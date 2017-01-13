@@ -20,7 +20,7 @@ Multiple WebGrab+Plus instances are then started in parallel for each configurat
 * Automatically modifies programmes' timings to local time.
 If your local time is +01:00 and you are grabbing a +00:00 channel then timings will be converted from:
 
-``` <programme start="20170101083000 +0000" stop="20170101093000 +0000" channel="Channel 1"> ```
+``` <programme start="20170101083000 +0000" stop="20170101093000 +0000" channel="Channel 1"> ```  
 to:  
 ``` <programme start="20170101093000 +0100" stop="20170101103000 +0100" channel="Channel 1"> ```
 
@@ -32,7 +32,7 @@ to:
 2. Run by starting the wgmulti.exe.  
 If started without arguments, the tool will load the configuration from WebGrab's default directory. On Windows systems it is %APPDATA%\ServerCare\WebGrab\, on Linux it's the current working folder.  
 The configuration folder can be passed as an argument:  
-``` wgmulti.exe &lt;path-to-configuration-folder> ```
+``` wgmulti.exe <path-to-configuration-folder> ```
 
 ### Configuration
 
