@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>epg.xml</filename>
+  <proxy></proxy>
+  <mode>m,nomark</mode>
+  <user-agent>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36</user-agent>
+  <logging>on</logging>
+  <skip>noskip</skip>
+  <timespan>0</timespan>
+  <update></update>
+  <channel site="m.tvprofil.net" xmltv_id="Arena Sport 1 HD (HR)" site_id="tv-arena-sport-1-hr" update="i">Arena Sport 1 HD (HR)</channel>
+</settings>

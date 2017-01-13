@@ -1,0 +1,6 @@
+#  Hot_Cookies, saved for the purpose of an actual WebGrab run
+#  Saved by WG++ 12/12/2016
+
+.tvprofil.net	False	/	False	-62135600400	PHPSESSID	hm81kojhqcmdsdbtl8hkvamln1
+.tvprofil.net	False	/	False	1513085460	ph_data	%7B%22lang%22%3A%22hr%22%2C%22paketID%22%3A0%2C%22tColumns%22%3A4%2C%22myKanal%22%3A0%2C%22anim%22%3A0%2C%22ss%22%3A%22hm81kojhqcmdsdbtl8hkvamln1%22%7D
+.tvprofil.net	False	/	False	1513085460	ph_channels	1%2C2%2C3%2C4%2C392%2C481%2C291%2C290%2C314%2C1047%2C6%2C7%2C88%2C89%2C81%2C548%2C84%2C80%2C180%2C147

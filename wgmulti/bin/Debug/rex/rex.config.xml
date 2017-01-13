@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>C:\inetpub\wwwroot\www\guides\movies\rex\epg.xml</filename>
+  <desc>{Рейтинг: 'rating', }{'category(, )', }{реж. 'director'.\n}  'description' {\n  Участват: 'actor(, )'}</desc>
+  <credits></credits>
+  <actor></actor>
+  <director></director>
+  <episode-num></episode-num>
+  <date></date>
+  <category></category>
+  <rating></rating>
+</settings>
+

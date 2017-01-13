@@ -1,0 +1,11 @@
+[Oo]bj/
+Tests/
+*.suo
+*.user
+TestResults/
+*.vspscc
+*.vssscc
+*.db
+*.pdb
+*wgmulti/bin/Debug/wgmulti.exe.CodeAnalysisLog.xml
+*wgmulti/bin/Debug/wgmulti.exe.lastcodeanalysissucceeded

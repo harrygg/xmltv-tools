@@ -1,0 +1,9 @@
+﻿# No data!
+# User-agent: *
+
+Disallow: /error
+Disallow: /login
+# Dummy robots-data created by WebGrab+Plus:
+
+User-agent: *
+Disallow:
