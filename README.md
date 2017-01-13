@@ -47,21 +47,20 @@ The wgmulti.exe.config file contains some configurable parameters:
 A program for copying and modifying elements from an XMLTV file. 
 The program can:
 
-* Replaces channel names with new ones 
-* Remove certain sub elements of the &lt;channel&gt; and the &lt;programme&gt; nodes i.e. &lt;url&gt;
-* Adds certain sub elements i.e. &lt;icon&gt;
-* Removes channels that have no associated programmes
+* Replace channel names
+* Remove certain sub-elements of the &lt;channel&gt; and the &lt;programme&gt;
+* Add new sub-elements i.e. &lt;icon&gt;
+* Remove channels that have no associated programmes
 
-## Installation
-To run the program you need to pass the following arguments:
+### Installation
+To use the tool you need to pass the following arguments:
 
-xmltv_program_copy &lt;path-to-input-xml-file&gt; &lt;path-to-output-xml-file&gt; &lt;path-to-template-file&gt;
+xmltv_program_copy.exe ``` <input-xml-file> <output-xml-file> <template-xml-file>```
 
-Example:  
-xmltv_program_copy epg.xml epg2.xml channels.xml
+Example:
+xmltv_program_copy.exe epg.xml epg2.xml channels.xml
 
-Example template file:
-
+Example channels.xml template file:
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -112,8 +111,24 @@ Example template file:
 
 ## xmltv_time_modify
 
+The tool modifies the timings for channel programmes in an xmltv guide. 
+
+xmltv_time_modify ``` <input-xml-file> [input-xml-file] [config-file] ```
+
+Examples:
+If you provide only an input EPG file, the tool will convert all programme timings to local time and save the changes in the input file.
+xmltv_time_modify.exe epg.xml
+
+If you provide an input and output EPG files, the tool will convert all programme timings to local time and save the changes in the output file. 
+xmltv_time_modify.exe epg.xml epg2.xml
+
+If you provide an input and output EPG files and settings XML file, the tool will correct all programme timings as per the settings in the chans2correct.xml. 
+xmltv_time_modify.exe epg.xml epg2.xml chans2correct.xml
+
 ## xmltv_merge
 
+A tool for merging multiple XMLTV files. It creates a single EPG file "merged_epg.xml". It will discard any duplicate channels if they are already added.
 
+xmltv_merge.exe ``` <input-xml-file> <input-xml-file> [input-xml-file] ```
 
 
