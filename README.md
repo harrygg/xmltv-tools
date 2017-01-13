@@ -44,9 +44,6 @@ The wgmulti.exe.config file contains some configurable parameters:
 
 ## xmltv_program_copy
 
-## xmltv_time_modify
-
-## xmltv_merge
 A program for copying and modifying elements from an XMLTV file. 
 The program can:
 
@@ -54,6 +51,69 @@ The program can:
 * Remove certain sub elements of the &lt;channel&gt; and the &lt;programme&gt; nodes i.e. &lt;url&gt;
 * Adds certain sub elements i.e. &lt;icon&gt;
 * Removes channels that have no associated programmes
+
+## Installation
+To run the program you need to pass the following arguments:
+
+xmltv_program_copy &lt;path-to-input-xml-file&gt; &lt;path-to-output-xml-file&gt; &lt;path-to-template-file&gt;
+
+Example:  
+xmltv_program_copy epg.xml epg2.xml channels.xml
+
+Example template file:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Anything put in the elements tag has global effect -->
+  <elements>
+      <!-- any xmltv element name added inside the remove tag will be removed. 'all' means remove all sub-elements. If added it will remove all sub-elements from <channel> and <programme> tags. It will leave only 'display-name' and 'title'  --> 
+      <remove>all</remove>
+      <!-- any xmltv element name added to the <keep> element will be preserved --> 
+      <keep>sub-title,icon</keep>
+      <!-- any xmltv element added to the <add> element will be added to <channel> or <programme> elements--> 
+      <add>
+        <url>http://xmltvtools/</url>
+      </add>
+  </elements>
+  <!-- Anything added insided a channel tag has local effect -->  
+  <channels>
+    <!-- 
+    will copy the program for channel with name "TEST 1", while renaming it to "Channel 1" 
+    will keep the 'desc' element for this channel's programme
+    will add 'icon' element for this channel
+    -->  
+    <channel name="TEST 1" display-name="Channel 1">
+      <keep>desc</keep>
+      <add>
+        <icon src="http://logos.com/test1.png" />
+      </add>
+    </channel>
+    <!-- 
+      will copy the program for channel with name "TEST 2" 
+      will keep the 'desc', 'sub-title', 'credits' and 'country' elements for this channel's programme
+      will add 'icon' element for this channel
+    -->      
+    <channel name="TEST 2">
+      <keep>desc,sub-title,credits,country</keep>
+      <add>
+        <icon src="http://logos.com/test2.png" />
+      </add>
+    </channel>
+    <!-- 
+      will copy the program for channel with name "TEST 3" 
+      all xmltv elements for channel's programme will be deleted leaving only the show 'title'
+    -->      
+    <channel name="TEST 3"></channel>
+  </channels>
+</root>
+
+```
+
+## xmltv_time_modify
+
+## xmltv_merge
+
 
 
 
