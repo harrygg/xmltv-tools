@@ -20,9 +20,10 @@ Multiple WebGrab+Plus instances are then started in parallel for each configurat
 * Automatically modifies programmes' timings to local time.
 If your local time is +01:00 and you are grabbing a +00:00 channel then timings will be converted from:
 
-&lt;programme start="20170101083000 +0000" stop="20170101093000 +0000" channel="Channel 1"&gt;  
+``` <programme start="20170101083000 +0000" stop="20170101093000 +0000" channel="Channel 1"> ```
 to:  
-&lt;programme start="20170101093000 +0100" stop="20170101103000 +0100" channel="Channel 1"&gt;  
+``` <programme start="20170101093000 +0100" stop="20170101103000 +0100" channel="Channel 1"> ```
+
 
 
 ### Installation
@@ -31,7 +32,7 @@ to:
 2. Run by starting the wgmulti.exe.  
 If started without arguments, the tool will load the configuration from WebGrab's default directory. On Windows systems it is %APPDATA%\ServerCare\WebGrab\, on Linux it's the current working folder.  
 The configuration folder can be passed as an argument:  
-.\wgmulti.exe &lt;path-to-configuration-folder>
+``` wgmulti.exe &lt;path-to-configuration-folder> ```
 
 ### Configuration
 
@@ -55,7 +56,7 @@ The program can:
 ### Installation
 To use the tool you need to pass the following arguments:
 
-xmltv_program_copy.exe ``` <input-xml-file> <output-xml-file> <template-xml-file>```
+``` xmltv_program_copy.exe <input-xml-file> <output-xml-file> <template-xml-file>```
 
 Example:
 xmltv_program_copy.exe epg.xml epg2.xml channels.xml
@@ -113,22 +114,22 @@ Example channels.xml template file:
 
 The tool modifies the timings for channel programmes in an xmltv guide. 
 
-xmltv_time_modify ``` <input-xml-file> [input-xml-file] [config-file] ```
+``` xmltv_time_modify <input-xml-file> [input-xml-file] [config-file] ```
 
 Examples:
 If you provide only an input EPG file, the tool will convert all programme timings to local time and save the changes in the input file.
-xmltv_time_modify.exe epg.xml
+ ``` xmltv_time_modify.exe epg.xml ``` 
 
 If you provide an input and output EPG files, the tool will convert all programme timings to local time and save the changes in the output file. 
-xmltv_time_modify.exe epg.xml epg2.xml
+ ``` xmltv_time_modify.exe epg.xml epg2.xml ``` 
 
 If you provide an input and output EPG files and settings XML file, the tool will correct all programme timings as per the settings in the chans2correct.xml. 
-xmltv_time_modify.exe epg.xml epg2.xml chans2correct.xml
+ ``` xmltv_time_modify.exe epg.xml epg2.xml chans2correct.xml ``` 
 
 ## xmltv_merge
 
 A tool for merging multiple XMLTV files. It creates a single EPG file "merged_epg.xml". It will discard any duplicate channels if they are already added.
 
-xmltv_merge.exe ``` <input-xml-file> <input-xml-file> [input-xml-file] ```
+ ``` xmltv_merge.exe <input-xml-file> <input-xml-file> [input-xml-file] ```
 
 
