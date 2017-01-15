@@ -108,7 +108,7 @@ namespace wgmulti
         if (rootConfig.postProcessEnabled)
           Console.WriteLine("There is no point of using wgmulti for only postprocess tasks. ");
       }
-      Console.ReadLine();
+      //Console.ReadLine();
     }
 
     public static string GetOutputPath(Grabber grabber)
@@ -123,7 +123,7 @@ namespace wgmulti
     /// Concatenates all EPGs into a single one
     /// Saves it in the config directory
     /// </summary>
-    /// <param name="grabbers"></param>
+    /// <param name="epgFiles"></param>
     /// <param name="outputFile">File for output.</param>
     public static void Concat(List<String> epgFiles, String outputFile = "")
     {
@@ -135,30 +135,32 @@ namespace wgmulti
       var eChannels = new List<XElement>();
       var eProgrammes = new List<XElement>();
 
-      foreach (var epgFile in epgFiles)
-      {
-        if (File.Exists(epgFile))
-        { 
-          var grabberXml = XDocument.Load(epgFile);
-          if (!eTv.HasAttributes)
-          {
-            eTv.Add(new XAttribute("generator-info-name", grabberXml.Element("tv").Attribute("generator-info-name").Value));
-            eTv.Add(new XAttribute("generator-info-url", grabberXml.Element("tv").Attribute("generator-info-url").Value));
-          }
+      epgFiles.ForEach(epgFile => {
+        try
+        {
+          var xml = XDocument.Load(epgFile);
+          var tv = xml.Elements("tv").ToList();
 
-          var channels = (from e in grabberXml.Elements("tv").Elements("channel") select e).ToList<XElement>();
-          var programmes = (from e in grabberXml.Elements("tv").Elements("programme") select e).ToList<XElement>();
+          AddMetaData(ref eTv, xml);
+          RemoveOrphanElements(ref tv);
+
+          var channels = (from e in tv.Elements("channel") select e).ToList();
+          var programmes = (from e in tv.Elements("programme") select e).ToList();
 
           report.total += channels.Count;
-          channels = RemoveEmptyChannels(channels, programmes);
+          //channels = RemoveOrphanElements(channels, programmes);
           eChannels.AddRange(channels);
 
           if (Arguments.convertTimesToLocal)
             programmes.ForEach(p => ModifyTimings(ref p));
           eProgrammes.AddRange(programmes);
-
         }
-      }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+      });
+      
       var epg = new XDocument(new XDeclaration("1.0", "utf-8", null), eTv);
       eTv.Add(eChannels.ToArray());
       eTv.Add(eProgrammes.ToArray());
@@ -166,13 +168,37 @@ namespace wgmulti
       Console.WriteLine("EPG saved to {0}", outputFile);
     }
 
-    public static List<XElement> RemoveEmptyChannels(List<XElement> channelsFromGrabber, List<XElement> programmes)
+    static void AddMetaData(ref XElement tv, XDocument xml)
+    {
+      if (!tv.HasAttributes)
+      {
+        var temp = xml.Element("tv").Attribute("generator-info-name");
+        if (temp != null)
+          tv.Add(new XAttribute("generator-info-name", temp.Value));
+
+        temp = xml.Element("tv").Attribute("generator-info-name");
+        if (temp != null)
+          tv.Add(new XAttribute("generator-info-url", temp.Value));
+      }
+    }
+
+    public static void RemoveOrphanElements(ref List<XElement> tv)
+    {
+      var channelIds = (from e in tv.Elements("channel") select e.Attribute("id").Value).ToList();
+      var programmesIds = (from e in tv.Elements("programme") select e.Attribute("channel").Value).ToList();
+
+      //Remove all orphan channels and programmes
+      tv.Descendants("programme").Where(p => !channelIds.Contains(p.Attribute("channel").Value)).Remove();
+      tv.Descendants("channel").Where(c => !programmesIds.Contains(c.Attribute("id").Value)).Remove();
+    }
+
+    public static List<XElement> RemoveOrphanElements1(List<XElement> channelsFromGrabber, List<XElement> programmes)
     {
       var channels = new List<XElement>();
       try
       {
-        var grabberProgrammesIds = programmes.GroupBy(x => x.Attribute("channel").Value);
-        var ids = (from e in grabberProgrammesIds select e.Key).ToArray<String>();
+        var programmesIds = programmes.GroupBy(x => x.Attribute("channel").Value);
+        var ids = (from e in programmesIds select e.Key).ToArray<String>();
         
         foreach (var channel in channelsFromGrabber)
         {
@@ -198,7 +224,6 @@ namespace wgmulti
     {
       programme.Attribute("start").Value = ConvertToLocal(programme.Attribute("start").Value);
       programme.Attribute("stop").Value = ConvertToLocal(programme.Attribute("stop").Value);
-
     }
 
     public static String ConvertToLocal(String dateTimeString)

@@ -14,13 +14,17 @@ namespace wgmulti
     public String siteId = "";
     public String xmltvId = "";
     public String name = "";
+    public String offset = "";
+    public String sameAs = "";
 
-    public Channel(String site, String name, String siteId, String xmltvId, String updateType = "i")
+    public Channel(String site, String name, String siteId, String xmltvId, String offset, String sameAs, String updateType = "i")
     {
       this.site = site;
       this.name = name;
       this.siteId = siteId;
       this.xmltvId = xmltvId;
+      this.offset = offset;
+      this.sameAs = sameAs;
       this.updateType = updateType;
     }
 
@@ -32,6 +36,12 @@ namespace wgmulti
         new XAttribute("site_id", siteId), 
         new XAttribute("update", updateType)
       );
+
+      if (offset != "")
+        xEl.Add(new XAttribute("offset", offset));
+      if (sameAs != "")
+        xEl.Add(new XAttribute("same_as", sameAs)); 
+
       return xEl;
     }
   }

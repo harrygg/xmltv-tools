@@ -8,7 +8,6 @@ namespace wgmulti
 {
   public class Config
   {
-    
     XDocument xmlConfig;
     public const String dateFormat = "yyyyMMddHHmmss zzz";
     public String fileName = "WebGrab++.config.xml";
@@ -161,14 +160,18 @@ namespace wgmulti
         var cs = from c in xmlConfig.Elements("settings").Elements("channel") select c;
         foreach (XElement c in cs)
         {
-          var site = c.Attribute("site").Value;
-          var siteId = c.Attribute("site_id").Value;
-          var xmltvId = c.Attribute("xmltv_id").Value;
-          var name = c.Value;
-          var update = c.Attribute("update").Value;
-          var channel = new Channel(site, name, siteId, xmltvId, update);
+          if  (c.Attribute("same_as") == null) { 
+            var site = c.Attribute("site").Value;
+            var siteId = c.Attribute("site_id").Value;
+            var xmltvId = c.Attribute("xmltv_id").Value;
+            var name = c.Value;
+            var update = c.Attribute("update") != null ? c.Attribute("update").Value : "";
+            var offset = c.Attribute("offset") != null ? c.Attribute("offset").Value : "";
+            var sameAs = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : "";
 
-          channels.Add(channel);
+            var channel = new Channel(site, name, siteId, xmltvId, offset, sameAs, update);
+            channels.Add(channel);
+          }
         }
       }
       catch (Exception ex)
