@@ -35,7 +35,7 @@ namespace wgmulti
     String postProcessConfigFileName = ".config.xml";
     public String postProcessConfigFilePath = "";
     public String postProcessOutputFilePath = "";
-    public XElement postProcessSettings = null;
+    public XElement postProcessSettings = new XElement("postprocess");
     public List<Channel> channels;
     public IEnumerable<IGrouping<String, Channel>> grabbers;
     public String tempDir = "";
@@ -51,11 +51,9 @@ namespace wgmulti
         throw new ArgumentException("Config path must be an absolute path");
 
       folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
-
       tempDir = Path.Combine(Path.GetTempPath(), "wgmulti");
 
       SetAbsPaths(folder);
-
       LoadSettingsFromFile(filePath);
     }
 
@@ -82,72 +80,100 @@ namespace wgmulti
 
       if (!File.Exists(file))
       {
-        Log("Configuration file " + file + " not found! Exiting...");
+        Debug("Configuration file " + file + " not found! Exiting...");
         return;
       }
-      
+      Debug("Loading configuration from " + file);
+
       xmlConfig = XDocument.Load(file);
       var settings = xmlConfig.Element("settings");
-      try {
-        var filename = settings.Element("filename").Value;
-        outputFilePath = Path.IsPathRooted(filename) ? filename : Path.Combine(folder, filename);
-      } catch {}
-      try { mode = settings.Element("mode").Value; } catch {}
-      try { proxy = settings.Element("proxy").Value; } catch {}
-      try { userAgent = settings.Element("user-agent").Value; } catch { }
-      try { logging = settings.Element("logging").Value; } catch {}
-      try { skip = settings.Element("skip").Value; } catch {}
-      try { timeSpan = settings.Element("timespan").Value;} catch {}
-      try { updateType = settings.Element("update").Value; } catch {}
-      try {
-        var retryEl = settings.Element("retry");
-        retry = retryEl.Value;
-        try { retryTimeOut = retryEl.Attribute("time-out").Value; } catch { }
-        try { retryChannelDelay = retryEl.Attribute("channel-delay").Value; } catch { }
-        try { retryIndexDelay = retryEl.Attribute("index-delay").Value; } catch { }
-        try { retryShowDelay = retryEl.Attribute("show-delay").Value; } catch { }
+      Debug("settings node loaded");
+      var epgFilePath = GetElementValue(settings, "filename");
+      if (epgFilePath == "")
+      {
+        outputFilePath = Path.Combine(folder, epgFileName);
       }
-      catch {}
-      try {
-        var postProcessEl = settings.Element("postprocess"); 
-        postProcessName = postProcessEl.Value;
-        try {
-          postProcessRun = postProcessEl.Attribute("run").Value.ToLower();
-          postProcessGrab = postProcessEl.Attribute("grab").Value.ToLower();
-          grabbingEnabled = (postProcessGrab == "y" || postProcessGrab == "yes" || postProcessGrab == "true" || postProcessGrab == "on");
-          postProcessEnabled = (postProcessName != "" && (postProcessRun == "y" || postProcessRun == "yes" || postProcessRun == "true" || postProcessRun == "on"));
-          if (postProcessEnabled)
-          {
-            var postProcessDir = Path.Combine(folder, postProcessName);
-
-            //if (!Directory.Exists(postProcessDir))
-            //  Directory.CreateDirectory(postProcessDir);
-
-            postProcessConfigFilePath = Path.Combine(postProcessDir, postProcessName + postProcessConfigFileName);
-            if (File.Exists(postProcessConfigFilePath))
-            {
-              //Overwrite EPG xml that will be later concatenated
-              var ppConfig = XDocument.Load(postProcessConfigFilePath);
-              postProcessSettings = ppConfig.Element("settings");
-              //var outFile = postProcessSettings.Element("filename").Value;
-              //if (!Path.IsPathRooted(outFile))
-              postProcessOutputFilePath = Path.Combine(postProcessDir, epgFileName);
-              //postProcessSettings.Element("filename").Value = postProcessOutputFilePath;
-            }
-            else //If file is not found disable postprocess
-            {
-              postProcessRun = "n";
-            }
-          }
-        } catch { }
-        try { postProcessGrab = postProcessEl.Attribute("grab").Value; } catch { }
+      else
+      {
+        outputFilePath = Path.IsPathRooted(epgFilePath) ? epgFilePath : Path.Combine(folder, epgFilePath);
       }
-      catch { }
+      Debug("filename set to " + outputFilePath);
+
+      mode = GetElementValue(settings, "mode");
+      proxy = GetElementValue(settings, "proxy");
+      userAgent = GetElementValue(settings, "user-agent");
+      logging = GetElementValue(settings, "logging");
+      skip = GetElementValue(settings, "skip");
+      timeSpan = GetElementValue(settings, "timespan");
+      updateType = GetElementValue(settings, "update");
+      retry = GetElementValue(settings, "retry");
+      retryTimeOut = GetElementValue(settings.Element("retry"), "time-out", true);
+      retryChannelDelay = GetElementValue(settings.Element("retry"), "channel-delay", true);
+      retryIndexDelay = GetElementValue(settings.Element("retry"), "index-delay", true);
+      retryShowDelay = GetElementValue(settings.Element("retry"), "show-delay", true);
+      postProcessName = GetElementValue(settings, "postprocess");
+      postProcessRun = GetElementValue(settings.Element("postprocess"), "run", true).ToLower();
+      postProcessGrab = GetElementValue(settings.Element("postprocess"), "grab", true).ToLower();
+      grabbingEnabled = (postProcessGrab == "y" || postProcessGrab == "yes" || postProcessGrab == "true" || postProcessGrab == "on");
+      postProcessEnabled = (postProcessName != "" && (postProcessRun == "y" || postProcessRun == "yes" || postProcessRun == "true" || postProcessRun == "on"));
+      Console.WriteLine("Postprocess enabled is: {0}", postProcessEnabled);
+
+      if (postProcessEnabled)
+      {
+        var postProcessDir = Path.Combine(folder, postProcessName);
+        Debug("postProcessDir=" + postProcessDir);
+        postProcessConfigFilePath = Path.Combine(postProcessDir, postProcessName + postProcessConfigFileName);
+        Debug("postprocess config file path is: " + postProcessConfigFilePath);
+        try
+        {
+          var ppConfig = XDocument.Load(postProcessConfigFilePath);
+          postProcessSettings = ppConfig.Element("settings");
+          postProcessOutputFilePath = Path.Combine(postProcessDir, this.epgFileName);
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+          Debug(ex.ToString());
+          postProcessRun = "n";
+          postProcessEnabled = false;
+          Console.WriteLine("Postprocess operations will be disabled!");
+        }
+      }
 
       if (loadChannels)
         channels = GetChannels();
     }
     
+    String GetElementValue(XElement x, string name, bool fromAttr = false)
+    {
+      String val = "";
+      try
+      {
+        val = fromAttr ? x.Attribute(name).Value : x.Element(name).Value;
+        Debug("\"" + name + "\" value is \"" + val + "\"");
+      }
+      catch
+      {
+        Debug("\"" + name + "\" value not found!");
+      }
+      return val;
+    }
+
+    String GetAttributeValue(XElement x, string name)
+    {
+      String val = "";
+      try
+      {
+        val = x.Attribute(name).Value;
+        Debug("\"Attribute " + name + "\" value is \"" + val + "\"");
+      }
+      catch
+      {
+        Debug("\"" + name + "\" Attribute not found!");
+      }
+      return val;
+    }
+
     /// <summary>
     /// Creates a list of channels from XML config file
     /// </summary>
@@ -256,14 +282,15 @@ namespace wgmulti
       }
       catch (Exception e)
       {
-        Log(e.ToString());
+        Debug(e.ToString());
         return false;
       }  
     }
 
-    static void Log(string v)
+    static void Debug(string v)
     {
-      Console.WriteLine(v);
+      if (Arguments.debug)
+        Console.WriteLine(v);
     }
 
     /// <summary>

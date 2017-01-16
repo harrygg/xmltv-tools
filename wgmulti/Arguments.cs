@@ -16,6 +16,7 @@ namespace wgmulti
     public static int maxAsyncProcesses = 10;
     public static int processTimeout = 240;
     public static bool showConsole = false;
+    public static bool debug = false;
 
     public static bool IsLinux()
     {
@@ -44,30 +45,33 @@ namespace wgmulti
         configDir = args[1];
         cmdArgs = args[1];
       }
-      val = ConfigurationManager.AppSettings["deleteWorkFolder"] ?? "false";
+
+      val = ConfigurationManager.AppSettings["Debug"] ?? "false";
+      debug = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["DeleteWorkFolder"] ?? "false";
       deleteWorkFolder = Convert.ToBoolean(val);
 
-      val = ConfigurationManager.AppSettings["convertTimesToLocal"] ?? "true";
+      val = ConfigurationManager.AppSettings["ConvertTimesToLocal"] ?? "true";
       convertTimesToLocal = Convert.ToBoolean(val);
 
       if (!convertTimesToLocal)
       {
-        val = ConfigurationManager.AppSettings["timeOffset"] ?? "0";
+        val = ConfigurationManager.AppSettings["TimeOffset"] ?? "0";
         timeOffset = Convert.ToDouble(val);
       }
 
-      val = ConfigurationManager.AppSettings["maxAsyncProcesses"] ?? "10";
+      val = ConfigurationManager.AppSettings["MaxAsyncProcesses"] ?? "10";
       maxAsyncProcesses = val != "0" ? Convert.ToInt32(val) : 10;
 
-      val = ConfigurationManager.AppSettings["processTimeout"] ?? "240";
+      val = ConfigurationManager.AppSettings["ProcessTimeout"] ?? "240";
       processTimeout = Convert.ToInt32(val);
 
       if (!IsLinux())
       { 
-        val = ConfigurationManager.AppSettings["showWebGrabConsole"] ?? "true";
+        val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "true";
         showConsole = Convert.ToBoolean(val);
       }
-
     }
   }
 }
