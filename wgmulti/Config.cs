@@ -158,10 +158,23 @@ namespace wgmulti
       try
       {
         var cs = from c in xmlConfig.Elements("settings").Elements("channel") select c;
+        if (cs.Count() == 0)
+          cs = from c in xmlConfig.Elements("settings").Elements("channels").Elements("channel") select c;
         foreach (XElement c in cs)
         {
-          if  (c.Attribute("same_as") == null) { 
-            var site = c.Attribute("site").Value;
+          try
+          {
+            String site = String.Empty;
+            try
+            {
+              site = c.Attribute("site").Value;
+            }
+            catch
+            {
+              Console.WriteLine("Skipping channel without \"site\" attribute!");
+              Console.WriteLine(c.ToString());
+              continue;
+            };
             var siteId = c.Attribute("site_id").Value;
             var xmltvId = c.Attribute("xmltv_id").Value;
             var name = c.Value;
@@ -171,6 +184,11 @@ namespace wgmulti
 
             var channel = new Channel(site, name, siteId, xmltvId, offset, sameAs, update);
             channels.Add(channel);
+          }
+          catch
+          {
+            Console.WriteLine("Unable to parse channel");
+            Console.WriteLine(c.ToString());
           }
         }
       }
@@ -183,6 +201,7 @@ namespace wgmulti
 
     public bool Save(String outputFile = "", bool saveChannels = true)
     {
+
       XDocument xdoc;
       try
       {
@@ -214,6 +233,7 @@ namespace wgmulti
 
         if (String.IsNullOrEmpty(outputFile))
           outputFile = filePath;
+        Console.WriteLine("Creating config file in {0}", outputFile);
 
         var folder = new FileInfo(outputFile).Directory.FullName;
         if (!Directory.Exists(folder))
