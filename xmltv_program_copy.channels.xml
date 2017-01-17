@@ -4,7 +4,7 @@
       <remove>all</remove>
       <keep>sub-title,desc,icon</keep>
       <add>
-        <url>http://megakodiepg</url>
+        <url>http://xmltvtools</url>
       </add>
   </globalRules>
   <channels>
