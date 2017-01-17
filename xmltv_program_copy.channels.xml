@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <elements>
+  <globalRules>
       <remove>all</remove>
       <keep>sub-title,desc,icon</keep>
       <add>
         <url>http://megakodiepg</url>
       </add>
-  </elements>
+  </globalRules>
   <channels>
     <channel name="TEST 1" display-name="Тест 1">
       <keep></keep>
