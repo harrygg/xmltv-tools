@@ -63,30 +63,41 @@ namespace wgmulti
           }
         }
 
-        if (grabbersGroupParallel.Count > 0)
+        try
         {
-          // Start all grabbers synchronously
-          if (!async)
-          { 
-            foreach (var grabber in grabbersGroupParallel)
-              StartWegGrabInstance(grabber);
-            foreach (var grabber in grabbersGroup2)
-              StartWegGrabInstance(grabber);
-          }
-          else
+
+          if (grabbersGroupParallel.Count > 0)
           {
-            // Start all grabbers asyncronously
-            Console.WriteLine("Starting grabbers asynchronously, {0} at a time", Arguments.maxAsyncProcesses);
-            Parallel.ForEach(grabbersGroupParallel, (grabber) =>
+            // Start all grabbers synchronously
+            if (!async)
             {
-              StartWegGrabInstance(grabber);
-            });
+              foreach (var grabber in grabbersGroupParallel)
+                StartWegGrabInstance(grabber);
+              foreach (var grabber in grabbersGroup2)
+                StartWegGrabInstance(grabber);
+            }
+            else
+            {
+              // Start all grabbers asyncronously
+              Console.WriteLine("Starting grabbers asynchronously, {0} at a time", Arguments.maxAsyncProcesses);
+              Parallel.ForEach(grabbersGroupParallel, (grabber) =>
+              {
+                StartWegGrabInstance(grabber);
+              });
+            }
+            // Combine all xml guides
+            var outputXml = rootConfig.postProcessEnabled ? rootConfig.postProcessOutputFilePath : rootConfig.outputFilePath;
+            //XmltvMerger.Merge(outputFiles.ToArray(), outputXml);
+            Concat(outputFiles, outputXml);
+            //Wgtools.XmltvTimeModifier.Modify(outputXml);
           }
-          // Combine all xml guides
-          var outputXml = rootConfig.postProcessEnabled ? rootConfig.postProcessOutputFilePath : rootConfig.outputFilePath;
-          //XmltvMerger.Merge(outputFiles.ToArray(), outputXml);
-          Concat(outputFiles, outputXml);
-          //Wgtools.XmltvTimeModifier.Modify(outputXml);
+        }
+        catch (Exception ex)
+        {
+          if (ex.ToString().Contains("annot find the"))
+            Console.WriteLine("ERROR! WebGrab+Plus.exe not found and not executable!");
+          else
+            Console.WriteLine(ex.ToString());
         }
 
         stopWatch.Stop();
@@ -251,6 +262,7 @@ namespace wgmulti
       }
 
       process.Start();
+
       process.EnableRaisingEvents = true;
       process.Exited += new EventHandler(SingleGrabberExited);
       if (!Arguments.showConsole)
