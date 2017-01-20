@@ -66,7 +66,7 @@ Example channels.xml template file:
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- Anything put in the elements tag has global effect -->
-  <elements>
+  <globalRules>
       <!-- any xmltv element name added inside the remove tag will be removed. 'all' means remove all sub-elements. If added it will remove all sub-elements from <channel> and <programme> tags. It will leave only 'display-name' and 'title'  --> 
       <remove>all</remove>
       <!-- any xmltv element name added to the <keep> element will be preserved --> 
@@ -75,7 +75,7 @@ Example channels.xml template file:
       <add>
         <url>http://xmltvtools/</url>
       </add>
-  </elements>
+  </globalRules>
   <!-- Anything added insided a channel tag has local effect -->  
   <channels>
     <!-- 
