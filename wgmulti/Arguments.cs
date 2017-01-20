@@ -67,11 +67,11 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["ProcessTimeout"] ?? "240";
       processTimeout = Convert.ToInt32(val);
 
-      if (!IsLinux())
-      { 
+      //if (!IsLinux())
+      //{ 
         val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "true";
         showConsole = Convert.ToBoolean(val);
-      }
+      //}
     }
   }
 }
