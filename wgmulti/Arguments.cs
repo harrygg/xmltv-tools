@@ -14,8 +14,11 @@ namespace wgmulti
     public static bool convertTimesToLocal = true;
     public static bool deleteWorkFolder = false;
     public static int maxAsyncProcesses = 10;
+    public static bool groupChannelsBySiteIni = true;
+    public static int maxChannelsInGroup = 10;
     public static int processTimeout = 240;
     public static bool showConsole = false;
+    public static bool randomStartOrder = true;
     public static bool debug = false;
 
     public static bool IsLinux()
@@ -55,6 +58,12 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["ConvertTimesToLocal"] ?? "true";
       convertTimesToLocal = Convert.ToBoolean(val);
 
+      val = ConfigurationManager.AppSettings["GroupChannelsBySiteIni"] ?? "true";
+      groupChannelsBySiteIni = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["RandomStartOrder"] ?? "true";
+      randomStartOrder = Convert.ToBoolean(val);
+
       if (!convertTimesToLocal)
       {
         val = ConfigurationManager.AppSettings["TimeOffset"] ?? "0";
@@ -63,6 +72,9 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["MaxAsyncProcesses"] ?? "10";
       maxAsyncProcesses = val != "0" ? Convert.ToInt32(val) : 10;
+
+      val = ConfigurationManager.AppSettings["MaxChannelsInGroup"] ?? "10";
+      maxChannelsInGroup = val != "0" ? Convert.ToInt32(val) : 10;
 
       val = ConfigurationManager.AppSettings["ProcessTimeout"] ?? "240";
       processTimeout = Convert.ToInt32(val);

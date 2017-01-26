@@ -16,6 +16,8 @@ namespace wgmulti
     public String name = "";
     public String offset = "";
     public String sameAs = "";
+    public bool active = true;
+    public String siteIni = ".ini";
 
     public Channel(String site, String name, String siteId, String xmltvId, String offset, String sameAs, String updateType = "i")
     {
@@ -26,6 +28,7 @@ namespace wgmulti
       this.offset = offset;
       this.sameAs = sameAs;
       this.updateType = updateType;
+      this.siteIni = site + siteIni;
     }
 
     public XElement ToXElement()

@@ -88,7 +88,9 @@ namespace wgmulti
       xmlConfig = XDocument.Load(file);
       var settings = xmlConfig.Element("settings");
       Debug("settings node loaded");
-      var epgFilePath = GetElementValue(settings, "filename");
+
+      var epgFilePath = "";
+      SetValue(ref epgFilePath, settings, "filename");
       if (epgFilePath == "")
       {
         outputFilePath = Path.Combine(folder, epgFileName);
@@ -99,24 +101,24 @@ namespace wgmulti
       }
       Debug("filename set to " + outputFilePath);
 
-      mode = GetElementValue(settings, "mode");
-      proxy = GetElementValue(settings, "proxy");
-      userAgent = GetElementValue(settings, "user-agent");
-      logging = GetElementValue(settings, "logging");
-      skip = GetElementValue(settings, "skip");
-      timeSpan = GetElementValue(settings, "timespan");
-      updateType = GetElementValue(settings, "update");
-      retry = GetElementValue(settings, "retry");
-      retryTimeOut = GetElementValue(settings.Element("retry"), "time-out", true);
-      retryChannelDelay = GetElementValue(settings.Element("retry"), "channel-delay", true);
-      retryIndexDelay = GetElementValue(settings.Element("retry"), "index-delay", true);
-      retryShowDelay = GetElementValue(settings.Element("retry"), "show-delay", true);
-      postProcessName = GetElementValue(settings, "postprocess");
-      postProcessRun = GetElementValue(settings.Element("postprocess"), "run", true).ToLower();
-      postProcessGrab = GetElementValue(settings.Element("postprocess"), "grab", true).ToLower();
-      grabbingEnabled = (postProcessGrab == "y" || postProcessGrab == "yes" || postProcessGrab == "true" || postProcessGrab == "on");
-      postProcessEnabled = (postProcessName != "" && (postProcessRun == "y" || postProcessRun == "yes" || postProcessRun == "true" || postProcessRun == "on"));
-      Console.WriteLine("Postprocess enabled is: {0}", postProcessEnabled);
+      SetValue(ref mode, settings, "mode");
+      SetValue(ref proxy, settings, "proxy");
+      SetValue(ref userAgent, settings, "user-agent");
+      SetValue(ref logging, settings, "logging");
+      SetValue(ref skip, settings, "skip");
+      SetValue(ref timeSpan, settings, "timespan");
+      SetValue(ref updateType, settings, "update");
+      SetValue(ref retry, settings, "retry");
+      SetValue(ref retryTimeOut, settings.Element("retry"), "time-out", true);
+      SetValue(ref retryChannelDelay , settings.Element("retry"), "channel-delay", true);
+      SetValue(ref retryIndexDelay, settings.Element("retry"), "index-delay", true);
+      SetValue(ref retryShowDelay, settings.Element("retry"), "show-delay", true);
+      SetValue(ref postProcessName, settings, "postprocess");
+      SetValue(ref postProcessRun, settings.Element("postprocess"), "run", true);
+      SetValue(ref postProcessGrab, settings.Element("postprocess"), "grab", true);
+      grabbingEnabled = StringToBool(postProcessGrab);
+      postProcessEnabled = postProcessName != "" && StringToBool(postProcessRun);
+      Console.WriteLine("Is postprocess enabled: {0}", postProcessEnabled);
 
       if (postProcessEnabled)
       {
@@ -144,34 +146,23 @@ namespace wgmulti
         channels = GetChannels();
     }
     
-    String GetElementValue(XElement x, string name, bool fromAttr = false)
+    bool StringToBool(String val)
     {
-      String val = "";
-      try
-      {
-        val = fromAttr ? x.Attribute(name).Value : x.Element(name).Value;
-        Debug("\"" + name + "\" value is \"" + val + "\"");
-      }
-      catch
-      {
-        Debug("\"" + name + "\" value not found!");
-      }
-      return val;
+      val = val.ToLower();
+      return (val == "y" || val == "yes" || val == "true" || val == "on");
     }
 
-    String GetAttributeValue(XElement x, string name)
+    void SetValue(ref String defaultValue, XElement x, string name, bool fromAttr = false)
     {
-      String val = "";
       try
       {
-        val = x.Attribute(name).Value;
-        Debug("\"Attribute " + name + "\" value is \"" + val + "\"");
+        defaultValue = fromAttr ? x.Attribute(name).Value.ToLower() : x.Element(name).Value.ToLower();
+        Debug("\"" + name + "\" value is set to \"" + defaultValue + "\"");
       }
       catch
       {
-        Debug("\"" + name + "\" Attribute not found!");
+        Debug("\"" + name + "\" value not found! Using the default value \"" + defaultValue + "\"");
       }
-      return val;
     }
 
     /// <summary>
@@ -186,29 +177,29 @@ namespace wgmulti
         var cs = from c in xmlConfig.Elements("settings").Elements("channel") select c;
         if (cs.Count() == 0)
           cs = from c in xmlConfig.Elements("settings").Elements("channels").Elements("channel") select c;
+
+        Channel channel = null; //keep the previous value here in case channel has same_as attribute
         foreach (XElement c in cs)
         {
           try
           {
-            String site = String.Empty;
-            try
+            //is "site" attr is null get it from the previous channel
+            var site = c.Attribute("site") != null ? c.Attribute("site").Value : channel.site;
+            var same_as = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : "";
+            //if "site" and "same_as" attr are missing skip this channel
+            if (String.IsNullOrEmpty(site) && String.IsNullOrEmpty(same_as))
             {
-              site = c.Attribute("site").Value;
-            }
-            catch
-            {
-              Console.WriteLine("Skipping channel without \"site\" attribute!");
-              Console.WriteLine(c.ToString());
+              Console.WriteLine("Skippping channel without \"site\" and \"same_as\" attributes");
               continue;
-            };
-            var siteId = c.Attribute("site_id").Value;
-            var xmltvId = c.Attribute("xmltv_id").Value;
-            var name = c.Value;
+            }
+
+            var siteId = c.Attribute("site_id") != null ? c.Attribute("site_id").Value : "";
             var update = c.Attribute("update") != null ? c.Attribute("update").Value : "";
             var offset = c.Attribute("offset") != null ? c.Attribute("offset").Value : "";
-            var sameAs = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : "";
+            var xmltvId = c.Attribute("xmltv_id").Value;
+            var name = c.Value;
 
-            var channel = new Channel(site, name, siteId, xmltvId, offset, sameAs, update);
+            channel = new Channel(site, name, siteId, xmltvId, offset, same_as, update);
             channels.Add(channel);
           }
           catch
@@ -259,7 +250,7 @@ namespace wgmulti
 
         if (String.IsNullOrEmpty(outputFile))
           outputFile = filePath;
-        Console.WriteLine("Creating config file in {0}", outputFile);
+        Debug("Creating config file in " + outputFile);
 
         var folder = new FileInfo(outputFile).Directory.FullName;
         if (!Directory.Exists(folder))
@@ -287,7 +278,7 @@ namespace wgmulti
       }  
     }
 
-    static void Debug(string v)
+    public static void Debug(string v)
     {
       if (Arguments.debug)
         Console.WriteLine(v);

@@ -1,19 +1,13 @@
-﻿<?xml version="1.0"?>
-<!-- Configuration file for WebGrab+Plus, the incremental Electronic-Program-Guide web grabber
-by Jan van Straaten, December 2011
-Version V1.1.1 -->
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
-	<filename>epg_temp.xml</filename>
-	<mode>m,nomark</mode>
-	<proxy>proxy.bbn.hp.com:8080</proxy>
-	<user-agent>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36</user-agent>
-	<logging>on</logging>
-	<retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">2</retry>
-	<skip>noskip</skip>
-	<timespan>0</timespan>
-	<update></update>
-  <postprocess run="n" grab="y">rex</postprocess>
-	<!-- CHANNELS -->
-
+  <filename>WebGrab++.config.xml\epg.xml</filename>
+  <proxy></proxy>
+  <mode>m,nomark</mode>
+  <user-agent>mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/54.0.2840.99 safari/537.36</user-agent>
+  <logging>on</logging>
+  <skip>noskip</skip>
+  <timespan>2</timespan>
+  <update></update>
+  <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">5</retry>
+  <postprocess run="n" grab="y">mdb</postprocess>
 </settings>
