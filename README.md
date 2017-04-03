@@ -15,10 +15,11 @@ Benefits:
 
 * Faster overal grabbing process. 
 Done by splitting the WebGrab master configuration WebGrab++.config.xml file into multiple configuration files. By default (see below for details) a single configuration file is created for every site ini in the master WebGrab++.config.xml file. 
-For instance, if you grab programmes for 20 channels - 10 from site1.com and 10 from site2.com, you will end up with 2 WebGrab++.config.xml with 10 channels each. 
 Multiple WebGrab+Plus instances are then started in parallel for each configuration file. 
 After the grabbing finsihes, the resulting xml files are merged into a single file.
 
+For instance, if you grab programmes for 30 channels - 10 from site1.com, 10 from site2.com and 10 from site3.com, you will end up with 3 WebGrab++.config.xml with 10 channels each. wgmulti will then start 3 instances of WebGrab+Plus that will work in parallel. Ideally the grabbing process will be 3 times faster although it depends on many other things.
+Once the grabboing is done, the program will automatically concat all epg.xml into one single epg.xml file just like the grabbing was done with a single WebGrab+Plus process.
 
 * Automatically modifies programmes' timings to local time.
 If your local time is +01:00 and you are grabbing a +00:00 channel then timings will be converted from:
