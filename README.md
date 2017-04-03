@@ -11,11 +11,16 @@ The XMLTV-Tools project consists of several programs for grabbing and modifying 
 
 ## wgmulti
 
-wgmulti is a wrapper for WebGrab+Plus.exe and offers a few benefits:
+wgmulti.exe is a simple accelarator for WebGrab+Plus.exe that can start multiple instances of the WebGrab process and later concatenates the xml output. 
+
+Benefits:
 
 * Faster overal grabbing process. 
-This is done by splitting the WebGrab master configuration into multiple slave configuration files. One for every single site ini. 
-Multiple WebGrab+Plus instances are then started in parallel for each configuration file. The resulting xml files are merged into a single file.
+Done by splitting the WebGrab master configuration WebGrab++.config.xml file into multiple configuration files. By default (see below for details) a single configuration file is created for every site ini in the master WebGrab++.config.xml file. 
+For instance, if you grab programmes for 20 channels - 10 from site1.com and 10 from site2.com, you will end up with 2 WebGrab++.config.xml with 10 channels each. 
+Multiple WebGrab+Plus instances are then started in parallel for each configuration file. 
+After the grabbing finsihes, the resulting xml files are merged into a single file.
+
 
 * Automatically modifies programmes' timings to local time.
 If your local time is +01:00 and you are grabbing a +00:00 channel then timings will be converted from:
@@ -41,6 +46,8 @@ The wgmulti.exe.config file contains some configurable parameters:
 * configDir - default configuration directory
 * showWebGrabConsole - Having this option to "True" will open a command line output window for each instance of WebGrab. 
 * convertTimesToLocal - If set to "False" will leave the programmes timinings unmodified. Otherwise will convert them to the local time of the machine where wgmulti is executed.
+* GroupChannelsBySiteIni - criteria for grouping channels. Defaults to true, meaning that it splits the master WebGrab++.config.xml into multiple files for each siteini. If false, WebGrab++.config.xml will be created fo a number of channels - depending on the MaxChannelsInGroup setting.
+MaxChannelsInGroup - works only if GroupChannelsBySiteIni is set to false. The number of channels that should be added to each newly created WebGrab++.config.xml.
 
 
 ## xmltv_program_copy
