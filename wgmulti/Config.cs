@@ -10,18 +10,20 @@ namespace wgmulti
   {
     XDocument xmlConfig;
     public const String dateFormat = "yyyyMMddHHmmss zzz";
-    public String fileName = "WebGrab++.config.xml";
-    public String filePath = String.Empty;
-    public String folder = String.Empty;
+    private String fileName = "WebGrab++.config.xml";
+    public String filePath = "";
+    private String logFileName = "WebGrab++.log.txt";
+    public String logFilePath = "";
+    public String folder = "";
     public String outputFilePath = "epg.xml";
     public String epgFileName = "epg.xml";
-    public String proxy = String.Empty;
+    public String proxy = "";
     public String mode = "m,nomark";
     public String userAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
     public String logging = "on";
     public String skip = "noskip";
     public String timeSpan = "0";
-    public String updateType = String.Empty;
+    public String updateType = "";
     public String retry = "4";
     public String retryTimeOut = "20";
     public String retryChannelDelay = "5";
@@ -63,8 +65,9 @@ namespace wgmulti
     /// <param name="configFolder"></param>
     public void SetAbsPaths(String configFolder)
     {
-      folder = configFolder; //when called from Clone
+      folder = configFolder; //when called from Clone()
       filePath = Path.Combine(folder, fileName);
+      logFilePath = Path.Combine(folder, logFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
       if (postProcessEnabled)
       {
@@ -185,21 +188,36 @@ namespace wgmulti
           {
             //is "site" attr is null get it from the previous channel
             var site = c.Attribute("site") != null ? c.Attribute("site").Value : channel.site;
-            var same_as = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : "";
+            var siteId = c.Attribute("site_id") != null ? c.Attribute("site_id").Value : "";
+            var update = c.Attribute("update") != null ? c.Attribute("update").Value : "";
+   
+            var xmltvId = c.Attribute("xmltv_id").Value;
+            var name = c.Value;
+
+            channel = new Channel(site, name, siteId, xmltvId, update);
+
+            // Add channel's additional attributes
+            if (c.Attribute("offset") != null)
+              channel.offset = c.Attribute("offset").Value;
+            if (c.Attribute("period") != null)
+              channel.period = c.Attribute("period").Value;
+            if (c.Attribute("include") != null)
+              channel.include = c.Attribute("include").Value;
+            if (c.Attribute("exclude") != null)
+              channel.exclude = c.Attribute("exclude").Value;
+            if (c.Attribute("site_channel") != null)
+              channel.site_channel = c.Attribute("site_channel").Value;
+
             //if "site" and "same_as" attr are missing skip this channel
+            var same_as = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : null;
             if (String.IsNullOrEmpty(site) && String.IsNullOrEmpty(same_as))
             {
               Console.WriteLine("Skippping channel without \"site\" and \"same_as\" attributes");
               continue;
             }
+            if (same_as != null)
+              channel.sameAs = same_as;
 
-            var siteId = c.Attribute("site_id") != null ? c.Attribute("site_id").Value : "";
-            var update = c.Attribute("update") != null ? c.Attribute("update").Value : "";
-            var offset = c.Attribute("offset") != null ? c.Attribute("offset").Value : "";
-            var xmltvId = c.Attribute("xmltv_id").Value;
-            var name = c.Value;
-
-            channel = new Channel(site, name, siteId, xmltvId, offset, same_as, update);
             channels.Add(channel);
           }
           catch
@@ -239,6 +257,7 @@ namespace wgmulti
           new XElement("timespan", timeSpan),
           new XElement("update", updateType)
         );
+
         settings.Add(retryEl);
         settings.Add(postProcessEl);
 

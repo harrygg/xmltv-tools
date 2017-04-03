@@ -19,6 +19,8 @@ namespace wgmulti
     public static int processTimeout = 240;
     public static bool showConsole = false;
     public static bool randomStartOrder = true;
+    public static bool generateReport = true;
+    public static bool combineLogFiles = true;
     public static bool debug = false;
 
     public static bool IsLinux()
@@ -55,15 +57,18 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["DeleteWorkFolder"] ?? "false";
       deleteWorkFolder = Convert.ToBoolean(val);
 
-      val = ConfigurationManager.AppSettings["ConvertTimesToLocal"] ?? "true";
-      convertTimesToLocal = Convert.ToBoolean(val);
-
       val = ConfigurationManager.AppSettings["GroupChannelsBySiteIni"] ?? "true";
       groupChannelsBySiteIni = Convert.ToBoolean(val);
 
       val = ConfigurationManager.AppSettings["RandomStartOrder"] ?? "true";
       randomStartOrder = Convert.ToBoolean(val);
 
+      val = ConfigurationManager.AppSettings["GenerateResultsReport"] ?? "true";
+      generateReport = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["CombineLogFiles"] ?? "true";
+      combineLogFiles = Convert.ToBoolean(val);
+      
       if (!convertTimesToLocal)
       {
         val = ConfigurationManager.AppSettings["TimeOffset"] ?? "0";

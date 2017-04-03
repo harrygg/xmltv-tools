@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace wgmulti
@@ -15,18 +11,20 @@ namespace wgmulti
     public String xmltvId = "";
     public String name = "";
     public String offset = "";
-    public String sameAs = "";
+    public String sameAs = null;
+    public String period = null;
+    public String include = null;
+    public String exclude = null;
+    public String site_channel = null;
     public bool active = true;
     public String siteIni = ".ini";
 
-    public Channel(String site, String name, String siteId, String xmltvId, String offset, String sameAs, String updateType = "i")
+    public Channel(String site, String name, String siteId, String xmltvId, String updateType = "i")
     {
       this.site = site;
       this.name = name;
       this.siteId = siteId;
       this.xmltvId = xmltvId;
-      this.offset = offset;
-      this.sameAs = sameAs;
       this.updateType = updateType;
       this.siteIni = site + siteIni;
     }
@@ -42,8 +40,16 @@ namespace wgmulti
 
       if (offset != "")
         xEl.Add(new XAttribute("offset", offset));
-      if (sameAs != "")
+      if (sameAs != null)
         xEl.Add(new XAttribute("same_as", sameAs)); 
+      if (period != null)
+        xEl.Add(new XAttribute("period", period));
+      if (include != null)
+        xEl.Add(new XAttribute("include", include));
+      if (include != null)
+        xEl.Add(new XAttribute("exclude", exclude));
+      if (include != null)
+        xEl.Add(new XAttribute("site_channel", site_channel));
 
       return xEl;
     }
