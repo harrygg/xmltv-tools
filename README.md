@@ -1,6 +1,4 @@
 # xmltv-tools
-wgmulti for WebGrab+ - splits config and runs multiple instances of WebGrab in paralell 
-
 
 The XMLTV-Tools project consists of several programs for grabbing and modifying XMLTV files.
 
