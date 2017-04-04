@@ -159,7 +159,7 @@ namespace wgmulti
     {
       try
       {
-        defaultValue = fromAttr ? x.Attribute(name).Value.ToLower() : x.Element(name).Value.ToLower();
+        defaultValue = fromAttr ? x.Attribute(name).Value : x.Element(name).Value;
         Debug("\"" + name + "\" value is set to \"" + defaultValue + "\"");
       }
       catch
