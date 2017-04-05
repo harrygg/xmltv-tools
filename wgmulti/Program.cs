@@ -55,10 +55,15 @@ namespace wgmulti
         }
 
         // Group grabbers (create grabbersGroupParallel, grabbersGroup2 and the list of outputEpgFiles)
-        // Each grabber contains one or more channels combined on a different criterias
-
+        // Each grabber contains one or more channels combined on a different criteria
         CreateGrabberGroups();
-        
+
+        if (grabbersGroupParallel.Count == 0)
+        {
+          Console.WriteLine("No active grabbing created. Exiting!");
+          return;
+        }
+
         // TODO
         Console.WriteLine("Starting grabbers asynchronously, {0} at a time", Arguments.maxAsyncProcesses);
         Parallel.ForEach(grabbersGroupParallel, (grabber) =>
@@ -121,8 +126,15 @@ namespace wgmulti
       {
         logFiles.ForEach(log =>
         {
-          using (var inStream = File.OpenRead(log))
-            inStream.CopyTo(outStream);
+          try
+          { 
+            using (var inStream = File.OpenRead(log))
+              inStream.CopyTo(outStream);
+          }
+          catch (Exception ex)
+          {
+            Console.Write(ex.Message);
+          }
         });
       }
     }
@@ -244,13 +256,19 @@ namespace wgmulti
         epgFiles = outputEpgFiles;
 
       var xmltv = new Xmltv();
-      Console.WriteLine("\nMerging single EPGs, master EPG will be saved in " + outputFile);
+      Console.WriteLine("\nMerging EPGs, master EPG will be saved in " + outputFile);
       epgFiles.ForEach( epgFile => {
-        var tempXmltv = new Xmltv(epgFile);
-        report.missingIds.AddRange(tempXmltv.missingChannelIds);
-        report.presentIds.AddRange(tempXmltv.presentChannelIds);
-
-        xmltv.Merge(tempXmltv);
+        try
+        { 
+          var tempXmltv = new Xmltv(epgFile);
+          report.missingIds.AddRange(tempXmltv.missingChannelIds);
+          report.presentIds.AddRange(tempXmltv.presentChannelIds);
+          xmltv.Merge(tempXmltv);
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
       });
 
       xmltv.RemoveOrphans();

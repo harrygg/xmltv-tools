@@ -26,14 +26,20 @@ namespace wgmulti
       this.rootConfig = rootConfig;
       this.id = id;
 
+      if (channels.Count == 0)
+        return;
+
       try
       {
         foreach (var channel in channels)
         {
-          var sourceIni = Path.Combine(rootConfig.folder, channel.siteIni); 
+          var sourceIni = Path.Combine(rootConfig.folder, channel.siteIni);
           CopyIni(sourceIni, channel);
 
-          // If we are grouping by site ini we copy the first ini file and exit.
+          // If we are grouping by siteini and there is no siteini found (channel will be inactive) we exit.
+          if ((Arguments.groupChannelsBySiteIni) && !channel.active)
+            return;
+          // If we are grouping by siteini we copy the first ini file and exit.
           if (Arguments.groupChannelsBySiteIni)
             break;
         }
