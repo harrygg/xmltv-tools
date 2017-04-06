@@ -67,12 +67,9 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["CombineLogFiles"] ?? "true";
       combineLogFiles = Convert.ToBoolean(val);
-      
-      if (!convertTimesToLocal)
-      {
-        val = ConfigurationManager.AppSettings["TimeOffset"] ?? "0";
-        timeOffset = Convert.ToDouble(val);
-      }
+
+      val = ConfigurationManager.AppSettings["ConvertTimesToLocal"] ?? "true";
+      convertTimesToLocal = Convert.ToBoolean(val);
 
       val = ConfigurationManager.AppSettings["MaxAsyncProcesses"] ?? "10";
       maxAsyncProcesses = val != "0" ? Convert.ToInt32(val) : 10;

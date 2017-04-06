@@ -92,7 +92,6 @@ namespace wgmulti
       Console.WriteLine("wgmulti execution time: " + elapsedTime);
 
       // Print failed channels
-      
       if (report.missingIds.Count() > 0)
       {
         Console.WriteLine("\r\nChannels with no EPG data:");
