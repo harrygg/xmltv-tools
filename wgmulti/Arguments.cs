@@ -9,6 +9,8 @@ namespace wgmulti
     public static String[] args = Environment.GetCommandLineArgs();
     public static String cmdArgs = "None";
     public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+    public static String jsonConfigFileName;
+    public static bool buildConfigFromJson;
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
@@ -21,6 +23,7 @@ namespace wgmulti
     public static bool randomStartOrder = true;
     public static bool generateReport = true;
     public static bool combineLogFiles = true;
+    public static bool removeChannelsWithNoProgrammes = true;
     public static bool debug = false;
 
     public static bool IsLinux()
@@ -53,8 +56,13 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["Debug"] ?? "false";
       debug = Convert.ToBoolean(val);
 
+      jsonConfigFileName = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? "wgmulti.channels.json";
+
       val = ConfigurationManager.AppSettings["DeleteWorkFolder"] ?? "false";
       deleteWorkFolder = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["BuildConfigFromJson"] ?? "true";
+      buildConfigFromJson = Convert.ToBoolean(val);
 
       val = ConfigurationManager.AppSettings["GroupChannelsBySiteIni"] ?? "true";
       groupChannelsBySiteIni = Convert.ToBoolean(val);
@@ -79,6 +87,9 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["ProcessTimeout"] ?? "240";
       processTimeout = Convert.ToInt32(val);
+
+      val = ConfigurationManager.AppSettings["RemoveChannelsWithNoProgrammes"] ?? "true";
+      removeChannelsWithNoProgrammes = Convert.ToBoolean(val);
 
       //if (!IsLinux())
       //{ 

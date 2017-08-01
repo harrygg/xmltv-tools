@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Xml.Linq;
 
 namespace wgmulti
@@ -18,6 +19,7 @@ namespace wgmulti
     public static List<Grabber> grabbersGroup2 = new List<Grabber>();
     static List<String> outputEpgFiles = new List<String>();
     static List<String> logs = new List<String>();
+    public static string jsonConfigPath;
 
     static void Main(string[] args)
     {
@@ -31,6 +33,11 @@ namespace wgmulti
       Console.WriteLine(" System: {0}", platform);
       Console.WriteLine(" Arguments: {0}", Arguments.cmdArgs);
       Console.WriteLine(" ConfigDir: {0}", Arguments.configDir);
+      if (Arguments.buildConfigFromJson)
+      {
+        Console.WriteLine(" Build config from JSON file: {0}", Arguments.buildConfigFromJson);
+        Console.WriteLine(" JsonConfigFileName: {0}", Arguments.jsonConfigFileName);
+      }
       Console.WriteLine(" MaxAsyncProcesses: {0}", Arguments.maxAsyncProcesses);
       Console.WriteLine(" GroupChannelsBySiteIni: {0}", Arguments.groupChannelsBySiteIni);
       Console.WriteLine(" MaxChannelsInGroup: {0}", Arguments.maxChannelsInGroup);
@@ -45,6 +52,13 @@ namespace wgmulti
 
       try
       {
+        // Check whether we have a config xml or json file
+        //jsonConfigPath = Path.Combine(Arguments.configDir, Arguments.jsonConfigFileName);
+        //if (File.Exists(jsonConfigPath))
+        //{
+        //  CreateConfigFromJson();
+        //}
+
         // Read main configuration file
         rootConfig = new Config(Arguments.configDir);
 
@@ -92,10 +106,10 @@ namespace wgmulti
       Console.WriteLine("wgmulti execution time: " + elapsedTime);
 
       // Print failed channels
-      if (report.missingIds.Count() > 0)
+      if (report.emptyChannels.Count() > 0)
       {
         Console.WriteLine("\r\nChannels with no EPG data:");
-        report.missingIds.ForEach(id => {
+        report.emptyChannels.ForEach(id => {
           Console.WriteLine(id);
        });
       }
@@ -103,8 +117,26 @@ namespace wgmulti
       // Save report
       report.generationTime = elapsedTime;
       if (Arguments.generateReport)
-        report.Save(rootConfig.folder);
+        report.Save(Arguments.configDir);
     }
+
+    //static void CreateConfigFromJson()
+    //{
+    //  try
+    //  {
+    //    var serializer = new JavaScriptSerializer();
+    //    using (StreamReader reader = new StreamReader(jsonConfigPath))
+    //    {
+    //      string jsonStr = reader.ReadToEnd();
+    //      var data = serializer.Deserialize<List<Channel>>(jsonStr);
+    //    }
+    //  }
+    //  catch (ArgumentException ex)
+    //  {
+    //    Console.WriteLine("ERROR | wgmulti.channels.json could not be decoded!");
+    //    throw;
+    //  }
+    //}
 
     /// <summary>
     /// Merge all local log files into a single master log file
@@ -194,7 +226,7 @@ namespace wgmulti
           var n = 0;
           while (channels.Any())
           {
-            var groupName = Arguments.maxChannelsInGroup > 1 ? "group" + (++n).ToString() : channels[0].xmltvId;
+            var groupName = Arguments.maxChannelsInGroup > 1 ? "group" + (++n).ToString() : channels[0].xmltv_id;
             var group = new ChannelGroup(groupName);
 
             group.channels.AddRange(channels.Take(Arguments.maxChannelsInGroup));
@@ -206,8 +238,8 @@ namespace wgmulti
             // and "same_as" or 'xmltvId" is equal to the previous channel ones, add it to the group
             while (channels.Any())
             {
-              if ((!String.IsNullOrEmpty(channels[0].sameAs) && channels[0].sameAs == lastAddedChannel.name)
-                || (!String.IsNullOrEmpty(channels[0].period) && channels[0].xmltvId == lastAddedChannel.xmltvId))
+              if ((!String.IsNullOrEmpty(channels[0].same_as) && channels[0].same_as == lastAddedChannel.name)
+                || (!String.IsNullOrEmpty(channels[0].period) && channels[0].xmltv_id == lastAddedChannel.xmltv_id))
               {
                 group.channels.AddRange(channels.Take(1));
                 channels = channels.Skip(1).ToList();
@@ -218,7 +250,7 @@ namespace wgmulti
             channelGroups.Add(group);
           }
         }
-        Console.WriteLine("Split channels into {0} groups", channelGroups.Count());
+        Console.WriteLine("Splitting channels into {0} groups", channelGroups.Count());
       }
       catch(Exception ex)
       {
@@ -260,8 +292,8 @@ namespace wgmulti
         try
         { 
           var tempXmltv = new Xmltv(epgFile);
-          report.missingIds.AddRange(tempXmltv.missingChannelIds);
-          report.presentIds.AddRange(tempXmltv.presentChannelIds);
+          report.emptyChannels.AddRange(tempXmltv.emptyChannels);
+          report.channels.AddRange(tempXmltv.notEmptyChannels);
           xmltv.Merge(tempXmltv);
         }
         catch (Exception ex)
@@ -270,7 +302,6 @@ namespace wgmulti
         }
       });
 
-      xmltv.RemoveOrphans();
       if (Arguments.convertTimesToLocal)
         xmltv.ConvertToLocalTime();
 

@@ -12,34 +12,57 @@ namespace wgmulti
     String file = "epg.xml";
     String generatorName = "";
     String generatorUrl = "";
-    List<XElement> channels = new List<XElement>();
-    List<XElement> programmes = new List<XElement>();
-    public List<String> missingChannelIds = new List<String>();
-    public List<String> presentChannelIds = new List<String>();
+    List<XElement> channelElements = new List<XElement>();
+    List<XElement> notEmptyChannelElements = new List<XElement>();
+    List<XElement> programmeElements = new List<XElement>();
+    public List<String> emptyChannels = new List<String>();
+    public List<String> notEmptyChannels = new List<String>();
 
     public Xmltv(String file = null)
     {
-      if (file != null)
-      {
-        root = XDocument.Load(file);
-        tv = root.Element("tv");
-        generatorName = tv.Attribute("generator-info-name") != null ? tv.Attribute("generator-info-name").Value : String.Empty;
-        generatorUrl = tv.Attribute("generator-info-url") != null ? tv.Attribute("generator-info-url").Value : String.Empty;
-        channels = (from e in tv.Elements("channel") select e).ToList();
-        programmes = (from e in tv.Elements("programme") select e).ToList();
-      }
+      if (file == null)
+        return;
+
+      root = XDocument.Load(file);
+      tv = root.Element("tv");
+      generatorName = tv.Attribute("generator-info-name") != null ? tv.Attribute("generator-info-name").Value : String.Empty;
+      generatorUrl = tv.Attribute("generator-info-url") != null ? tv.Attribute("generator-info-url").Value : String.Empty;
+
+      // Get all channel xml nodes
+      channelElements = (from e in tv.Elements("channel") select e).ToList();
+      // Get the ids of all channel elements
+      var channelIds = (from e in channelElements select e.Attribute("id").Value).ToList();
+
+      // Get all programme xml nodes
+      programmeElements = (from e in tv.Elements("programme") select e).ToList();
+      // Get the channel ids of all programme elements
+      var programmesIds = (from e in programmeElements select e.Attribute("channel").Value).ToList();
+
+      // Get all channel xml nodes that have no programmes
+      notEmptyChannelElements.AddRange(channelElements.Where(c => programmesIds.Contains(c.Attribute("id").Value)).ToList());
+      // Get the names of all channels that have programmes
+      notEmptyChannels.AddRange(notEmptyChannelElements.Select(c => c.Element("display-name").Value));
+
+      // Get the names of all channels that have no programmes
+      emptyChannels.AddRange(channelElements.Where(c => !programmesIds.Contains(c.Attribute("id").Value)).Select(c => c.Element("display-name").Value).ToList());
     }
 
 
     public void Merge(Xmltv xmltv)
     {
+      bool excludeEmptyChannels = Arguments.removeChannelsWithNoProgrammes;
+
       if (generatorName == "" && generatorUrl == "")
       {
         generatorName = xmltv.generatorName;
         generatorUrl = xmltv.generatorUrl;
       }
-      channels.AddRange(xmltv.channels);
-      programmes.AddRange(xmltv.programmes);
+
+      if (excludeEmptyChannels)
+        channelElements.AddRange(xmltv.notEmptyChannelElements);
+      else
+        channelElements.AddRange(xmltv.channelElements);
+      programmeElements.AddRange(xmltv.programmeElements);
     }
 
 
@@ -50,32 +73,15 @@ namespace wgmulti
 
       tv.Add(new XAttribute("generator-info-name", generatorName));
       tv.Add(new XAttribute("generator-info-url", generatorUrl));
-      tv.Add(channels.ToArray());
-      tv.Add(programmes.ToArray());
+      tv.Add(channelElements.ToArray());
+      tv.Add(programmeElements.ToArray());
       root.Add(tv);
       root.Save(outputFile);
     }
 
-    /// <summary>
-    /// Remove all orphan channels and programmes
-    /// </summary>
-    public void RemoveOrphans()
-    {
-      var channelIds = (from e in tv.Elements("channel") select e.Attribute("id").Value).ToList();
-      var programmesIds = (from e in tv.Elements("programme") select e.Attribute("channel").Value).ToList();
-
-      tv.Descendants("programme").Where(p => !channelIds.Contains(p.Attribute("channel").Value)).Remove();
-      missingChannelIds.AddRange(tv.Descendants("channel")
-        .Where(c => !programmesIds.Contains(c.Attribute("id").Value))
-        .Select(c => c.Element("display-name").Value).ToList());
-
-      tv.Descendants("channel").Where(c => !programmesIds.Contains(c.Attribute("id").Value)).Remove();
-      presentChannelIds.AddRange(tv.Descendants("channel").Select(c => c.Element("display-name").Value).ToList());
-    }
-
     public void ConvertToLocalTime()
     {
-      programmes.ForEach(programme => {
+      programmeElements.ForEach(programme => {
         programme.Attribute("start").Value = ConvertToLocal(programme.Attribute("start").Value);
         programme.Attribute("stop").Value = ConvertToLocal(programme.Attribute("stop").Value);
       });

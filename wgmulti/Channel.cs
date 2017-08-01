@@ -5,27 +5,39 @@ namespace wgmulti
 {
   public class Channel
   {
-    public String updateType = "";
-    public String site = "";
-    public String siteId = "";
-    public String xmltvId = "";
-    public String name = "";
-    public String offset = "";
-    public String sameAs = null;
-    public String period = null;
-    public String include = null;
-    public String exclude = null;
-    public String site_channel = null;
+    public String update { get; set; }
+    public String iniPath { get; set; }
+    public String Site
+    {
+      get { return this.site ?? this.getFileName(); }
+    }
+
+    private string getFileName()
+    {
+      throw new NotImplementedException();
+    }
+
+    public String site { get; set; }
+    public String site_id { get; set; }
+    public String xmltv_id { get; set; }
+    public String name { get; set; }
+    public String offset { get; set; }
+    public String same_as { get; set; }
+    public String period { get; set; }
+    public String include { get; set; }
+    public String exclude { get; set; }
+    public String site_channel { get; set; }
     public bool active = true;
     public String siteIni = ".ini";
 
+    public Channel(){}
     public Channel(String site, String name, String siteId, String xmltvId, String updateType = "i")
     {
       this.site = site;
       this.name = name;
-      this.siteId = siteId;
-      this.xmltvId = xmltvId;
-      this.updateType = updateType;
+      this.site_id = siteId;
+      this.xmltv_id = xmltvId;
+      this.update = updateType;
       this.siteIni = site + siteIni;
     }
 
@@ -33,15 +45,15 @@ namespace wgmulti
     {
       var xEl = new XElement("channel", name, 
         new XAttribute("site", site), 
-        new XAttribute("xmltv_id", xmltvId),
-        new XAttribute("site_id", siteId), 
-        new XAttribute("update", updateType)
+        new XAttribute("xmltv_id", xmltv_id),
+        new XAttribute("site_id", site_id), 
+        new XAttribute("update", update)
       );
 
-      if (offset != "")
+      if (offset != null)
         xEl.Add(new XAttribute("offset", offset));
-      if (sameAs != null)
-        xEl.Add(new XAttribute("same_as", sameAs)); 
+      if (same_as != null)
+        xEl.Add(new XAttribute("same_as", same_as)); 
       if (period != null)
         xEl.Add(new XAttribute("period", period));
       if (include != null)

@@ -1,41 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace wgmulti
 {
   public class Report
   {
-    public Report()
-    {
-    }
-    String name = "wgmultiresults.json";
-    public List<String> presentIds = new List<String>();
-    public List<String> missingIds = new List<String>();
+    public Report(){}
+
+    String fileName = "wgmulti.results.json";
+    public List<String> channels = new List<String>();
+    public List<String> emptyChannels = new List<String>();
     public int total = 0;
+    public int missing = 0;
     public String generationTime = String.Empty;
 
     public void Save(String path)
     {
-      using (var f = new StreamWriter(Path.Combine(path, name)))
-      {
-        f.Write("{");
-        f.Write("\"total\":" + total + ",");
-        var ids = String.Empty;
-        if (presentIds.Count > 0)
-          ids = "\"" + String.Join("\",\"", presentIds.ToArray()) + "\"";
-        f.Write("\"present_ids\":["+ids+"], ");
+      var file = Path.Combine(path, fileName);
+      this.total = channels.Count;
+      this.missing = emptyChannels.Count;
 
-        if (missingIds.Count > 0)
-          ids = "\"" + String.Join("\",\"", missingIds.ToArray()) + "\"";
-        else
-          ids = ""; //reset in case they were set above
-
-        f.Write("\"missing_ids\":[" + ids + "], ");
-        f.Write("\"missing\":" + missingIds.Count + ", ");
-        f.Write("\"generationTime\":\"{0}\"", generationTime);
-        f.Write("}");
-      }
+      var serializer = new JavaScriptSerializer();
+      var json = serializer.Serialize(this);
+      File.WriteAllText(file, json);
+      Console.WriteLine("Report saved to {0}", file);
     }
   }
 }

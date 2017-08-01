@@ -11,3 +11,5 @@ TestResults/
 *wgmulti/bin/Debug/wgmulti.exe.CodeAnalysisLog.xml
 *wgmulti/bin/Debug/wgmulti.exe.lastcodeanalysissucceeded
 *xmltv_merger/bin/Debug/xmltv_merge.vshost.exe.manifest
+epg.xml*
+xmltv_program_copy/bin/Debug/epg.xml

@@ -83,8 +83,8 @@ namespace wgmulti
 
       if (!File.Exists(file))
       {
-        Debug("Configuration file " + file + " not found! Exiting...");
-        return;
+        //Debug("Configuration file " + file + " not found! Exiting...");
+        throw new FileNotFoundException("Unable to find config file: " + file);
       }
       Debug("Loading configuration from " + file);
 
@@ -216,7 +216,7 @@ namespace wgmulti
               continue;
             }
             if (same_as != null)
-              channel.sameAs = same_as;
+              channel.same_as = same_as;
 
             channels.Add(channel);
           }
@@ -234,21 +234,28 @@ namespace wgmulti
       return channels;
     }
 
-    public bool Save(String outputFile = "", bool saveChannels = true)
+    XElement CreateXml(bool saveChannels)
     {
-
-      XDocument xdoc;
+      var settings = new XElement("settings");
       try
       {
-        var settings = new XElement("settings");
-        var retryEl = new XElement("retry", new XAttribute("time-out", retryTimeOut), new XAttribute("channel-delay", retryChannelDelay), new XAttribute("index-delay", retryIndexDelay), new XAttribute("show-delay", retryShowDelay));
+        var retryEl = new XElement("retry", 
+          new XAttribute("time-out", retryTimeOut), 
+          new XAttribute("channel-delay", retryChannelDelay), 
+          new XAttribute("index-delay", retryIndexDelay), 
+          new XAttribute("show-delay", retryShowDelay));
+
         retryEl.Value = retry;
-        var postProcessEl = new XElement("postprocess", new XAttribute("run", postProcessRun), new XAttribute("grab", postProcessGrab));
+
+        var postProcessEl = new XElement("postprocess", 
+          new XAttribute("run", postProcessRun), 
+          new XAttribute("grab", postProcessGrab));
+
         postProcessEl.Value = postProcessName;
 
-        xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
+        
         settings.Add(
-          new XElement("filename", Path.Combine(filePath, outputFilePath)),
+          new XElement("filename", outputFilePath),
           new XElement("proxy", proxy),
           new XElement("mode", mode),
           new XElement("user-agent", userAgent),
@@ -262,10 +269,24 @@ namespace wgmulti
         settings.Add(postProcessEl);
 
         if (saveChannels && channels != null)
-        { 
+        {
           foreach (Channel c in channels)
             settings.Add(c.ToXElement());
         }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.ToString());
+      }
+      return settings;
+    }
+
+    public bool Save(String outputFile = "", bool saveChannels = true)
+    {
+      try
+      {
+        var settings = CreateXml(saveChannels);
+        XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
 
         if (String.IsNullOrEmpty(outputFile))
           outputFile = filePath;
@@ -287,14 +308,13 @@ namespace wgmulti
             Directory.CreateDirectory(folder);
           xdoc.Save(postProcessConfigFilePath);
         }
-
-        return true;
       }
-      catch (Exception e)
+      catch (Exception ex)
       {
-        Debug(e.ToString());
+        Console.WriteLine(ex.ToString());
         return false;
-      }  
+      }
+      return true; 
     }
 
     public static void Debug(string v)

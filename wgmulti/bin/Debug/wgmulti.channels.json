@@ -1,0 +1,19 @@
+[
+  {
+    "name":"БНТ 1",
+    "xmltv_id": "БНТ 1",
+    "site_id": "bnt1",
+    "site": "bnt.bg",
+    "iniPath": "https://raw.githubusercontent.com/harrygg/WebGrab-Plus-Ini-Files/master/bnt.bg.ini",
+    "ini": {
+      "disale_details": false
+      "disabled_elements": ["index"]
+      }
+  },
+  {
+    "name":"bTV",
+    "xmltv_id": "bTV",
+    "site_id": "chanel_1",
+    "iniPath": "https://raw.githubusercontent.com/harrygg/WebGrab-Plus-Ini-Files/master/bnt.bg.ini"
+  }
+]
