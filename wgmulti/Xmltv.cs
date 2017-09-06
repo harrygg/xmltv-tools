@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace wgmulti
 {
@@ -12,11 +14,11 @@ namespace wgmulti
     String file = "epg.xml";
     String generatorName = "";
     String generatorUrl = "";
-    List<XElement> channelElements = new List<XElement>();
-    List<XElement> notEmptyChannelElements = new List<XElement>();
-    List<XElement> programmeElements = new List<XElement>();
-    public List<String> emptyChannels = new List<String>();
-    public List<String> notEmptyChannels = new List<String>();
+    public List<XElement> allChannels = new List<XElement>();
+    public List<XElement> channels = new List<XElement>();
+    public List<XElement> programmes = new List<XElement>();
+    public List<String> emptyChannelNames = new List<String>();
+    //public List<String> notEmptyChannelNames = new List<String>();
 
     public Xmltv(String file = null)
     {
@@ -29,42 +31,23 @@ namespace wgmulti
       generatorUrl = tv.Attribute("generator-info-url") != null ? tv.Attribute("generator-info-url").Value : String.Empty;
 
       // Get all channel xml nodes
-      channelElements = (from e in tv.Elements("channel") select e).ToList();
+      allChannels = (from e in tv.Elements("channel") select e).ToList();
       // Get the ids of all channel elements
-      var channelIds = (from e in channelElements select e.Attribute("id").Value).ToList();
+      //var channelIds = (from e in channels select e.Attribute("id").Value).ToList();
 
       // Get all programme xml nodes
-      programmeElements = (from e in tv.Elements("programme") select e).ToList();
+      programmes = (from e in tv.Elements("programme") select e).ToList();
       // Get the channel ids of all programme elements
-      var programmesIds = (from e in programmeElements select e.Attribute("channel").Value).ToList();
+      var programmesIds = (from e in programmes select e.Attribute("channel").Value).ToList();
 
-      // Get all channel xml nodes that have no programmes
-      notEmptyChannelElements.AddRange(channelElements.Where(c => programmesIds.Contains(c.Attribute("id").Value)).ToList());
+      // Get all channel xml nodes that have programmes
+      channels.AddRange(allChannels.Where(c => programmesIds.Contains(c.Attribute("id").Value)).ToList());
       // Get the names of all channels that have programmes
-      notEmptyChannels.AddRange(notEmptyChannelElements.Select(c => c.Element("display-name").Value));
+      //notEmptyChannelNames.AddRange(channels.Select(c => c.Element("display-name").Value));
 
       // Get the names of all channels that have no programmes
-      emptyChannels.AddRange(channelElements.Where(c => !programmesIds.Contains(c.Attribute("id").Value)).Select(c => c.Element("display-name").Value).ToList());
+      emptyChannelNames.AddRange(allChannels.Where(c => !programmesIds.Contains(c.Attribute("id").Value)).Select(c => c.Element("display-name").Value).ToList());
     }
-
-
-    public void Merge(Xmltv xmltv)
-    {
-      bool excludeEmptyChannels = Arguments.removeChannelsWithNoProgrammes;
-
-      if (generatorName == "" && generatorUrl == "")
-      {
-        generatorName = xmltv.generatorName;
-        generatorUrl = xmltv.generatorUrl;
-      }
-
-      if (excludeEmptyChannels)
-        channelElements.AddRange(xmltv.notEmptyChannelElements);
-      else
-        channelElements.AddRange(xmltv.channelElements);
-      programmeElements.AddRange(xmltv.programmeElements);
-    }
-
 
     public void Save(String outputFile = null)
     {
@@ -73,15 +56,20 @@ namespace wgmulti
 
       tv.Add(new XAttribute("generator-info-name", generatorName));
       tv.Add(new XAttribute("generator-info-url", generatorUrl));
-      tv.Add(channelElements.ToArray());
-      tv.Add(programmeElements.ToArray());
+
+      if (Arguments.removeChannelsWithNoProgrammes)
+        tv.Add(channels.ToArray());
+      else
+        tv.Add(allChannels.ToArray());
+
+      tv.Add(programmes.ToArray());
       root.Add(tv);
       root.Save(outputFile);
     }
 
     public void ConvertToLocalTime()
     {
-      programmeElements.ForEach(programme => {
+      programmes.ForEach(programme => {
         programme.Attribute("start").Value = ConvertToLocal(programme.Attribute("start").Value);
         programme.Attribute("stop").Value = ConvertToLocal(programme.Attribute("stop").Value);
       });
@@ -92,6 +80,35 @@ namespace wgmulti
       var dDateTime = DateTime.ParseExact(dateTimeString, Config.dateFormat, null);
       dateTimeString = dDateTime.ToString(Config.dateFormat);
       return dateTimeString.Replace(":", "");
+    }
+
+    public String GetMD5Hash()
+    {
+      try
+      {
+        var md5 = MD5.Create();
+        var stream = File.OpenRead(file);
+        return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+        return String.Empty;
+      }
+    }
+
+    public String GetFileSize()
+    {
+      try
+      {
+        var fi = new FileInfo(file);
+        return fi.Length.ToString();
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+        return String.Empty;
+      }
     }
   }
 }

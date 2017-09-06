@@ -10,53 +10,54 @@ namespace wgmulti
   {
     XDocument xmlConfig;
     public const String dateFormat = "yyyyMMddHHmmss zzz";
-    private String fileName = "WebGrab++.config.xml";
-    public String filePath = "";
-    private String logFileName = "WebGrab++.log.txt";
+    public const String configFileName = "WebGrab++.config.xml";
+    public String configFilePath = "";
+    const String logFileName = "WebGrab++.log.txt";
     public String logFilePath = "";
     public String folder = "";
     public String outputFilePath = "epg.xml";
     public String epgFileName = "epg.xml";
-    public String proxy = "";
-    public String mode = "m,nomark";
-    public String userAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
-    public String logging = "on";
-    public String skip = "noskip";
-    public String timeSpan = "0";
-    public String updateType = "";
-    public String retry = "4";
-    public String retryTimeOut = "20";
-    public String retryChannelDelay = "5";
-    public String retryIndexDelay = "1";
-    public String retryShowDelay = "1";
-    public bool postProcessEnabled = false;
-    public String postProcessName = "mdb";
-    public String postProcessRun = "n";
-    public String postProcessGrab = "y";
-    public bool grabbingEnabled = true;
+    public Proxy proxy { get; set; }
+    //public List<Credentials> credentials { get; set; }
+    public String mode { get; set; }
+    public String userAgent { get; set; }
+    public bool logging { get; set; }
+    public Skip skip { get; set; }
+    public Timespan timeSpan { get; set; }
+    public String update { get; set; }
+    public Retry retry { get; set; }
+    public PostProcess postProcess { get; set; }
     String postProcessConfigFileName = ".config.xml";
     public String postProcessConfigFilePath = "";
     public String postProcessOutputFilePath = "";
-    public XElement postProcessSettings = new XElement("postprocess");
-    public List<Channel> channels;
+    public XElement postProcessSettings;
+    public List<Channel> channels { get; set; }
+    public int activeChannels = 0;
     public IEnumerable<IGrouping<String, Channel>> grabbers;
-    public String tempDir = "";
+    public String tempDir = Path.Combine(Path.GetTempPath(), "wgmulti");
 
+    public Config() { }
     /// <summary>
     /// Create a config object. If a path to config.xml file is provided, settings will be loaded.
     /// Otherwise a default config file will be created
     /// </summary>
     /// <param name="path">Directory where the configuration exists or will be created</param>
-    public Config(String path = "")
+    public Config(String path = null)
     {
-      if (!Path.IsPathRooted(path))
-        throw new ArgumentException("Config path must be an absolute path");
+      postProcess = new PostProcess(); //init postprocess default values
 
-      folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
-      tempDir = Path.Combine(Path.GetTempPath(), "wgmulti");
-
+      if (path == null)
+        folder = tempDir;
+      else
+      { 
+        folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
+        if (!Path.IsPathRooted(folder))
+          throw new ArgumentException("Config path must be an absolute path");
+      }
       SetAbsPaths(folder);
-      LoadSettingsFromFile(filePath);
+
+      if (path != null)
+        LoadSettingsFromXmlFile(configFilePath);
     }
 
     /// <summary>
@@ -66,20 +67,21 @@ namespace wgmulti
     public void SetAbsPaths(String configFolder)
     {
       folder = configFolder; //when called from Clone()
-      filePath = Path.Combine(folder, fileName);
+      configFilePath = Path.Combine(folder, configFileName);
       logFilePath = Path.Combine(folder, logFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
-      if (postProcessEnabled)
+      if (postProcess.run)
       {
-        postProcessConfigFilePath = Path.Combine(folder, postProcessName, postProcessName + postProcessConfigFileName);
-        postProcessOutputFilePath = Path.Combine(folder, postProcessName, epgFileName);
+        postProcessConfigFilePath = Path.Combine(folder, postProcess.type.ToString().ToLower(),
+          postProcess.type.ToString().ToLower() + postProcessConfigFileName);
+        postProcessOutputFilePath = Path.Combine(folder, postProcess.type.ToString().ToLower(), epgFileName);
       }
     }
 
-    public void LoadSettingsFromFile(String file = "", bool loadChannels = true)
+    public void LoadSettingsFromXmlFile(String file = "", bool loadChannels = true)
     {
       if (file == "")
-        file = filePath;
+        file = configFilePath;
 
       if (!File.Exists(file))
       {
@@ -92,8 +94,7 @@ namespace wgmulti
       var settings = xmlConfig.Element("settings");
       Debug("settings node loaded");
 
-      var epgFilePath = "";
-      SetValue(ref epgFilePath, settings, "filename");
+      var epgFilePath = settings.Element("filename").Value;
       if (epgFilePath == "")
       {
         outputFilePath = Path.Combine(folder, epgFileName);
@@ -104,30 +105,29 @@ namespace wgmulti
       }
       Debug("filename set to " + outputFilePath);
 
-      SetValue(ref mode, settings, "mode");
-      SetValue(ref proxy, settings, "proxy");
-      SetValue(ref userAgent, settings, "user-agent");
-      SetValue(ref logging, settings, "logging");
-      SetValue(ref skip, settings, "skip");
-      SetValue(ref timeSpan, settings, "timespan");
-      SetValue(ref updateType, settings, "update");
-      SetValue(ref retry, settings, "retry");
-      SetValue(ref retryTimeOut, settings.Element("retry"), "time-out", true);
-      SetValue(ref retryChannelDelay , settings.Element("retry"), "channel-delay", true);
-      SetValue(ref retryIndexDelay, settings.Element("retry"), "index-delay", true);
-      SetValue(ref retryShowDelay, settings.Element("retry"), "show-delay", true);
-      SetValue(ref postProcessName, settings, "postprocess");
-      SetValue(ref postProcessRun, settings.Element("postprocess"), "run", true);
-      SetValue(ref postProcessGrab, settings.Element("postprocess"), "grab", true);
-      grabbingEnabled = StringToBool(postProcessGrab);
-      postProcessEnabled = postProcessName != "" && StringToBool(postProcessRun);
-      Console.WriteLine("Is postprocess enabled: {0}", postProcessEnabled);
+      if (settings.Element("mode") != null)
+        mode = settings.Element("mode").Value;
 
-      if (postProcessEnabled)
+      if (settings.Element("user-agent") != null)
+        userAgent = settings.Element("user-agent").Value;
+
+      if (settings.Element("update") != null)
+        update = settings.Element("update").Value;
+
+      skip = new Skip(settings.Element("skip"));
+      timeSpan = new Timespan(settings.Element("timespan"));
+      proxy = new Proxy(settings.Element("proxy"));
+      logging = StringToBool(settings.Element("logging"));
+      retry = new Retry(settings.Element("retry"));
+      postProcess = new PostProcess(settings.Element("postprocess"));
+
+      Console.WriteLine("Is postprocess enabled: {0}", postProcess.run);
+
+      if (postProcess.run)
       {
-        var postProcessDir = Path.Combine(folder, postProcessName);
+        var postProcessDir = Path.Combine(folder, postProcess.type.ToString().ToLower());
         Debug("postProcessDir=" + postProcessDir);
-        postProcessConfigFilePath = Path.Combine(postProcessDir, postProcessName + postProcessConfigFileName);
+        postProcessConfigFilePath = Path.Combine(postProcessDir, postProcess.type.ToString().ToLower() + postProcessConfigFileName);
         Debug("postprocess config file path is: " + postProcessConfigFilePath);
         try
         {
@@ -139,8 +139,7 @@ namespace wgmulti
         {
           Console.WriteLine(ex.Message);
           Debug(ex.ToString());
-          postProcessRun = "n";
-          postProcessEnabled = false;
+          postProcess.run = false;
           Console.WriteLine("Postprocess operations will be disabled!");
         }
       }
@@ -148,8 +147,14 @@ namespace wgmulti
       if (loadChannels)
         channels = GetChannels();
     }
-    
-    bool StringToBool(String val)
+    public static bool StringToBool(XElement el)
+    {
+      if (el != null)
+        return StringToBool(el.Value);
+      return false;
+    }
+
+    public static bool StringToBool(String val)
     {
       val = val.ToLower();
       return (val == "y" || val == "yes" || val == "true" || val == "on");
@@ -187,18 +192,19 @@ namespace wgmulti
           try
           {
             //is "site" attr is null get it from the previous channel
-            var site = c.Attribute("site") != null ? c.Attribute("site").Value : channel.site;
+            var site = c.Attribute("site") != null ? c.Attribute("site").Value : channel.siteini.name;
             var siteId = c.Attribute("site_id") != null ? c.Attribute("site_id").Value : "";
-            var update = c.Attribute("update") != null ? c.Attribute("update").Value : "";
-   
+            var update = c.Attribute("update") != null ? c.Attribute("update").Value : UpdateType.None;
+
             var xmltvId = c.Attribute("xmltv_id").Value;
             var name = c.Value;
 
-            channel = new Channel(site, name, siteId, xmltvId, update);
+            var siteIni = new SiteIni(site, siteId);
+            channel = new Channel(name, xmltvId, siteIni, update);
 
             // Add channel's additional attributes
             if (c.Attribute("offset") != null)
-              channel.offset = c.Attribute("offset").Value;
+              channel.offset = Convert.ToInt16(c.Attribute("offset").Value);
             if (c.Attribute("period") != null)
               channel.period = c.Attribute("period").Value;
             if (c.Attribute("include") != null)
@@ -237,41 +243,48 @@ namespace wgmulti
     XElement CreateXml(bool saveChannels)
     {
       var settings = new XElement("settings");
+
       try
       {
-        var retryEl = new XElement("retry", 
-          new XAttribute("time-out", retryTimeOut), 
-          new XAttribute("channel-delay", retryChannelDelay), 
-          new XAttribute("index-delay", retryIndexDelay), 
-          new XAttribute("show-delay", retryShowDelay));
-
-        retryEl.Value = retry;
-
-        var postProcessEl = new XElement("postprocess", 
-          new XAttribute("run", postProcessRun), 
-          new XAttribute("grab", postProcessGrab));
-
-        postProcessEl.Value = postProcessName;
-
-        
         settings.Add(
           new XElement("filename", outputFilePath),
-          new XElement("proxy", proxy),
           new XElement("mode", mode),
           new XElement("user-agent", userAgent),
-          new XElement("logging", logging),
-          new XElement("skip", skip),
-          new XElement("timespan", timeSpan),
-          new XElement("update", updateType)
+          new XElement("update", update)
         );
 
-        settings.Add(retryEl);
-        settings.Add(postProcessEl);
+        if (logging)
+          settings.Add(new XElement("logging", "on"));
+
+        //if (credentials != null)
+        //{
+        //  foreach (var c in credentials)
+        //    settings.Add(c.ToXElement());
+        //}
+
+        if (proxy != null)
+          settings.Add(proxy.ToXElement());
+
+        settings.Add(skip.ToXElement());
+        settings.Add(timeSpan.ToXElement());
+        settings.Add(retry.ToXElement());
+        settings.Add(postProcess.ToXElement());
 
         if (saveChannels && channels != null)
         {
-          foreach (Channel c in channels)
+          foreach (var c in channels)
+          { 
             settings.Add(c.ToXElement());
+            if (c.offset_channels != null)
+              foreach (var ch in c.offset_channels)
+              {
+                if (String.IsNullOrEmpty(ch.same_as))
+                {
+                  ch.same_as = c.name;
+                }
+                settings.Add(ch.ToXElement());
+              }
+          }
         }
       }
       catch (Exception e)
@@ -281,23 +294,32 @@ namespace wgmulti
       return settings;
     }
 
-    public bool Save(String outputFile = "", bool saveChannels = true)
+    public bool Save(String outputDir = null, bool saveChannels = true)
     {
+      var _filePath = "";
+      if (!String.IsNullOrEmpty(outputDir)) //If we want to overwrite
+        _filePath = Path.Combine(outputDir, configFileName);
+      else if (!String.IsNullOrEmpty(configFilePath))
+        _filePath = configFilePath;
+      else if(!String.IsNullOrEmpty(folder))
+        _filePath = Path.Combine(folder, configFileName);
+      else
+        _filePath = configFileName;
+
+      Debug("Saving config in " + _filePath);
+
       try
       {
         var settings = CreateXml(saveChannels);
         XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
 
-        if (String.IsNullOrEmpty(outputFile))
-          outputFile = filePath;
-        Debug("Creating config file in " + outputFile);
-
-        var folder = new FileInfo(outputFile).Directory.FullName;
+        folder = new FileInfo(_filePath).Directory.FullName;
         if (!Directory.Exists(folder))
           Directory.CreateDirectory(folder);
-        xdoc.Save(outputFile);
 
-        if (postProcessEnabled)
+        xdoc.Save(_filePath);
+
+        if (postProcess.run)
         {
           // Always overwrite filename value
           postProcessSettings.Element("filename").Value = postProcessOutputFilePath;
@@ -314,7 +336,7 @@ namespace wgmulti
         Console.WriteLine(ex.ToString());
         return false;
       }
-      return true; 
+      return true;
     }
 
     public static void Debug(string v)
@@ -331,10 +353,397 @@ namespace wgmulti
     /// <returns></returns>
     public Config Clone(String outputFolder)
     {
-      var newConfig = (Config) this.MemberwiseClone();
+      var newConfig = (Config)this.MemberwiseClone();
       newConfig.SetAbsPaths(outputFolder);
 
       return newConfig;
     }
+
+    /// <summary>
+    /// Creates a list of all channels that are not disabled
+    /// Adds 'site' attribute to 'same_as' channels so that the grouping works
+    /// </summary>
+    /// <returns>A list of channels enabled for grabbing</returns>
+    public void SetActiveChannels()
+    {
+      channels.ForEach(channel => {
+        if (!channel.enabled)
+        {
+          channels.Remove(channel);
+        }
+        else
+        {
+          if (channel.siteinis == null || channel.siteinis.Count == 0)
+          {
+            channel.isActive = false;
+          }
+          else
+          {
+            activeChannels++;
+            if (channel.offset_channels != null)
+            {
+              channel.offset_channels.ForEach(offset_channel =>
+              {
+                if (!offset_channel.enabled)
+                  channel.offset_channels.Remove(offset_channel);
+                else
+                  activeChannels++;
+              });
+            }
+          }
+        }
+        
+      });
+    }
+
+    /// <summary>
+    /// Get enumeration of all currently active channels
+    /// TODO - FIX issue - some playlists contain offset channels without active parent channels
+    /// if playlist contains offset channel but no parent channel, 
+    /// then the parent channel will be inactive and so will be the child offset channel.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<Channel> GetActiveChannels()
+    {
+      foreach (var channel in channels)
+      {
+        if (!channel.isActive)
+          continue;
+
+        yield return channel;
+
+        if (channel.offset_channels == null)
+          continue;
+
+        foreach (var offset_channel in channel.offset_channels)
+           yield return offset_channel;
+      }
+    }
+  }
+
+  public class PostProcess
+  {
+    /// <summary>
+    /// mdb runs a build in movie database grabber
+    /// rex runs a postprocess that re-allocates xmltv elements
+    /// </summary>
+    public enum Type { MDB, REX };
+    public Type type = Type.MDB;
+    /// <summary>
+    /// Grabs epg first
+    /// </summary>
+    public bool grab = true;
+    /// <summary>
+    /// Runs the postprocess
+    /// </summary>
+    public bool run = false;
+    public PostProcess() { }
+
+    public PostProcess(XElement el)
+    {
+      if (el == null)
+        return;
+
+      var attr = el.Attribute("grab");
+      if (attr != null && attr.Value != "")
+        grab = Config.StringToBool(attr.Value);
+
+      attr = el.Attribute("run");
+      if (attr != null && attr.Value != "")
+        run = Config.StringToBool(attr.Value);
+
+      if (el.Value.ToLower() != "" && el.Value.ToLower() != Type.MDB.ToString().ToLower())
+        type = Type.REX;
+    }
+
+    public override String ToString()
+    {
+      var _run = run ? "y" : "n";
+      var _grab = grab ? "y" : "n";
+      var _type = (type == Type.MDB) ? "mdb" : "rex";
+      return String.Format("<postprocess run=\"{0}\" grab=\"{1}\">{2}</postprocess>", _run, _grab, _type);
+    }
+
+    public XElement ToXElement()
+    {
+      var el = new XElement("postprocess");
+
+      var val = run ? "y" : "n";
+      el.Add(new XAttribute("run", val));
+      val = grab ? "y" : "n";
+      el.Add(new XAttribute("grab", val));
+      el.Value = (type == Type.MDB) ? "mdb" : "rex";
+
+      return el;
+    }
+  }
+
+  public class Retry
+  {
+    /// <summary>
+    /// The delay between retries
+    /// </summary>
+    public int timeOut = 10;
+    /// <summary>
+    /// The delay between subsequent channels
+    /// </summary>
+    public int channelDelay = 0;
+    /// <summary>
+    /// The delay between the grabbing of index pages
+    /// </summary>
+    public int indexDelay = 0; //
+    /// <summary>
+    /// The delay between the grabbing of detail show page
+    /// </summary>
+    public int showDelay = 0;
+    /// <summary>
+    /// The amount of times the grabber engine should attempt to capture 
+    /// a web page before giving up and continuing with the next page
+    /// </summary>
+    public int value = 4;
+    public Retry() { }
+
+    public Retry(XElement el)
+    {
+      if (el == null)
+        return;
+
+      var attr = el.Attribute("time-out");
+      if (attr != null && attr.Value != "")
+        timeOut = Convert.ToInt32(attr.Value);
+
+      attr = el.Attribute("channel-delay");
+      if (attr != null && attr.Value != "")
+        channelDelay = Convert.ToInt32(attr.Value);
+
+      attr = el.Attribute("index-delay");
+      if (attr != null && attr.Value != "")
+        indexDelay = Convert.ToInt32(attr.Value);
+
+      attr = el.Attribute("show-delay");
+      if (attr != null && attr.Value != "")
+        showDelay = Convert.ToInt32(attr.Value);
+
+      if (el.Value != "")
+        value = Convert.ToInt32(el.Value);
+    }
+
+
+    public override String ToString()
+    {
+      return String.Format("<retry time-out=\"{0}\" channel-delay=\"{1}\" index-delay=\"{2}\" show-delay=\"{3}\">{4}</retry>", timeOut, channelDelay, indexDelay, showDelay, value);
+    }
+    public XElement ToXElement()
+    {
+      var el = new XElement("retry",
+        new XAttribute("time-out", timeOut),
+        new XAttribute("channel-delay", channelDelay),
+        new XAttribute("index-delay", indexDelay),
+        new XAttribute("show-delay", showDelay));
+      el.Value = value.ToString();
+      return el;
+    }
+  }
+
+  public class Timespan
+  {
+    public int days = 0;
+    public string time = null;
+    public Timespan() { }
+
+    public Timespan(String t = null)
+    {
+      if (t == null)
+        return;
+
+      var temp = t.Split(',');
+      days = Convert.ToInt32(temp[0]);
+      if (temp.Length > 1)
+        time = temp[1];
+
+    }
+    public Timespan(XElement el)
+    {
+      if (el == null)
+        return;
+
+      var temp = el.Value.Split(',');
+      days = Convert.ToInt32(temp[0]);
+      if (temp.Length > 1)
+        time = temp[1];
+    }
+
+    public XElement ToXElement()
+    {
+      var el = new XElement("timespan");
+
+      el.Value = days.ToString();
+      if (time != null)
+        el.Value += "," + time;
+
+      return el;
+    }
+  }
+
+  public class Skip
+  {
+    /// <summary>
+    ///  if a show takes more than H hours, it's either tellsell or other commercial fluff, 
+    ///  or simply a mistake or error, we want to skip such shows.
+    /// </summary>
+    public int max = 12;
+    /// <summary>
+    /// if a show is less or equal than m minutes it is probably an announcement, 
+    /// in any case not a real show
+    /// </summary>
+    public int min = 1;
+    bool noskip = false;
+
+    public Skip() { }
+    public Skip(String t = null)
+    {
+      if (t == null)
+        return;
+
+      if (t == "noskip")
+      {
+        noskip = true;
+        return;
+      }
+
+      var temp = t.Split(',');
+      max = Convert.ToInt32(temp[0]);
+      if (temp.Length > 1)
+        min = Convert.ToInt32(temp[1]);
+    }
+
+    public Skip(XElement el)
+    {
+      if (el == null)
+        return;
+
+      if (el.Value == "noskip")
+      {
+        noskip = true;
+        return;
+      }
+
+      var temp = el.Value.Split(',');
+      max = Convert.ToInt32(temp[0]);
+      if (temp.Length > 1)
+        min = Convert.ToInt32(temp[1]);
+    }
+    public XElement ToXElement()
+    {
+      var el = new XElement("skip");
+
+      if (noskip)
+        el.Value = "noskip";
+      else
+      {
+        el.Value = String.Format("{0},{1}", max.ToString(), min.ToString());
+      }
+
+      return el;
+    }
+  }
+
+  public class Proxy
+  {
+    public String user { get; set; }
+    public String password { get; set; }
+    public String value { get; set; }
+
+    public Proxy() { }
+
+    public Proxy(XElement el)
+    {
+      if (el == null)
+        return;
+
+      var attr = el.Attribute("user");
+      if (attr != null)
+        user = attr.Value;
+
+      attr = el.Attribute("password");
+      if (attr != null)
+        password = attr.Value;
+
+      value = el.Value;
+    }
+
+    public XElement ToXElement()
+    {
+      var el = new XElement("proxy");
+      if (!String.IsNullOrEmpty(user))
+        el.Add(new XAttribute("user", user));
+      if (!String.IsNullOrEmpty(password))
+        el.Add(new XAttribute("password", password));
+
+      if (!String.IsNullOrEmpty(value))
+        el.Value = value;
+
+      return el;
+    }
+  }
+
+  //public class Credentials
+  //{
+  //  public String user = "";
+  //  public String password = "";
+  //  public String site = "";
+  //  public Credentials() { }
+  //  public Credentials(JObject jo = null)
+  //  {
+  //    if (jo == null)
+  //      return;
+
+  //    if (jo["user"] != null)
+  //      user = jo["user"].ToString();
+
+  //    if (jo["password"] != null)
+  //      password = jo["password"].ToString();
+
+  //    if (jo["site"] == null)
+  //      site = jo["site"].ToString();
+  //  }
+  //  public Credentials(XElement el)
+  //  {
+  //    if (el == null)
+  //      return;
+
+  //    var attr = el.Attribute("user");
+  //    if (attr != null)
+  //      user = attr.Value;
+
+  //    attr = el.Attribute("password");
+  //    if (attr != null)
+  //      password = attr.Value;
+
+  //    site = el.Value;
+  //  }
+
+  //  public XElement ToXElement()
+  //  {
+  //    var el = new XElement("credentials");
+  //    if (user != "")
+  //      el.Add(new XAttribute("user", user));
+  //    if (password != "")
+  //      el.Add(new XAttribute("password", password));
+
+  //    el.Value = site;
+
+  //    return el;
+  //  }
+  //}
+
+  public class UpdateType
+  {
+    public static String None = "";
+    public static String Incremental = "i";
+    public static String Light = "l";
+    public static String Smart = "s";
+    public static String Full = "f";
+    public static String Index = "index-only";
   }
 }

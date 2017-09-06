@@ -24,6 +24,7 @@ namespace wgmulti
     public static bool generateReport = true;
     public static bool combineLogFiles = true;
     public static bool removeChannelsWithNoProgrammes = true;
+    public static bool persistantGrabbing = true;
     public static bool debug = false;
 
     public static bool IsLinux()
@@ -91,6 +92,9 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["RemoveChannelsWithNoProgrammes"] ?? "true";
       removeChannelsWithNoProgrammes = Convert.ToBoolean(val);
 
+      val = ConfigurationManager.AppSettings["PersistantGrabbing"] ?? "true";
+      persistantGrabbing = Convert.ToBoolean(val);
+      
       //if (!IsLinux())
       //{ 
         val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "true";

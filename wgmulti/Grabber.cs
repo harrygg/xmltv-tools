@@ -5,47 +5,60 @@ using System.Linq;
 
 namespace wgmulti
 {
+  /// <summary>
+  /// Create grabbers (copy ini and config to temp location) for each group
+  /// </summary>
   public class Grabber
   {
     public Config config;
-    Config rootConfig;
+    //Config rootConfig;
     public String id;
     public String currentChannel;
-    String localDir = "";
-    String iniFilePath;
+    public String localDir = "";
+    //String iniFilePath;
     public bool enabled = false;
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="rootConfig"></param>
-    /// <param name="id"></param>
-    /// <param name="channels"></param>
-    public Grabber(Config rootConfig, String id, List<Channel> channels)
+    /// <param name="group"></param>
+    public Grabber(ChannelGroup group)
     {
-      this.rootConfig = rootConfig;
-      this.id = id;
+      //this.rootConfig = rootConfig;
+      id = group.id;
 
-      if (channels.Count == 0)
+      if (group.channels.Count == 0)
+      {
+        enabled = false;
         return;
+      }
+
+      // If all channels have update type None (possible when grabbing from backup siteinis), disable the grabber
+      if (group.channels.Where(ch => (ch.update == "")).ToList<Channel>().Count == group.channels.Count)
+      {
+        enabled = false;
+        return;
+      }
 
       try
       {
-        foreach (var channel in channels)
+        // save ini files to temp dirs
+        foreach (var channel in group.channels)
         {
-          var sourceIni = Path.Combine(rootConfig.folder, channel.siteIni);
-          CopyIni(sourceIni, channel);
-
-          // If we are grouping by siteini and there is no siteini found (channel will be inactive) we exit.
-          if ((Arguments.groupChannelsBySiteIni) && !channel.active)
+          localDir = GetLocalDir(channel);
+          if (!channel.GetActiveSiteIni().Save(localDir))
+            channel.enabled = false;
+          // If we are grouping by siteini and there was no siteini found (channel will be inactive) 
+          // we exit and don't enable the grabber.
+          if (Arguments.groupChannelsBySiteIni && !channel.enabled)
             return;
           // If we are grouping by siteini we copy the first ini file and exit.
           if (Arguments.groupChannelsBySiteIni)
             break;
         }
         
-        config = (Config)rootConfig.Clone(localDir);
-        config.channels = channels.Where(ch => (ch.active == true)).ToList<Channel>();
+        config = (Config)Program.rootConfig.Clone(localDir);
+        config.channels = group.channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
         config.Save();
         enabled = true;
       }
@@ -53,27 +66,6 @@ namespace wgmulti
       {
         Console.WriteLine("Grabber ERROR | {0}" + ex.Message);
         enabled = false;
-      }
-    }
-
-    void CopyIni(String sourceIni, Channel channel)
-    {
-      try
-      {
-        localDir = GetLocalDir(channel);
-        iniFilePath = Path.Combine(localDir, channel.siteIni);
-        File.Copy(sourceIni, iniFilePath, true);
-      }
-      catch (FileNotFoundException)
-      {
-        Console.WriteLine("Grabber {0} | ERROR | Ini file does not exist. Grabbing will be skipped!\n{1}", id.ToUpper(), sourceIni);
-        channel.active = false;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine("Unable to copy source ini file to grabber dir");
-        Console.WriteLine(ex.ToString());
-        channel.active = false;
       }
     }
 
@@ -86,9 +78,9 @@ namespace wgmulti
     /// <returns></returns>
     String GetLocalDir(Channel channel)
     {
-      var localDir = Path.Combine(rootConfig.tempDir, id);
+      var localDir = Path.Combine(Program.rootConfig.tempDir, id);
       if (!Arguments.groupChannelsBySiteIni && Arguments.maxChannelsInGroup == 1)
-        localDir = Path.Combine(rootConfig.tempDir, channel.name);
+        localDir = Path.Combine(Program.rootConfig.tempDir, channel.name);
 
       if (!Directory.Exists(localDir))
         Directory.CreateDirectory(localDir);

@@ -1,0 +1,71 @@
+{
+  "retry": {
+    "timeOut": 20,
+    "channelDelay": 5,
+    "showDelay": 1,
+    "indexDelay": 1,
+    "value": 2
+  },
+  "logging": true,
+  "skip": {
+    "max":13, 
+    "min":1
+    },
+  "timespan": {
+    "days":0
+    },
+  "update": "i",
+  "filename": "epg.xml",
+  "useragent": "Mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/54.0.2840.99 safari/537.36",
+  "mode": "m,nomark",
+  "proxy": {
+    "user":"",
+    "password":"",
+    "value":"myproxy"
+    },
+  "postprocess": {
+    "type": "mdb",
+    "grab": true,
+    "run": false
+  },
+  "channels": [
+    {
+      "name":"A Spor",
+      "xmltv_id": "A Spor",
+      "update": "i",
+      "siteinis": [
+        {
+          "name": "digiturk.com.tr",
+          "site_id": "433"
+        }
+      ],
+      "offset_channels":[
+        {
+          "name":"A Spor +1",
+          "xmltv_id": "A Spor +1",
+          "enabled": true,
+          "offset":1
+        }
+      ]
+    },
+    {
+      "name":"13th Street",
+      "xmltv_id": "13th Street",
+      "enabled": true,
+      "update": "i",
+      "siteinis": [
+        {
+          "name": "klack.de",
+          "site_id": "112/1 th-street"
+        }
+      ]
+    },
+    {
+			"name": "Sky Sports 1",
+			"xmltv_id": "Sky Sports 1",
+			"enabled": true,
+			"siteinis": [],
+			"update": "i"
+		}
+  ]
+}

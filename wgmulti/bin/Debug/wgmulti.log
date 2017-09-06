@@ -1,0 +1,2733 @@
+
+#####################################################
+#                                                   #
+#        wgmulti for WebGrab++ by Harry_GG          #
+#                                                   #
+#####################################################
+
+ System: Win32NT
+ Arguments: C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug
+ ConfigDir: C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug
+ Build config from JSON file: True
+ JsonConfigFileName: wgmulti.config.json
+ MaxAsyncProcesses: 20
+ GroupChannelsBySiteIni: True
+ MaxChannelsInGroup: 10
+ ConvertTimesToLocal: True
+ ShowConsole: False
+
+-----------------------------------------------------
+
+Execution started at: 8/20/2017 4:08:07 PM
+-----------------------------------------------------
+Splitting channels into 94 groups
+Grabber TV.I.UA | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\tv.i.ua.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.i.ua\WebGrab++.config.xml
+Grabber TV.I.UA initialized
+Grabber KLACK.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\klack.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de\WebGrab++.config.xml
+Grabber KLACK.DE initialized
+Grabber TV.MAIL.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\tv.mail.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru\WebGrab++.config.xml
+Grabber TV.MAIL.RU initialized
+Grabber 24KITCHEN.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\24kitchen.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\24kitchen.bg\WebGrab++.config.xml
+Grabber 24KITCHEN.BG initialized
+Grabber TELEKOM.MK | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Macedonia\telekom.mk.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\telekom.mk\WebGrab++.config.xml
+Grabber TELEKOM.MK initialized
+Grabber TVIZ.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\tviz.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tviz.tv\WebGrab++.config.xml
+Grabber TVIZ.TV initialized
+Grabber M.TVTODAY.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\m.tvtoday.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvtoday.de\WebGrab++.config.xml
+Grabber M.TVTODAY.DE initialized
+Grabber ENGIN.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Turkey\engin.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\engin.tv\WebGrab++.config.xml
+Grabber ENGIN.TV initialized
+Grabber DIGITURK.COM.TR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\digiturk.com.tr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\digiturk.com.tr\WebGrab++.config.xml
+Grabber DIGITURK.COM.TR initialized
+Grabber TELERAMA.FR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\France\telerama.fr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\telerama.fr\WebGrab++.config.xml
+Grabber TELERAMA.FR initialized
+Grabber TV.DIR.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tv.dir.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.dir.bg\WebGrab++.config.xml
+Grabber TV.DIR.BG initialized
+Grabber COSMOTE.GR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Greece\cosmote.gr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\cosmote.gr\WebGrab++.config.xml
+Grabber COSMOTE.GR initialized
+Grabber HORIZON.TV.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\horizon.tv.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.de\WebGrab++.config.xml
+Grabber HORIZON.TV.DE initialized
+Grabber UK-SKY.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\uk-sky.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\uk-sky.com\WebGrab++.config.xml
+Grabber UK-SKY.COM initialized
+Grabber AXN.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\axn.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\axn.bg\WebGrab++.config.xml
+Grabber AXN.BG initialized
+Grabber DNEVNIK.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\dnevnik.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg\WebGrab++.config.xml
+Grabber DNEVNIK.BG initialized
+Grabber TVPLUS.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tvplus.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvplus.bg\WebGrab++.config.xml
+Grabber TVPLUS.BG initialized
+Grabber SBB.RS | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Serbia\sbb.rs.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sbb.rs\WebGrab++.config.xml
+Grabber SBB.RS initialized
+Grabber ZINGZING.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\zingzing.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\zingzing.tv\WebGrab++.config.xml
+Grabber ZINGZING.TV initialized
+Grabber PROGRAM24.RO | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Romania\program24.ro.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\program24.ro\WebGrab++.config.xml
+Grabber PROGRAM24.RO initialized
+Grabber M.TVGUIDE.CO.UK-INDEX | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\m.tvguide.co.uk-index.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-index\WebGrab++.config.xml
+Grabber M.TVGUIDE.CO.UK-INDEX initialized
+Grabber DNES.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\dnes.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\dnes.bg\WebGrab++.config.xml
+Grabber DNES.BG initialized
+Grabber MOJTV.HR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Croatia\mojtv.hr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\mojtv.hr\WebGrab++.config.xml
+Grabber MOJTV.HR initialized
+Grabber TVARENASPORT.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Serbia\tvarenasport.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvarenasport.com\WebGrab++.config.xml
+Grabber TVARENASPORT.COM initialized
+Grabber VSETV.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\vsetv.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\vsetv.com\WebGrab++.config.xml
+Grabber VSETV.COM initialized
+Grabber VIVACOM.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\vivacom.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\vivacom.bg\WebGrab++.config.xml
+Grabber VIVACOM.BG initialized
+Grabber M.TVGUIDE.CO.UK-FULL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\m.tvguide.co.uk-full.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-full\WebGrab++.config.xml
+Grabber M.TVGUIDE.CO.UK-FULL initialized
+Grabber BGDNES.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\bgdnes.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\bgdnes.tv\WebGrab++.config.xml
+Grabber BGDNES.TV initialized
+Grabber HOBBYTV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\hobbytv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\hobbytv.bg\WebGrab++.config.xml
+Grabber HOBBYTV.BG initialized
+Grabber PROGRAMATV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\programatv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\programatv.bg\WebGrab++.config.xml
+Grabber PROGRAMATV.BG initialized
+Grabber BNT.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\bnt.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\bnt.bg\WebGrab++.config.xml
+Grabber BNT.BG initialized
+Grabber ELMUNDO.ES | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Spain\elmundo.es.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\elmundo.es\WebGrab++.config.xml
+Grabber ELMUNDO.ES initialized
+Grabber PROGRAMTV.ONET.PL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Poland\programtv.onet.pl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\programtv.onet.pl\WebGrab++.config.xml
+Grabber PROGRAMTV.ONET.PL initialized
+Grabber BULGARIA24.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\bulgaria24.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\bulgaria24.tv\WebGrab++.config.xml
+Grabber BULGARIA24.TV initialized
+Grabber MEGAEPG.KODIBG.ORG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\megaepg.kodibg.org.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\megaepg.kodibg.org\WebGrab++.config.xml
+Grabber MEGAEPG.KODIBG.ORG initialized
+Grabber TV.BOXBG.NET | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tv.boxbg.net.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.boxbg.net\WebGrab++.config.xml
+Grabber TV.BOXBG.NET initialized
+Grabber SINGTELTV.COM.SG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Singapore\singteltv.com.sg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\singteltv.com.sg\WebGrab++.config.xml
+Grabber SINGTELTV.COM.SG initialized
+Grabber TV.SKY.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\tv.sky.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.sky.com\WebGrab++.config.xml
+Grabber TV.SKY.COM initialized
+Grabber TVGUIDE.CO.UK | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\tvguide.co.uk.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvguide.co.uk\WebGrab++.config.xml
+Grabber TVGUIDE.CO.UK initialized
+Grabber HBO.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\hbo.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\hbo.bg\WebGrab++.config.xml
+Grabber HBO.BG initialized
+Grabber ELPAIS.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Spain\elpais.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\elpais.com\WebGrab++.config.xml
+Grabber ELPAIS.COM initialized
+Grabber HORIZON.TV.RO | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Romania\horizon.tv.ro.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.ro\WebGrab++.config.xml
+Grabber HORIZON.TV.RO initialized
+Grabber TVTODAY.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\m.tvtoday.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvtoday.de\WebGrab++.config.xml
+Grabber TVTODAY.DE initialized
+Grabber MOVIETELE.IT | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Italy\movietele.it.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\movietele.it\WebGrab++.config.xml
+Grabber MOVIETELE.IT initialized
+Grabber POTV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\potv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\potv.bg\WebGrab++.config.xml
+Grabber POTV.BG initialized
+Grabber HORIZON.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\International\horizon.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv\WebGrab++.config.xml
+Grabber HORIZON.TV initialized
+Grabber NOVA.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\nova.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg\WebGrab++.config.xml
+Grabber NOVA.BG initialized
+Grabber SKY.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\sky.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sky.de\WebGrab++.config.xml
+Grabber SKY.DE initialized
+Grabber GUIDATV.SKY.IT | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Italy\guidatv.sky.it.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\guidatv.sky.it\WebGrab++.config.xml
+Grabber GUIDATV.SKY.IT initialized
+Grabber DISNEY.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\disney.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\disney.bg\WebGrab++.config.xml
+Grabber DISNEY.BG initialized
+Grabber PRISMA.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\prisma.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\prisma.de\WebGrab++.config.xml
+Grabber PRISMA.DE initialized
+Grabber NATGEOFOXTV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\natgeofoxtv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\natgeofoxtv.bg\WebGrab++.config.xml
+Grabber NATGEOFOXTV.BG initialized
+Grabber NTVPLUS.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\ntvplus.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\ntvplus.ru\WebGrab++.config.xml
+Grabber NTVPLUS.RU initialized
+Grabber FOXSPORTS.NL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Netherlands\foxsports.nl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\foxsports.nl\WebGrab++.config.xml
+Grabber FOXSPORTS.NL initialized
+Grabber TV.ETCC.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tv.etcc.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.etcc.bg\WebGrab++.config.xml
+Grabber TV.ETCC.BG initialized
+Grabber TVGIDS.NL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Netherlands\tvgids.nl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl\WebGrab++.config.xml
+Grabber TVGIDS.NL initialized
+Grabber HORIZON.TV.NL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Netherlands\horizon.tv.nl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.nl\WebGrab++.config.xml
+Grabber HORIZON.TV.NL initialized
+Grabber FILMBOX.PL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\filmbox.pl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\filmbox.pl\WebGrab++.config.xml
+Grabber FILMBOX.PL initialized
+Grabber FOODNETWORKTV.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\foodnetworktv.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\foodnetworktv.com\WebGrab++.config.xml
+Grabber FOODNETWORKTV.COM initialized
+Grabber FREESAT.CO.UK | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\freesat.co.uk.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\freesat.co.uk\WebGrab++.config.xml
+Grabber FREESAT.CO.UK initialized
+Grabber HMTV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\hmtv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\hmtv.bg\WebGrab++.config.xml
+Grabber HMTV.BG initialized
+Grabber SPOREDI.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Slovenia\sporedi.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sporedi.tv\WebGrab++.config.xml
+Grabber SPOREDI.TV initialized
+Grabber DSMART.COM.TR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Turkey\dsmart.com.tr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\dsmart.com.tr\WebGrab++.config.xml
+Grabber DSMART.COM.TR initialized
+Grabber STASERAINTV.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Italy\staseraintv.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\staseraintv.com\WebGrab++.config.xml
+Grabber STASERAINTV.COM initialized
+Grabber TVPORTAL.RS | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\tvportal.rs.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvportal.rs\WebGrab++.config.xml
+Grabber TVPORTAL.RS initialized
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\tvguideuk.telegraph.co.uk.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvguideuk.telegraph.co.uk\WebGrab++.config.xml
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK initialized
+Grabber TELEGUIDE.INFO | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\teleguide.info.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\teleguide.info\WebGrab++.config.xml
+Grabber TELEGUIDE.INFO initialized
+Grabber TVGIDS.NL.INDEX-ONLY | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Netherlands\tvgids.nl.index-only.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl.index-only\WebGrab++.config.xml
+Grabber TVGIDS.NL.INDEX-ONLY initialized
+Grabber TV.SMS.CZ.M | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Czech Republic\tv.sms.cz.m.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.sms.cz.m\WebGrab++.config.xml
+Grabber TV.SMS.CZ.M initialized
+Grabber MI.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Brazil\mi.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\mi.tv\WebGrab++.config.xml
+Grabber MI.TV initialized
+Grabber RCS-RDS.RO | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Romania\rcs-rds.ro.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\rcs-rds.ro\WebGrab++.config.xml
+Grabber RCS-RDS.RO initialized
+Grabber RAI.IT | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Italy\rai.it.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\rai.it\WebGrab++.config.xml
+Grabber RAI.IT initialized
+Grabber BTV.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\btv.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\btv.bg\WebGrab++.config.xml
+Grabber BTV.BG initialized
+Grabber TV.WP.PL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Poland\tv.wp.pl.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.wp.pl\WebGrab++.config.xml
+Grabber TV.WP.PL initialized
+Grabber PROGRAMM.ARD.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\programm.ard.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\programm.ard.de\WebGrab++.config.xml
+Grabber PROGRAMM.ARD.DE initialized
+Grabber TV-MEDIA.AT | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Austria\tv-media.at.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv-media.at\WebGrab++.config.xml
+Grabber TV-MEDIA.AT initialized
+Grabber HORIZON.TV.AT | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Austria\horizon.tv.at.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.at\WebGrab++.config.xml
+Grabber HORIZON.TV.AT initialized
+Grabber SKYSPORTS.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\skysports.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\skysports.com\WebGrab++.config.xml
+Grabber SKYSPORTS.COM initialized
+Grabber SPORT1.DE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Germany\sport1.de.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sport1.de\WebGrab++.config.xml
+Grabber SPORT1.DE initialized
+Grabber SPORTKLUB.RS | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Serbia\sportklub.rs.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sportklub.rs\WebGrab++.config.xml
+Grabber SPORTKLUB.RS initialized
+Grabber SPORTKLUB.HR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Serbia\sportklub.hr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\sportklub.hr\WebGrab++.config.xml
+Grabber SPORTKLUB.HR initialized
+Grabber TRT.NET.TR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Turkey\trt.net.tr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\trt.net.tr\WebGrab++.config.xml
+Grabber TRT.NET.TR initialized
+Grabber VIASAT.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\viasat.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\viasat.bg\WebGrab++.config.xml
+Grabber VIASAT.BG initialized
+Grabber TVN.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tvn.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvn.bg\WebGrab++.config.xml
+Grabber TVN.BG initialized
+Grabber BEINSPORTS.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\beinsports.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\beinsports.com\WebGrab++.config.xml
+Grabber BEINSPORTS.COM initialized
+Grabber EIRSPORT.IE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Ireland\eirsport.ie.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\eirsport.ie\WebGrab++.config.xml
+Grabber EIRSPORT.IE initialized
+Grabber TELESTAR.FR | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\France\telestar.fr.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\telestar.fr\WebGrab++.config.xml
+Grabber TELESTAR.FR initialized
+Grabber TVDARTS.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tvdarts.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvdarts.com\WebGrab++.config.xml
+Grabber TVDARTS.COM initialized
+Grabber DESTINATION-BG.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\destination-bg.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\destination-bg.tv\WebGrab++.config.xml
+Grabber DESTINATION-BG.TV initialized
+Grabber S-TV.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\s-tv.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\s-tv.ru\WebGrab++.config.xml
+Grabber S-TV.RU initialized
+Grabber KARTINA.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\kartina.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\kartina.tv\WebGrab++.config.xml
+Grabber KARTINA.TV initialized
+Grabber MATCHTV.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\matchtv.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\matchtv.ru\WebGrab++.config.xml
+Grabber MATCHTV.RU initialized
+Grabber PLANETA.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\planeta.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\planeta.tv\WebGrab++.config.xml
+Grabber PLANETA.TV initialized
+Grabber TVSHUMEN.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\tvshumen.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvshumen.bg\WebGrab++.config.xml
+Grabber TVSHUMEN.BG initialized
+-----------------------------------------------------
+---------------- Grabbing Round #1 ------------------
+-----------------------------------------------------
+Starting 94 grabbers asynchronously, 20 at a time
+Grabber M.TVTODAY.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvtoday.de"
+Grabber TV.I.UA | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.i.ua"
+Grabber TV.MAIL.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru"
+Grabber TV.DIR.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.dir.bg"
+Grabber TELEKOM.MK | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\telekom.mk"
+Grabber DIGITURK.COM.TR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\digiturk.com.tr"
+Grabber TVPLUS.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvplus.bg"
+Grabber AXN.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\axn.bg"
+Grabber HORIZON.TV.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.de"
+Grabber TV.I.UA | Job started at 20/08/2017 16:08:10
+Grabber TV.I.UA | starting 1/6 1+1 (Укр)  mode Incremental
+Grabber TV.MAIL.RU | Job started at 20/08/2017 16:08:10
+Grabber TV.MAIL.RU | starting 1/11  ) TV.MAIL.RU -- chan. (xmltv_id=24 Doc  mode Incremental
+Grabber TELEKOM.MK | Job started at 20/08/2017 16:08:10
+Grabber TELEKOM.MK | starting 1/8 24 Вести MK  mode Incremental
+Grabber M.TVTODAY.DE | Job started at 20/08/2017 16:08:10
+Grabber M.TVTODAY.DE | starting 1/12  ) M.TVTODAY.DE -- chan. (xmltv_id=3sat  mode Incremental
+Grabber M.TVTODAY.DE | starting 2/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Anixe  mode Incremental
+Grabber M.TVTODAY.DE | starting 3/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Arte DE  mode Incremental
+Grabber M.TVTODAY.DE | starting 4/12  ) M.TVTODAY.DE -- chan. (xmltv_id=FOX (de)  mode Incremental
+Grabber M.TVTODAY.DE | starting 5/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Fix and Foxi  mode Incremental
+Grabber M.TVTODAY.DE | starting 6/12  ) M.TVTODAY.DE -- chan. (xmltv_id=N24 Docu  mode Incremental
+Grabber M.TVTODAY.DE | starting 7/12  ) M.TVTODAY.DE -- chan. (xmltv_id=ORF1  mode Incremental
+Grabber M.TVTODAY.DE | starting 8/12  ) M.TVTODAY.DE -- chan. (xmltv_id=ORF2  mode Incremental
+Grabber M.TVTODAY.DE | starting 9/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Phoenix  mode Incremental
+Grabber M.TVTODAY.DE | starting (  10/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Sky 3D de  mode Incremental
+Grabber M.TVTODAY.DE | ERROR! no shows in indexpage for channel Sky 3D de
+Grabber M.TVTODAY.DE | starting (  11/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Sky Cinema  mode Incremental
+Grabber M.TVTODAY.DE | starting (  12/12  ) M.TVTODAY.DE -- chan. (xmltv_id=Tagesschau 24  mode Incremental
+Grabber M.TVTODAY.DE | Job finished at 20/08/2017 16:08:12 done in 2s
+Grabber TV.I.UA | starting 2/6 Armenia  mode Incremental
+Grabber TV.I.UA | ERROR! no shows in indexpage for channel Armenia
+Grabber TV.I.UA | starting 3/6 M1  mode Incremental
+Grabber TV.MAIL.RU | ERROR! no shows in indexpage for channel 24 Doc
+Grabber TV.MAIL.RU | starting 2/11  ) TV.MAIL.RU -- chan. (xmltv_id=CGTN  mode Incremental
+Grabber DIGITURK.COM.TR | Job started at 20/08/2017 16:08:10
+Grabber DIGITURK.COM.TR | starting 1/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=A Spor  mode Incremental
+Grabber DIGITURK.COM.TR | starting 2/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 1 (tr)  mode Incremental
+Grabber DIGITURK.COM.TR | starting 3/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 2 (tr)  mode Incremental
+Grabber TELEKOM.MK | starting 2/8 DM Sat  mode Incremental
+Grabber TV.I.UA | starting 4/6 Music Box (Укр)  mode Incremental
+Grabber TELEKOM.MK | starting 3/8 Hayat Music  mode Incremental
+Grabber TELEKOM.MK | starting 4/8 Nova TV MK  mode Incremental
+Grabber TV.MAIL.RU | starting 3/11  ) TV.MAIL.RU -- chan. (xmltv_id=CTC Инт.  mode Incremental
+Grabber TV.I.UA | starting 5/6 TV RUS  mode Incremental
+Grabber DIGITURK.COM.TR | starting 4/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 3 (tr)  mode Incremental
+Grabber TELEKOM.MK | starting 5/8 Алфа MK  mode Incremental
+Grabber TELEKOM.MK | starting 6/8 Канал 5 MK  mode Incremental
+Grabber TELEKOM.MK | starting 7/8 Сител MK  mode Incremental
+Grabber TV.I.UA | starting 6/6 World Fashion  mode Incremental
+Grabber TELEKOM.MK | starting 8/8 Телма MK  mode Incremental
+Grabber TELEKOM.MK | Job finished at 20/08/2017 16:08:15 done in 4s
+Grabber DIGITURK.COM.TR | starting 5/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Cartoon TR  mode Incremental
+Grabber TV.MAIL.RU | ERROR! CTC Инт.  show REPLACED (forced update / overlap or timeorder error in EPG
+Grabber TV.MAIL.RU | ERROR! CTC Инт.  show REPLACED (forced update / overlap or timeorder error in EPG
+Grabber TV.MAIL.RU | ERROR! CTC Инт.  show REPLACED (forced update / overlap or timeorder error in EPG
+Grabber TV.MAIL.RU | ERROR! CTC Инт.  show REPLACED (forced update / overlap or timeorder error in EPG
+Grabber TV.MAIL.RU | starting 4/11  ) TV.MAIL.RU -- chan. (xmltv_id=OutDoor  mode Incremental
+Grabber TV.DIR.BG | Job started at 20/08/2017 16:08:10
+Grabber TV.DIR.BG | starting 1/23  ) TV.DIR.BG -- chan. (xmltv_id=AMC  mode Incremental
+Grabber TV.DIR.BG | starting 2/23  ) TV.DIR.BG -- chan. (xmltv_id=ARD One  mode Incremental
+Grabber TV.DIR.BG | starting 3/23  ) TV.DIR.BG -- chan. (xmltv_id=Agro TV  mode Incremental
+Grabber TV.I.UA | Job finished at 20/08/2017 16:08:16 done in 5s
+Grabber TV.DIR.BG | starting 4/23  ) TV.DIR.BG -- chan. (xmltv_id=Alfa TV  mode Incremental
+Grabber TV.MAIL.RU | starting 5/11  ) TV.MAIL.RU -- chan. (xmltv_id=Russian Travel Guide  mode Incremental
+Grabber TV.DIR.BG | starting 5/23  ) TV.DIR.BG -- chan. (xmltv_id=BOX  mode Incremental
+Grabber HORIZON.TV.DE | Job started at 20/08/2017 16:08:10
+Grabber HORIZON.TV.DE | starting 1/1 ARD / Das Erste  mode Incremental
+Grabber HORIZON.TV.DE | Job finished at 20/08/2017 16:08:14 done in 4s
+Grabber M.TVTODAY.DE | Parsing XML output
+Grabber M.TVTODAY.DE | 3sat | 26 programms grabbed
+Grabber M.TVTODAY.DE | Anixe | 22 programms grabbed
+Grabber M.TVTODAY.DE | Arte DE | 28 programms grabbed
+Grabber M.TVTODAY.DE | FOX (de) | 24 programms grabbed
+Grabber M.TVTODAY.DE | Fix and Foxi | 49 programms grabbed
+Grabber M.TVTODAY.DE | N24 Docu | 20 programms grabbed
+Grabber M.TVTODAY.DE | ORF1 | 36 programms grabbed
+Grabber M.TVTODAY.DE | ORF2 | 35 programms grabbed
+Grabber M.TVTODAY.DE | Phoenix | 24 programms grabbed
+Grabber M.TVTODAY.DE | Sky Cinema | 11 programms grabbed
+Grabber M.TVTODAY.DE | Tagesschau 24 | 40 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-index"
+Grabber TV.DIR.BG | starting 6/23  ) TV.DIR.BG -- chan. (xmltv_id=Da Vinci Learning  mode Incremental
+Grabber TV.DIR.BG | starting 7/23  ) TV.DIR.BG -- chan. (xmltv_id=Disney Jr.  mode Incremental
+Grabber DIGITURK.COM.TR | starting 6/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=FOX TR  mode Incremental
+Grabber DIGITURK.COM.TR | starting 7/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Moviemax Premier 1  mode Incremental
+Grabber DIGITURK.COM.TR | starting 8/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 1  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | Job started at 20/08/2017 16:08:20
+Grabber AXN.BG | Job started at 20/08/2017 16:08:10
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 1/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=Aljazeera English  mode Incremental
+Grabber AXN.BG | starting 1/1 AXN  mode Incremental
+Grabber AXN.BG | Job finished at 20/08/2017 16:08:16 done in 6s
+Grabber ZINGZING.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\zingzing.tv"
+Grabber TVPLUS.BG | Job started at 20/08/2017 16:08:10
+Grabber TVPLUS.BG | starting 1/6 Action+  mode Incremental
+Grabber TVPLUS.BG | starting 2/6 Cinema+  mode Incremental
+Grabber TVPLUS.BG | starting 3/6 Comedy+  mode Incremental
+Grabber KLACK.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de"
+Grabber TVPLUS.BG | starting 4/6 F+  mode Incremental
+Grabber TVPLUS.BG | starting 5/6 Sport+  mode Incremental
+Grabber TVPLUS.BG | starting 6/6 TV+  mode Incremental
+Grabber TVPLUS.BG | Job finished at 20/08/2017 16:08:15 done in 4s
+Grabber 24KITCHEN.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\24kitchen.bg"
+Grabber TVIZ.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tviz.tv"
+Grabber ENGIN.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\engin.tv"
+Grabber TELERAMA.FR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\telerama.fr"
+Grabber UK-SKY.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\uk-sky.com"
+Grabber DNEVNIK.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg"
+Grabber COSMOTE.GR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\cosmote.gr"
+Grabber TVIZ.TV | Job started at 20/08/2017 16:08:22
+Grabber TELERAMA.FR | Job started at 20/08/2017 16:08:22
+Grabber KLACK.DE | Job started at 20/08/2017 16:08:22
+Grabber ZINGZING.TV | Job started at 20/08/2017 16:08:22
+Grabber 24KITCHEN.BG | Job started at 20/08/2017 16:08:22
+Grabber ENGIN.TV | Job started at 20/08/2017 16:08:22
+Grabber UK-SKY.COM | Job started at 20/08/2017 16:08:22
+Grabber COSMOTE.GR | Job started at 20/08/2017 16:08:22
+Grabber HORIZON.TV.DE | Parsing XML output
+Grabber HORIZON.TV.DE | ARD / Das Erste | 34 programms grabbed
+Grabber DNES.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\dnes.bg"
+Grabber TVIZ.TV | starting 1/7 24 Техно  mode Incremental
+Grabber 24KITCHEN.BG | starting 1/1 24 Kitchen  mode Incremental
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=ANT1  mode Incremental
+Grabber ZINGZING.TV | starting 1/3 Al Jazeera Eng  mode Incremental
+Grabber KLACK.DE | starting 1/16  ) KLACK.DE -- chan. (xmltv_id=13th Street  mode Incremental
+Grabber DNES.BG | Job started at 20/08/2017 16:08:22
+Grabber TVPLUS.BG | Parsing XML output
+Grabber SBB.RS | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sbb.rs"
+Grabber TVPLUS.BG | Action+ | 12 programms grabbed
+Grabber TVPLUS.BG | Cinema+ | 12 programms grabbed
+Grabber TVPLUS.BG | Comedy+ | 16 programms grabbed
+Grabber TVPLUS.BG | F+ | 13 programms grabbed
+Grabber TVPLUS.BG | Sport+ | 15 programms grabbed
+Grabber TVPLUS.BG | TV+ | 31 programms grabbed
+Grabber MOJTV.HR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\mojtv.hr"
+Grabber UK-SKY.COM | starting 1/34  ) UK-SKY.COM -- chan. (xmltv_id=ARY Digital  mode Incremental
+Grabber DNES.BG | starting 1/22  ) DNES.BG -- chan. (xmltv_id=Animal Planet  mode Incremental
+Grabber TELERAMA.FR | starting 1/24  ) TELERAMA.FR -- chan. (xmltv_id=AB Moteurs  mode Incremental
+Grabber TELEKOM.MK | Parsing XML output
+Grabber TELEKOM.MK | 24 Вести MK | 32 programms grabbed
+Grabber TELEKOM.MK | DM Sat | 16 programms grabbed
+Grabber TELEKOM.MK | Hayat Music | 10 programms grabbed
+Grabber TELEKOM.MK | Nova TV MK | 6 programms grabbed
+Grabber TELEKOM.MK | Алфа MK | 22 programms grabbed
+Grabber TELEKOM.MK | Канал 5 MK | 16 programms grabbed
+Grabber TELEKOM.MK | Сител MK | 24 programms grabbed
+Grabber TELEKOM.MK | Телма MK | 28 programms grabbed
+Grabber TVARENASPORT.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvarenasport.com"
+Grabber TV.I.UA | Parsing XML output
+Grabber TV.I.UA | 1+1 (Укр) | 12 programms grabbed
+Grabber TV.I.UA | M1 | 4 programms grabbed
+Grabber TV.I.UA | Music Box (Укр) | 6 programms grabbed
+Grabber TV.I.UA | TV RUS | 10 programms grabbed
+Grabber TV.I.UA | World Fashion | 76 programms grabbed
+Grabber VSETV.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\vsetv.com"
+Grabber AXN.BG | Parsing XML output
+No programs grabbed by grabber AXN.BG
+Grabber VIVACOM.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\vivacom.bg"
+Grabber TVIZ.TV | ERROR! 24 Техно error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber DNES.BG | starting 2/22  ) DNES.BG -- chan. (xmltv_id=Balkanika  mode Incremental
+Grabber DNES.BG | starting 3/22  ) DNES.BG -- chan. (xmltv_id=Bloomberg BG  mode Incremental
+Grabber DNES.BG | starting 4/22  ) DNES.BG -- chan. (xmltv_id=Boomerang  mode Incremental
+Grabber DNES.BG | starting 5/22  ) DNES.BG -- chan. (xmltv_id=Bulgaria on Air  mode Incremental
+Grabber DNES.BG | starting 6/22  ) DNES.BG -- chan. (xmltv_id=CNN International  mode Incremental
+Grabber DNES.BG | starting 7/22  ) DNES.BG -- chan. (xmltv_id=Comedy Central  mode Incremental
+Grabber DNES.BG | starting 8/22  ) DNES.BG -- chan. (xmltv_id=Discovery Channel  mode Incremental
+Grabber DNES.BG | starting 9/22  ) DNES.BG -- chan. (xmltv_id=Disney RU  mode Incremental
+Grabber DNES.BG | starting (  10/22  ) DNES.BG -- chan. (xmltv_id=Eurosport  mode Incremental
+Grabber DNES.BG | starting (  11/22  ) DNES.BG -- chan. (xmltv_id=Eurosport 2  mode Incremental
+Grabber DNES.BG | starting (  12/22  ) DNES.BG -- chan. (xmltv_id=FEN TV  mode Incremental
+Grabber DNES.BG | starting (  13/22  ) DNES.BG -- chan. (xmltv_id=Fine Living  mode Incremental
+Grabber DNES.BG | starting (  14/22  ) DNES.BG -- chan. (xmltv_id=Fishing & Hunting  mode Incremental
+Grabber DNES.BG | starting (  15/22  ) DNES.BG -- chan. (xmltv_id=Nickelodeon  mode Incremental
+Grabber DNES.BG | starting (  16/22  ) DNES.BG -- chan. (xmltv_id=RTVi  mode Incremental
+Grabber DNES.BG | starting (  17/22  ) DNES.BG -- chan. (xmltv_id=TLC  mode Incremental
+Grabber DNES.BG | starting (  18/22  ) DNES.BG -- chan. (xmltv_id=The Voice  mode Incremental
+Grabber DNES.BG | starting (  19/22  ) DNES.BG -- chan. (xmltv_id=Travel  mode Incremental
+Grabber DNES.BG | starting (  20/22  ) DNES.BG -- chan. (xmltv_id=eKids  mode Incremental
+Grabber DNES.BG | starting (  21/22  ) DNES.BG -- chan. (xmltv_id=Евроком  mode Incremental
+Grabber DNES.BG | starting (  22/22  ) DNES.BG -- chan. (xmltv_id=ТВ Европа  mode Incremental
+Grabber DNES.BG | Job finished at 20/08/2017 16:08:28 done in 5s
+Grabber TELERAMA.FR | starting 2/24  ) TELERAMA.FR -- chan. (xmltv_id=AB3  mode Incremental
+Grabber TELERAMA.FR | starting 3/24  ) TELERAMA.FR -- chan. (xmltv_id=ARTE Francais  mode Incremental
+Grabber TELERAMA.FR | starting 4/24  ) TELERAMA.FR -- chan. (xmltv_id=BFM  mode Incremental
+Grabber TELERAMA.FR | starting 5/24  ) TELERAMA.FR -- chan. (xmltv_id=CCTV French  mode Incremental
+Grabber TELERAMA.FR | starting 6/24  ) TELERAMA.FR -- chan. (xmltv_id=Chasse & Peche  mode Incremental
+Grabber TELERAMA.FR | starting 7/24  ) TELERAMA.FR -- chan. (xmltv_id=Club RTL  mode Incremental
+Grabber TELERAMA.FR | starting 8/24  ) TELERAMA.FR -- chan. (xmltv_id=France 2  mode Incremental
+Grabber TELERAMA.FR | starting 9/24  ) TELERAMA.FR -- chan. (xmltv_id=France 24 FR  mode Incremental
+Grabber TELERAMA.FR | starting (  10/24  ) TELERAMA.FR -- chan. (xmltv_id=France 3  mode Incremental
+Grabber TELERAMA.FR | starting (  11/24  ) TELERAMA.FR -- chan. (xmltv_id=France 4  mode Incremental
+Grabber ENGIN.TV | starting 1/38  ) ENGIN.TV -- chan. (xmltv_id=A Haber  mode Incremental
+Grabber ENGIN.TV | starting 2/38  ) ENGIN.TV -- chan. (xmltv_id=ATV  mode Incremental
+Grabber ENGIN.TV | starting 3/38  ) ENGIN.TV -- chan. (xmltv_id=Beyaz TV  mode Incremental
+Grabber ENGIN.TV | starting 4/38  ) ENGIN.TV -- chan. (xmltv_id=CNN Turk  mode Incremental
+Grabber ENGIN.TV | starting 5/38  ) ENGIN.TV -- chan. (xmltv_id=Disney TR  mode Incremental
+Grabber ENGIN.TV | starting 6/38  ) ENGIN.TV -- chan. (xmltv_id=Dream TV  mode Incremental
+Grabber ENGIN.TV | starting 7/38  ) ENGIN.TV -- chan. (xmltv_id=Euronews  mode Incremental
+Grabber ENGIN.TV | starting 8/38  ) ENGIN.TV -- chan. (xmltv_id=Eurosport News  mode Incremental
+Grabber ENGIN.TV | starting 9/38  ) ENGIN.TV -- chan. (xmltv_id=Flash TV  mode Incremental
+Grabber ENGIN.TV | starting (  10/38  ) ENGIN.TV -- chan. (xmltv_id=Haber Turk  mode Incremental
+Grabber ENGIN.TV | starting (  11/38  ) ENGIN.TV -- chan. (xmltv_id=Kanal 7 (tr)  mode Incremental
+Grabber ENGIN.TV | starting (  12/38  ) ENGIN.TV -- chan. (xmltv_id=Kanal D  mode Incremental
+Grabber ENGIN.TV | starting (  13/38  ) ENGIN.TV -- chan. (xmltv_id=Kanal t  mode Incremental
+Grabber ENGIN.TV | starting (  14/38  ) ENGIN.TV -- chan. (xmltv_id=Kazakh TV  mode Incremental
+Grabber 24KITCHEN.BG | Parsing XML output
+Grabber 24KITCHEN.BG | 24 Kitchen | 51 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-full"
+Grabber TVARENASPORT.COM | Parsing XML output
+Grabber TVARENASPORT.COM | Arena Sport 1 (SRB) | 12 programms grabbed
+Grabber TVARENASPORT.COM | Arena Sport 2 (SRB) | 13 programms grabbed
+Grabber TVARENASPORT.COM | Arena Sport 3 (SRB) | 9 programms grabbed
+Grabber TVARENASPORT.COM | Arena Sport 4 (SRB) | 12 programms grabbed
+Grabber TVARENASPORT.COM | Arena Sport 5 (SRB) | 4 programms grabbed
+Grabber BGDNES.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\bgdnes.tv"
+Grabber MOJTV.HR | Job started at 20/08/2017 16:08:23
+Grabber MOJTV.HR | starting 1/10  ) MOJTV.HR -- chan. (xmltv_id=Arena Sport 1 (HR)  mode Incremental
+Grabber MOJTV.HR | starting 2/10  ) MOJTV.HR -- chan. (xmltv_id=Arena Sport 2 (HR)  mode Incremental
+Grabber MOJTV.HR | starting 3/10  ) MOJTV.HR -- chan. (xmltv_id=Arena Sport 3 (HR)  mode Incremental
+Grabber MOJTV.HR | starting 4/10  ) MOJTV.HR -- chan. (xmltv_id=Arena Sport 4 (HR)  mode Incremental
+Grabber MOJTV.HR | starting 5/10  ) MOJTV.HR -- chan. (xmltv_id=Arena Sport 5 (HR)  mode Incremental
+Grabber MOJTV.HR | starting 6/10  ) MOJTV.HR -- chan. (xmltv_id=Body and Balance  mode Incremental
+Grabber MOJTV.HR | starting 7/10  ) MOJTV.HR -- chan. (xmltv_id=Brava  mode Incremental
+Grabber MOJTV.HR | starting 8/10  ) MOJTV.HR -- chan. (xmltv_id=Classica  mode Incremental
+Grabber MOJTV.HR | starting 9/10  ) MOJTV.HR -- chan. (xmltv_id=Djazz  mode Incremental
+Grabber MOJTV.HR | starting (  10/10  ) MOJTV.HR -- chan. (xmltv_id=Fight World  mode Incremental
+Grabber MOJTV.HR | Job finished at 20/08/2017 16:08:26 done in 3s
+Grabber VSETV.COM | Job started at 20/08/2017 16:08:24
+Grabber VSETV.COM | starting 1/4 Arirang  mode Incremental
+Grabber MOJTV.HR | Parsing XML output
+Grabber MOJTV.HR | Arena Sport 1 (HR) | 11 programms grabbed
+Grabber MOJTV.HR | Arena Sport 2 (HR) | 13 programms grabbed
+Grabber MOJTV.HR | Arena Sport 3 (HR) | 13 programms grabbed
+Grabber MOJTV.HR | Arena Sport 4 (HR) | 11 programms grabbed
+Grabber MOJTV.HR | Arena Sport 5 (HR) | 5 programms grabbed
+Grabber MOJTV.HR | Body and Balance | 32 programms grabbed
+Grabber MOJTV.HR | Brava | 30 programms grabbed
+Grabber MOJTV.HR | Classica | 13 programms grabbed
+Grabber MOJTV.HR | Djazz | 21 programms grabbed
+Grabber MOJTV.HR | Fight World | 9 programms grabbed
+Grabber HOBBYTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\hobbytv.bg"
+Grabber TVIZ.TV | ERROR! no index page data received from 24 Техно
+Grabber TVIZ.TV | ERROR! 24 Техно unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 RT Docu  mode Incremental
+Grabber TV.DIR.BG | starting 8/23  ) TV.DIR.BG -- chan. (xmltv_id=Fuel TV  mode Incremental
+Grabber TV.DIR.BG | ERROR! no shows in indexpage for channel Fuel TV
+Grabber TV.DIR.BG | starting 9/23  ) TV.DIR.BG -- chan. (xmltv_id=Kabel Eins  mode Incremental
+Grabber TV.DIR.BG | ERROR! no shows in indexpage for channel Kabel Eins
+Grabber TV.DIR.BG | starting (  10/23  ) TV.DIR.BG -- chan. (xmltv_id=MTV  mode Incremental
+Grabber TV.DIR.BG | starting (  11/23  ) TV.DIR.BG -- chan. (xmltv_id=Motors TV  mode Incremental
+Grabber TV.DIR.BG | starting (  12/23  ) TV.DIR.BG -- chan. (xmltv_id=PO TV  mode Incremental
+Grabber TV.DIR.BG | starting (  13/23  ) TV.DIR.BG -- chan. (xmltv_id=PRO7  mode Incremental
+Grabber TV.DIR.BG | starting (  14/23  ) TV.DIR.BG -- chan. (xmltv_id=RTL  mode Incremental
+Grabber TV.DIR.BG | starting (  15/23  ) TV.DIR.BG -- chan. (xmltv_id=RTL 2  mode Incremental
+Grabber TV.DIR.BG | ERROR! no shows in indexpage for channel RTL 2
+Grabber TV.DIR.BG | starting (  16/23  ) TV.DIR.BG -- chan. (xmltv_id=Rimex TV  mode Incremental
+Grabber TV.DIR.BG | starting (  17/23  ) TV.DIR.BG -- chan. (xmltv_id=SAT1  mode Incremental
+Grabber TV.DIR.BG | starting (  18/23  ) TV.DIR.BG -- chan. (xmltv_id=Super RTL  mode Incremental
+Grabber ENGIN.TV | starting (  15/38  ) ENGIN.TV -- chan. (xmltv_id=Kral Pop  mode Incremental
+Grabber COSMOTE.GR | ERROR! ANT1 error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from ANT1
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 2/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=BBC 4  mode Incremental
+Grabber COSMOTE.GR | ERROR! ANT1 unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=ART  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 3/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=ITV 2  mode Incremental
+Grabber 24KITCHEN.BG | Job finished at 20/08/2017 16:08:25 done in 2s
+Grabber VIVACOM.BG | Job started at 20/08/2017 16:08:24
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Auto Motor Sport  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Auto Motor Sport
+Grabber VIVACOM.BG | ERROR! Auto Motor Sport unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=BG Music  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from BG Music
+Grabber VIVACOM.BG | ERROR! BG Music unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Baby TV  mode Incremental
+Grabber ZINGZING.TV | ERROR! no index page data received from Al Jazeera Eng
+Grabber ZINGZING.TV | ERROR! Al Jazeera Eng unable to update channel, try again later
+Grabber VIVACOM.BG | ERROR! no index page data received from Baby TV
+Grabber ZINGZING.TV | starting 1/3 Sky 1  mode Incremental
+Grabber VIVACOM.BG | ERROR! Baby TV unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=City TV  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 4/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=ITV 3  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from City TV
+Grabber VIVACOM.BG | ERROR! City TV unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Deluxe Lounge  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 5/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=Playboy TV  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Deluxe Lounge
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=TVCI Центр  mode Incremental
+Grabber VIVACOM.BG | ERROR! Deluxe Lounge unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Deluxe Music  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 6/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=Sky 2  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Deluxe Music
+Grabber TV.MAIL.RU | ERROR! no index page data received from TVCI Центр
+Grabber TV.MAIL.RU | ERROR! TVCI Центр unable to update channel, try again later
+Grabber UK-SKY.COM | ERROR! no shows in indexpage for channel ARY Digital
+Grabber UK-SKY.COM | starting 2/34  ) UK-SKY.COM -- chan. (xmltv_id=ARY News  mode Incremental
+Grabber TVARENASPORT.COM | Job started at 20/08/2017 16:08:23
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=VH1  mode Incremental
+Grabber HOBBYTV.BG | Job started at 20/08/2017 16:08:34
+Grabber UK-SKY.COM | ERROR! no shows in indexpage for channel ARY News
+Grabber UK-SKY.COM | starting 3/34  ) UK-SKY.COM -- chan. (xmltv_id=ARY QTV  mode Incremental
+Grabber UK-SKY.COM | starting 4/34  ) UK-SKY.COM -- chan. (xmltv_id=B4U Movies  mode Incremental
+Grabber TVARENASPORT.COM | starting 1/5 Arena Sport 1 (SRB)  mode Incremental
+Grabber PROGRAM24.RO | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\program24.ro"
+Grabber VIVACOM.BG | ERROR! Deluxe Music unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Duck TV  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | Job started at 20/08/2017 16:08:33
+Grabber TVARENASPORT.COM | starting 2/5 Arena Sport 2 (SRB)  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Duck TV
+Grabber VIVACOM.BG | ERROR! Duck TV unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Fen Folk  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 1/6 BBC Worldnews  mode Incremental
+Grabber DNEVNIK.BG | Job started at 20/08/2017 16:08:22
+Grabber TVARENASPORT.COM | starting 3/5 Arena Sport 3 (SRB)  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Fen Folk
+Grabber VIVACOM.BG | ERROR! Fen Folk unable to update channel, try again later
+Grabber BGDNES.TV | Job started at 20/08/2017 16:08:33
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=InLife  mode Incremental
+Grabber TVARENASPORT.COM | starting 4/5 Arena Sport 4 (SRB)  mode Incremental
+Grabber BGDNES.TV | starting 1/1 BG DNES  mode Incremental
+Grabber UK-SKY.COM | starting 5/34  ) UK-SKY.COM -- chan. (xmltv_id=B4U Music  mode Incremental
+Grabber UK-SKY.COM | starting 6/34  ) UK-SKY.COM -- chan. (xmltv_id=BT Sports 1 *  mode Incremental
+Grabber DNEVNIK.BG | starting 1/12  ) DNEVNIK.BG -- chan. (xmltv_id=AXN Black  mode Incremental
+Grabber TVARENASPORT.COM | starting 5/5 Arena Sport 5 (SRB)  mode Incremental
+Grabber UK-SKY.COM | starting 7/34  ) UK-SKY.COM -- chan. (xmltv_id=BT Sports 2 *  mode Incremental
+Grabber DNEVNIK.BG | starting 2/12  ) DNEVNIK.BG -- chan. (xmltv_id=AXN White  mode Incremental
+Grabber UK-SKY.COM | starting 8/34  ) UK-SKY.COM -- chan. (xmltv_id=Box Nation  mode Incremental
+Grabber DNEVNIK.BG | starting 3/12  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Science  mode Incremental
+Grabber TVARENASPORT.COM | Job finished at 20/08/2017 16:08:25 done in 2s
+Grabber DNEVNIK.BG | starting 4/12  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Showcase  mode Incremental
+Grabber SBB.RS | Job started at 20/08/2017 16:08:23
+Grabber TV.MAIL.RU | ERROR! no index page data received from VH1
+Grabber DNEVNIK.BG | starting 5/12  ) DNEVNIK.BG -- chan. (xmltv_id=Extreme Sports Channel  mode Incremental
+Grabber HOBBYTV.BG | starting 1/3 BG Лов  mode Incremental
+Grabber TV.MAIL.RU | ERROR! VH1 unable to update channel, try again later
+Grabber DNEVNIK.BG | starting 6/12  ) DNEVNIK.BG -- chan. (xmltv_id=ID Xtra  mode Incremental
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=VH1 Classic  mode Incremental
+Grabber DNEVNIK.BG | starting 7/12  ) DNEVNIK.BG -- chan. (xmltv_id=TV1  mode Incremental
+Grabber SBB.RS | starting 1/19  ) SBB.RS -- chan. (xmltv_id=Al Jazeera Balkans  mode Incremental
+Grabber DNEVNIK.BG | starting 8/12  ) DNEVNIK.BG -- chan. (xmltv_id=TVT Tourism  mode Incremental
+Grabber SBB.RS | starting 2/19  ) SBB.RS -- chan. (xmltv_id=B92  mode Incremental
+Grabber SBB.RS | starting 3/19  ) SBB.RS -- chan. (xmltv_id=Grand  mode Incremental
+Grabber TV.MAIL.RU | ERROR! no index page data received from VH1 Classic
+Grabber DNEVNIK.BG | starting 9/12  ) DNEVNIK.BG -- chan. (xmltv_id=VTV  mode Incremental
+Grabber SBB.RS | starting 4/19  ) SBB.RS -- chan. (xmltv_id=Happy RS  mode Incremental
+Grabber TV.MAIL.RU | ERROR! VH1 Classic unable to update channel, try again later
+Grabber SBB.RS | starting 5/19  ) SBB.RS -- chan. (xmltv_id=Pink  mode Incremental
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=Илюзион+  mode Incremental
+Grabber DNEVNIK.BG | starting (  10/12  ) DNEVNIK.BG -- chan. (xmltv_id=Viasat HD  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from InLife
+Grabber VIVACOM.BG | ERROR! InLife unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Magic TV  mode Incremental
+Grabber ENGIN.TV | starting (  16/38  ) ENGIN.TV -- chan. (xmltv_id=Minika Cocuk  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Magic TV
+Grabber VIVACOM.BG | ERROR! Magic TV unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Nick Jr.  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Nick Jr.
+Grabber VIVACOM.BG | ERROR! Nick Jr. unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=The World  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from The World
+Grabber VIVACOM.BG | ERROR! The World unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Trace Sport Stars  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Trace Sport Stars
+Grabber VIVACOM.BG | ERROR! Trace Sport Stars unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Wness  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Wness
+Grabber VIVACOM.BG | ERROR! Wness unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Перец  mode Incremental
+Grabber PROGRAM24.RO | Job started at 20/08/2017 16:08:36
+Grabber VIVACOM.BG | ERROR! no index page data received from Перец
+Grabber VIVACOM.BG | ERROR! Перец unable to update channel, try again later
+Grabber VIVACOM.BG | starting 1/16  ) VIVACOM.BG -- chan. (xmltv_id=Родина ТВ  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Родина ТВ
+Grabber VIVACOM.BG | ERROR! Родина ТВ unable to update channel, try again later
+Grabber VIVACOM.BG | Job finished at 20/08/2017 16:08:36 done in 12s
+Grabber DNEVNIK.BG | starting (  11/12  ) DNEVNIK.BG -- chan. (xmltv_id=Канал 3  mode Incremental
+Grabber TVIZ.TV | ERROR! RT Docu error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber ENGIN.TV | starting (  17/38  ) ENGIN.TV -- chan. (xmltv_id=NHK World  mode Incremental
+Grabber TV.MAIL.RU | ERROR! no index page data received from Илюзион+
+Grabber TV.MAIL.RU | ERROR! Илюзион+ unable to update channel, try again later
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=НТВ Мир  mode Incremental
+Grabber DNES.BG | Parsing XML output
+Grabber DNES.BG | Animal Planet | 10 programms grabbed
+Grabber DNES.BG | Balkanika | 3 programms grabbed
+Grabber DNES.BG | Bloomberg BG | 8 programms grabbed
+Grabber DNES.BG | Boomerang | 19 programms grabbed
+Grabber DNES.BG | Bulgaria on Air | 11 programms grabbed
+Grabber DNES.BG | CNN International | 10 programms grabbed
+Grabber DNES.BG | Comedy Central | 20 programms grabbed
+Grabber DNES.BG | Discovery Channel | 11 programms grabbed
+Grabber DNES.BG | Disney RU | 22 programms grabbed
+Grabber DNES.BG | Eurosport | 6 programms grabbed
+Grabber DNES.BG | Eurosport 2 | 7 programms grabbed
+Grabber DNES.BG | FEN TV | 5 programms grabbed
+Grabber DNES.BG | Fine Living | 16 programms grabbed
+Grabber DNES.BG | Fishing & Hunting | 18 programms grabbed
+Grabber DNES.BG | Nickelodeon | 21 programms grabbed
+Grabber DNES.BG | RTVi | 10 programms grabbed
+Grabber DNES.BG | TLC | 12 programms grabbed
+Grabber DNES.BG | The Voice | 5 programms grabbed
+Grabber DNES.BG | Travel | 18 programms grabbed
+Grabber DNES.BG | eKids | 13 programms grabbed
+Grabber DNES.BG | Евроком | 9 programms grabbed
+Grabber DNES.BG | ТВ Европа | 30 programms grabbed
+Grabber PROGRAMATV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\programatv.bg"
+Grabber PROGRAM24.RO | starting 1/21  ) PROGRAM24.RO -- chan. (xmltv_id=Alfa Omega TV  mode Incremental
+Grabber HOBBYTV.BG | starting 2/3 Hobby HD  mode Incremental
+Grabber PROGRAMATV.BG | Job started at 20/08/2017 16:08:36
+Grabber HOBBYTV.BG | starting 3/3 Hobby TV  mode Incremental
+Grabber TV.MAIL.RU | ERROR! no index page data received from НТВ Мир
+Grabber TV.MAIL.RU | ERROR! НТВ Мир unable to update channel, try again later
+Grabber TELERAMA.FR | starting (  12/24  ) TELERAMA.FR -- chan. (xmltv_id=France 5  mode Incremental
+Grabber TV.MAIL.RU | starting 6/11  ) TV.MAIL.RU -- chan. (xmltv_id=Спас  mode Incremental
+Grabber ENGIN.TV | starting (  18/38  ) ENGIN.TV -- chan. (xmltv_id=NTV  mode Incremental
+Grabber BGDNES.TV | Job finished at 20/08/2017 16:08:37 done in 3s
+Grabber HOBBYTV.BG | Job finished at 20/08/2017 16:08:37 done in 2s
+Grabber TV.DIR.BG | starting (  19/23  ) TV.DIR.BG -- chan. (xmltv_id=VOX  mode Incremental
+Grabber TV.DIR.BG | starting (  20/23  ) TV.DIR.BG -- chan. (xmltv_id=ВТК  mode Incremental
+Grabber TV.DIR.BG | ERROR! no shows in indexpage for channel ВТК
+Grabber TV.DIR.BG | starting (  21/23  ) TV.DIR.BG -- chan. (xmltv_id=Охота и рыбалка  mode Incremental
+Grabber TV.DIR.BG | starting (  22/23  ) TV.DIR.BG -- chan. (xmltv_id=РТР Планета  mode Incremental
+Grabber VSETV.COM | ERROR! no index page data received from Arirang
+Grabber VSETV.COM | ERROR! Arirang unable to update channel, try again later
+Grabber VSETV.COM | starting 1/4 F.O. TV  mode Incremental
+Grabber TV.DIR.BG | starting (  23/23  ) TV.DIR.BG -- chan. (xmltv_id=Черно море  mode Incremental
+Grabber TV.DIR.BG | Job finished at 20/08/2017 16:08:41 done in 31s
+Grabber PROGRAMATV.BG | starting 1/4 BIT  mode Incremental
+Grabber PROGRAMATV.BG | ERROR! no index page data received from BIT
+Grabber PROGRAMATV.BG | ERROR! BIT unable to update channel, try again later
+Grabber PROGRAMATV.BG | starting 1/4 Diema  mode Incremental
+Grabber PROGRAMATV.BG | ERROR! no index page data received from Diema
+Grabber PROGRAMATV.BG | ERROR! Diema unable to update channel, try again later
+Grabber PROGRAMATV.BG | starting 1/4 KinoNova  mode Incremental
+Grabber PROGRAMATV.BG | ERROR! no index page data received from KinoNova
+Grabber PROGRAMATV.BG | ERROR! KinoNova unable to update channel, try again later
+Grabber PROGRAMATV.BG | starting 1/4 bTV Cinema  mode Incremental
+Grabber PROGRAMATV.BG | ERROR! no index page data received from bTV Cinema
+Grabber PROGRAMATV.BG | ERROR! bTV Cinema unable to update channel, try again later
+Grabber PROGRAMATV.BG | Job finished at 20/08/2017 16:08:38 done in 1s
+Grabber DIGITURK.COM.TR | starting 9/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 2  mode Incremental
+Grabber COSMOTE.GR | ERROR! ART error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from ART
+Grabber COSMOTE.GR | ERROR! ART unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=Alpha GR  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 7/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=Sky Premiere  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 9/10  ) M.TVGUIDE.CO.UK-INDEX -- chan. (xmltv_id=True Movies 1  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | ERROR! no index page data received from True Movies 1
+Grabber M.TVGUIDE.CO.UK-INDEX | ERROR! True Movies 1 unable to update channel, try again later
+Grabber M.TVGUIDE.CO.UK-INDEX | Job finished at 20/08/2017 16:08:39 done in 18s
+Grabber UK-SKY.COM | starting 9/34  ) UK-SKY.COM -- chan. (xmltv_id=COLORS  mode Incremental
+Grabber UK-SKY.COM | starting (  10/34  ) UK-SKY.COM -- chan. (xmltv_id=Channel 4  mode Incremental
+Grabber UK-SKY.COM | starting (  11/34  ) UK-SKY.COM -- chan. (xmltv_id=ITV 1  mode Incremental
+Grabber UK-SKY.COM | starting (  12/34  ) UK-SKY.COM -- chan. (xmltv_id=Insight HD  mode Incremental
+Grabber UK-SKY.COM | starting (  13/34  ) UK-SKY.COM -- chan. (xmltv_id=Kerrang! TV  mode Incremental
+Grabber UK-SKY.COM | starting (  14/34  ) UK-SKY.COM -- chan. (xmltv_id=Magic UK  mode Incremental
+Grabber UK-SKY.COM | starting (  15/34  ) UK-SKY.COM -- chan. (xmltv_id=Motors UK  mode Incremental
+Grabber UK-SKY.COM | starting (  16/34  ) UK-SKY.COM -- chan. (xmltv_id=Movies 24 UK  mode Incremental
+Grabber VIVACOM.BG | Parsing XML output
+No programs grabbed by grabber VIVACOM.BG
+Grabber BNT.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\bnt.bg"
+Grabber UK-SKY.COM | starting (  17/34  ) UK-SKY.COM -- chan. (xmltv_id=Premier Sports  mode Incremental
+Grabber BNT.BG | Job started at 20/08/2017 16:08:44
+Grabber BNT.BG | starting 1/11  ) BNT.BG -- chan. (xmltv_id=BNT World  mode Incremental
+Grabber BGDNES.TV | Parsing XML output
+Grabber BGDNES.TV | BG DNES | 12 programms grabbed
+Grabber ELMUNDO.ES | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\elmundo.es"
+Grabber HOBBYTV.BG | Parsing XML output
+Grabber HOBBYTV.BG | BG Лов | 27 programms grabbed
+Grabber HOBBYTV.BG | Hobby HD | 27 programms grabbed
+Grabber HOBBYTV.BG | Hobby TV | 27 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\programtv.onet.pl"
+Grabber ELMUNDO.ES | Job started at 20/08/2017 16:08:45
+Grabber TV.MAIL.RU | Parsing XML output
+Grabber TV.MAIL.RU | CGTN | 32 programms grabbed
+Grabber TV.MAIL.RU | CTC Инт. | 18 programms grabbed
+Grabber TV.MAIL.RU | OutDoor | 32 programms grabbed
+Grabber TV.MAIL.RU | Russian Travel Guide | 26 programms grabbed
+Grabber BULGARIA24.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\bulgaria24.tv"
+Grabber TV.MAIL.RU | ERROR! no index page data received from Спас
+Grabber TV.MAIL.RU | ERROR! Спас unable to update channel, try again later
+Grabber TV.MAIL.RU | Job finished at 20/08/2017 16:08:37 done in 26s
+Grabber PROGRAMTV.ONET.PL | Job started at 20/08/2017 16:08:45
+Grabber ELMUNDO.ES | starting 1/5 Bein Sports (es)  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 1/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Brazzers TV  mode Incremental
+Grabber UK-SKY.COM | starting (  18/34  ) UK-SKY.COM -- chan. (xmltv_id=Racing UK  mode Incremental
+Grabber ZINGZING.TV | Parsing XML output
+No programs grabbed by grabber ZINGZING.TV
+Grabber MEGAEPG.KODIBG.ORG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\megaepg.kodibg.org"
+Grabber DNEVNIK.BG | Parsing XML output
+Grabber DNEVNIK.BG | AXN Black | 16 programms grabbed
+Grabber DNEVNIK.BG | AXN White | 12 programms grabbed
+Grabber DNEVNIK.BG | Discovery Science | 31 programms grabbed
+Grabber DNEVNIK.BG | Discovery Showcase | 28 programms grabbed
+Grabber DNEVNIK.BG | Extreme Sports Channel | 29 programms grabbed
+Grabber DNEVNIK.BG | ID Xtra | 29 programms grabbed
+Grabber DNEVNIK.BG | TV1 | 36 programms grabbed
+Grabber DNEVNIK.BG | TVT Tourism | 34 programms grabbed
+Grabber DNEVNIK.BG | VTV | 24 programms grabbed
+Grabber DNEVNIK.BG | Viasat HD | 29 programms grabbed
+Grabber DNEVNIK.BG | Канал 3 | 24 programms grabbed
+Grabber DNEVNIK.BG | СКАТ | 19 programms grabbed
+Grabber TV.BOXBG.NET | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.boxbg.net"
+Grabber UK-SKY.COM | starting (  19/34  ) UK-SKY.COM -- chan. (xmltv_id=Rishtey  mode Incremental
+Grabber TVIZ.TV | ERROR! no index page data received from RT Docu
+Grabber TVIZ.TV | ERROR! RT Docu unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 RT Spanish  mode Incremental
+Grabber ELMUNDO.ES | starting 2/5 LaLiga  mode Incremental
+Grabber TV.BOXBG.NET | Job started at 20/08/2017 16:08:46
+Grabber TV.BOXBG.NET | starting 1/5 CBS Drama  mode Incremental
+Grabber PROGRAMATV.BG | Parsing XML output
+No programs grabbed by grabber PROGRAMATV.BG
+Grabber SINGTELTV.COM.SG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\singteltv.com.sg"
+Grabber PROGRAMTV.ONET.PL | starting 2/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=DocuBox  mode Incremental
+Grabber TVIZ.TV | ERROR! RT Spanish error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber ENGIN.TV | starting (  19/38  ) ENGIN.TV -- chan. (xmltv_id=NTV Spor  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 2/6 Bloomberg  mode Incremental
+Grabber ENGIN.TV | starting (  20/38  ) ENGIN.TV -- chan. (xmltv_id=Planet Mutfak  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 3/6 CNBC  mode Incremental
+Grabber ENGIN.TV | starting (  21/38  ) ENGIN.TV -- chan. (xmltv_id=Planet Turk  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 4/6 DTX  mode Incremental
+Grabber ENGIN.TV | starting (  22/38  ) ENGIN.TV -- chan. (xmltv_id=Power TV  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 5/6 Smash Hits  mode Incremental
+Grabber ENGIN.TV | starting (  23/38  ) ENGIN.TV -- chan. (xmltv_id=Power Turk  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 6/6 and TV  mode Incremental
+Grabber ENGIN.TV | starting (  24/38  ) ENGIN.TV -- chan. (xmltv_id=Rumeli TV  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | Job finished at 20/08/2017 16:08:42 done in 9s
+Grabber ENGIN.TV | starting (  25/38  ) ENGIN.TV -- chan. (xmltv_id=Semerkand  mode Incremental
+Grabber ENGIN.TV | starting (  26/38  ) ENGIN.TV -- chan. (xmltv_id=Show TV  mode Incremental
+Grabber DNEVNIK.BG | starting (  12/12  ) DNEVNIK.BG -- chan. (xmltv_id=СКАТ  mode Incremental
+Grabber ENGIN.TV | starting (  27/38  ) ENGIN.TV -- chan. (xmltv_id=Star TV  mode Incremental
+Grabber ENGIN.TV | starting (  28/38  ) ENGIN.TV -- chan. (xmltv_id=TRT 1  mode Incremental
+Grabber DNEVNIK.BG | Job finished at 20/08/2017 16:08:37 done in 15s
+Grabber ENGIN.TV | starting (  29/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Avaz  mode Incremental
+Grabber ENGIN.TV | starting (  30/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Belgesel  mode Incremental
+Grabber ENGIN.TV | starting (  31/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Cocuk  mode Incremental
+Grabber ENGIN.TV | starting (  32/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Haber  mode Incremental
+Grabber ENGIN.TV | starting (  33/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Music  mode Incremental
+Grabber ENGIN.TV | starting (  34/38  ) ENGIN.TV -- chan. (xmltv_id=TRT Spor  mode Incremental
+Grabber ENGIN.TV | starting (  35/38  ) ENGIN.TV -- chan. (xmltv_id=TRT World  mode Incremental
+Grabber ENGIN.TV | starting (  36/38  ) ENGIN.TV -- chan. (xmltv_id=TV 8  mode Incremental
+Grabber ENGIN.TV | starting (  37/38  ) ENGIN.TV -- chan. (xmltv_id=Teve 2  mode Incremental
+Grabber ENGIN.TV | starting (  38/38  ) ENGIN.TV -- chan. (xmltv_id=Yaban TV  mode Incremental
+Grabber ENGIN.TV | Job finished at 20/08/2017 16:08:40 done in 17s
+Grabber BULGARIA24.TV | Job started at 20/08/2017 16:08:45
+Grabber TELERAMA.FR | starting (  13/24  ) TELERAMA.FR -- chan. (xmltv_id=La Deux  mode Incremental
+Grabber BULGARIA24.TV | starting 1/1 Bulgaria 24  mode Incremental
+Grabber TELERAMA.FR | starting (  14/24  ) TELERAMA.FR -- chan. (xmltv_id=La Trois  mode Incremental
+Grabber SBB.RS | starting 6/19  ) SBB.RS -- chan. (xmltv_id=Pink 2  mode Incremental
+Grabber TELERAMA.FR | starting (  15/24  ) TELERAMA.FR -- chan. (xmltv_id=La Une  mode Incremental
+Grabber TELERAMA.FR | starting (  16/24  ) TELERAMA.FR -- chan. (xmltv_id=NT1  mode Incremental
+Grabber TELERAMA.FR | starting (  17/24  ) TELERAMA.FR -- chan. (xmltv_id=Plug RTL  mode Incremental
+Grabber SBB.RS | starting 7/19  ) SBB.RS -- chan. (xmltv_id=Pink 3  mode Incremental
+Grabber TELERAMA.FR | starting (  18/24  ) TELERAMA.FR -- chan. (xmltv_id=RTL TVi  mode Incremental
+Grabber SINGTELTV.COM.SG | Job started at 20/08/2017 16:08:46
+Grabber TELERAMA.FR | starting (  19/24  ) TELERAMA.FR -- chan. (xmltv_id=RTL9 (Fr)  mode Incremental
+Grabber TELERAMA.FR | starting (  20/24  ) TELERAMA.FR -- chan. (xmltv_id=TF1  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | Job started at 20/08/2017 16:08:45
+Grabber ZINGZING.TV | ERROR! Sky 1 error downloading page: The operation has timed out (10sec)
+Grabber KLACK.DE | starting 2/16  ) KLACK.DE -- chan. (xmltv_id=Eins Festival  mode Incremental
+Grabber PROGRAM24.RO | starting 2/21  ) PROGRAM24.RO -- chan. (xmltv_id=Digi Sport 1  mode Incremental
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel Eins Festival
+Grabber KLACK.DE | starting 3/16  ) KLACK.DE -- chan. (xmltv_id=Eins Plus  mode Incremental
+Grabber PROGRAM24.RO | starting 3/21  ) PROGRAM24.RO -- chan. (xmltv_id=Digi Sport 2  mode Incremental
+Grabber TELERAMA.FR | starting (  21/24  ) TELERAMA.FR -- chan. (xmltv_id=Toute L'histoire  mode Incremental
+Grabber ZINGZING.TV | ERROR! no index page data received from Sky 1
+Grabber PROGRAM24.RO | starting 4/21  ) PROGRAM24.RO -- chan. (xmltv_id=Digi Sport 3  mode Incremental
+Grabber ZINGZING.TV | ERROR! Sky 1 unable to update channel, try again later
+Grabber PROGRAM24.RO | starting 5/21  ) PROGRAM24.RO -- chan. (xmltv_id=Digi Sport 4  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | starting 1/5 C&I Networks  mode Incremental
+Grabber PROGRAM24.RO | starting 6/21  ) PROGRAM24.RO -- chan. (xmltv_id=Extreme Sports  mode Incremental
+Grabber ZINGZING.TV | Job finished at 20/08/2017 16:08:37 done in 15s
+Grabber PROGRAM24.RO | starting 7/21  ) PROGRAM24.RO -- chan. (xmltv_id=Kanal D RO  mode Incremental
+Grabber TELERAMA.FR | starting (  22/24  ) TELERAMA.FR -- chan. (xmltv_id=beIN Sports 1 (fr)  mode Incremental
+Grabber PROGRAM24.RO | starting 8/21  ) PROGRAM24.RO -- chan. (xmltv_id=Luxe  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | starting 2/5 Dusk!  mode Incremental
+Grabber PROGRAM24.RO | starting 9/21  ) PROGRAM24.RO -- chan. (xmltv_id=Mezzo  mode Incremental
+Grabber PROGRAM24.RO | starting (  10/21  ) PROGRAM24.RO -- chan. (xmltv_id=Mezzo Live  mode Incremental
+Grabber PROGRAM24.RO | starting (  11/21  ) PROGRAM24.RO -- chan. (xmltv_id=MotorVision  mode Incremental
+Grabber TELERAMA.FR | starting (  23/24  ) TELERAMA.FR -- chan. (xmltv_id=beIN Sports 2 (fr)  mode Incremental
+Grabber PROGRAM24.RO | starting (  12/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR 2 RO  mode Incremental
+Grabber PROGRAM24.RO | starting (  13/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR 3 RO  mode Incremental
+Grabber TELERAMA.FR | starting (  24/24  ) TELERAMA.FR -- chan. (xmltv_id=beIN Sports 3 (fr)  mode Incremental
+Grabber PROGRAM24.RO | starting (  14/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Cluj  mode Incremental
+Grabber PROGRAM24.RO | starting (  15/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Craiova  mode Incremental
+Grabber PROGRAM24.RO | starting (  16/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Iasi  mode Incremental
+Grabber TELERAMA.FR | Job finished at 20/08/2017 16:08:42 done in 19s
+Grabber PROGRAM24.RO | starting (  17/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR International  mode Incremental
+Grabber PROGRAM24.RO | starting (  18/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Moldova  mode Incremental
+Grabber PROGRAM24.RO | starting (  19/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR RO  mode Incremental
+Grabber PROGRAM24.RO | starting (  20/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Targu-Mures  mode Incremental
+Grabber PROGRAM24.RO | starting (  21/21  ) PROGRAM24.RO -- chan. (xmltv_id=TVR Timisoara  mode Incremental
+Grabber PROGRAM24.RO | Job finished at 20/08/2017 16:08:41 done in 4s
+Grabber TV.BOXBG.NET | starting 2/5 CBS Reality  mode Incremental
+Grabber SINGTELTV.COM.SG | starting 1/1 CCTV 9 Documentary  mode Incremental
+Grabber ELMUNDO.ES | starting 3/5 Movistar Deportes 1  mode Incremental
+Grabber TV.BOXBG.NET | starting 3/5 Cartoon Network  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | starting 3/5 History  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | Parsing XML output
+Grabber M.TVGUIDE.CO.UK-INDEX | Aljazeera English | 27 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | BBC 4 | 3 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | ITV 2 | 14 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | ITV 3 | 11 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | Playboy TV | 10 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | Sky 2 | 17 programms grabbed
+Grabber TV.SKY.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.sky.com"
+Grabber TV.SKY.COM | Job started at 20/08/2017 16:08:47
+Grabber TV.BOXBG.NET | starting 4/5 Jim Jam  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | starting 4/5 History 2  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | ERROR! no index page data received from History 2
+Grabber MEGAEPG.KODIBG.ORG | ERROR! History 2 unable to update channel, try again later
+Grabber MEGAEPG.KODIBG.ORG | starting 4/5 Movie Star  mode Incremental
+Grabber UK-SKY.COM | starting (  20/34  ) UK-SKY.COM -- chan. (xmltv_id=Sangat  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | Job finished at 20/08/2017 16:08:47 done in 2s
+Grabber TV.SKY.COM | starting 1/10  ) TV.SKY.COM -- chan. (xmltv_id=CCTV News  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 3/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Dorcel TV  mode Incremental
+Grabber ELMUNDO.ES | starting 4/5 Movistar F1  mode Incremental
+Grabber TV.BOXBG.NET | starting 5/5 Travel Channel  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 4/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=English Club  mode Incremental
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel Eins Plus
+Grabber KLACK.DE | starting 4/16  ) KLACK.DE -- chan. (xmltv_id=N-TV  mode Incremental
+Grabber TV.BOXBG.NET | Job finished at 20/08/2017 16:08:48 done in 2s
+Grabber BULGARIA24.TV | Job finished at 20/08/2017 16:08:48 done in 2s
+Grabber ENGIN.TV | Parsing XML output
+Grabber ENGIN.TV | A Haber | 19 programms grabbed
+Grabber ENGIN.TV | ATV | 7 programms grabbed
+Grabber ENGIN.TV | Beyaz TV | 13 programms grabbed
+Grabber ENGIN.TV | CNN Turk | 23 programms grabbed
+Grabber ENGIN.TV | Disney TR | 37 programms grabbed
+Grabber ENGIN.TV | Dream TV | 23 programms grabbed
+Grabber ENGIN.TV | Euronews | 83 programms grabbed
+Grabber ENGIN.TV | Eurosport News | 4 programms grabbed
+Grabber ENGIN.TV | Flash TV | 10 programms grabbed
+Grabber ENGIN.TV | Haber Turk | 19 programms grabbed
+Grabber ENGIN.TV | Kanal 7 (tr) | 11 programms grabbed
+Grabber ENGIN.TV | Kanal D | 8 programms grabbed
+Grabber ENGIN.TV | Kanal t | 8 programms grabbed
+Grabber ENGIN.TV | Kazakh TV | 6 programms grabbed
+Grabber ENGIN.TV | Kral Pop | 21 programms grabbed
+Grabber ENGIN.TV | Minika Cocuk | 37 programms grabbed
+Grabber ENGIN.TV | NHK World | 63 programms grabbed
+Grabber ENGIN.TV | NTV | 53 programms grabbed
+Grabber ENGIN.TV | NTV Spor | 16 programms grabbed
+Grabber ENGIN.TV | Planet Mutfak | 34 programms grabbed
+Grabber ENGIN.TV | Planet Turk | 14 programms grabbed
+Grabber ENGIN.TV | Power TV | 15 programms grabbed
+Grabber ENGIN.TV | Power Turk | 8 programms grabbed
+Grabber ENGIN.TV | Rumeli TV | 14 programms grabbed
+Grabber ENGIN.TV | Semerkand | 18 programms grabbed
+Grabber ENGIN.TV | Show TV | 8 programms grabbed
+Grabber ENGIN.TV | Star TV | 9 programms grabbed
+Grabber ENGIN.TV | TRT 1 | 10 programms grabbed
+Grabber ENGIN.TV | TRT Avaz | 18 programms grabbed
+Grabber ENGIN.TV | TRT Belgesel | 27 programms grabbed
+Grabber ENGIN.TV | TRT Cocuk | 36 programms grabbed
+Grabber ENGIN.TV | TRT Haber | 33 programms grabbed
+Grabber ENGIN.TV | TRT Music | 27 programms grabbed
+Grabber ENGIN.TV | TRT Spor | 34 programms grabbed
+Grabber ENGIN.TV | TRT World | 32 programms grabbed
+Grabber ENGIN.TV | TV 8 | 8 programms grabbed
+Grabber ENGIN.TV | Teve 2 | 12 programms grabbed
+Grabber ENGIN.TV | Yaban TV | 21 programms grabbed
+Grabber TVGUIDE.CO.UK | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvguide.co.uk"
+Grabber ELMUNDO.ES | starting 5/5 Movistar GP  mode Incremental
+Grabber TVGUIDE.CO.UK | Job started at 20/08/2017 16:08:48
+Grabber TVGUIDE.CO.UK | starting 1/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Chartshow Hits  mode Incremental
+Grabber UK-SKY.COM | starting (  21/34  ) UK-SKY.COM -- chan. (xmltv_id=Sikh Channel  mode Incremental
+Grabber ELMUNDO.ES | Job finished at 20/08/2017 16:08:48 done in 3s
+Grabber PROGRAM24.RO | Parsing XML output
+Grabber PROGRAM24.RO | Alfa Omega TV | 15 programms grabbed
+Grabber PROGRAM24.RO | Digi Sport 1 | 15 programms grabbed
+Grabber PROGRAM24.RO | Digi Sport 2 | 7 programms grabbed
+Grabber PROGRAM24.RO | Digi Sport 3 | 10 programms grabbed
+Grabber PROGRAM24.RO | Digi Sport 4 | 9 programms grabbed
+Grabber PROGRAM24.RO | Extreme Sports | 15 programms grabbed
+Grabber PROGRAM24.RO | Kanal D RO | 7 programms grabbed
+Grabber PROGRAM24.RO | Luxe | 10 programms grabbed
+Grabber PROGRAM24.RO | Mezzo | 7 programms grabbed
+Grabber PROGRAM24.RO | Mezzo Live | 6 programms grabbed
+Grabber PROGRAM24.RO | MotorVision | 18 programms grabbed
+Grabber PROGRAM24.RO | TVR 2 RO | 10 programms grabbed
+Grabber PROGRAM24.RO | TVR 3 RO | 13 programms grabbed
+Grabber PROGRAM24.RO | TVR Cluj | 7 programms grabbed
+Grabber PROGRAM24.RO | TVR Craiova | 6 programms grabbed
+Grabber PROGRAM24.RO | TVR Iasi | 10 programms grabbed
+Grabber PROGRAM24.RO | TVR International | 15 programms grabbed
+Grabber PROGRAM24.RO | TVR Moldova | 14 programms grabbed
+Grabber PROGRAM24.RO | TVR RO | 16 programms grabbed
+Grabber PROGRAM24.RO | TVR Targu-Mures | 8 programms grabbed
+Grabber PROGRAM24.RO | TVR Timisoara | 9 programms grabbed
+Grabber HBO.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\hbo.bg"
+Grabber HBO.BG | Job started at 20/08/2017 16:08:49
+Grabber TV.DIR.BG | Parsing XML output
+Grabber TV.DIR.BG | AMC | 12 programms grabbed
+Grabber TV.DIR.BG | ARD One | 22 programms grabbed
+Grabber TV.DIR.BG | Agro TV | 97 programms grabbed
+Grabber TV.DIR.BG | Alfa TV | 21 programms grabbed
+Grabber TV.DIR.BG | BOX | 6 programms grabbed
+Grabber TV.DIR.BG | Da Vinci Learning | 41 programms grabbed
+Grabber TV.DIR.BG | Disney Jr. | 46 programms grabbed
+Grabber TV.DIR.BG | MTV | 22 programms grabbed
+Grabber TV.DIR.BG | Motors TV | 30 programms grabbed
+Grabber TV.DIR.BG | PO TV | 16 programms grabbed
+Grabber TV.DIR.BG | PRO7 | 14 programms grabbed
+Grabber TV.DIR.BG | RTL | 11 programms grabbed
+Grabber TV.DIR.BG | Rimex TV | 17 programms grabbed
+Grabber TV.DIR.BG | SAT1 | 12 programms grabbed
+Grabber TV.DIR.BG | Super RTL | 24 programms grabbed
+Grabber TV.DIR.BG | VOX | 8 programms grabbed
+Grabber TV.DIR.BG | Охота и рыбалка | 45 programms grabbed
+Grabber TV.DIR.BG | РТР Планета | 12 programms grabbed
+Grabber TV.DIR.BG | Черно море | 30 programms grabbed
+Grabber ELPAIS.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\elpais.com"
+Grabber ELPAIS.COM | Job started at 20/08/2017 16:08:49
+Grabber ELPAIS.COM | starting 1/3 Comedy Central HD (es,en)  mode Incremental
+Grabber TELERAMA.FR | Parsing XML output
+Grabber TELERAMA.FR | AB Moteurs | 20 programms grabbed
+Grabber TELERAMA.FR | AB3 | 17 programms grabbed
+Grabber TELERAMA.FR | ARTE Francais | 29 programms grabbed
+Grabber TELERAMA.FR | BFM | 5 programms grabbed
+Grabber TELERAMA.FR | CCTV French | 34 programms grabbed
+Grabber TELERAMA.FR | Chasse & Peche | 30 programms grabbed
+Grabber TELERAMA.FR | Club RTL | 28 programms grabbed
+Grabber TELERAMA.FR | France 2 | 32 programms grabbed
+Grabber TELERAMA.FR | France 24 FR | 117 programms grabbed
+Grabber TELERAMA.FR | France 3 | 52 programms grabbed
+Grabber TELERAMA.FR | France 4 | 63 programms grabbed
+Grabber TELERAMA.FR | France 5 | 36 programms grabbed
+Grabber TELERAMA.FR | La Deux | 26 programms grabbed
+Grabber TELERAMA.FR | La Trois | 62 programms grabbed
+Grabber TELERAMA.FR | La Une | 27 programms grabbed
+Grabber TELERAMA.FR | NT1 | 19 programms grabbed
+Grabber TELERAMA.FR | Plug RTL | 14 programms grabbed
+Grabber TELERAMA.FR | RTL TVi | 28 programms grabbed
+Grabber TELERAMA.FR | RTL9 (Fr) | 9 programms grabbed
+Grabber TELERAMA.FR | TF1 | 23 programms grabbed
+Grabber TELERAMA.FR | Toute L'histoire | 19 programms grabbed
+Grabber TELERAMA.FR | beIN Sports 1 (fr) | 17 programms grabbed
+Grabber TELERAMA.FR | beIN Sports 2 (fr) | 12 programms grabbed
+Grabber TELERAMA.FR | beIN Sports 3 (fr) | 12 programms grabbed
+Grabber HORIZON.TV.RO | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.ro"
+Grabber TVGUIDE.CO.UK | starting 2/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Chartshow TV  mode Incremental
+Grabber VSETV.COM | ERROR! no index page data received from F.O. TV
+Grabber VSETV.COM | ERROR! F.O. TV unable to update channel, try again later
+Grabber VSETV.COM | starting 1/4 HD Fashion (Укр)  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | Parsing XML output
+Grabber M.TVGUIDE.CO.UK-FULL | BBC Worldnews | 32 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | Bloomberg | 26 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | CNBC | 25 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | DTX | 17 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | Smash Hits | 12 programms grabbed
+Grabber M.TVGUIDE.CO.UK-FULL | and TV | 10 programms grabbed
+Grabber TVTODAY.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvtoday.de"
+Grabber SINGTELTV.COM.SG | Job finished at 20/08/2017 16:08:50 done in 4s
+Grabber BNT.BG | starting 2/11  ) BNT.BG -- chan. (xmltv_id=БНТ 1  mode Incremental
+Grabber HORIZON.TV.RO | Job started at 20/08/2017 16:08:50
+Grabber HORIZON.TV.RO | starting 1/5 DIVA Universal  mode Incremental
+Grabber HORIZON.TV.RO | starting 2/5 Etno RO  mode Incremental
+Grabber HORIZON.TV.RO | starting 3/5 Fine Living RO  mode Incremental
+Grabber TV.SKY.COM | starting 2/10  ) TV.SKY.COM -- chan. (xmltv_id=Insight  mode Incremental
+Grabber TVGUIDE.CO.UK | starting 3/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Flava  mode Incremental
+Grabber TV.SKY.COM | starting 3/10  ) TV.SKY.COM -- chan. (xmltv_id=KIX  mode Incremental
+Grabber COSMOTE.GR | ERROR! Alpha GR error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from Alpha GR
+Grabber COSMOTE.GR | ERROR! Alpha GR unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=E Channel GR  mode Incremental
+Grabber HORIZON.TV.RO | starting 4/5 Kiss TV  mode Incremental
+Grabber HORIZON.TV.RO | starting 5/5 Taraf RO  mode Incremental
+Grabber TVGUIDE.CO.UK | starting 4/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Manchester United HD  mode Incremental
+Grabber HORIZON.TV.RO | Job finished at 20/08/2017 16:08:54 done in 3s
+Grabber PROGRAMTV.ONET.PL | starting 5/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=EroX  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 6/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=EroXX HD  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 7/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Fashion TV  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 8/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=FashionBox  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting 9/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=FightBox  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  10/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Hustler HD  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  11/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Hustler TV  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  12/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=MTV Dance  mode Incremental
+Grabber HBO.BG | starting 1/6 Cinemax  mode Incremental
+Grabber HBO.BG | starting 2/6 Cinemax 2  mode Incremental
+Grabber KLACK.DE | starting 5/16  ) KLACK.DE -- chan. (xmltv_id=N24  mode Incremental
+Grabber HBO.BG | starting 3/6 HBO  mode Incremental
+Grabber HBO.BG | starting 5/6 HBO 2  mode Incremental
+Grabber UK-SKY.COM | starting (  22/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Action  mode Incremental
+Grabber HBO.BG | starting 6/6 HBO 3  mode Incremental
+Grabber HBO.BG | Job finished at 20/08/2017 16:08:50 done in 1s
+Grabber UK-SKY.COM | starting (  23/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Comedy  mode Incremental
+Grabber UK-SKY.COM | starting (  24/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Disney  mode Incremental
+Grabber TVTODAY.DE | Job started at 20/08/2017 16:08:50
+Grabber UK-SKY.COM | starting (  25/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Drama  mode Incremental
+Grabber UK-SKY.COM | starting (  26/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Family  mode Incremental
+Grabber TVTODAY.DE | starting 1/3 DMAX DE  mode Incremental
+Grabber UK-SKY.COM | starting (  27/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Living  mode Incremental
+Grabber TVTODAY.DE | starting 2/3 Spiegel Geschichte  mode Incremental
+Grabber TVTODAY.DE | starting 3/3 TLC DE  mode Incremental
+Grabber UK-SKY.COM | starting (  28/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Modern Greats  mode Incremental
+Grabber TVTODAY.DE | Job finished at 20/08/2017 16:08:51 done in 0s
+Grabber BNT.BG | starting 8/11  ) BNT.BG -- chan. (xmltv_id=БНТ 2  mode Incremental
+Grabber MEGAEPG.KODIBG.ORG | Parsing XML output
+Grabber MEGAEPG.KODIBG.ORG | C&I Networks | 23 programms grabbed
+Grabber MEGAEPG.KODIBG.ORG | Dusk! | 60 programms grabbed
+Grabber MEGAEPG.KODIBG.ORG | History | 34 programms grabbed
+Grabber MEGAEPG.KODIBG.ORG | Movie Star | 10 programms grabbed
+Grabber MOVIETELE.IT | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\movietele.it"
+Grabber MOVIETELE.IT | Job started at 20/08/2017 16:08:55
+Grabber UK-SKY.COM | starting (  29/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky SciFi/Horror  mode Incremental
+Grabber TVGUIDE.CO.UK | starting 5/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Movies 4 Men  mode Incremental
+Grabber MOVIETELE.IT | starting 1/4 DMAX IT  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  13/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=MTV Hits  mode Incremental
+Grabber TV.BOXBG.NET | Parsing XML output
+Grabber TV.BOXBG.NET | CBS Drama | 12 programms grabbed
+Grabber TV.BOXBG.NET | CBS Reality | 23 programms grabbed
+Grabber TV.BOXBG.NET | Cartoon Network | 45 programms grabbed
+Grabber TV.BOXBG.NET | Jim Jam | 69 programms grabbed
+Grabber TV.BOXBG.NET | Travel Channel | 35 programms grabbed
+Grabber POTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\potv.bg"
+Grabber POTV.BG | Job started at 20/08/2017 16:08:56
+Grabber BULGARIA24.TV | Parsing XML output
+No programs grabbed by grabber BULGARIA24.TV
+Grabber HORIZON.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv"
+Grabber HORIZON.TV | Job started at 20/08/2017 16:08:56
+Grabber POTV.BG | starting 1/2 DSTV  mode Incremental
+Grabber HORIZON.TV | starting 1/2 Deutsche Welle  mode Incremental
+Grabber UK-SKY.COM | starting (  30/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Select  mode Incremental
+Grabber ELMUNDO.ES | Parsing XML output
+No programs grabbed by grabber ELMUNDO.ES
+Grabber NOVA.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg"
+Grabber PROGRAMTV.ONET.PL | starting (  14/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=MTV Live  mode Incremental
+Grabber TVIZ.TV | ERROR! no index page data received from RT Spanish
+Grabber TVIZ.TV | ERROR! RT Spanish unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 Дом кино  mode Incremental
+Grabber NOVA.BG | Job started at 20/08/2017 16:08:56
+Grabber TVGUIDE.CO.UK | starting 7/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Scuzz  mode Incremental
+Grabber POTV.BG | starting 2/2 Фолклор  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  15/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=MTV Rocks  mode Incremental
+Grabber NOVA.BG | starting 1/10  ) NOVA.BG -- chan. (xmltv_id=Diema Family  mode Incremental
+Grabber TVIZ.TV | ERROR! Дом кино error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber BNT.BG | starting 9/11  ) BNT.BG -- chan. (xmltv_id=БНТ HD  mode Incremental
+Grabber POTV.BG | Job finished at 20/08/2017 16:08:57 done in 1s
+Grabber UK-SKY.COM | starting (  31/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Thriller  mode Incremental
+Grabber TVGUIDE.CO.UK | starting 8/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Sony Movies  mode Incremental
+Grabber KLACK.DE | starting 6/16  ) KLACK.DE -- chan. (xmltv_id=RTL Nitro  mode Incremental
+Grabber BNT.BG | Job finished at 20/08/2017 16:08:58 done in 13s
+Grabber PROGRAMTV.ONET.PL | starting (  16/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Private  mode Incremental
+Grabber MOVIETELE.IT | starting 2/4 Premium Action +24  mode Incremental
+Grabber HORIZON.TV | starting 2/2 Evil Angel  mode Incremental
+Grabber UK-SKY.COM | starting (  32/34  ) UK-SKY.COM -- chan. (xmltv_id=Sony MAX  mode Incremental
+Grabber SINGTELTV.COM.SG | Parsing XML output
+Grabber SINGTELTV.COM.SG | CCTV 9 Documentary | 72 programms grabbed
+Grabber SKY.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sky.de"
+Grabber HBO.BG | Parsing XML output
+Grabber HBO.BG | Cinemax | 10 programms grabbed
+Grabber HBO.BG | Cinemax 2 | 10 programms grabbed
+Grabber HBO.BG | HBO | 11 programms grabbed
+Grabber HBO.BG | HBO 2 | 16 programms grabbed
+Grabber HBO.BG | HBO 3 | 17 programms grabbed
+Grabber GUIDATV.SKY.IT | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\guidatv.sky.it"
+Grabber NOVA.BG | starting 2/10  ) NOVA.BG -- chan. (xmltv_id=Diema Sport  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  17/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Redlight  mode Incremental
+Grabber NOVA.BG | starting 3/10  ) NOVA.BG -- chan. (xmltv_id=Diema Sport 2  mode Incremental
+Grabber TVGUIDE.CO.UK | starting (  10/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=Sony SAB  mode Incremental
+Grabber PROGRAMTV.ONET.PL | starting (  18/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=Russia Today  mode Incremental
+Grabber NOVA.BG | starting 4/10  ) NOVA.BG -- chan. (xmltv_id=Nova  mode Incremental
+Grabber DIGITURK.COM.TR | starting (  10/10  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 3  mode Incremental
+Grabber MOVIETELE.IT | starting 3/4 Premium Cinema Energy  mode Incremental
+Grabber MOVIETELE.IT | starting 4/4 Supper Tennis  mode Incremental
+Grabber TVTODAY.DE | Parsing XML output
+Grabber TVTODAY.DE | DMAX DE | 20 programms grabbed
+Grabber TVTODAY.DE | Spiegel Geschichte | 24 programms grabbed
+Grabber TVTODAY.DE | TLC DE | 23 programms grabbed
+Grabber DISNEY.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\disney.bg"
+Grabber NOVA.BG | starting (  10/10  ) NOVA.BG -- chan. (xmltv_id=Nova Sport  mode Incremental
+Grabber SKY.DE | Job started at 20/08/2017 16:08:58
+Grabber SKY.DE | starting 1/7 Discovery DE  mode Incremental
+Grabber MOVIETELE.IT | Job finished at 20/08/2017 16:08:59 done in 4s
+Grabber NOVA.BG | Job finished at 20/08/2017 16:08:59 done in 2s
+Grabber TVGUIDE.CO.UK | starting (  11/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=The Vault  mode Incremental
+Grabber VSETV.COM | ERROR! no index page data received from HD Fashion (Укр)
+Grabber VSETV.COM | ERROR! HD Fashion (Укр unable to update channel, try again later
+Grabber VSETV.COM | starting 1/4 Телеканал новостей 24 (Укр)  mode Incremental
+Grabber TVGUIDE.CO.UK | ERROR! no shows in indexpage for channel The Vault
+Grabber TVGUIDE.CO.UK | starting (  12/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=True Enternatinment  mode Incremental
+Grabber PROGRAMTV.ONET.PL | ERROR! Russia Today  show REPLACED (forced update / overlap or timeorder error in EPG
+Grabber PROGRAMTV.ONET.PL | starting (  19/19  ) PROGRAMTV.ONET.PL -- chan. (xmltv_id=XXX  mode Incremental
+Grabber TVGUIDE.CO.UK | starting (  14/14  ) TVGUIDE.CO.UK -- chan. (xmltv_id=tru TV  mode Incremental
+Grabber PROGRAMTV.ONET.PL | Job finished at 20/08/2017 16:09:01 done in 16s
+Grabber HORIZON.TV | Job finished at 20/08/2017 16:08:59 done in 3s
+Grabber HORIZON.TV.RO | Parsing XML output
+Grabber HORIZON.TV.RO | DIVA Universal | 16 programms grabbed
+Grabber HORIZON.TV.RO | Etno RO | 23 programms grabbed
+Grabber HORIZON.TV.RO | Fine Living RO | 40 programms grabbed
+Grabber HORIZON.TV.RO | Kiss TV | 6 programms grabbed
+Grabber HORIZON.TV.RO | Taraf RO | 8 programms grabbed
+Grabber PRISMA.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\prisma.de"
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel RTL Nitro
+Grabber KLACK.DE | starting 7/16  ) KLACK.DE -- chan. (xmltv_id=Sat.1 Gold  mode Incremental
+Grabber UK-SKY.COM | starting (  33/34  ) UK-SKY.COM -- chan. (xmltv_id=Star Life OK  mode Incremental
+Grabber GUIDATV.SKY.IT | Job started at 20/08/2017 16:08:58
+Grabber DISNEY.BG | Job started at 20/08/2017 16:08:59
+Grabber UK-SKY.COM | starting (  34/34  ) UK-SKY.COM -- chan. (xmltv_id=SyFy UK  mode Incremental
+Grabber UK-SKY.COM | Job finished at 20/08/2017 16:09:01 done in 39s
+Grabber DISNEY.BG | starting 1/1 Disney Channel  mode Incremental
+Grabber GUIDATV.SKY.IT | starting 1/4 Discovery IT  mode Incremental
+Grabber GUIDATV.SKY.IT | starting 2/4 Primafila  mode Incremental
+Grabber GUIDATV.SKY.IT | starting 3/4 Primafila 3  mode Incremental
+Grabber DISNEY.BG | Job finished at 20/08/2017 16:09:01 done in 1s
+Grabber PRISMA.DE | Job started at 20/08/2017 16:09:02
+Grabber GUIDATV.SKY.IT | starting 4/4 RAI News  mode Incremental
+Grabber GUIDATV.SKY.IT | Job finished at 20/08/2017 16:09:01 done in 2s
+Grabber PRISMA.DE | starting 1/8 Disney DE  mode Incremental
+Grabber TVGUIDE.CO.UK | Job finished at 20/08/2017 16:09:02 done in 14s
+Grabber COSMOTE.GR | ERROR! E Channel GR error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from E Channel GR
+Grabber COSMOTE.GR | ERROR! E Channel GR unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=EPT 1  mode Incremental
+Grabber PRISMA.DE | starting 2/8 Eurosport DE  mode Incremental
+Grabber PRISMA.DE | starting 3/8 Kika  mode Incremental
+Grabber PRISMA.DE | starting 4/8 Sixx  mode Incremental
+Grabber POTV.BG | Parsing XML output
+Grabber POTV.BG | Фолклор | 21 programms grabbed
+Grabber NATGEOFOXTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\natgeofoxtv.bg"
+Grabber NATGEOFOXTV.BG | Job started at 20/08/2017 16:09:05
+Grabber PRISMA.DE | starting 5/8 Sky Bundesliga 1  mode Incremental
+Grabber NATGEOFOXTV.BG | starting 1/5 FOX  mode Incremental
+Grabber PRISMA.DE | starting 6/8 Sky Sport 1  mode Incremental
+Grabber PRISMA.DE | starting 7/8 Sky Sport 2  mode Incremental
+Grabber BNT.BG | Parsing XML output
+Grabber BNT.BG | BNT World | 25 programms grabbed
+Grabber BNT.BG | БНТ 1 | 23 programms grabbed
+Grabber BNT.BG | БНТ 2 | 25 programms grabbed
+Grabber BNT.BG | БНТ HD | 20 programms grabbed
+Grabber NTVPLUS.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\ntvplus.ru"
+Grabber NTVPLUS.RU | Job started at 20/08/2017 16:09:06
+Grabber PRISMA.DE | starting 8/8 Tele 5 DE  mode Incremental
+Grabber NTVPLUS.RU | starting 1/24  ) NTVPLUS.RU -- chan. (xmltv_id=FOX RU  mode Incremental
+Grabber PRISMA.DE | Job finished at 20/08/2017 16:09:06 done in 4s
+Grabber TVIZ.TV | ERROR! no index page data received from Дом кино
+Grabber TVIZ.TV | ERROR! Дом кино unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 Мир ТВ  mode Incremental
+Grabber KLACK.DE | starting 8/16  ) KLACK.DE -- chan. (xmltv_id=Servus  mode Incremental
+Grabber HORIZON.TV | Parsing XML output
+Grabber HORIZON.TV | Deutsche Welle | 64 programms grabbed
+Grabber HORIZON.TV | Evil Angel | 45 programms grabbed
+Grabber FOXSPORTS.NL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\foxsports.nl"
+Grabber FOXSPORTS.NL | Job started at 20/08/2017 16:09:07
+Grabber TVIZ.TV | ERROR! Мир ТВ error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber MOVIETELE.IT | Parsing XML output
+Grabber MOVIETELE.IT | DMAX IT | 39 programms grabbed
+Grabber MOVIETELE.IT | Premium Action +24 | 23 programms grabbed
+Grabber MOVIETELE.IT | Premium Cinema Energy | 9 programms grabbed
+Grabber MOVIETELE.IT | Supper Tennis | 18 programms grabbed
+Grabber TV.ETCC.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.etcc.bg"
+Grabber NOVA.BG | Parsing XML output
+Grabber FOXSPORTS.NL | starting 1/6 FOX Sports 1 NL  mode Incremental
+Grabber NOVA.BG | Diema Family | 6 programms grabbed
+Grabber NOVA.BG | Diema Sport | 9 programms grabbed
+Grabber NOVA.BG | Diema Sport 2 | 10 programms grabbed
+Grabber NOVA.BG | Nova | 7 programms grabbed
+Grabber NOVA.BG | Nova Sport | 11 programms grabbed
+Grabber TVGIDS.NL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl"
+Grabber TV.ETCC.BG | Job started at 20/08/2017 16:09:07
+Grabber TVGIDS.NL | Job started at 20/08/2017 16:09:07
+Grabber TV.ETCC.BG | starting 1/1 Film+  mode Incremental
+Grabber TV.ETCC.BG | Job finished at 20/08/2017 16:09:08 done in 0s
+Grabber TVGIDS.NL | starting 1/3 Film1 Action NL  mode Incremental
+Grabber ELPAIS.COM | starting 2/3 Cosmo HD (es,en)  mode Incremental
+Grabber TVGIDS.NL | starting 2/3 Film1 Comedy Kids NL  mode Incremental
+Grabber TVGIDS.NL | starting 3/3 Film1 Spotlight NL  mode Incremental
+Grabber TVGIDS.NL | Job finished at 20/08/2017 16:09:08 done in 0s
+Grabber GUIDATV.SKY.IT | Parsing XML output
+Grabber TV.SKY.COM | starting 5/10  ) TV.SKY.COM -- chan. (xmltv_id=POP  mode Incremental
+Grabber GUIDATV.SKY.IT | Discovery IT | 26 programms grabbed
+Grabber GUIDATV.SKY.IT | Primafila | 9 programms grabbed
+Grabber GUIDATV.SKY.IT | Primafila 3 | 9 programms grabbed
+Grabber GUIDATV.SKY.IT | RAI News | 90 programms grabbed
+Grabber HORIZON.TV.NL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.nl"
+Grabber HORIZON.TV.NL | Job started at 20/08/2017 16:09:09
+Grabber HORIZON.TV.NL | starting 1/10  ) HORIZON.TV.NL -- chan. (xmltv_id=Film1 Comedy NL  mode Incremental
+Grabber DISNEY.BG | Parsing XML output
+Grabber DISNEY.BG | Disney Channel | 38 programms grabbed
+Grabber FILMBOX.PL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\filmbox.pl"
+Grabber UK-SKY.COM | Parsing XML output
+Grabber UK-SKY.COM | ARY QTV | 27 programms grabbed
+Grabber UK-SKY.COM | B4U Movies | 5 programms grabbed
+Grabber UK-SKY.COM | B4U Music | 20 programms grabbed
+Grabber UK-SKY.COM | BT Sports 1 * | 9 programms grabbed
+Grabber UK-SKY.COM | BT Sports 2 * | 14 programms grabbed
+Grabber UK-SKY.COM | Box Nation | 7 programms grabbed
+Grabber UK-SKY.COM | COLORS | 10 programms grabbed
+Grabber UK-SKY.COM | Channel 4 | 14 programms grabbed
+Grabber UK-SKY.COM | ITV 1 | 15 programms grabbed
+Grabber UK-SKY.COM | Insight HD | 17 programms grabbed
+Grabber UK-SKY.COM | Kerrang! TV | 6 programms grabbed
+Grabber UK-SKY.COM | Magic UK | 11 programms grabbed
+Grabber UK-SKY.COM | Motors UK | 16 programms grabbed
+Grabber UK-SKY.COM | Movies 24 UK | 6 programms grabbed
+Grabber UK-SKY.COM | Premier Sports | 8 programms grabbed
+Grabber UK-SKY.COM | Racing UK | 8 programms grabbed
+Grabber UK-SKY.COM | Rishtey | 11 programms grabbed
+Grabber UK-SKY.COM | Sangat | 15 programms grabbed
+Grabber UK-SKY.COM | Sikh Channel | 17 programms grabbed
+Grabber UK-SKY.COM | Sky Action | 6 programms grabbed
+Grabber UK-SKY.COM | Sky Comedy | 7 programms grabbed
+Grabber UK-SKY.COM | Sky Disney | 8 programms grabbed
+Grabber UK-SKY.COM | Sky Drama | 7 programms grabbed
+Grabber UK-SKY.COM | Sky Family | 8 programms grabbed
+Grabber UK-SKY.COM | Sky Living | 18 programms grabbed
+Grabber UK-SKY.COM | Sky Modern Greats | 7 programms grabbed
+Grabber UK-SKY.COM | Sky SciFi/Horror | 7 programms grabbed
+Grabber UK-SKY.COM | Sky Select | 7 programms grabbed
+Grabber UK-SKY.COM | Sky Thriller | 7 programms grabbed
+Grabber UK-SKY.COM | Sony MAX | 5 programms grabbed
+Grabber UK-SKY.COM | Star Life OK | 15 programms grabbed
+Grabber UK-SKY.COM | SyFy UK | 6 programms grabbed
+Grabber FOODNETWORKTV.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\foodnetworktv.com"
+Grabber FILMBOX.PL | Job started at 20/08/2017 16:09:09
+Grabber FILMBOX.PL | starting 1/2 FilmBox Extra  mode Incremental
+Grabber PROGRAMTV.ONET.PL | Parsing XML output
+Grabber PROGRAMTV.ONET.PL | Brazzers TV | 55 programms grabbed
+Grabber PROGRAMTV.ONET.PL | DocuBox | 28 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Dorcel TV | 4 programms grabbed
+Grabber PROGRAMTV.ONET.PL | English Club | 142 programms grabbed
+Grabber PROGRAMTV.ONET.PL | EroX | 16 programms grabbed
+Grabber PROGRAMTV.ONET.PL | EroXX HD | 10 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Fashion TV | 42 programms grabbed
+Grabber PROGRAMTV.ONET.PL | FashionBox | 21 programms grabbed
+Grabber PROGRAMTV.ONET.PL | FightBox | 31 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Hustler HD | 14 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Hustler TV | 15 programms grabbed
+Grabber PROGRAMTV.ONET.PL | MTV Dance | 8 programms grabbed
+Grabber PROGRAMTV.ONET.PL | MTV Hits | 10 programms grabbed
+Grabber PROGRAMTV.ONET.PL | MTV Live | 9 programms grabbed
+Grabber PROGRAMTV.ONET.PL | MTV Rocks | 8 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Private | 11 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Redlight | 27 programms grabbed
+Grabber PROGRAMTV.ONET.PL | Russia Today | 42 programms grabbed
+Grabber PROGRAMTV.ONET.PL | XXX | 22 programms grabbed
+Grabber FREESAT.CO.UK | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\freesat.co.uk"
+Grabber TV.SKY.COM | starting 7/10  ) TV.SKY.COM -- chan. (xmltv_id=Sky Atlantic  mode Incremental
+Grabber FOXSPORTS.NL | starting 2/6 FOX Sports 2 NL  mode Incremental
+Grabber FOXSPORTS.NL | starting 3/6 FOX Sports 3 NL  mode Incremental
+Grabber FREESAT.CO.UK | Job started at 20/08/2017 16:09:09
+Grabber FREESAT.CO.UK | starting 1/2 France 24  mode Incremental
+Grabber TVGUIDE.CO.UK | Parsing XML output
+Grabber TVGUIDE.CO.UK | Chartshow Hits | 14 programms grabbed
+Grabber TVGUIDE.CO.UK | Chartshow TV | 21 programms grabbed
+Grabber TVGUIDE.CO.UK | Flava | 12 programms grabbed
+Grabber TVGUIDE.CO.UK | Manchester United HD | 21 programms grabbed
+Grabber TVGUIDE.CO.UK | Movies 4 Men | 20 programms grabbed
+Grabber TVGUIDE.CO.UK | Scuzz | 23 programms grabbed
+Grabber TVGUIDE.CO.UK | Sony Movies | 21 programms grabbed
+Grabber TVGUIDE.CO.UK | Sony SAB | 16 programms grabbed
+Grabber TVGUIDE.CO.UK | True Enternatinment | 18 programms grabbed
+Grabber TVGUIDE.CO.UK | tru TV | 21 programms grabbed
+Grabber HMTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\hmtv.bg"
+Grabber VSETV.COM | ERROR! no index page data received from Телеканал новостей 24 (Укр)
+Grabber VSETV.COM | ERROR! Телеканал новостей 24 (Укр unable to update channel, try again later
+Grabber VSETV.COM | Job finished at 20/08/2017 16:09:10 done in 46s
+Grabber FOXSPORTS.NL | starting 4/6 FOX Sports 4 NL  mode Incremental
+Grabber FOXSPORTS.NL | starting 5/6 FOX Sports 5 NL  mode Incremental
+Grabber NTVPLUS.RU | starting 2/24  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Комеди  mode Incremental
+Grabber FOXSPORTS.NL | starting 6/6 FOX Sports 6 NL  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel Film1 Comedy NL
+Grabber FREESAT.CO.UK | ERROR! no index page data received from France 24
+Grabber FREESAT.CO.UK | ERROR! France 24 unable to update channel, try again later
+Grabber FREESAT.CO.UK | starting 1/2 Sky News  mode Incremental
+Grabber SKY.DE | starting 2/7 Jukebox  mode Incremental
+Grabber FILMBOX.PL | starting 2/2 FilmBox Plus  mode Incremental
+Grabber NTVPLUS.RU | starting 3/24  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Мегахит  mode Incremental
+Grabber HORIZON.TV.NL | starting 2/10  ) HORIZON.TV.NL -- chan. (xmltv_id=Film1 Premiere NL  mode Incremental
+Grabber HMTV.BG | Job started at 20/08/2017 16:09:10
+Grabber HMTV.BG | starting 1/1 HMTV  mode Incremental
+Grabber ELPAIS.COM | starting 3/3 FOX Life HD (es,en)  mode Incremental
+Grabber ELPAIS.COM | Job finished at 20/08/2017 16:09:10 done in 21s
+Grabber FOODNETWORKTV.COM | Job started at 20/08/2017 16:09:09
+Grabber FOODNETWORKTV.COM | starting 1/1 Food Network  mode Incremental
+Grabber FOODNETWORKTV.COM | Job finished at 20/08/2017 16:09:10 done in 1s
+Grabber FOXSPORTS.NL | Job finished at 20/08/2017 16:09:12 done in 5s
+Grabber FREESAT.CO.UK | ERROR! no index page data received from Sky News
+Grabber FREESAT.CO.UK | ERROR! Sky News unable to update channel, try again later
+Grabber FREESAT.CO.UK | Job finished at 20/08/2017 16:09:12 done in 2s
+Grabber KLACK.DE | starting 9/16  ) KLACK.DE -- chan. (xmltv_id=Sky Action HD  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel Film1 Premiere NL
+Grabber HORIZON.TV.NL | starting 3/10  ) HORIZON.TV.NL -- chan. (xmltv_id=HBO2 NL  mode Incremental
+Grabber TV.SKY.COM | starting 8/10  ) TV.SKY.COM -- chan. (xmltv_id=TV5 Monde  mode Incremental
+Grabber FILMBOX.PL | Job finished at 20/08/2017 16:09:13 done in 3s
+Grabber COSMOTE.GR | ERROR! EPT 1 error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from EPT 1
+Grabber COSMOTE.GR | ERROR! EPT 1 unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=EPT 2  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel HBO2 NL
+Grabber HORIZON.TV.NL | starting 4/10  ) HORIZON.TV.NL -- chan. (xmltv_id=HBO2 NL)  mode Incremental
+Grabber NTVPLUS.RU | starting 4/24  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Премиум  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel HBO2 NL
+Grabber HORIZON.TV.NL | starting 5/10  ) HORIZON.TV.NL -- chan. (xmltv_id=HBO3 NL  mode Incremental
+Grabber SKY.DE | starting 3/7 MGM  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel HBO3 NL
+Grabber HORIZON.TV.NL | starting 6/10  ) HORIZON.TV.NL -- chan. (xmltv_id=RTL 4 NL  mode Incremental
+Grabber NTVPLUS.RU | starting 5/24  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Русское кино  mode Incremental
+Grabber HORIZON.TV.NL | starting 7/10  ) HORIZON.TV.NL -- chan. (xmltv_id=RTL 5 NL  mode Incremental
+Grabber PRISMA.DE | Parsing XML output
+Grabber PRISMA.DE | Disney DE | 34 programms grabbed
+Grabber PRISMA.DE | Eurosport DE | 13 programms grabbed
+Grabber PRISMA.DE | Kika | 35 programms grabbed
+Grabber PRISMA.DE | Sixx | 19 programms grabbed
+Grabber PRISMA.DE | Sky Bundesliga 1 | 16 programms grabbed
+Grabber PRISMA.DE | Sky Sport 1 | 11 programms grabbed
+Grabber PRISMA.DE | Sky Sport 2 | 13 programms grabbed
+Grabber PRISMA.DE | Tele 5 DE | 13 programms grabbed
+Grabber SPOREDI.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sporedi.tv"
+Grabber SKY.DE | ERROR! no shows in indexpage for channel MGM
+Grabber SKY.DE | starting 4/7 Nat Geo DE  mode Incremental
+Grabber HORIZON.TV.NL | starting 8/10  ) HORIZON.TV.NL -- chan. (xmltv_id=RTL 7 (NL)  mode Incremental
+Grabber SPOREDI.TV | Job started at 20/08/2017 16:09:14
+Grabber SPOREDI.TV | starting 1/1 KCN Music 2  mode Incremental
+Grabber HORIZON.TV.NL | starting 9/10  ) HORIZON.TV.NL -- chan. (xmltv_id=SBS 6 (NL)  mode Incremental
+Grabber HORIZON.TV.NL | ERROR! no shows in indexpage for channel SBS 6 (NL
+Grabber HORIZON.TV.NL | starting (  10/10  ) HORIZON.TV.NL -- chan. (xmltv_id=Veronica / Disney (NL)  mode Incremental
+Grabber HMTV.BG | Job finished at 20/08/2017 16:09:15 done in 5s
+Grabber NATGEOFOXTV.BG | starting 2/5 FOX Crime  mode Incremental
+Grabber HORIZON.TV.NL | Job finished at 20/08/2017 16:09:16 done in 6s
+Grabber TV.ETCC.BG | Parsing XML output
+No programs grabbed by grabber TV.ETCC.BG
+Grabber DSMART.COM.TR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\dsmart.com.tr"
+Grabber NTVPLUS.RU | starting 6/24  ) NTVPLUS.RU -- chan. (xmltv_id=Viasat Golf  mode Incremental
+Grabber DSMART.COM.TR | Job started at 20/08/2017 16:09:16
+Grabber NATGEOFOXTV.BG | starting 3/5 FOX Life  mode Incremental
+Grabber SPOREDI.TV | Job finished at 20/08/2017 16:09:16 done in 1s
+Grabber DSMART.COM.TR | starting 1/7 Kardelen  mode Incremental
+Grabber NATGEOFOXTV.BG | starting 4/5 NatGeo Wild  mode Incremental
+Grabber TVGIDS.NL | Parsing XML output
+Grabber TVGIDS.NL | Film1 Action NL | 14 programms grabbed
+Grabber TVGIDS.NL | Film1 Comedy Kids NL | 14 programms grabbed
+Grabber TVGIDS.NL | Film1 Spotlight NL | 14 programms grabbed
+Grabber STASERAINTV.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\staseraintv.com"
+Grabber STASERAINTV.COM | Job started at 20/08/2017 16:09:16
+Grabber NTVPLUS.RU | starting 7/24  ) NTVPLUS.RU -- chan. (xmltv_id=Viasat Sport  mode Incremental
+Grabber NATGEOFOXTV.BG | starting 5/5 National Geographic  mode Incremental
+Grabber DIGITURK.COM.TR | Job finished at 20/08/2017 16:09:17 done in 1m 6s
+Grabber STASERAINTV.COM | starting 1/9 LA 5  mode Incremental
+Grabber TVIZ.TV | ERROR! no index page data received from Мир ТВ
+Grabber TVIZ.TV | ERROR! Мир ТВ unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 Наука 2.0  mode Incremental
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel Sky Action HD
+Grabber KLACK.DE | starting (  10/16  ) KLACK.DE -- chan. (xmltv_id=Sky Atlantic HD  mode Incremental
+Grabber DSMART.COM.TR | ERROR! Kardelen error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber TVIZ.TV | ERROR! Наука 2.0 error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber NTVPLUS.RU | starting 8/24  ) NTVPLUS.RU -- chan. (xmltv_id=Время  mode Incremental
+Grabber STASERAINTV.COM | starting 2/9 RSI La1  mode Incremental
+Grabber STASERAINTV.COM | starting 3/9 RSI La2  mode Incremental
+Grabber STASERAINTV.COM | starting 4/9 Rai 5  mode Incremental
+Grabber STASERAINTV.COM | starting 5/9 Rai Sport +  mode Incremental
+Grabber STASERAINTV.COM | starting 6/9 SkyIT Cinema +1  mode Incremental
+Grabber STASERAINTV.COM | starting 7/9 SkyIT Cinema Cult  mode Incremental
+Grabber FOODNETWORKTV.COM | Parsing XML output
+Grabber FOODNETWORKTV.COM | Food Network | 42 programms grabbed
+Grabber TVPORTAL.RS | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvportal.rs"
+Grabber STASERAINTV.COM | starting 8/9 SkyIT Cinema Family  mode Incremental
+Grabber STASERAINTV.COM | starting 9/9 SkyIT Cinema Passion  mode Incremental
+Grabber STASERAINTV.COM | Job finished at 20/08/2017 16:09:18 done in 1s
+Grabber VSETV.COM | Parsing XML output
+No programs grabbed by grabber VSETV.COM
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvguideuk.telegraph.co.uk"
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | Job started at 20/08/2017 16:09:18
+Grabber ELPAIS.COM | Parsing XML output
+Grabber ELPAIS.COM | Comedy Central HD (es,en) | 20 programms grabbed
+Grabber ELPAIS.COM | Cosmo HD (es,en) | 18 programms grabbed
+Grabber ELPAIS.COM | FOX Life HD (es,en) | 20 programms grabbed
+Grabber TELEGUIDE.INFO | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\teleguide.info"
+Grabber NTVPLUS.RU | starting 9/24  ) NTVPLUS.RU -- chan. (xmltv_id=Еврокино  mode Incremental
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | starting 1/1 Landscape HD  mode Incremental
+Grabber NTVPLUS.RU | starting (  10/24  ) NTVPLUS.RU -- chan. (xmltv_id=Живи  mode Incremental
+Grabber SBB.RS | starting 8/19  ) SBB.RS -- chan. (xmltv_id=Pink Action  mode Incremental
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | ERROR! no shows in indexpage for channel Landscape HD
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | Job finished at 20/08/2017 16:09:20 done in 1s
+Grabber TVPORTAL.RS | Job started at 20/08/2017 16:09:18
+Grabber TVPORTAL.RS | starting 1/3 Landscape  mode Incremental
+Grabber TVPORTAL.RS | starting 2/3 Prva RS  mode Incremental
+Grabber TVPORTAL.RS | starting 3/3 Slovenija 2 TV  mode Incremental
+Grabber FOXSPORTS.NL | Parsing XML output
+Grabber FOXSPORTS.NL | FOX Sports 1 NL | 22 programms grabbed
+Grabber FOXSPORTS.NL | FOX Sports 2 NL | 13 programms grabbed
+Grabber FOXSPORTS.NL | FOX Sports 3 NL | 19 programms grabbed
+Grabber FOXSPORTS.NL | FOX Sports 4 NL | 6 programms grabbed
+Grabber FOXSPORTS.NL | FOX Sports 5 NL | 20 programms grabbed
+Grabber FOXSPORTS.NL | FOX Sports 6 NL | 18 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl.index-only"
+Grabber FREESAT.CO.UK | Parsing XML output
+No programs grabbed by grabber FREESAT.CO.UK
+Grabber TV.SMS.CZ.M | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.sms.cz.m"
+Grabber NTVPLUS.RU | starting (  11/24  ) NTVPLUS.RU -- chan. (xmltv_id=Моя Планета  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | Job started at 20/08/2017 16:09:20
+Grabber TVPORTAL.RS | Job finished at 20/08/2017 16:09:20 done in 2s
+Grabber TV.SMS.CZ.M | Job started at 20/08/2017 16:09:20
+Grabber TVGIDS.NL.INDEX-ONLY | starting 1/7 NPO 1 (NL)  mode Incremental
+Grabber TV.SMS.CZ.M | starting 1/2 Nova Sport 2 (CZ)  mode Incremental
+Grabber TELEGUIDE.INFO | Job started at 20/08/2017 16:09:19
+Grabber TELEGUIDE.INFO | starting 1/4 Music Box RU  mode Incremental
+Grabber FILMBOX.PL | Parsing XML output
+Grabber FILMBOX.PL | FilmBox Extra | 13 programms grabbed
+Grabber FILMBOX.PL | FilmBox Plus | 12 programms grabbed
+Grabber MI.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\mi.tv"
+Grabber NATGEOFOXTV.BG | Job finished at 20/08/2017 16:09:21 done in 16s
+Grabber NTVPLUS.RU | starting (  12/24  ) NTVPLUS.RU -- chan. (xmltv_id=НТВ  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 2/7 NPO 2 (NL)  mode Incremental
+Grabber TV.SMS.CZ.M | starting 2/2 Wild TV  mode Incremental
+Grabber SBB.RS | starting 9/19  ) SBB.RS -- chan. (xmltv_id=Pink Extra  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 3/7 NPO 3 (NL)  mode Incremental
+Grabber MI.TV | Job started at 20/08/2017 16:09:21
+Grabber MI.TV | starting 1/1 Penthouse HD1  mode Incremental
+Grabber TV.SMS.CZ.M | Job finished at 20/08/2017 16:09:22 done in 1s
+Grabber TVGIDS.NL.INDEX-ONLY | starting 4/7 RTL Z (NL)  mode Incremental
+Grabber NTVPLUS.RU | starting (  13/24  ) NTVPLUS.RU -- chan. (xmltv_id=Наше кино  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 5/7 Ziggo Sport Golf  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 6/7 Ziggo Sport NL  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 7/7 Ziggo Sport Select  mode Incremental
+Grabber NTVPLUS.RU | starting (  14/24  ) NTVPLUS.RU -- chan. (xmltv_id=Первый канал  mode Incremental
+Grabber COSMOTE.GR | ERROR! EPT 2 error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from EPT 2
+Grabber COSMOTE.GR | ERROR! EPT 2 unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=EPT 3  mode Incremental
+Grabber KLACK.DE | starting (  11/16  ) KLACK.DE -- chan. (xmltv_id=Sky Hits  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | Job finished at 20/08/2017 16:09:23 done in 2s
+Grabber HMTV.BG | Parsing XML output
+Grabber HMTV.BG | HMTV | 25 programms grabbed
+Grabber RCS-RDS.RO | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\rcs-rds.ro"
+Grabber RCS-RDS.RO | Job started at 20/08/2017 16:09:23
+Grabber SBB.RS | starting (  10/19  ) SBB.RS -- chan. (xmltv_id=Pink Family  mode Incremental
+Grabber RCS-RDS.RO | starting 1/3 Prima TV RO  mode Incremental
+Grabber HORIZON.TV.NL | Parsing XML output
+Grabber HORIZON.TV.NL | RTL 4 NL | 33 programms grabbed
+Grabber HORIZON.TV.NL | RTL 5 NL | 20 programms grabbed
+Grabber HORIZON.TV.NL | RTL 7 (NL) | 37 programms grabbed
+Grabber HORIZON.TV.NL | Veronica / Disney (NL) | 45 programms grabbed
+Grabber RAI.IT | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\rai.it"
+Grabber RAI.IT | Job started at 20/08/2017 16:09:24
+Grabber NTVPLUS.RU | starting (  15/24  ) NTVPLUS.RU -- chan. (xmltv_id=Россия 1  mode Incremental
+Grabber SPOREDI.TV | Parsing XML output
+Grabber SPOREDI.TV | KCN Music 2 | 8 programms grabbed
+Grabber BTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\btv.bg"
+Grabber RAI.IT | starting 1/9 RAI 1  mode Incremental
+Grabber BTV.BG | Job started at 20/08/2017 16:09:24
+Grabber MI.TV | ERROR! no index page data received from Penthouse HD1
+Grabber MI.TV | ERROR! Penthouse HD1 unable to update channel, try again later
+Grabber MI.TV | Job finished at 20/08/2017 16:09:24 done in 3s
+Grabber BTV.BG | starting 1/10  ) BTV.BG -- chan. (xmltv_id=RING BG  mode Incremental
+Grabber RCS-RDS.RO | ERROR! no shows in indexpage for channel Prima TV RO
+Grabber RCS-RDS.RO | starting 2/3 Realitatea TV  mode Incremental
+Grabber DIGITURK.COM.TR | Parsing XML output
+Grabber DIGITURK.COM.TR | A Spor | 13 programms grabbed
+Grabber DIGITURK.COM.TR | Bein Sports 1 (tr) | 20 programms grabbed
+Grabber DIGITURK.COM.TR | Bein Sports 2 (tr) | 14 programms grabbed
+Grabber DIGITURK.COM.TR | Bein Sports 3 (tr) | 15 programms grabbed
+Grabber DIGITURK.COM.TR | Cartoon TR | 54 programms grabbed
+Grabber DIGITURK.COM.TR | FOX TR | 13 programms grabbed
+Grabber DIGITURK.COM.TR | Moviemax Premier 1 | 24 programms grabbed
+Grabber DIGITURK.COM.TR | Salon 1 | 9 programms grabbed
+Grabber DIGITURK.COM.TR | Salon 2 | 11 programms grabbed
+Grabber DIGITURK.COM.TR | Salon 3 | 11 programms grabbed
+Grabber TV.WP.PL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.wp.pl"
+Grabber NTVPLUS.RU | starting (  16/24  ) NTVPLUS.RU -- chan. (xmltv_id=Россия 24  mode Incremental
+Grabber TV.WP.PL | Job started at 20/08/2017 16:09:25
+Grabber RCS-RDS.RO | starting 3/3 TVR 1 RO  mode Incremental
+Grabber TV.WP.PL | starting 1/1 RTP International  mode Incremental
+Grabber RCS-RDS.RO | Job finished at 20/08/2017 16:09:25 done in 1s
+Grabber TV.SKY.COM | starting 9/10  ) TV.SKY.COM -- chan. (xmltv_id=Tiny Pop  mode Incremental
+Grabber NTVPLUS.RU | starting (  17/24  ) NTVPLUS.RU -- chan. (xmltv_id=Россия К  mode Incremental
+Grabber RAI.IT | starting 2/9 RAI 2  mode Incremental
+Grabber SBB.RS | starting (  11/19  ) SBB.RS -- chan. (xmltv_id=Pink Film  mode Incremental
+Grabber STASERAINTV.COM | Parsing XML output
+Grabber STASERAINTV.COM | LA 5 | 24 programms grabbed
+Grabber STASERAINTV.COM | RSI La1 | 26 programms grabbed
+Grabber STASERAINTV.COM | RSI La2 | 25 programms grabbed
+Grabber STASERAINTV.COM | Rai 5 | 22 programms grabbed
+Grabber STASERAINTV.COM | Rai Sport + | 15 programms grabbed
+Grabber STASERAINTV.COM | SkyIT Cinema +1 | 11 programms grabbed
+Grabber STASERAINTV.COM | SkyIT Cinema Cult | 10 programms grabbed
+Grabber STASERAINTV.COM | SkyIT Cinema Family | 11 programms grabbed
+Grabber STASERAINTV.COM | SkyIT Cinema Passion | 9 programms grabbed
+Grabber PROGRAMM.ARD.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\programm.ard.de"
+Grabber NTVPLUS.RU | starting (  18/24  ) NTVPLUS.RU -- chan. (xmltv_id=Русский Иллюзион  mode Incremental
+Grabber RAI.IT | starting 3/9 RAI 3  mode Incremental
+Grabber SKY.DE | starting 5/7 Natgeo Wild EU  mode Incremental
+Grabber BTV.BG | starting 2/10  ) BTV.BG -- chan. (xmltv_id=bTV  mode Incremental
+Grabber BTV.BG | starting 8/10  ) BTV.BG -- chan. (xmltv_id=bTV Action  mode Incremental
+Grabber PROGRAMM.ARD.DE | Job started at 20/08/2017 16:09:26
+Grabber PROGRAMM.ARD.DE | starting 1/1 SR Fernsehen  mode Incremental
+Grabber BTV.BG | starting 9/10  ) BTV.BG -- chan. (xmltv_id=bTV Comedy  mode Incremental
+Grabber BTV.BG | starting (  10/10  ) BTV.BG -- chan. (xmltv_id=bTV Lady  mode Incremental
+Grabber RAI.IT | starting 4/9 RAI Gulp  mode Incremental
+Grabber BTV.BG | Job finished at 20/08/2017 16:09:27 done in 3s
+Grabber SBB.RS | starting (  12/19  ) SBB.RS -- chan. (xmltv_id=Pink Kids  mode Incremental
+Grabber NTVPLUS.RU | starting (  19/24  ) NTVPLUS.RU -- chan. (xmltv_id=Русский Экстрим  mode Incremental
+Grabber DSMART.COM.TR | ERROR! no index page data received from Kardelen
+Grabber DSMART.COM.TR | ERROR! Kardelen unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 Kral TV  mode Incremental
+Grabber TVIZ.TV | ERROR! no index page data received from Наука 2.0
+Grabber TVIZ.TV | ERROR! Наука 2.0 unable to update channel, try again later
+Grabber TVIZ.TV | starting 1/7 ТБН Россия  mode Incremental
+Grabber DSMART.COM.TR | ERROR! Kral TV error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber TVGUIDEUK.TELEGRAPH.CO.UK | Parsing XML output
+No programs grabbed by grabber TVGUIDEUK.TELEGRAPH.CO.UK
+Grabber TV-MEDIA.AT | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv-media.at"
+Grabber TVIZ.TV | ERROR! ТБН Россия error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber TV-MEDIA.AT | Job started at 20/08/2017 16:09:28
+Grabber RAI.IT | starting 5/9 RAI Movie  mode Incremental
+Grabber TV.SKY.COM | Job finished at 20/08/2017 16:09:28 done in 41s
+Grabber NTVPLUS.RU | starting (  20/24  ) NTVPLUS.RU -- chan. (xmltv_id=Телеканал КХЛ  mode Incremental
+Grabber TV-MEDIA.AT | starting 1/1 Servus AT  mode Incremental
+Grabber TVPORTAL.RS | Parsing XML output
+Grabber TVPORTAL.RS | Landscape | 5 programms grabbed
+Grabber TVPORTAL.RS | Prva RS | 15 programms grabbed
+Grabber TVPORTAL.RS | Slovenija 2 TV | 21 programms grabbed
+Grabber HORIZON.TV.AT | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.at"
+Grabber RAI.IT | starting 6/9 RAI Scuola  mode Incremental
+Grabber HORIZON.TV.AT | Job started at 20/08/2017 16:09:28
+Grabber PROGRAMM.ARD.DE | Job finished at 20/08/2017 16:09:29 done in 2s
+Grabber HORIZON.TV.AT | starting 1/6 Sky Sport 3  mode Incremental
+Grabber SBB.RS | starting (  13/19  ) SBB.RS -- chan. (xmltv_id=Pink M  mode Incremental
+Grabber NTVPLUS.RU | starting (  21/24  ) NTVPLUS.RU -- chan. (xmltv_id=Телекафе  mode Incremental
+Grabber NATGEOFOXTV.BG | Parsing XML output
+Grabber NATGEOFOXTV.BG | FOX | 19 programms grabbed
+Grabber NATGEOFOXTV.BG | FOX Crime | 21 programms grabbed
+Grabber NATGEOFOXTV.BG | FOX Life | 19 programms grabbed
+Grabber NATGEOFOXTV.BG | NatGeo Wild | 18 programms grabbed
+Grabber NATGEOFOXTV.BG | National Geographic | 19 programms grabbed
+Grabber SKYSPORTS.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\skysports.com"
+Grabber RAI.IT | starting 7/9 RAI Sport 1  mode Incremental
+Grabber SKYSPORTS.COM | Job started at 20/08/2017 16:09:29
+Grabber SKYSPORTS.COM | starting 1/6 Sky Sports 1  mode Incremental
+Grabber RAI.IT | starting 8/9 RAI Sport 2  mode Incremental
+Grabber NTVPLUS.RU | starting (  22/24  ) NTVPLUS.RU -- chan. (xmltv_id=Че  mode Incremental
+Grabber TV.SMS.CZ.M | Parsing XML output
+Grabber TV.SMS.CZ.M | Nova Sport 2 (CZ) | 12 programms grabbed
+Grabber TV.SMS.CZ.M | Wild TV | 38 programms grabbed
+Grabber SPORT1.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sport1.de"
+Grabber SPORT1.DE | Job started at 20/08/2017 16:09:30
+Grabber RAI.IT | starting 9/9 RAI Yoyo  mode Incremental
+Grabber SPORT1.DE | starting 1/3 Sport 1 DE  mode Incremental
+Grabber TV.WP.PL | Job finished at 20/08/2017 16:09:31 done in 6s
+Grabber NTVPLUS.RU | starting (  23/24  ) NTVPLUS.RU -- chan. (xmltv_id=Шансон-TB  mode Incremental
+Grabber HORIZON.TV.AT | starting 2/6 Sky Sport 4  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | Parsing XML output
+Grabber TVGIDS.NL.INDEX-ONLY | NPO 1 (NL) | 23 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | NPO 2 (NL) | 29 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | NPO 3 (NL) | 33 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | RTL Z (NL) | 41 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | Ziggo Sport Golf | 11 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | Ziggo Sport NL | 25 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | Ziggo Sport Select | 25 programms grabbed
+Grabber SPORTKLUB.RS | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sportklub.rs"
+Grabber SPORTKLUB.RS | Job started at 20/08/2017 16:09:31
+Grabber TV-MEDIA.AT | Job finished at 20/08/2017 16:09:31 done in 3s
+Grabber SPORTKLUB.RS | starting 1/6 Sport Klub 1  mode Incremental
+Grabber HORIZON.TV.AT | starting 3/6 Sky Sport 5  mode Incremental
+Grabber NTVPLUS.RU | starting (  24/24  ) NTVPLUS.RU -- chan. (xmltv_id=Ю  mode Incremental
+Grabber SBB.RS | starting (  14/19  ) SBB.RS -- chan. (xmltv_id=Pink Movies  mode Incremental
+Grabber HORIZON.TV.AT | starting 4/6 Sky Sport 6  mode Incremental
+Grabber MI.TV | Parsing XML output
+No programs grabbed by grabber MI.TV
+Grabber SPORTKLUB.HR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\sportklub.hr"
+Grabber RAI.IT | Job finished at 20/08/2017 16:09:32 done in 8s
+Grabber SKYSPORTS.COM | starting 2/6 Sky Sports 2  mode Incremental
+Grabber SPORTKLUB.HR | Job started at 20/08/2017 16:09:32
+Grabber SKYSPORTS.COM | starting 3/6 Sky Sports 3  mode Incremental
+Grabber SKYSPORTS.COM | starting 4/6 Sky Sports 4  mode Incremental
+Grabber SKYSPORTS.COM | starting 5/6 Sky Sports 5  mode Incremental
+Grabber SPORTKLUB.HR | starting 1/3 Sport Klub 1 HR  mode Incremental
+Grabber SKYSPORTS.COM | starting 6/6 Sky Sports F1  mode Incremental
+Grabber HORIZON.TV.AT | starting 5/6 Sky Sport Austria  mode Incremental
+Grabber NTVPLUS.RU | Job finished at 20/08/2017 16:09:33 done in 26s
+Grabber SKYSPORTS.COM | Job finished at 20/08/2017 16:09:33 done in 3s
+Grabber KLACK.DE | starting (  12/16  ) KLACK.DE -- chan. (xmltv_id=WDR  mode Incremental
+Grabber COSMOTE.GR | ERROR! EPT 3 error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from EPT 3
+Grabber COSMOTE.GR | ERROR! EPT 3 unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=M.TV  mode Incremental
+Grabber RCS-RDS.RO | Parsing XML output
+Grabber RCS-RDS.RO | Realitatea TV | 16 programms grabbed
+Grabber RCS-RDS.RO | TVR 1 RO | 21 programms grabbed
+Grabber TRT.NET.TR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\trt.net.tr"
+Grabber SPORTKLUB.RS | starting 2/6 Sport Klub 2  mode Incremental
+Grabber HORIZON.TV.AT | starting 6/6 TVE  mode Incremental
+Grabber TRT.NET.TR | Job started at 20/08/2017 16:09:33
+Grabber SPORTKLUB.RS | starting 3/6 Sport Klub 3  mode Incremental
+Grabber SPORTKLUB.RS | starting 4/6 Sport Klub 4  mode Incremental
+Grabber SPORTKLUB.RS | starting 5/6 Sport Klub 5  mode Incremental
+Grabber TELEGUIDE.INFO | starting 2/4 Shanson  mode Incremental
+Grabber TRT.NET.TR | starting 1/1 TRT Arapca  mode Incremental
+Grabber SPORTKLUB.RS | starting 6/6 Sport Klub 6  mode Incremental
+Grabber SPORTKLUB.RS | Job finished at 20/08/2017 16:09:34 done in 2s
+Grabber HORIZON.TV.AT | Job finished at 20/08/2017 16:09:34 done in 5s
+Grabber SPORTKLUB.HR | starting 2/3 Sport Klub 2 HR  mode Incremental
+Grabber SPORTKLUB.HR | starting 3/3 Sport Klub 3 HR  mode Incremental
+Grabber SPORTKLUB.HR | Job finished at 20/08/2017 16:09:34 done in 2s
+Grabber TRT.NET.TR | Job finished at 20/08/2017 16:09:35 done in 1s
+Grabber SBB.RS | starting (  15/19  ) SBB.RS -- chan. (xmltv_id=Pink Music  mode Incremental
+Grabber BTV.BG | Parsing XML output
+Grabber BTV.BG | RING BG | 15 programms grabbed
+Grabber BTV.BG | bTV | 18 programms grabbed
+Grabber BTV.BG | bTV Action | 14 programms grabbed
+Grabber BTV.BG | bTV Comedy | 16 programms grabbed
+Grabber BTV.BG | bTV Lady | 13 programms grabbed
+Grabber VIASAT.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\viasat.bg"
+Grabber VIASAT.BG | Job started at 20/08/2017 16:09:35
+Grabber VIASAT.BG | starting 1/4 TV 1000  mode Incremental
+Grabber SPORT1.DE | starting 2/3 Sport1 US  mode Incremental
+Grabber SBB.RS | starting (  16/19  ) SBB.RS -- chan. (xmltv_id=Pink Plus  mode Incremental
+Grabber TV.SKY.COM | Parsing XML output
+Grabber TV.SKY.COM | CCTV News | 56 programms grabbed
+Grabber TV.SKY.COM | Insight | 31 programms grabbed
+Grabber TV.SKY.COM | KIX | 50 programms grabbed
+Grabber TV.SKY.COM | POP | 56 programms grabbed
+Grabber TV.SKY.COM | Sky Atlantic | 26 programms grabbed
+Grabber TV.SKY.COM | TV5 Monde | 60 programms grabbed
+Grabber TV.SKY.COM | Tiny Pop | 85 programms grabbed
+Grabber TVN.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvn.bg"
+Grabber TVN.BG | Job started at 20/08/2017 16:09:36
+Grabber TVN.BG | starting 1/1 TVN  mode Incremental
+Grabber PROGRAMM.ARD.DE | Parsing XML output
+Grabber PROGRAMM.ARD.DE | SR Fernsehen | 10 programms grabbed
+Grabber BEINSPORTS.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\beinsports.com"
+Grabber BEINSPORTS.COM | Job started at 20/08/2017 16:09:37
+Grabber BEINSPORTS.COM | starting 1/3 beIN Sports 1 (ar)  mode Incremental
+Grabber SBB.RS | starting (  17/19  ) SBB.RS -- chan. (xmltv_id=РТС 1  mode Incremental
+Grabber KLACK.DE | starting (  13/16  ) KLACK.DE -- chan. (xmltv_id=ZDF  mode Incremental
+Grabber TVN.BG | Job finished at 20/08/2017 16:09:38 done in 1s
+Grabber DSMART.COM.TR | ERROR! no index page data received from Kral TV
+Grabber DSMART.COM.TR | ERROR! Kral TV unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 NR1 Turk  mode Incremental
+Grabber TVIZ.TV | ERROR! no index page data received from ТБН Россия
+Grabber TVIZ.TV | ERROR! ТБН Россия unable to update channel, try again later
+Grabber TVIZ.TV | Job finished at 20/08/2017 16:09:38 done in 1m 16s
+Grabber DSMART.COM.TR | ERROR! NR1 Turk error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber TV.WP.PL | Parsing XML output
+Grabber TV.WP.PL | RTP International | 17 programms grabbed
+Grabber EIRSPORT.IE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\eirsport.ie"
+Grabber EIRSPORT.IE | Job started at 20/08/2017 16:09:39
+Grabber SBB.RS | starting (  18/19  ) SBB.RS -- chan. (xmltv_id=РТС 2  mode Incremental
+Grabber EIRSPORT.IE | starting 1/2 eir Sport 1  mode Incremental
+Grabber BEINSPORTS.COM | starting 2/3 beIN Sports 2 (ar)  mode Incremental
+Grabber BEINSPORTS.COM | starting 3/3 beIN Sports 3 (ar)  mode Incremental
+Grabber TV-MEDIA.AT | Parsing XML output
+Grabber TV-MEDIA.AT | Servus AT | 27 programms grabbed
+Grabber TELESTAR.FR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\telestar.fr"
+Grabber BEINSPORTS.COM | Job finished at 20/08/2017 16:09:39 done in 2s
+Grabber TELEGUIDE.INFO | starting 3/4 Детский мир  mode Incremental
+Grabber TELESTAR.FR | Job started at 20/08/2017 16:09:39
+Grabber TELESTAR.FR | starting 1/1 iConcerts  mode Incremental
+Grabber SPORT1.DE | starting 3/3 Sport1+  mode Incremental
+Grabber RAI.IT | Parsing XML output
+Grabber RAI.IT | RAI 1 | 27 programms grabbed
+Grabber RAI.IT | RAI 2 | 27 programms grabbed
+Grabber RAI.IT | RAI 3 | 32 programms grabbed
+Grabber RAI.IT | RAI Gulp | 45 programms grabbed
+Grabber RAI.IT | RAI Movie | 11 programms grabbed
+Grabber RAI.IT | RAI Scuola | 35 programms grabbed
+Grabber RAI.IT | RAI Sport 1 | 15 programms grabbed
+Grabber RAI.IT | RAI Sport 2 | 15 programms grabbed
+Grabber RAI.IT | RAI Yoyo | 119 programms grabbed
+Grabber TVDARTS.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvdarts.com"
+Grabber SBB.RS | starting (  19/19  ) SBB.RS -- chan. (xmltv_id=РТС 3  mode Incremental
+Grabber TVDARTS.COM | Job started at 20/08/2017 16:09:40
+Grabber TVDARTS.COM | starting 1/1 Дартс  mode Incremental
+Grabber SKYSPORTS.COM | Parsing XML output
+Grabber SKYSPORTS.COM | Sky Sports 1 | 12 programms grabbed
+Grabber SKYSPORTS.COM | Sky Sports 2 | 29 programms grabbed
+Grabber SKYSPORTS.COM | Sky Sports 3 | 22 programms grabbed
+Grabber SKYSPORTS.COM | Sky Sports 4 | 32 programms grabbed
+Grabber SKYSPORTS.COM | Sky Sports 5 | 14 programms grabbed
+Grabber SKYSPORTS.COM | Sky Sports F1 | 22 programms grabbed
+Grabber DESTINATION-BG.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\destination-bg.tv"
+Grabber NTVPLUS.RU | Parsing XML output
+Grabber NTVPLUS.RU | FOX RU | 32 programms grabbed
+Grabber NTVPLUS.RU | TV1000 Комеди | 10 programms grabbed
+Grabber NTVPLUS.RU | TV1000 Мегахит | 8 programms grabbed
+Grabber NTVPLUS.RU | TV1000 Премиум | 9 programms grabbed
+Grabber NTVPLUS.RU | TV1000 Русское кино | 9 programms grabbed
+Grabber NTVPLUS.RU | Viasat Golf | 11 programms grabbed
+Grabber NTVPLUS.RU | Viasat Sport | 8 programms grabbed
+Grabber NTVPLUS.RU | Время | 20 programms grabbed
+Grabber NTVPLUS.RU | Еврокино | 10 programms grabbed
+Grabber NTVPLUS.RU | Живи | 30 programms grabbed
+Grabber NTVPLUS.RU | Моя Планета | 27 programms grabbed
+Grabber NTVPLUS.RU | НТВ | 17 programms grabbed
+Grabber NTVPLUS.RU | Наше кино | 10 programms grabbed
+Grabber NTVPLUS.RU | Первый канал | 18 programms grabbed
+Grabber NTVPLUS.RU | Россия 1 | 13 programms grabbed
+Grabber NTVPLUS.RU | Россия 24 | 36 programms grabbed
+Grabber NTVPLUS.RU | Россия К | 13 programms grabbed
+Grabber NTVPLUS.RU | Русский Иллюзион | 13 programms grabbed
+Grabber NTVPLUS.RU | Русский Экстрим | 20 programms grabbed
+Grabber NTVPLUS.RU | Телеканал КХЛ | 15 programms grabbed
+Grabber NTVPLUS.RU | Телекафе | 12 programms grabbed
+Grabber NTVPLUS.RU | Че | 6 programms grabbed
+Grabber NTVPLUS.RU | Шансон-TB | 19 programms grabbed
+Grabber NTVPLUS.RU | Ю | 7 programms grabbed
+Grabber S-TV.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\s-tv.ru"
+Grabber DESTINATION-BG.TV | Job started at 20/08/2017 16:09:41
+Grabber S-TV.RU | Job started at 20/08/2017 16:09:41
+Grabber DESTINATION-BG.TV | starting 1/1 Дестинация BG  mode Incremental
+Grabber S-TV.RU | starting 1/6 Канал 5  mode Incremental
+Grabber EIRSPORT.IE | starting 2/2 eir Sport 2  mode Incremental
+Grabber SPORTKLUB.RS | Parsing XML output
+Grabber SPORTKLUB.RS | Sport Klub 1 | 7 programms grabbed
+Grabber SPORTKLUB.RS | Sport Klub 2 | 7 programms grabbed
+Grabber SPORTKLUB.RS | Sport Klub 3 | 10 programms grabbed
+Grabber SPORTKLUB.RS | Sport Klub 4 | 10 programms grabbed
+Grabber SPORTKLUB.RS | Sport Klub 5 | 1 programms grabbed
+Grabber SPORTKLUB.RS | Sport Klub 6 | 3 programms grabbed
+Grabber KARTINA.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\kartina.tv"
+Grabber EIRSPORT.IE | Job finished at 20/08/2017 16:09:42 done in 2s
+Grabber TVDARTS.COM | ERROR! no shows in indexpage for channel Дартс
+Grabber TVDARTS.COM | Job finished at 20/08/2017 16:09:42 done in 1s
+Grabber SBB.RS | Job finished at 20/08/2017 16:09:42 done in 1m 19s
+Grabber KARTINA.TV | Job started at 20/08/2017 16:09:42
+Grabber HORIZON.TV.AT | Parsing XML output
+Grabber HORIZON.TV.AT | Sky Sport 3 | 1 programms grabbed
+Grabber HORIZON.TV.AT | Sky Sport 4 | 2 programms grabbed
+Grabber HORIZON.TV.AT | Sky Sport 5 | 2 programms grabbed
+Grabber HORIZON.TV.AT | Sky Sport 6 | 2 programms grabbed
+Grabber HORIZON.TV.AT | Sky Sport Austria | 17 programms grabbed
+Grabber HORIZON.TV.AT | TVE | 36 programms grabbed
+Grabber MATCHTV.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\matchtv.ru"
+Grabber MATCHTV.RU | Job started at 20/08/2017 16:09:42
+Grabber KARTINA.TV | starting 1/3 Карусель  mode Incremental
+Grabber SPORTKLUB.HR | Parsing XML output
+Grabber SPORTKLUB.HR | Sport Klub 1 HR | 8 programms grabbed
+Grabber SPORTKLUB.HR | Sport Klub 2 HR | 8 programms grabbed
+Grabber SPORTKLUB.HR | Sport Klub 3 HR | 10 programms grabbed
+Grabber PLANETA.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\planeta.tv"
+Grabber MATCHTV.RU | starting 1/7 Конный Мир  mode Incremental
+Grabber DESTINATION-BG.TV | Job finished at 20/08/2017 16:09:42 done in 1s
+Grabber PLANETA.TV | Job started at 20/08/2017 16:09:42
+Grabber S-TV.RU | starting 2/6 Первый канал (RU)  mode Incremental
+Grabber TRT.NET.TR | Parsing XML output
+Grabber TRT.NET.TR | TRT Arapca | 39 programms grabbed
+Grabber TVSHUMEN.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvshumen.bg"
+Grabber PLANETA.TV | starting 1/3 Планета  mode Incremental
+Grabber TVSHUMEN.BG | Job started at 20/08/2017 16:09:43
+Grabber KLACK.DE | starting (  14/16  ) KLACK.DE -- chan. (xmltv_id=ZDF Info  mode Incremental
+Grabber TVSHUMEN.BG | starting 1/1 Шумен  mode Incremental
+Grabber COSMOTE.GR | ERROR! M.TV error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from M.TV
+Grabber COSMOTE.GR | ERROR! M.TV unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=Mega  mode Incremental
+Grabber KARTINA.TV | starting 2/3 Первый канал (EUR)  mode Incremental
+Grabber KARTINA.TV | starting 3/3 Пятница  mode Incremental
+Grabber S-TV.RU | starting 3/6 РЕН ТВ  mode Incremental
+Grabber VIASAT.BG | starting 2/4 Viasat Explore  mode Incremental
+Grabber KARTINA.TV | Job finished at 20/08/2017 16:09:43 done in 1s
+Grabber S-TV.RU | starting 4/6 ТВ3  mode Incremental
+Grabber TVSHUMEN.BG | Job finished at 20/08/2017 16:09:44 done in 1s
+Grabber PLANETA.TV | starting 2/3 Планета HD  mode Incremental
+Grabber S-TV.RU | starting 5/6 ТНТ  mode Incremental
+Grabber PLANETA.TV | starting 3/3 Планета Фолк  mode Incremental
+Grabber PLANETA.TV | Job finished at 20/08/2017 16:09:45 done in 2s
+Grabber MATCHTV.RU | starting 2/7 Матч Боец  mode Incremental
+Grabber S-TV.RU | starting 6/6 Телеканал 2x2  mode Incremental
+Grabber MATCHTV.RU | starting 3/7 Матч! ТВ  mode Incremental
+Grabber MATCHTV.RU | starting 4/7 Матч! Футбол 1  mode Incremental
+Grabber MATCHTV.RU | starting 5/7 Матч! Футбол 2  mode Incremental
+Grabber MATCHTV.RU | starting 6/7 Матч! Футбол 3  mode Incremental
+Grabber MATCHTV.RU | starting 7/7 Наш Футбол  mode Incremental
+Grabber MATCHTV.RU | Job finished at 20/08/2017 16:09:45 done in 3s
+Grabber TELEGUIDE.INFO | starting 4/4 Новый Канал  mode Incremental
+Grabber SKY.DE | starting 6/7 TNT Film  mode Incremental
+Grabber S-TV.RU | Job finished at 20/08/2017 16:09:46 done in 4s
+Grabber TVN.BG | Parsing XML output
+Grabber TVN.BG | TVN | 9 programms grabbed
+Grabber TVIZ.TV | Parsing XML output
+No programs grabbed by grabber TVIZ.TV
+Grabber SPORT1.DE | Job finished at 20/08/2017 16:09:46 done in 16s
+Grabber TELESTAR.FR | Job finished at 20/08/2017 16:09:47 done in 7s
+Grabber BEINSPORTS.COM | Parsing XML output
+Grabber BEINSPORTS.COM | beIN Sports 1 (ar) | 1 programms grabbed
+Grabber BEINSPORTS.COM | beIN Sports 2 (ar) | 1 programms grabbed
+Grabber BEINSPORTS.COM | beIN Sports 3 (ar) | 11 programms grabbed
+Grabber KLACK.DE | starting (  15/16  ) KLACK.DE -- chan. (xmltv_id=ZDF Kultur  mode Incremental
+Grabber DSMART.COM.TR | ERROR! no index page data received from NR1 Turk
+Grabber DSMART.COM.TR | ERROR! NR1 Turk unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 NTV TR  mode Incremental
+Grabber DSMART.COM.TR | ERROR! NTV TR error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber EIRSPORT.IE | Parsing XML output
+No programs grabbed by grabber EIRSPORT.IE
+Grabber TVDARTS.COM | Parsing XML output
+No programs grabbed by grabber TVDARTS.COM
+Grabber SBB.RS | Parsing XML output
+Grabber SBB.RS | Al Jazeera Balkans | 35 programms grabbed
+Grabber SBB.RS | B92 | 27 programms grabbed
+Grabber SBB.RS | Grand | 5 programms grabbed
+Grabber SBB.RS | Happy RS | 13 programms grabbed
+Grabber SBB.RS | Pink | 14 programms grabbed
+Grabber SBB.RS | Pink 2 | 13 programms grabbed
+Grabber SBB.RS | Pink 3 | 48 programms grabbed
+Grabber SBB.RS | Pink Action | 11 programms grabbed
+Grabber SBB.RS | Pink Extra | 9 programms grabbed
+Grabber SBB.RS | Pink Family | 29 programms grabbed
+Grabber SBB.RS | Pink Film | 13 programms grabbed
+Grabber SBB.RS | Pink Kids | 20 programms grabbed
+Grabber SBB.RS | Pink M | 21 programms grabbed
+Grabber SBB.RS | Pink Movies | 11 programms grabbed
+Grabber SBB.RS | Pink Music | 23 programms grabbed
+Grabber SBB.RS | Pink Plus | 12 programms grabbed
+Grabber SBB.RS | РТС 1 | 30 programms grabbed
+Grabber SBB.RS | РТС 2 | 28 programms grabbed
+Grabber SBB.RS | РТС 3 | 39 programms grabbed
+Grabber TELEGUIDE.INFO | Job finished at 20/08/2017 16:09:50 done in 31s
+Grabber DESTINATION-BG.TV | Parsing XML output
+Grabber DESTINATION-BG.TV | Дестинация BG | 27 programms grabbed
+Grabber SKY.DE | starting 7/7 TNT Serie  mode Incremental
+Grabber KARTINA.TV | Parsing XML output
+Grabber KARTINA.TV | Карусель | 23 programms grabbed
+Grabber KARTINA.TV | Первый канал (EUR) | 22 programms grabbed
+Grabber KARTINA.TV | Пятница | 14 programms grabbed
+Grabber TVSHUMEN.BG | Parsing XML output
+Grabber TVSHUMEN.BG | Шумен | 11 programms grabbed
+Grabber PLANETA.TV | Parsing XML output
+Grabber PLANETA.TV | Планета | 28 programms grabbed
+Grabber PLANETA.TV | Планета HD | 26 programms grabbed
+Grabber PLANETA.TV | Планета Фолк | 32 programms grabbed
+Grabber COSMOTE.GR | ERROR! Mega error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from Mega
+Grabber COSMOTE.GR | ERROR! Mega unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=SKAI  mode Incremental
+Grabber MATCHTV.RU | Parsing XML output
+Grabber MATCHTV.RU | Конный Мир | 13 programms grabbed
+Grabber MATCHTV.RU | Матч Боец | 15 programms grabbed
+Grabber MATCHTV.RU | Матч! ТВ | 20 programms grabbed
+Grabber MATCHTV.RU | Матч! Футбол 1 | 13 programms grabbed
+Grabber MATCHTV.RU | Матч! Футбол 2 | 14 programms grabbed
+Grabber MATCHTV.RU | Матч! Футбол 3 | 15 programms grabbed
+Grabber MATCHTV.RU | Наш Футбол | 13 programms grabbed
+Grabber S-TV.RU | Parsing XML output
+Grabber S-TV.RU | Канал 5 | 19 programms grabbed
+Grabber S-TV.RU | Первый канал (RU) | 18 programms grabbed
+Grabber S-TV.RU | РЕН ТВ | 1 programms grabbed
+Grabber S-TV.RU | ТВ3 | 13 programms grabbed
+Grabber S-TV.RU | ТНТ | 18 programms grabbed
+Grabber S-TV.RU | Телеканал 2x2 | 29 programms grabbed
+Grabber SPORT1.DE | Parsing XML output
+Grabber SPORT1.DE | Sport 1 DE | 10 programms grabbed
+Grabber SPORT1.DE | Sport1 US | 4 programms grabbed
+Grabber SPORT1.DE | Sport1+ | 11 programms grabbed
+Grabber TELESTAR.FR | Parsing XML output
+Grabber TELESTAR.FR | iConcerts | 14 programms grabbed
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel ZDF Kultur
+Grabber KLACK.DE | starting (  16/16  ) KLACK.DE -- chan. (xmltv_id=ZDF Neo  mode Incremental
+Grabber TELEGUIDE.INFO | Parsing XML output
+Grabber TELEGUIDE.INFO | Music Box RU | 25 programms grabbed
+Grabber TELEGUIDE.INFO | Shanson | 25 programms grabbed
+Grabber TELEGUIDE.INFO | Детский мир | 15 programms grabbed
+Grabber TELEGUIDE.INFO | Новый Канал | 13 programms grabbed
+Grabber DSMART.COM.TR | ERROR! no index page data received from NTV TR
+Grabber DSMART.COM.TR | ERROR! NTV TR unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 Planet Cocuk  mode Incremental
+Grabber DSMART.COM.TR | ERROR! Planet Cocuk error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber KLACK.DE | Job finished at 20/08/2017 16:10:02 done in 1m 40s
+Grabber SKY.DE | Job finished at 20/08/2017 16:10:02 done in 1m 4s
+Grabber COSMOTE.GR | ERROR! SKAI error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from SKAI
+Grabber COSMOTE.GR | ERROR! SKAI unable to update channel, try again later
+Grabber COSMOTE.GR | starting 1/11  ) COSMOTE.GR -- chan. (xmltv_id=Star GR  mode Incremental
+Grabber DSMART.COM.TR | ERROR! no index page data received from Planet Cocuk
+Grabber DSMART.COM.TR | ERROR! Planet Cocuk unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 Planet Pembe  mode Incremental
+Grabber DSMART.COM.TR | ERROR! Planet Pembe error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber VIASAT.BG | starting 3/4 Viasat History  mode Incremental
+Grabber KLACK.DE | Parsing XML output
+Grabber KLACK.DE | 13th Street | 28 programms grabbed
+Grabber KLACK.DE | N-TV | 44 programms grabbed
+Grabber KLACK.DE | N24 | 33 programms grabbed
+Grabber KLACK.DE | Sat.1 Gold | 42 programms grabbed
+Grabber KLACK.DE | Servus | 24 programms grabbed
+Grabber KLACK.DE | Sky Atlantic HD | 22 programms grabbed
+Grabber KLACK.DE | Sky Hits | 12 programms grabbed
+Grabber KLACK.DE | WDR | 29 programms grabbed
+Grabber KLACK.DE | ZDF | 38 programms grabbed
+Grabber KLACK.DE | ZDF Info | 34 programms grabbed
+Grabber KLACK.DE | ZDF Neo | 22 programms grabbed
+Grabber SKY.DE | Parsing XML output
+Grabber SKY.DE | Discovery DE | 30 programms grabbed
+Grabber SKY.DE | Jukebox | 10 programms grabbed
+Grabber SKY.DE | Nat Geo DE | 33 programms grabbed
+Grabber SKY.DE | Natgeo Wild EU | 35 programms grabbed
+Grabber SKY.DE | TNT Film | 13 programms grabbed
+Grabber SKY.DE | TNT Serie | 28 programms grabbed
+Grabber COSMOTE.GR | ERROR! Star GR error downloading page: The operation has timed out (10sec)
+Grabber COSMOTE.GR | ERROR! no index page data received from Star GR
+Grabber COSMOTE.GR | ERROR! Star GR unable to update channel, try again later
+Grabber COSMOTE.GR | Job finished at 20/08/2017 16:10:13 done in 1m 51s
+Grabber DSMART.COM.TR | ERROR! no index page data received from Planet Pembe
+Grabber DSMART.COM.TR | ERROR! Planet Pembe unable to update channel, try again later
+Grabber DSMART.COM.TR | starting 1/7 Tay TV  mode Incremental
+Grabber VIASAT.BG | starting 4/4 Viasat Nature  mode Incremental
+Grabber DSMART.COM.TR | ERROR! Tay TV error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber COSMOTE.GR | Parsing XML output
+No programs grabbed by grabber COSMOTE.GR
+Grabber VIASAT.BG | Job finished at 20/08/2017 16:10:24 done in 48s
+Grabber DSMART.COM.TR | ERROR! no index page data received from Tay TV
+Grabber DSMART.COM.TR | ERROR! Tay TV unable to update channel, try again later
+Grabber DSMART.COM.TR | Job finished at 20/08/2017 16:10:29 done in 1m 13s
+Grabber VIASAT.BG | Parsing XML output
+Grabber VIASAT.BG | TV 1000 | 13 programms grabbed
+Grabber VIASAT.BG | Viasat Explore | 44 programms grabbed
+Grabber VIASAT.BG | Viasat History | 27 programms grabbed
+Grabber VIASAT.BG | Viasat Nature | 36 programms grabbed
+Grabber DSMART.COM.TR | Parsing XML output
+No programs grabbed by grabber DSMART.COM.TR
+Channel '24 Doc' has no programs. No alternative siteinis found. Channel disabled.
+Channel '24 Техно' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'ANT1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'ART' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'ARY Digital' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'ARY News' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'AXN' has no programs. Switching to grabber DNEVNIK.BG
+Channel 'Al Jazeera Eng' has no programs. Switching to grabber FREESAT.CO.UK
+Channel 'Alpha GR' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Arirang' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Armenia' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Auto Motor Sport' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'BG Music' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'BIT' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Baby TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Bein Sports (es)' has no programs. Switching to grabber ELPAIS.COM
+Channel 'Bulgaria 24' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'City TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'DSTV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Deluxe Lounge' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Deluxe Music' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Diema' has no programs. Switching to grabber MEDIA-PRESS.TV
+Channel 'Duck TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'E Channel GR' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'EPT 1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'EPT 2' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'EPT 3' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Eins Festival' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Eins Plus' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'F.O. TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Fen Folk' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Film+' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Film1 Comedy NL' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Film1 Premiere NL' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'France 24' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Fuel TV' has no programs. Switching to grabber VIVACOM.BG
+Channel 'HBO NL' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'HBO2 NL' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'HBO3 NL' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'HD Fashion (Укр)' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'History 2' has no programs. Switching to grabber TV.MAIL.RU
+Channel 'InLife' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Kabel Eins' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Kardelen' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'KinoNova' has no programs. Switching to grabber MEDIA-PRESS.TV
+Channel 'Kral TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'LaLiga' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Landscape HD' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'M.TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'MGM' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Magic TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Mega' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Movistar Deportes 1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Movistar F1' has no programs. Switching to grabber ELPAIS.COM
+Channel 'Movistar GP' has no programs. Switching to grabber ELPAIS.COM
+Channel 'NR1 Turk' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'NTV TR' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Nick Jr.' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Penthouse HD1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Planet Cocuk' has no programs. Switching to grabber DIGITURK.COM.TR
+Channel 'Planet Pembe' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Prima TV RO' has no programs. Switching to grabber HORIZON.TV.RO
+Channel 'RT Docu' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'RT Spanish' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'RTL 2' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'RTL Nitro' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'SBS 6 (NL)' has no programs. Switching to grabber TVGIDS.NL.INDEX-ONLY
+Channel 'SKAI' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Sky 1' has no programs. Switching to grabber M.TVGUIDE.CO.UK-INDEX
+Channel 'Sky 3D de' has no programs. Switching to grabber KLACK.DE
+Channel 'Sky Action HD' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Sky News' has no programs. Switching to grabber VIRGINMEDIA.COM
+Channel 'Sky Premiere' has no programs. Switching to grabber ZINGZING.TV
+Channel 'Star GR' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'TVCI Центр' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Tay TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'The Vault' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'The World' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Trace Sport Stars' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'True Movies 1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'VH1' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'VH1 Classic' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Wness' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'ZDF Kultur' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'bTV Cinema' has no programs. Switching to grabber MEDIA-PRESS.TV
+Channel 'eir Sport 1' has no programs. Switching to grabber ENTERTAINMENT.IE
+Channel 'eir Sport 2' has no programs. Switching to grabber ENTERTAINMENT.IE
+Channel 'ВТК' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Дартс' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Дом кино' has no programs. Switching to grabber KARTINA.TV
+Channel 'Илюзион+' has no programs. Switching to grabber TVIZ.TV
+Channel 'Мир ТВ' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'НТВ Мир' has no programs. Switching to grabber NTVPLUS.RU
+Channel 'Наука 2.0' has no programs. Switching to grabber NTVPLUS.RU
+Channel 'Перец' has no programs. Switching to grabber VSETV.COM
+Channel 'Родина ТВ' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Спас' has no programs. Switching to grabber KARTINA.TV
+Channel 'ТБН Россия' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Телеканал новостей 24 (Укр)' has no programs. No alternative siteinis found. Channel disabled.
+Splitting channels into 86 groups
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de\WebGrab++.config.xml
+Grabber KLACK.DE initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\digiturk.com.tr\WebGrab++.config.xml
+Grabber DIGITURK.COM.TR initialized
+Grabber DNEVNIK.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\dnevnik.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg\WebGrab++.config.xml
+Grabber DNEVNIK.BG initialized
+Grabber FREESAT.CO.UK | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\freesat.co.uk.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\freesat.co.uk\WebGrab++.config.xml
+Grabber FREESAT.CO.UK initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-index\WebGrab++.config.xml
+Grabber M.TVGUIDE.CO.UK-INDEX initialized
+Grabber ELPAIS.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Spain\elpais.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\elpais.com\WebGrab++.config.xml
+Grabber ELPAIS.COM initialized
+Grabber TV.MAIL.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\tv.mail.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru\WebGrab++.config.xml
+Grabber TV.MAIL.RU initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.ro\WebGrab++.config.xml
+Grabber HORIZON.TV.RO initialized
+Grabber MEDIA-PRESS.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\media-press.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\media-press.tv\WebGrab++.config.xml
+Grabber MEDIA-PRESS.TV initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\ntvplus.ru\WebGrab++.config.xml
+Grabber NTVPLUS.RU initialized
+Grabber VIVACOM.BG | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Bulgaria\vivacom.bg.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\vivacom.bg\WebGrab++.config.xml
+Grabber VIVACOM.BG initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl.index-only\WebGrab++.config.xml
+Grabber TVGIDS.NL.INDEX-ONLY initialized
+Grabber VIRGINMEDIA.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\virginmedia.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\virginmedia.com\WebGrab++.config.xml
+Grabber VIRGINMEDIA.COM initialized
+Grabber ZINGZING.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\zingzing.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\zingzing.tv\WebGrab++.config.xml
+Grabber ZINGZING.TV initialized
+Grabber ENTERTAINMENT.IE | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Ireland\entertainment.ie.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\entertainment.ie\WebGrab++.config.xml
+Grabber ENTERTAINMENT.IE initialized
+Grabber KARTINA.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\kartina.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\kartina.tv\WebGrab++.config.xml
+Grabber KARTINA.TV initialized
+Grabber TVIZ.TV | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\tviz.tv.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tviz.tv\WebGrab++.config.xml
+Grabber TVIZ.TV initialized
+Grabber VSETV.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\Russia\vsetv.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\vsetv.com\WebGrab++.config.xml
+Grabber VSETV.COM initialized
+-----------------------------------------------------
+---------------- Grabbing Round #2 ------------------
+-----------------------------------------------------
+Starting 18 grabbers asynchronously, 20 at a time
+Grabber KLACK.DE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de"
+Grabber DNEVNIK.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg"
+Grabber VIVACOM.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\vivacom.bg"
+Grabber DIGITURK.COM.TR | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\digiturk.com.tr"
+Grabber TV.MAIL.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru"
+Grabber ENTERTAINMENT.IE | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\entertainment.ie"
+Grabber ELPAIS.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\elpais.com"
+Grabber NTVPLUS.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\ntvplus.ru"
+Grabber HORIZON.TV.RO | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\horizon.tv.ro"
+Grabber KARTINA.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\kartina.tv"
+Grabber ZINGZING.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\zingzing.tv"
+Grabber VSETV.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\vsetv.com"
+Grabber MEDIA-PRESS.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\media-press.tv"
+Grabber TVIZ.TV | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tviz.tv"
+Grabber VIRGINMEDIA.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\virginmedia.com"
+Grabber FREESAT.CO.UK | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\freesat.co.uk"
+Grabber M.TVGUIDE.CO.UK-INDEX | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-index"
+Grabber TVGIDS.NL.INDEX-ONLY | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tvgids.nl.index-only"
+Grabber KLACK.DE | Job started at 20/08/2017 16:10:38
+Grabber VIVACOM.BG | Job started at 20/08/2017 16:10:38
+Grabber VSETV.COM | Job started at 20/08/2017 16:10:38
+Grabber TV.MAIL.RU | Job started at 20/08/2017 16:10:38
+Grabber ELPAIS.COM | Job started at 20/08/2017 16:10:38
+Grabber ENTERTAINMENT.IE | Job started at 20/08/2017 16:10:38
+Grabber KARTINA.TV | Job started at 20/08/2017 16:10:38
+Grabber ZINGZING.TV | Job started at 20/08/2017 16:10:38
+Grabber DIGITURK.COM.TR | Job started at 20/08/2017 16:10:38
+Grabber NTVPLUS.RU | Job started at 20/08/2017 16:10:38
+Grabber HORIZON.TV.RO | Job started at 20/08/2017 16:10:38
+Grabber MEDIA-PRESS.TV | Job started at 20/08/2017 16:10:38
+Grabber TVIZ.TV | Job started at 20/08/2017 16:10:38
+Grabber VIRGINMEDIA.COM | Job started at 20/08/2017 16:10:38
+Grabber DNEVNIK.BG | Job started at 20/08/2017 16:10:38
+Grabber TVGIDS.NL.INDEX-ONLY | Job started at 20/08/2017 16:10:38
+Grabber FREESAT.CO.UK | Job started at 20/08/2017 16:10:38
+Grabber VIVACOM.BG | starting 1/1 Fuel TV  mode Incremental
+Grabber M.TVGUIDE.CO.UK-INDEX | Job started at 20/08/2017 16:10:38
+Grabber MEDIA-PRESS.TV | starting 1/3 Diema  mode Incremental
+Grabber TV.MAIL.RU | starting 1/5 CGTN  skipped .. mode None
+Grabber TV.MAIL.RU | starting 2/5 CTC Инт.  skipped .. mode None
+Grabber ZINGZING.TV | starting 1/2 Sky Premiere  mode Incremental
+Grabber TV.MAIL.RU | starting 3/5 History 2  mode Incremental
+Grabber ELPAIS.COM | starting 1/6 Bein Sports (es)  mode Incremental
+Grabber VSETV.COM | starting 1/1 Перец  mode Incremental
+Grabber VIRGINMEDIA.COM | starting 1/1 Sky News  mode Incremental
+Grabber DIGITURK.COM.TR | starting 1/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=A Spor  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 2/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 1 (tr)  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 3/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 2 (tr)  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 4/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Bein Sports 3 (tr)  skipped .. mode None
+Grabber ENTERTAINMENT.IE | starting 1/2 eir Sport 1  mode Incremental
+Grabber DIGITURK.COM.TR | starting 5/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Cartoon TR  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 6/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=FOX TR  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 7/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Moviemax Premier 1  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting 8/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Planet Cocuk  mode Incremental
+Grabber TVIZ.TV | starting 1/1 Илюзион+  mode Incremental
+Grabber KARTINA.TV | starting 1/5 Дом кино  mode Incremental
+Grabber KLACK.DE | starting 1/12  ) KLACK.DE -- chan. (xmltv_id=13th Street  skipped .. mode None
+Grabber KLACK.DE | starting 2/12  ) KLACK.DE -- chan. (xmltv_id=N-TV  skipped .. mode None
+Grabber KLACK.DE | starting 3/12  ) KLACK.DE -- chan. (xmltv_id=N24  skipped .. mode None
+Grabber KLACK.DE | starting 4/12  ) KLACK.DE -- chan. (xmltv_id=Sat.1 Gold  skipped .. mode None
+Grabber KLACK.DE | starting 5/12  ) KLACK.DE -- chan. (xmltv_id=Servus  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 1/8 NPO 1 (NL)  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 2/8 NPO 2 (NL)  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 3/8 NPO 3 (NL)  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 4/8 RTL Z (NL)  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 5/8 SBS 6 (NL)  mode Incremental
+Grabber NTVPLUS.RU | starting 1/26  ) NTVPLUS.RU -- chan. (xmltv_id=FOX RU  skipped .. mode None
+Grabber KLACK.DE | starting 6/12  ) KLACK.DE -- chan. (xmltv_id=Sky 3D de  mode Incremental
+Grabber NTVPLUS.RU | starting 2/26  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Комеди  skipped .. mode None
+Grabber NTVPLUS.RU | starting 3/26  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Мегахит  skipped .. mode None
+Grabber NTVPLUS.RU | starting 4/26  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Премиум  skipped .. mode None
+Grabber NTVPLUS.RU | starting 5/26  ) NTVPLUS.RU -- chan. (xmltv_id=TV1000 Русское кино  skipped .. mode None
+Grabber NTVPLUS.RU | starting 6/26  ) NTVPLUS.RU -- chan. (xmltv_id=Viasat Golf  skipped .. mode None
+Grabber NTVPLUS.RU | starting 7/26  ) NTVPLUS.RU -- chan. (xmltv_id=Viasat Sport  skipped .. mode None
+Grabber NTVPLUS.RU | starting 8/26  ) NTVPLUS.RU -- chan. (xmltv_id=Время  skipped .. mode None
+Grabber NTVPLUS.RU | starting 9/26  ) NTVPLUS.RU -- chan. (xmltv_id=Еврокино  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  10/26  ) NTVPLUS.RU -- chan. (xmltv_id=Живи  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  11/26  ) NTVPLUS.RU -- chan. (xmltv_id=Моя Планета  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  12/26  ) NTVPLUS.RU -- chan. (xmltv_id=НТВ  skipped .. mode None
+Grabber HORIZON.TV.RO | starting 1/6 DIVA Universal  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  13/26  ) NTVPLUS.RU -- chan. (xmltv_id=НТВ Мир  mode Incremental
+Grabber HORIZON.TV.RO | starting 2/6 Etno RO  skipped .. mode None
+Grabber HORIZON.TV.RO | starting 3/6 Fine Living RO  skipped .. mode None
+Grabber HORIZON.TV.RO | starting 4/6 Kiss TV  skipped .. mode None
+Grabber DNEVNIK.BG | starting 1/13  ) DNEVNIK.BG -- chan. (xmltv_id=AXN  mode Incremental
+Grabber HORIZON.TV.RO | starting 5/6 Prima TV RO  mode Incremental
+Grabber FREESAT.CO.UK | starting 1/1 Al Jazeera Eng  mode Incremental
+Grabber VIVACOM.BG | ERROR! no index page data received from Fuel TV
+Grabber VIVACOM.BG | ERROR! Fuel TV unable to update channel, try again later
+Grabber VIVACOM.BG | Job finished at 20/08/2017 16:10:39 done in 1s
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 1/8 Aljazeera English  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 2/8 BBC 4  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 3/8 ITV 2  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 4/8 ITV 3  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 5/8 Playboy TV  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 6/8 Sky 1  mode Incremental
+Grabber KARTINA.TV | starting 2/5 Карусель  skipped .. mode None
+Grabber KARTINA.TV | starting 3/5 Первый канал (EUR)  skipped .. mode None
+Grabber KARTINA.TV | starting 4/5 Пятница  skipped .. mode None
+Grabber KARTINA.TV | starting 5/5 Спас  mode Incremental
+Grabber TVGIDS.NL.INDEX-ONLY | starting 6/8 Ziggo Sport Golf  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 7/8 Ziggo Sport NL  skipped .. mode None
+Grabber TVGIDS.NL.INDEX-ONLY | starting 8/8 Ziggo Sport Select  skipped .. mode None
+Grabber KARTINA.TV | Job finished at 20/08/2017 16:10:40 done in 2s
+Grabber TVGIDS.NL.INDEX-ONLY | Job finished at 20/08/2017 16:10:40 done in 2s
+Grabber MEDIA-PRESS.TV | ERROR! no index page data received from Diema
+Grabber MEDIA-PRESS.TV | ERROR! Diema unable to update channel, try again later
+Grabber MEDIA-PRESS.TV | starting 1/3 KinoNova  mode Incremental
+Grabber MEDIA-PRESS.TV | ERROR! no index page data received from KinoNova
+Grabber MEDIA-PRESS.TV | ERROR! KinoNova unable to update channel, try again later
+Grabber MEDIA-PRESS.TV | starting 1/3 bTV Cinema  mode Incremental
+Grabber MEDIA-PRESS.TV | ERROR! no index page data received from bTV Cinema
+Grabber MEDIA-PRESS.TV | ERROR! bTV Cinema unable to update channel, try again later
+Grabber MEDIA-PRESS.TV | Job finished at 20/08/2017 16:10:40 done in 2s
+Grabber DNEVNIK.BG | starting 2/13  ) DNEVNIK.BG -- chan. (xmltv_id=AXN Black  skipped .. mode None
+Grabber DNEVNIK.BG | starting 3/13  ) DNEVNIK.BG -- chan. (xmltv_id=AXN White  skipped .. mode None
+Grabber DNEVNIK.BG | starting 4/13  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Science  skipped .. mode None
+Grabber DNEVNIK.BG | starting 5/13  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Showcase  skipped .. mode None
+Grabber DNEVNIK.BG | starting 6/13  ) DNEVNIK.BG -- chan. (xmltv_id=Extreme Sports Channel  skipped .. mode None
+Grabber DNEVNIK.BG | starting 7/13  ) DNEVNIK.BG -- chan. (xmltv_id=ID Xtra  skipped .. mode None
+Grabber DNEVNIK.BG | starting 8/13  ) DNEVNIK.BG -- chan. (xmltv_id=TV1  skipped .. mode None
+Grabber DNEVNIK.BG | starting 9/13  ) DNEVNIK.BG -- chan. (xmltv_id=TVT Tourism  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  10/13  ) DNEVNIK.BG -- chan. (xmltv_id=VTV  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  11/13  ) DNEVNIK.BG -- chan. (xmltv_id=Viasat HD  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  12/13  ) DNEVNIK.BG -- chan. (xmltv_id=Канал 3  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  13/13  ) DNEVNIK.BG -- chan. (xmltv_id=СКАТ  skipped .. mode None
+Grabber DNEVNIK.BG | Job finished at 20/08/2017 16:10:40 done in 2s
+Grabber TVIZ.TV | ERROR! Илюзион+ error downloading page: The underlying connection was closed: An unexpected error occurred on a send.
+Grabber FREESAT.CO.UK | ERROR! no index page data received from Al Jazeera Eng
+Grabber FREESAT.CO.UK | ERROR! Al Jazeera Eng unable to update channel, try again later
+Grabber FREESAT.CO.UK | Job finished at 20/08/2017 16:10:41 done in 2s
+Grabber TV.MAIL.RU | ERROR! no index page data received from History 2
+Grabber TV.MAIL.RU | ERROR! History 2 unable to update channel, try again later
+Grabber TV.MAIL.RU | starting 3/5 OutDoor  skipped .. mode None
+Grabber TV.MAIL.RU | starting 4/5 Russian Travel Guide  skipped .. mode None
+Grabber TV.MAIL.RU | Job finished at 20/08/2017 16:10:41 done in 3s
+Grabber ENTERTAINMENT.IE | starting 2/2 eir Sport 2  mode Incremental
+Grabber ENTERTAINMENT.IE | Job finished at 20/08/2017 16:10:42 done in 4s
+Grabber M.TVGUIDE.CO.UK-INDEX | starting 8/8 Sky 2  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-INDEX | Job finished at 20/08/2017 16:10:42 done in 4s
+Grabber NTVPLUS.RU | starting (  14/26  ) NTVPLUS.RU -- chan. (xmltv_id=Наука 2.0  mode Incremental
+Grabber ZINGZING.TV | ERROR! no index page data received from Sky Premiere
+Grabber ZINGZING.TV | ERROR! Sky Premiere unable to update channel, try again later
+Grabber ZINGZING.TV | Job finished at 20/08/2017 16:10:42 done in 4s
+Grabber NTVPLUS.RU | starting (  15/26  ) NTVPLUS.RU -- chan. (xmltv_id=Наше кино  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  16/26  ) NTVPLUS.RU -- chan. (xmltv_id=Первый канал  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  17/26  ) NTVPLUS.RU -- chan. (xmltv_id=Россия 1  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  18/26  ) NTVPLUS.RU -- chan. (xmltv_id=Россия 24  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  19/26  ) NTVPLUS.RU -- chan. (xmltv_id=Россия К  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  20/26  ) NTVPLUS.RU -- chan. (xmltv_id=Русский Иллюзион  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  21/26  ) NTVPLUS.RU -- chan. (xmltv_id=Русский Экстрим  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  22/26  ) NTVPLUS.RU -- chan. (xmltv_id=Телеканал КХЛ  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  23/26  ) NTVPLUS.RU -- chan. (xmltv_id=Телекафе  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  24/26  ) NTVPLUS.RU -- chan. (xmltv_id=Че  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  25/26  ) NTVPLUS.RU -- chan. (xmltv_id=Шансон-TB  skipped .. mode None
+Grabber NTVPLUS.RU | starting (  26/26  ) NTVPLUS.RU -- chan. (xmltv_id=Ю  skipped .. mode None
+Grabber NTVPLUS.RU | Job finished at 20/08/2017 16:10:43 done in 5s
+Grabber VIRGINMEDIA.COM | Job finished at 20/08/2017 16:10:44 done in 6s
+Grabber VIVACOM.BG | Parsing XML output
+No programs grabbed by grabber VIVACOM.BG
+Grabber KARTINA.TV | Parsing XML output
+Grabber KARTINA.TV | Дом кино | 8 programms grabbed
+Grabber KARTINA.TV | Спас | 42 programms grabbed
+Grabber TVGIDS.NL.INDEX-ONLY | Parsing XML output
+Grabber TVGIDS.NL.INDEX-ONLY | SBS 6 (NL) | 25 programms grabbed
+Grabber MEDIA-PRESS.TV | Parsing XML output
+No programs grabbed by grabber MEDIA-PRESS.TV
+Grabber DNEVNIK.BG | Parsing XML output
+Grabber DNEVNIK.BG | AXN | 21 programms grabbed
+Grabber FREESAT.CO.UK | Parsing XML output
+No programs grabbed by grabber FREESAT.CO.UK
+Grabber TV.MAIL.RU | Parsing XML output
+No programs grabbed by grabber TV.MAIL.RU
+Grabber HORIZON.TV.RO | starting 6/6 Taraf RO  skipped .. mode None
+Grabber HORIZON.TV.RO | Job finished at 20/08/2017 16:10:49 done in 11s
+Grabber VSETV.COM | ERROR! no index page data received from Перец
+Grabber VSETV.COM | ERROR! Перец unable to update channel, try again later
+Grabber VSETV.COM | Job finished at 20/08/2017 16:10:50 done in 11s
+Grabber ENTERTAINMENT.IE | Parsing XML output
+Grabber ENTERTAINMENT.IE | eir Sport 1 | 13 programms grabbed
+Grabber ENTERTAINMENT.IE | eir Sport 2 | 7 programms grabbed
+Grabber M.TVGUIDE.CO.UK-INDEX | Parsing XML output
+Grabber M.TVGUIDE.CO.UK-INDEX | Sky 1 | 22 programms grabbed
+Grabber ZINGZING.TV | Parsing XML output
+No programs grabbed by grabber ZINGZING.TV
+Grabber TVIZ.TV | ERROR! no index page data received from Илюзион+
+Grabber TVIZ.TV | ERROR! Илюзион+ unable to update channel, try again later
+Grabber TVIZ.TV | Job finished at 20/08/2017 16:10:51 done in 12s
+Grabber KLACK.DE | ERROR! no shows in indexpage for channel Sky 3D de
+Grabber KLACK.DE | starting 7/12  ) KLACK.DE -- chan. (xmltv_id=Sky Atlantic HD  skipped .. mode None
+Grabber KLACK.DE | starting 8/12  ) KLACK.DE -- chan. (xmltv_id=Sky Hits  skipped .. mode None
+Grabber KLACK.DE | starting 9/12  ) KLACK.DE -- chan. (xmltv_id=WDR  skipped .. mode None
+Grabber KLACK.DE | starting (  10/12  ) KLACK.DE -- chan. (xmltv_id=ZDF  skipped .. mode None
+Grabber KLACK.DE | starting (  11/12  ) KLACK.DE -- chan. (xmltv_id=ZDF Info  skipped .. mode None
+Grabber KLACK.DE | starting (  12/12  ) KLACK.DE -- chan. (xmltv_id=ZDF Neo  skipped .. mode None
+Grabber KLACK.DE | Job finished at 20/08/2017 16:10:51 done in 12s
+Grabber NTVPLUS.RU | Parsing XML output
+Grabber NTVPLUS.RU | НТВ Мир | 17 programms grabbed
+Grabber NTVPLUS.RU | Наука 2.0 | 28 programms grabbed
+Grabber VIRGINMEDIA.COM | Parsing XML output
+Grabber VIRGINMEDIA.COM | Sky News | 36 programms grabbed
+Grabber HORIZON.TV.RO | Parsing XML output
+Grabber HORIZON.TV.RO | Prima TV RO | 17 programms grabbed
+Grabber VSETV.COM | Parsing XML output
+No programs grabbed by grabber VSETV.COM
+Grabber TVIZ.TV | Parsing XML output
+No programs grabbed by grabber TVIZ.TV
+Grabber KLACK.DE | Parsing XML output
+No programs grabbed by grabber KLACK.DE
+Grabber ELPAIS.COM | starting 2/6 Comedy Central HD (es,en)  skipped .. mode None
+Grabber ELPAIS.COM | starting 3/6 Cosmo HD (es,en)  skipped .. mode None
+Grabber ELPAIS.COM | starting 4/6 FOX Life HD (es,en)  skipped .. mode None
+Grabber ELPAIS.COM | starting 5/6 Movistar F1  mode Incremental
+Grabber DIGITURK.COM.TR | starting 9/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 1  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting (  10/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 2  skipped .. mode None
+Grabber DIGITURK.COM.TR | starting (  11/11  ) DIGITURK.COM.TR -- chan. (xmltv_id=Salon 3  skipped .. mode None
+Grabber DIGITURK.COM.TR | Job finished at 20/08/2017 16:11:52 done in 1m 13s
+Grabber DIGITURK.COM.TR | Parsing XML output
+Grabber DIGITURK.COM.TR | Planet Cocuk | 43 programms grabbed
+Grabber ELPAIS.COM | starting 6/6 Movistar GP  mode Incremental
+Grabber ELPAIS.COM | Job finished at 20/08/2017 16:13:13 done in 2m 35s
+Grabber ELPAIS.COM | Parsing XML output
+Grabber ELPAIS.COM | Bein Sports (es) | 17 programms grabbed
+Grabber ELPAIS.COM | Movistar F1 | 17 programms grabbed
+Grabber ELPAIS.COM | Movistar GP | 32 programms grabbed
+Channel 'Al Jazeera Eng' has no programs. Switching to grabber M.TVGUIDE.CO.UK-FULL
+Channel 'Diema' has no programs. Switching to grabber DNEVNIK.BG
+Channel 'Fuel TV' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'History 2' has no programs. Switching to grabber TV.YANDEX.RU
+Channel 'KinoNova' has no programs. Switching to grabber NOVA.BG
+Channel 'Sky 3D de' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Sky Premiere' has no programs. Switching to grabber UK-SKY.COM
+Channel 'bTV Cinema' has no programs. Switching to grabber BTV.BG
+Channel 'Илюзион+' has no programs. No alternative siteinis found. Channel disabled.
+Channel 'Перец' has no programs. No alternative siteinis found. Channel disabled.
+Splitting channels into 81 groups
+Grabber UK-SKY.COM | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\uk-sky.com.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\uk-sky.com\WebGrab++.config.xml
+Grabber UK-SKY.COM initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg\WebGrab++.config.xml
+Grabber DNEVNIK.BG initialized
+Grabber M.TVGUIDE.CO.UK-FULL | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\siteini.pack\UK\m.tvguide.co.uk-full.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-full\WebGrab++.config.xml
+Grabber M.TVGUIDE.CO.UK-FULL initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg\WebGrab++.config.xml
+Grabber NOVA.BG initialized
+Grabber TV.YANDEX.RU | Found siteini C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\tv.yandex.ru.ini
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.yandex.ru\WebGrab++.config.xml
+Grabber TV.YANDEX.RU initialized
+Saving config in C:\Users\genevh\AppData\Local\Temp\wgmulti\btv.bg\WebGrab++.config.xml
+Grabber BTV.BG initialized
+-----------------------------------------------------
+---------------- Grabbing Round #3 ------------------
+-----------------------------------------------------
+Starting 6 grabbers asynchronously, 20 at a time
+Grabber UK-SKY.COM | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\uk-sky.com"
+Grabber BTV.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\btv.bg"
+Grabber TV.YANDEX.RU | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.yandex.ru"
+Grabber NOVA.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg"
+Grabber DNEVNIK.BG | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\dnevnik.bg"
+Grabber M.TVGUIDE.CO.UK-FULL | Starting new instance of WebGrab+Plus.exe with argument
+"C:\Users\genevh\AppData\Local\Temp\wgmulti\m.tvguide.co.uk-full"
+Grabber DNEVNIK.BG | Job started at 20/08/2017 16:13:22
+Grabber UK-SKY.COM | Job started at 20/08/2017 16:13:22
+Grabber M.TVGUIDE.CO.UK-FULL | Job started at 20/08/2017 16:13:22
+Grabber BTV.BG | Job started at 20/08/2017 16:13:22
+Grabber NOVA.BG | Job started at 20/08/2017 16:13:22
+Grabber TV.YANDEX.RU | Job started at 20/08/2017 16:13:22
+Grabber NOVA.BG | starting 1/11  ) NOVA.BG -- chan. (xmltv_id=Diema Family  skipped .. mode None
+Grabber NOVA.BG | starting 2/11  ) NOVA.BG -- chan. (xmltv_id=Diema Sport  skipped .. mode None
+Grabber NOVA.BG | starting 3/11  ) NOVA.BG -- chan. (xmltv_id=Diema Sport 2  skipped .. mode None
+Grabber NOVA.BG | starting 4/11  ) NOVA.BG -- chan. (xmltv_id=KinoNova  mode Incremental
+Grabber M.TVGUIDE.CO.UK-FULL | starting 1/7 Al Jazeera Eng  mode Incremental
+Grabber DNEVNIK.BG | starting 1/14  ) DNEVNIK.BG -- chan. (xmltv_id=AXN  skipped .. mode None
+Grabber DNEVNIK.BG | starting 2/14  ) DNEVNIK.BG -- chan. (xmltv_id=AXN Black  skipped .. mode None
+Grabber DNEVNIK.BG | starting 3/14  ) DNEVNIK.BG -- chan. (xmltv_id=AXN White  skipped .. mode None
+Grabber DNEVNIK.BG | starting 4/14  ) DNEVNIK.BG -- chan. (xmltv_id=Diema  mode Incremental
+Grabber TV.YANDEX.RU | starting 1/1 History 2  mode Incremental
+Grabber BTV.BG | starting 1/11  ) BTV.BG -- chan. (xmltv_id=RING BG  skipped .. mode None
+Grabber BTV.BG | starting 2/11  ) BTV.BG -- chan. (xmltv_id=bTV  skipped .. mode None
+Grabber BTV.BG | starting 3/11  ) BTV.BG -- chan. (xmltv_id=BTV +1  skipped .. mode None
+Grabber BTV.BG | starting 4/11  ) BTV.BG -- chan. (xmltv_id=BTV +2  skipped .. mode None
+Grabber BTV.BG | starting 5/11  ) BTV.BG -- chan. (xmltv_id=BTV +7  skipped .. mode None
+Grabber BTV.BG | starting 6/11  ) BTV.BG -- chan. (xmltv_id=BTV +24  skipped .. mode None
+Grabber BTV.BG | starting 7/11  ) BTV.BG -- chan. (xmltv_id=BTV +48  skipped .. mode None
+Grabber BTV.BG | starting 8/11  ) BTV.BG -- chan. (xmltv_id=bTV Action  skipped .. mode None
+Grabber BTV.BG | starting 9/11  ) BTV.BG -- chan. (xmltv_id=bTV Cinema  mode Incremental
+Grabber UK-SKY.COM | starting 1/34  ) UK-SKY.COM -- chan. (xmltv_id=ARY QTV  skipped .. mode None
+Grabber UK-SKY.COM | starting 2/34  ) UK-SKY.COM -- chan. (xmltv_id=B4U Movies  skipped .. mode None
+Grabber UK-SKY.COM | starting 3/34  ) UK-SKY.COM -- chan. (xmltv_id=B4U Music  skipped .. mode None
+Grabber UK-SKY.COM | starting 4/34  ) UK-SKY.COM -- chan. (xmltv_id=BT Sports 1 *  skipped .. mode None
+Grabber UK-SKY.COM | starting 5/34  ) UK-SKY.COM -- chan. (xmltv_id=BT Sports 2 *  skipped .. mode None
+Grabber UK-SKY.COM | starting 6/34  ) UK-SKY.COM -- chan. (xmltv_id=Box Nation  skipped .. mode None
+Grabber UK-SKY.COM | starting 7/34  ) UK-SKY.COM -- chan. (xmltv_id=COLORS  skipped .. mode None
+Grabber UK-SKY.COM | starting 8/34  ) UK-SKY.COM -- chan. (xmltv_id=Channel 4  skipped .. mode None
+Grabber UK-SKY.COM | starting 9/34  ) UK-SKY.COM -- chan. (xmltv_id=ITV 1  skipped .. mode None
+Grabber UK-SKY.COM | starting (  10/34  ) UK-SKY.COM -- chan. (xmltv_id=Insight HD  skipped .. mode None
+Grabber UK-SKY.COM | starting (  11/34  ) UK-SKY.COM -- chan. (xmltv_id=Kerrang! TV  skipped .. mode None
+Grabber UK-SKY.COM | starting (  12/34  ) UK-SKY.COM -- chan. (xmltv_id=Magic UK  skipped .. mode None
+Grabber UK-SKY.COM | starting (  13/34  ) UK-SKY.COM -- chan. (xmltv_id=Motors UK  skipped .. mode None
+Grabber UK-SKY.COM | starting (  14/34  ) UK-SKY.COM -- chan. (xmltv_id=Movies 24 UK  skipped .. mode None
+Grabber UK-SKY.COM | starting (  15/34  ) UK-SKY.COM -- chan. (xmltv_id=Premier Sports  skipped .. mode None
+Grabber UK-SKY.COM | starting (  16/34  ) UK-SKY.COM -- chan. (xmltv_id=Racing UK  skipped .. mode None
+Grabber UK-SKY.COM | starting (  17/34  ) UK-SKY.COM -- chan. (xmltv_id=Rishtey  skipped .. mode None
+Grabber UK-SKY.COM | starting (  18/34  ) UK-SKY.COM -- chan. (xmltv_id=Sangat  skipped .. mode None
+Grabber UK-SKY.COM | starting (  19/34  ) UK-SKY.COM -- chan. (xmltv_id=Sikh Channel  skipped .. mode None
+Grabber UK-SKY.COM | starting (  20/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Action  skipped .. mode None
+Grabber UK-SKY.COM | starting (  21/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Comedy  skipped .. mode None
+Grabber UK-SKY.COM | starting (  22/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Disney  skipped .. mode None
+Grabber UK-SKY.COM | starting (  23/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Drama  skipped .. mode None
+Grabber UK-SKY.COM | starting (  24/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Family  skipped .. mode None
+Grabber UK-SKY.COM | starting (  25/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Living  skipped .. mode None
+Grabber UK-SKY.COM | starting (  26/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Modern Greats  skipped .. mode None
+Grabber UK-SKY.COM | starting (  27/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Premiere  mode Incremental
+Grabber UK-SKY.COM | starting (  29/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky SciFi/Horror  skipped .. mode None
+Grabber UK-SKY.COM | starting (  30/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Select  skipped .. mode None
+Grabber UK-SKY.COM | starting (  31/34  ) UK-SKY.COM -- chan. (xmltv_id=Sky Thriller  skipped .. mode None
+Grabber UK-SKY.COM | starting (  32/34  ) UK-SKY.COM -- chan. (xmltv_id=Sony MAX  skipped .. mode None
+Grabber UK-SKY.COM | starting (  33/34  ) UK-SKY.COM -- chan. (xmltv_id=Star Life OK  skipped .. mode None
+Grabber UK-SKY.COM | starting (  34/34  ) UK-SKY.COM -- chan. (xmltv_id=SyFy UK  skipped .. mode None
+Grabber UK-SKY.COM | Job finished at 20/08/2017 16:13:24 done in 2s
+Grabber TV.YANDEX.RU | ERROR! no shows in indexpage for channel History 2
+Grabber TV.YANDEX.RU | Job finished at 20/08/2017 16:13:24 done in 2s
+Grabber DNEVNIK.BG | starting 5/14  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Science  skipped .. mode None
+Grabber DNEVNIK.BG | starting 6/14  ) DNEVNIK.BG -- chan. (xmltv_id=Discovery Showcase  skipped .. mode None
+Grabber DNEVNIK.BG | starting 7/14  ) DNEVNIK.BG -- chan. (xmltv_id=Extreme Sports Channel  skipped .. mode None
+Grabber DNEVNIK.BG | starting 8/14  ) DNEVNIK.BG -- chan. (xmltv_id=ID Xtra  skipped .. mode None
+Grabber DNEVNIK.BG | starting 9/14  ) DNEVNIK.BG -- chan. (xmltv_id=TV1  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  10/14  ) DNEVNIK.BG -- chan. (xmltv_id=TVT Tourism  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  11/14  ) DNEVNIK.BG -- chan. (xmltv_id=VTV  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  12/14  ) DNEVNIK.BG -- chan. (xmltv_id=Viasat HD  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  13/14  ) DNEVNIK.BG -- chan. (xmltv_id=Канал 3  skipped .. mode None
+Grabber DNEVNIK.BG | starting (  14/14  ) DNEVNIK.BG -- chan. (xmltv_id=СКАТ  skipped .. mode None
+Grabber DNEVNIK.BG | Job finished at 20/08/2017 16:13:23 done in 1s
+Grabber M.TVGUIDE.CO.UK-FULL | starting 2/7 BBC Worldnews  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | starting 3/7 Bloomberg  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | starting 4/7 CNBC  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | starting 5/7 DTX  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | starting 6/7 Smash Hits  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | starting 7/7 and TV  skipped .. mode None
+Grabber M.TVGUIDE.CO.UK-FULL | Job finished at 20/08/2017 16:13:25 done in 3s
+Grabber NOVA.BG | starting 5/11  ) NOVA.BG -- chan. (xmltv_id=Nova  skipped .. mode None
+Grabber NOVA.BG | starting 6/11  ) NOVA.BG -- chan. (xmltv_id=Nova +1  skipped .. mode None
+Grabber NOVA.BG | starting 7/11  ) NOVA.BG -- chan. (xmltv_id=Nova +2  skipped .. mode None
+Grabber NOVA.BG | starting 8/11  ) NOVA.BG -- chan. (xmltv_id=Nova +7  skipped .. mode None
+Grabber NOVA.BG | starting 9/11  ) NOVA.BG -- chan. (xmltv_id=Nova +24  skipped .. mode None
+Grabber NOVA.BG | starting (  10/11  ) NOVA.BG -- chan. (xmltv_id=Nova +48  skipped .. mode None
+Grabber NOVA.BG | starting (  11/11  ) NOVA.BG -- chan. (xmltv_id=Nova Sport  skipped .. mode None
+Grabber NOVA.BG | Job finished at 20/08/2017 16:13:24 done in 1s
+Grabber DNEVNIK.BG | Parsing XML output
+Grabber DNEVNIK.BG | Diema | 11 programms grabbed
+Grabber NOVA.BG | Parsing XML output
+Grabber NOVA.BG | KinoNova | 5 programms grabbed
+Grabber UK-SKY.COM | Parsing XML output
+Grabber UK-SKY.COM | Sky Premiere | 7 programms grabbed
+Grabber TV.YANDEX.RU | Parsing XML output
+No programs grabbed by grabber TV.YANDEX.RU
+Grabber M.TVGUIDE.CO.UK-FULL | Parsing XML output
+Grabber M.TVGUIDE.CO.UK-FULL | Al Jazeera Eng | 27 programms grabbed
+Grabber BTV.BG | starting (  10/11  ) BTV.BG -- chan. (xmltv_id=bTV Comedy  skipped .. mode None
+Grabber BTV.BG | starting (  11/11  ) BTV.BG -- chan. (xmltv_id=bTV Lady  skipped .. mode None
+Grabber BTV.BG | Job finished at 20/08/2017 16:13:34 done in 12s
+Grabber BTV.BG | Parsing XML output
+Grabber BTV.BG | bTV Cinema | 10 programms grabbed
+Channel 'History 2' has no programs. No alternative siteinis found. Channel disabled.
+Saving EPG XML file
+wgmulti execution time: 00:05:35.62
+Channels with no EPG:
+1. 24 Doc
+2. 24 Техно
+3. ANT1
+4. ART
+5. ARY Digital
+6. ARY News
+7. Alpha GR
+8. Arirang
+9. Armenia
+10. Auto Motor Sport
+11. BG Music
+12. BIT
+13. Baby TV
+14. Bulgaria 24
+15. City TV
+16. DSTV
+17. Deluxe Lounge
+18. Deluxe Music
+19. Duck TV
+20. E Channel GR
+21. EPT 1
+22. EPT 2
+23. EPT 3
+24. Eins Festival
+25. Eins Plus
+26. F.O. TV
+27. Fen Folk
+28. Film+
+29. Film1 Comedy NL
+30. Film1 Premiere NL
+31. France 24
+32. Fuel TV
+33. HBO NL
+34. HBO2 NL
+35. HBO3 NL
+36. HD Fashion (Укр)
+37. History 2
+38. InLife
+39. Kabel Eins
+40. Kardelen
+41. Kral TV
+42. LaLiga
+43. Landscape HD
+44. M.TV
+45. MGM
+46. Magic TV
+47. Mega
+48. Movistar Deportes 1
+49. NR1 Turk
+50. NTV TR
+51. Nick Jr.
+52. Penthouse HD1
+53. Planet Pembe
+54. RT Docu
+55. RT Spanish
+56. RTL 2
+57. RTL Nitro
+58. SKAI
+59. Sky 3D de
+60. Sky Action HD
+61. Star GR
+62. TVCI Центр
+63. Tay TV
+64. The Vault
+65. The World
+66. Trace Sport Stars
+67. True Movies 1
+68. VH1
+69. VH1 Classic
+70. Wness
+71. ZDF Kultur
+72. ВТК
+73. Дартс
+74. Илюзион+
+75. Мир ТВ
+76. Перец
+77. Родина ТВ
+78. ТБН Россия
+79. Телеканал новостей 24 (Укр)
+Report saved to C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\wgmulti.results.json

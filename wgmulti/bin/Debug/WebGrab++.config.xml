@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
-  <filename>epg.xml</filename>
-  <proxy></proxy>
+  <filename>C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\epg.xml</filename>
   <mode>m,nomark</mode>
-  <user-agent>mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/54.0.2840.99 safari/537.36</user-agent>
+  <user-agent />
+  <update>i</update>
   <logging>on</logging>
-  <skip>noskip</skip>
-  <timespan>2</timespan>
-  <update></update>
-  <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">5</retry>
-  <postprocess run="n" grab="y">mdb</postprocess>
-  <channel update="i" site="nova.bg" site_id="5" xmltv_id="Diema Sport">Diema Sport</channel>
-  <channel update="i" site="tv.i.ua" site_id="/russkij-ekstrim" xmltv_id="Русский Экстрим">Русский Экстрим</channel>
-</settings>
+  <credentials></credentials>wgmulti.Proxy<skip>13,1</skip><timespan>2,</timespan><retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">2</retry><postprocess run="n" grab="y">mdb</postprocess><channel site="tv.i.ua" xmltv_id="1+1 (Укр)" site_id="/1plus1" update="i">1+1 (Укр)</channel><channel site="klack.de" xmltv_id="13th Street" site_id="112/13th-street" update="i">13th Street</channel></settings>

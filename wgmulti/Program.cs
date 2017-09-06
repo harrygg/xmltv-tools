@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Xml.Linq;
 
 namespace wgmulti
 {
@@ -15,82 +14,142 @@ namespace wgmulti
     public static Config rootConfig;
     public static Report report = new Report();
     public static List<String> failedChannelIds = new List<String>();
-    public static List<Grabber> grabbersGroupParallel = new List<Grabber>(Arguments.maxAsyncProcesses);
+    public static List<Grabber> grabbersGroupParallel;
     public static List<Grabber> grabbersGroup2 = new List<Grabber>();
-    static List<String> outputEpgFiles = new List<String>();
     static List<String> logs = new List<String>();
-    public static string jsonConfigPath;
+    public static Xmltv epg = new Xmltv();
 
     static void Main(string[] args)
     {
-      Console.WriteLine("#####################################################");
+      Console.WriteLine("\n#####################################################");
       Console.WriteLine("#                                                   #");
       Console.WriteLine("#        wgmulti for WebGrab++ by Harry_GG          #");
       Console.WriteLine("#                                                   #");
-      Console.WriteLine("#####################################################");
-      Console.WriteLine("");      
-      var platform = Environment.OSVersion.Platform;
-      Console.WriteLine(" System: {0}", platform);
+      Console.WriteLine("#####################################################\n");
+      Console.WriteLine(" System: {0}", Environment.OSVersion.Platform);
       Console.WriteLine(" Arguments: {0}", Arguments.cmdArgs);
       Console.WriteLine(" ConfigDir: {0}", Arguments.configDir);
+
       if (Arguments.buildConfigFromJson)
       {
         Console.WriteLine(" Build config from JSON file: {0}", Arguments.buildConfigFromJson);
         Console.WriteLine(" JsonConfigFileName: {0}", Arguments.jsonConfigFileName);
       }
+
       Console.WriteLine(" MaxAsyncProcesses: {0}", Arguments.maxAsyncProcesses);
       Console.WriteLine(" GroupChannelsBySiteIni: {0}", Arguments.groupChannelsBySiteIni);
       Console.WriteLine(" MaxChannelsInGroup: {0}", Arguments.maxChannelsInGroup);
       Console.WriteLine(" ConvertTimesToLocal: {0}", Arguments.convertTimesToLocal);
       Console.WriteLine(" ShowConsole: {0}", Arguments.showConsole);
-      Console.WriteLine("");
-      Console.WriteLine("-----------------------------------------------------");
-      Console.WriteLine("");
+      Console.WriteLine("\n-----------------------------------------------------\n");
       Console.WriteLine("Execution started at: " + DateTime.Now);
+
       Stopwatch stopWatch = new Stopwatch();
       stopWatch.Start();
 
       try
       {
-        // Check whether we have a config xml or json file
-        //jsonConfigPath = Path.Combine(Arguments.configDir, Arguments.jsonConfigFileName);
-        //if (File.Exists(jsonConfigPath))
-        //{
-        //  CreateConfigFromJson();
-        //}
+        rootConfig = InitConfig();
+        report.total = rootConfig.activeChannels;
+        Console.WriteLine("Cofig contains {0} channels for grabbing", rootConfig.activeChannels);
 
-        // Read main configuration file
-        rootConfig = new Config(Arguments.configDir);
-
-        if (!rootConfig.grabbingEnabled)
+        if (!rootConfig.postProcess.grab)
         {
-          Console.WriteLine("Grabbing disabled in configuration. Enable by setting the postprocess \"grab\" value to on");
+          Console.WriteLine("Grabbing disabled in configuration. Enable by setting the postprocess 'grab' value to 'on'");
           return;
         }
 
-        // Group grabbers (create grabbersGroupParallel, grabbersGroup2 and the list of outputEpgFiles)
-        // Each grabber contains one or more channels combined on a different criteria
-        CreateGrabberGroups();
-
-        if (grabbersGroupParallel.Count == 0)
+        // Try grabbing all empty channels using the next available siteini 
+        // until there are no more site inis or all channels have programmes
+        Console.WriteLine("-----------------------------------------------------");
+        var doGrabbing = true;
+        var siteiniIndex = 0;
+        while (doGrabbing)
         {
-          Console.WriteLine("No active grabbing created. Exiting!");
-          return;
+          //if (siteiniIndex > 0)
+          //  Console.WriteLine("Checking for empty channels...");
+
+          doGrabbing = false;
+          //Call GetActiveChannels everytime as channels are disabled
+          foreach (var channel in rootConfig.GetActiveChannels())
+          {
+            if (channel.xmltvPrograms.Count > 0)
+            {
+              // there is EPG for this channel so disable updates for next round
+              channel.update = UpdateType.None;
+              continue;
+            }
+
+            if (channel.offset != null) //skip offset channels
+              continue;
+
+            if (channel.siteinis == null)
+            {
+              Console.WriteLine("Channel '{0}' has no siteinis. Channel disabled.", channel.name);
+              channel.isActive = false;
+              continue;
+            }
+
+            // If there are more siteinis, take the next one
+            if (channel.siteinis.Count > siteiniIndex)
+            {
+              channel.activeSiteIni = siteiniIndex;
+              doGrabbing = true;
+
+              if (siteiniIndex > 0) // we are not in the first grabbing round
+                Console.WriteLine("Channel '{0}' has no programs. Switching to grabber {1}",
+                  channel.name, channel.GetActiveSiteIni().name.ToUpper());
+            }
+            else
+            {
+              Console.WriteLine("Channel '{0}' has no programs. No alternative siteinis found. Channel disabled.", channel.name);
+              channel.isActive = false;
+            }
+          }
+
+          if (!doGrabbing)
+            break;
+
+          // Group grabbers (create grabbersGroupParallel, grabbersGroup2)
+          // Each grabber contains one or more channels combined on a different criteria
+          CreateGrabberGroups();
+
+          if (grabbersGroupParallel.Count == 0)
+          {
+            Console.WriteLine("No active grabbing created. Exiting!");
+            return;
+          }
+
+          Console.WriteLine("-----------------------------------------------------");
+          Console.WriteLine("---------------- Grabbing Round #{0} ------------------", siteiniIndex+1);
+          Console.WriteLine("-----------------------------------------------------");
+          Console.WriteLine("Starting {0} grabbers asynchronously, {1} at a time",
+            grabbersGroupParallel.Count + grabbersGroup2.Count, Arguments.maxAsyncProcesses);
+
+          Parallel.ForEach(grabbersGroupParallel, (grabber) =>
+          {
+            StartWegGrabInstance(grabber);
+          });
+
+          if (rootConfig.GetActiveChannels().Where(channel => channel.xmltvPrograms.Count == 0).ToList().Count == 0)
+          {
+            doGrabbing = false;
+            break;
+          }
+          siteiniIndex++;
         }
 
-        // TODO
-        Console.WriteLine("Starting grabbers asynchronously, {0} at a time", Arguments.maxAsyncProcesses);
-        Parallel.ForEach(grabbersGroupParallel, (grabber) =>
-        {
-          StartWegGrabInstance(grabber);
-        });
+        // Create the combined xmltv EPG
+        MergeEPGs();
 
-        // Combine all xml guides
-        MergeEpgs();
-        
+        if (Arguments.convertTimesToLocal)
+          epg.ConvertToLocalTime();
+
+        epg.Save(rootConfig.outputFilePath);
+
         // Combine all log files
-        if (Arguments.combineLogFiles)
-          MergeLogs();
+        //if (Arguments.combineLogFiles)
+        //  MergeLogs();
       }
       catch (Exception ex)
       {
@@ -98,45 +157,64 @@ namespace wgmulti
           Console.WriteLine("ERROR! WebGrab+Plus.exe not found and not executable!");
         else
           Console.WriteLine(ex.ToString());
+        return;
       }
+
+      /// Output names of channels with no EPG
+      OutputEmptyChannels();
+
+      // Calculate EPG file size and md5 hash
+      report.fileSize = epg.GetFileSize();
+      report.md5hash = epg.GetMD5Hash();
+
+      Console.WriteLine("-----------------------------------------------------");
+      Console.WriteLine("Total channels: {0}", report.total);
+      Console.WriteLine("With EPG: {0}", report.channels.Count);
+      Console.WriteLine("Without EPG: {0}", report.emptyChannels.Count);
+      Console.WriteLine("EPG size: {0}", report.fileSize);
+      Console.WriteLine("EPG md5 hash: {0}", report.md5hash);
+      Console.WriteLine("-----------------------------------------------------");
 
       stopWatch.Stop();
       TimeSpan ts = stopWatch.Elapsed;
-      var elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-      Console.WriteLine("wgmulti execution time: " + elapsedTime);
+      report.generationTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+      report.generatedOn = DateTime.Now.ToString();
+      Console.WriteLine("wgmulti finished at: " + report.generatedOn);
+      Console.WriteLine("wgmulti execution time: " + report.generationTime);
 
-      // Print failed channels
-      if (report.emptyChannels.Count() > 0)
-      {
-        Console.WriteLine("\r\nChannels with no EPG data:");
-        report.emptyChannels.ForEach(id => {
-          Console.WriteLine(id);
-       });
-      }
-
-      // Save report
-      report.generationTime = elapsedTime;
+      // Save report    
       if (Arguments.generateReport)
         report.Save(Arguments.configDir);
+
+      Console.ReadLine();
     }
 
-    //static void CreateConfigFromJson()
-    //{
-    //  try
-    //  {
-    //    var serializer = new JavaScriptSerializer();
-    //    using (StreamReader reader = new StreamReader(jsonConfigPath))
-    //    {
-    //      string jsonStr = reader.ReadToEnd();
-    //      var data = serializer.Deserialize<List<Channel>>(jsonStr);
-    //    }
-    //  }
-    //  catch (ArgumentException ex)
-    //  {
-    //    Console.WriteLine("ERROR | wgmulti.channels.json could not be decoded!");
-    //    throw;
-    //  }
-    //}
+    static Config InitConfig()
+    {
+      Config config = null;
+
+      // Check whether we have a config xml or json file
+      if (Arguments.buildConfigFromJson)
+      {
+        var jsonConfigPath = Path.Combine(Arguments.configDir, Arguments.jsonConfigFileName);
+        if (File.Exists(jsonConfigPath))
+        {
+          var js = new JavaScriptSerializer();
+          config = js.Deserialize<Config>(File.ReadAllText(jsonConfigPath));
+          config.SetAbsPaths(Arguments.configDir);
+        }
+      }
+      else
+      {
+        // Read xml configuration file
+        config = new Config(Arguments.configDir);
+      }
+
+      // Remove all disabled channels from the list
+      config.SetActiveChannels();
+
+      return config;
+    }
 
     /// <summary>
     /// Merge all local log files into a single master log file
@@ -177,8 +255,10 @@ namespace wgmulti
     /// </summary>
     static void CreateGrabberGroups()
     {
+      // Create the list here so that it is reset when creating backup groups
+      grabbersGroupParallel = new List<Grabber>(Arguments.maxAsyncProcesses);
       // Group channels
-      var channelGroups = CreateChannelGroups(rootConfig.channels);
+      var channelGroups = CreateChannelGroups();
 
       if (Arguments.randomStartOrder && channelGroups.Count() > 1)
         channelGroups = channelGroups.OrderBy(item => rnd.Next()).ToList();
@@ -187,7 +267,7 @@ namespace wgmulti
       // Create grabbers (copy ini and config to temp location) for each group
       foreach (var group in channelGroups)
       {
-        var grabber = new Grabber(rootConfig, group.id, group.channels);
+        var grabber = new Grabber(group);
         if (grabber.enabled)
         {
           i++;
@@ -196,7 +276,7 @@ namespace wgmulti
           else
             grabbersGroup2.Add(grabber);
 
-          outputEpgFiles.Add(GetOutputPath(grabber));
+          //outputEpgFiles.Add(GetOutputPath(grabber));
           logs.Add(grabber.config.logFilePath);
           Console.WriteLine("Grabber {0} initialized", grabber.id.ToUpper());
         }
@@ -209,47 +289,49 @@ namespace wgmulti
     /// </summary>
     /// <param name="channels"></param>
     /// <returns></returns>
-    static List<ChannelGroup> CreateChannelGroups(List<Channel> channels)
+    static List<ChannelGroup> CreateChannelGroups()
     {
       var channelGroups = new List<ChannelGroup>();
       try
       { 
-        if (Arguments.groupChannelsBySiteIni)
-        {
-          channelGroups = (from c in channels group c by c.site into grouped
-                           select new ChannelGroup(grouped.Key, grouped.ToList<Channel>())).ToList();
-        }
-        else
-        {
-          // Channels are not grouped by siteini, meaning that 
-          // A single group can have channels from various sites
-          var n = 0;
-          while (channels.Any())
-          {
-            var groupName = Arguments.maxChannelsInGroup > 1 ? "group" + (++n).ToString() : channels[0].xmltv_id;
-            var group = new ChannelGroup(groupName);
+        //if (Arguments.groupChannelsBySiteIni)
+        //{
+        channelGroups = (from channel in rootConfig.channels where channel.isActive
+                           group channel by channel.GetActiveSiteIni().name into grouped
+                           select new ChannelGroup(grouped.Key, grouped.ToList<Channel>()))
+                           .ToList();
+        //}
+        //else
+        //{
+        //  // Channels are not grouped by siteini, meaning that 
+        //  // A single group can have channels from various sites
+        //  var n = 0;
+        //  while (rootConfig.channels.Any())
+        //  {
+        //    var groupName = Arguments.maxChannelsInGroup > 1 ? "group" + (++n).ToString() : rootConfig.channels[0].xmltv_id;
+        //    var group = new ChannelGroup(groupName);
 
-            group.channels.AddRange(channels.Take(Arguments.maxChannelsInGroup));
-            Channel lastAddedChannel = null;
-            try { lastAddedChannel = channels[Arguments.maxChannelsInGroup - 1]; } catch { }
-            channels = channels.Skip(Arguments.maxChannelsInGroup).ToList();
+        //    group.channels.AddRange(rootConfig.channels.Take(Arguments.maxChannelsInGroup));
+        //    Channel lastAddedChannel = null;
+        //    try { lastAddedChannel = rootConfig.channels[Arguments.maxChannelsInGroup - 1]; } catch { }
+        //    rootConfig.channels = rootConfig.channels.Skip(Arguments.maxChannelsInGroup).ToList();
 
-            // If any of the left channels have "same_as" or "period" attribute 
-            // and "same_as" or 'xmltvId" is equal to the previous channel ones, add it to the group
-            while (channels.Any())
-            {
-              if ((!String.IsNullOrEmpty(channels[0].same_as) && channels[0].same_as == lastAddedChannel.name)
-                || (!String.IsNullOrEmpty(channels[0].period) && channels[0].xmltv_id == lastAddedChannel.xmltv_id))
-              {
-                group.channels.AddRange(channels.Take(1));
-                channels = channels.Skip(1).ToList();
-              }
-              else
-                break;
-            }
-            channelGroups.Add(group);
-          }
-        }
+        //    // If any of the left channels have "same_as" or "period" attribute 
+        //    // and "same_as" or 'xmltvId" is equal to the previous channel ones, add it to the group
+        //    while (rootConfig.channels.Any())
+        //    {
+        //      if ((!String.IsNullOrEmpty(rootConfig.channels[0].same_as) && rootConfig.channels[0].same_as == lastAddedChannel.name)
+        //        || (!String.IsNullOrEmpty(rootConfig.channels[0].period) && rootConfig.channels[0].xmltv_id == lastAddedChannel.xmltv_id))
+        //      {
+        //        group.channels.AddRange(rootConfig.channels.Take(1));
+        //        rootConfig.channels = rootConfig.channels.Skip(1).ToList();
+        //      }
+        //      else
+        //        break;
+        //    }
+        //    channelGroups.Add(group);
+        //  }
+        //}
         Console.WriteLine("Splitting channels into {0} groups", channelGroups.Count());
       }
       catch(Exception ex)
@@ -264,50 +346,14 @@ namespace wgmulti
     /// </summary>
     /// <param name="grabber"></param>
     /// <returns></returns>
-    public static string GetOutputPath(Grabber grabber)
+    /*public static string GetOutputPath(Grabber grabber)
     {
-      if (grabber.config.postProcessEnabled)
+      if (grabber.config.postProcess.run)
         return grabber.config.postProcessOutputFilePath;
       else
         return grabber.config.outputFilePath;
-    }
-
-    /// <summary>
-    /// Concatenates all EPGs into a single one
-    /// Saves it in the config directory
-    /// </summary>
-    /// <param name="epgFiles">List of all local EPG files to be merged</param>
-    /// <param name="outputFile">File for output.</param>
-    public static void MergeEpgs(List<String> epgFiles = null, String outputFile = null)
-    {
-      if (outputFile == null)
-        outputFile = rootConfig.postProcessEnabled ? rootConfig.postProcessOutputFilePath : rootConfig.outputFilePath;
-
-      if (epgFiles == null)
-        epgFiles = outputEpgFiles;
-
-      var xmltv = new Xmltv();
-      Console.WriteLine("\nMerging EPGs, master EPG will be saved in " + outputFile);
-      epgFiles.ForEach( epgFile => {
-        try
-        { 
-          var tempXmltv = new Xmltv(epgFile);
-          report.emptyChannels.AddRange(tempXmltv.emptyChannels);
-          report.channels.AddRange(tempXmltv.notEmptyChannels);
-          xmltv.Merge(tempXmltv);
-        }
-        catch (Exception ex)
-        {
-          Console.WriteLine(ex.Message);
-        }
-      });
-
-      if (Arguments.convertTimesToLocal)
-        xmltv.ConvertToLocalTime();
-
-      xmltv.Save(outputFile);
-      Console.WriteLine("EPG saved to {0}", outputFile);
-    }
+    }*/
+    
 
     static void StartWegGrabInstance(Grabber grabber)
     {
@@ -327,10 +373,11 @@ namespace wgmulti
       }
 
       process.Start();
-      Console.WriteLine("Starting process {0} {1}", startInfo.FileName, startInfo.Arguments);
+      Console.WriteLine("Grabber {0} | Starting new instance of {1} with argument\n{2}", 
+        grabber.id.ToUpper(), startInfo.FileName, startInfo.Arguments);
 
       process.EnableRaisingEvents = true;
-      process.Exited += new EventHandler(SingleGrabberExited);
+      process.Exited += new EventHandler((sender, e) => SingleGrabberExited(sender, e, grabber));
       if (!Arguments.showConsole)
         process.BeginOutputReadLine();
       process.WaitForExit(1000 * 60 * Arguments.processTimeout);
@@ -380,8 +427,10 @@ namespace wgmulti
       }
     }
 
-    static void SingleGrabberExited(object sender, EventArgs e)
+    static void SingleGrabberExited(object sender, EventArgs e, Grabber currentGrabber)
     {
+      ParseXml(currentGrabber);
+
       Grabber temp = null;
       lock (grabbersGroup2)
       {
@@ -394,7 +443,80 @@ namespace wgmulti
       if (temp != null)
         StartWegGrabInstance(temp);
     }
+
+    static void ParseXml(Grabber currentGrabber)
+    {
+      Console.WriteLine("Grabber {0} | Parsing XML output", currentGrabber.id.ToUpper());
+      //Parse xml file and assign programs to channels
+      var xmltv = new Xmltv(currentGrabber.config.outputFilePath);
+      var i = 0;
+      // Iterate the channels in the EPG file, add their programmes to the active channels
+      xmltv.channels.ForEach(xmltvChannel => {
+        try
+        {
+          // If channel is offset channel, get it's parent first
+          var channel = rootConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
+
+          channel.xmltvChannel = xmltvChannel;
+          channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
+          i += channel.xmltvPrograms.Count;
+
+          Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
+            currentGrabber.id.ToUpper(),
+            channel.name,
+            channel.xmltvPrograms.Count);
+          
+        }
+        catch { }
+      });
+
+      if (i == 0)
+        Console.WriteLine("{0} | No programs grabbed by grabber", currentGrabber.id.ToUpper());
+    }
+
+
+    static void OutputEmptyChannels()
+    {
+      var n = 0;
+      Console.WriteLine("Channels with no EPG:");
+      foreach (var name in report.emptyChannels)
+      {
+        Console.WriteLine("{0}. {1}", ++n, name);
+      }
+      if (n == 0)
+        Console.WriteLine("None");
+    }
+
+    static void MergeEPGs()
+    {
+      try
+      {
+        // Combine all xml guides into a single one
+        Console.WriteLine("Saving EPG XML file");
+
+        foreach (var channel in rootConfig.GetActiveChannels())
+        {
+          if (channel.xmltvPrograms.Count > 0)
+          {
+            epg.programmes.AddRange(channel.xmltvPrograms);
+            epg.channels.Add(channel.xmltvChannel);
+            report.channels.Add(channel.name);
+          }
+          else
+          {
+            report.emptyChannels.Add(channel.name);
+          }
+          epg.allChannels.Add(channel.xmltvChannel);
+        };
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("Unable to merge EPGs");
+        Console.WriteLine(ex.ToString());
+      }
+    }
   }
+
 
   public class ChannelGroup
   {
@@ -406,6 +528,10 @@ namespace wgmulti
       this.id = id;
       if (channels != null)
         this.channels = channels;
+    }
+    public override string ToString()
+    {
+      return id + " (" + channels.Count + ")";
     }
   }
 }

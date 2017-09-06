@@ -7,27 +7,28 @@
 [        ]             thanks to Paul Weterings and all the contributing users             
 [        ] --------------------------------------------------------------------------------
 [        ] 
-[        ] Job started at 01/08/2017 17:42:23
+[        ] Job started at 10/08/2017 17:35:47
 [  Debug ] 
 [  Debug ] Running  on: Microsoft Windows NT 6.1.7601 Service Pack 1
 [  Debug ] Environment: 4.0.30319.42000
 [  Debug ] 
 [  Debug ] Loading timezone data
 [  Debug ] Embedded timezones source: WGconsole.WG.Common.timezonesdata.txt
-[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.i.ua\WebGrab++.config.xml
-[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.i.ua\tv.i.ua.ini -- Revision 00
-[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.i.ua\epg.xml - found
+[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.yandex.ru\WebGrab++.config.xml
+[Warning ] timezone=UTC+03:00 mapped with timezone_id "Europe/Moscow"
+[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.yandex.ru\tv.yandex.ru.ini -- Revision 02
+[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.yandex.ru\epg.xml - found
 [  Debug ] 0 superfluous shows removed
-[Error   ] Could find existing channel (xmltv_id=Русский Экстрим) in the config file
+[Error   ] Could find existing channel (xmltv_id=1+1 (Укр)) in the config file
 [  Info  ] 
 [  Info  ] 
 [  Info  ]       i=index  .=same  c=change  g=gab  r=replace  n=new
 [  Info  ] 
 [  Info  ] 
 [  Info  ] Group (0) :
-[  Info  ] update requested for - 1 - out of - 1 - channels for 3 day(s)
+[  Info  ] update requested for - 1 - out of - 1 - channels for 1 day(s)
 [  Debug ] 
-[  Info  ] (   1/1   ) TV.I.UA -- chan. (xmltv_id=Русский Экстрим) -- mode Incremental
+[  Info  ] (   1/1   ) TV.YANDEX.RU -- chan. (xmltv_id=1+1 (Укр)) -- mode Incremental
 [Error   ] no shows in indexpage!
 [  Info  ] 
 [  Debug ] 
@@ -36,7 +37,7 @@
 [  Debug ] 0 new shows added
 [  Info  ] 
 [  Info  ] 
-[        ] Job finished at 01/08/2017 17:42:25 done in 1s
+[        ] Job finished at 10/08/2017 17:35:57 done in 9s
 [  Debug ] statistics upload error: The remote server returned an error: (500) Internal Server Error.
 ﻿[        ] 
 [        ]              WebGrab+Plus/w MDB & REX Postprocess -- version  V1.57             
@@ -47,33 +48,137 @@
 [        ]             thanks to Paul Weterings and all the contributing users             
 [        ] --------------------------------------------------------------------------------
 [        ] 
-[        ] Job started at 01/08/2017 17:42:23
+[        ] Job started at 10/08/2017 17:35:47
 [  Debug ] 
 [  Debug ] Running  on: Microsoft Windows NT 6.1.7601 Service Pack 1
 [  Debug ] Environment: 4.0.30319.42000
 [  Debug ] 
 [  Debug ] Loading timezone data
 [  Debug ] Embedded timezones source: WGconsole.WG.Common.timezonesdata.txt
-[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg\WebGrab++.config.xml
-[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg\nova.bg.ini -- Revision 01
-[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\nova.bg\epg.xml - found
+[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de\WebGrab++.config.xml
+[Warning ] timezone=UTC+01:00 mapped with timezone_id "Europe/Paris"
+[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de\klack.de.ini -- Revision 00
+[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\klack.de\epg.xml - found
 [  Debug ] 0 superfluous shows removed
-[Error   ] Could find existing channel (xmltv_id=Diema Sport) in the config file
+[Error   ] Could find existing channel (xmltv_id=13th Street) in the config file
 [  Info  ] 
 [  Info  ] 
 [  Info  ]       i=index  .=same  c=change  g=gab  r=replace  n=new
 [  Info  ] 
 [  Info  ] 
 [  Info  ] Group (0) :
-[  Info  ] update requested for - 1 - out of - 1 - channels for 3 day(s)
+[  Info  ] update requested for - 1 - out of - 1 - channels for 1 day(s)
 [  Debug ] 
-[  Info  ] (   1/1   ) NOVA.BG -- chan. (xmltv_id=Diema Sport) -- mode Incremental
+[  Info  ] (   1/1   ) KLACK.DE -- chan. (xmltv_id=13th Street) -- mode Incremental
+[Error   ] no shows in indexpage!
 [  Info  ] 
 [  Debug ] 
-[  Debug ] 35 shows in 1 channels
+[  Debug ] 0 shows in 1 channels
 [  Debug ] 0 updated shows
 [  Debug ] 0 new shows added
 [  Info  ] 
 [  Info  ] 
-[        ] Job finished at 01/08/2017 17:42:32 done in 8s
+[        ] Job finished at 10/08/2017 17:35:59 done in 11s
+[  Debug ] statistics upload error: The remote server returned an error: (500) Internal Server Error.
+﻿[        ] 
+[        ]              WebGrab+Plus/w MDB & REX Postprocess -- version  V1.57             
+[        ] 
+[        ]                                 Jan van Straaten                                
+[        ]                              Francis De Paemeleere                              
+[        ] 
+[        ]             thanks to Paul Weterings and all the contributing users             
+[        ] --------------------------------------------------------------------------------
+[        ] 
+[        ] Job started at 10/08/2017 17:36:07
+[  Debug ] 
+[  Debug ] Running  on: Microsoft Windows NT 6.1.7601 Service Pack 1
+[  Debug ] Environment: 4.0.30319.42000
+[  Debug ] 
+[  Debug ] Loading timezone data
+[  Debug ] Embedded timezones source: WGconsole.WG.Common.timezonesdata.txt
+[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\sky.de\WebGrab++.config.xml
+[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\sky.de\sky.de.ini -- Revision 02
+[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\sky.de\epg.xml - found
+[  Debug ] 0 superfluous shows removed
+[Error   ] Could find existing channel (xmltv_id=13th Street) in the config file
+[  Info  ] 
+[  Info  ] 
+[  Info  ]       i=index  .=same  c=change  g=gab  r=replace  n=new
+[  Info  ] 
+[  Info  ] 
+[  Info  ] Group (0) :
+[  Info  ] update requested for - 1 - out of - 1 - channels for 1 day(s)
+[  Debug ] 
+[  Info  ] (   1/1   ) SKY.DE -- chan. (xmltv_id=13th Street) -- mode Incremental
+[  Debug ]    skipped : show that happened before 'today' @ 09/08/2017 23:55
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Debug ]    suspicious      title in index page  = Law \u0026 Order
+[  Debug ]       differs from title in showdetails = Law & Order
+[  Info  ] 1.42 sec/update
+[  Info  ]    Summary for update of       13th Street
+[  Info  ]      missing shows added       0
+[  Info  ]      changed shows updated     0
+[  Info  ]      new shows added           29
+[  Info  ]      unchanged shows inspected 1
+[  Info  ]      total after update        30
+[  Info  ]      elapstime / updated show  1.43 seconds
+[  Debug ] 
+[  Debug ] 30 shows in 1 channels
+[  Debug ] 0 updated shows
+[  Debug ] 29 new shows added
+[  Info  ] 
+[  Info  ] 
+[        ] Job finished at 10/08/2017 17:36:49 done in 42s
+[  Debug ] statistics upload error: The remote server returned an error: (500) Internal Server Error.
+﻿[        ] 
+[        ]              WebGrab+Plus/w MDB & REX Postprocess -- version  V1.57             
+[        ] 
+[        ]                                 Jan van Straaten                                
+[        ]                              Francis De Paemeleere                              
+[        ] 
+[        ]             thanks to Paul Weterings and all the contributing users             
+[        ] --------------------------------------------------------------------------------
+[        ] 
+[        ] Job started at 10/08/2017 17:36:07
+[  Debug ] 
+[  Debug ] Running  on: Microsoft Windows NT 6.1.7601 Service Pack 1
+[  Debug ] Environment: 4.0.30319.42000
+[  Debug ] 
+[  Debug ] Loading timezone data
+[  Debug ] Embedded timezones source: WGconsole.WG.Common.timezonesdata.txt
+[  Debug ] Reading config file: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru\WebGrab++.config.xml
+[  Info  ] found: C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru\tv.mail.ru.ini -- Revision 01
+[  Debug ] xmltv input file - C:\Users\genevh\AppData\Local\Temp\wgmulti\tv.mail.ru\epg.xml - found
+[  Debug ] 0 superfluous shows removed
+[Error   ] Could find existing channel (xmltv_id=1+1 (Укр)) in the config file
+[  Info  ] 
+[  Info  ] 
+[  Info  ]       i=index  .=same  c=change  g=gab  r=replace  n=new
+[  Info  ] 
+[  Info  ] 
+[  Info  ] Group (0) :
+[  Info  ] update requested for - 1 - out of - 1 - channels for 1 day(s)
+[  Debug ] 
+[  Info  ] (   1/1   ) TV.MAIL.RU -- chan. (xmltv_id=1+1 (Укр)) -- mode Incremental
+[Warning ] 
+[Warning ]   !! -- WARNING : tv.mail.ru doesn't allow epg grabbing !!
+[Warning ] it is advised to disable this channel / site from your channel list
+[Warning ] 
+[  Info  ] 1.14 sec/update
+[  Debug ] 
+[  Debug ] 17 shows in 1 channels
+[  Debug ] 0 updated shows
+[  Debug ] 17 new shows added
+[  Info  ] 
+[  Info  ] 
+[        ] Job finished at 10/08/2017 17:36:30 done in 22s
 [  Debug ] statistics upload error: The remote server returned an error: (500) Internal Server Error.
