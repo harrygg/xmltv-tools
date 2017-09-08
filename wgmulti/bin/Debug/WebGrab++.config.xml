@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<settings>
-  <filename>C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\epg.xml</filename>
-  <mode>m,nomark</mode>
-  <user-agent />
-  <update>i</update>
-  <logging>on</logging>
-  <credentials></credentials>wgmulti.Proxy<skip>13,1</skip><timespan>2,</timespan><retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">2</retry><postprocess run="n" grab="y">mdb</postprocess><channel site="tv.i.ua" xmltv_id="1+1 (Укр)" site_id="/1plus1" update="i">1+1 (Укр)</channel><channel site="klack.de" xmltv_id="13th Street" site_id="112/13th-street" update="i">13th Street</channel></settings>
