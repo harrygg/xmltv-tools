@@ -366,7 +366,8 @@ namespace wgmulti
     /// <returns>A list of channels enabled for grabbing</returns>
     public void SetActiveChannels()
     {
-      channels.ForEach(channel => {
+      foreach (var channel in channels.ToArray())
+      {
         if (!channel.enabled)
         {
           channels.Remove(channel);
@@ -382,18 +383,17 @@ namespace wgmulti
             activeChannels++;
             if (channel.offset_channels != null)
             {
-              channel.offset_channels.ForEach(offset_channel =>
+              foreach (var offset_channel in channel.offset_channels.ToArray())
               {
                 if (!offset_channel.enabled)
                   channel.offset_channels.Remove(offset_channel);
                 else
                   activeChannels++;
-              });
+              }
             }
           }
         }
-        
-      });
+      }
     }
 
     /// <summary>

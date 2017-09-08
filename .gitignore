@@ -16,3 +16,7 @@ xmltv_program_copy/bin/Debug/epg.xml
 packages/*
 wgmulti/bin/Debug/Newtonsoft.Json.xml
 wgmulti/bin/Debug/Newtonsoft.Json.dll
+wgmulti/bin/Debug/rex/*
+wgmulti/bin/Debug/wgmulti.config*
+wgmulti/bin/Debug/siteini.pack
+wgmulti/bin/Debug/siteini.pack/*

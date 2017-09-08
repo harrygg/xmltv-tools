@@ -186,7 +186,7 @@ namespace wgmulti
       if (Arguments.generateReport)
         report.Save(Arguments.configDir);
 
-      Console.ReadLine();
+      //Console.ReadLine();
     }
 
     static Config InitConfig()
@@ -457,15 +457,17 @@ namespace wgmulti
           // If channel is offset channel, get it's parent first
           var channel = rootConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
 
-          channel.xmltvChannel = xmltvChannel;
-          channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
-          i += channel.xmltvPrograms.Count;
+          if (channel.xmltvPrograms.Count == 0) // Update only if channel hasn't been populated from previous run
+          {
+            channel.xmltvChannel = xmltvChannel;
+            channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
+            i += channel.xmltvPrograms.Count;
 
-          Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
-            currentGrabber.id.ToUpper(),
-            channel.name,
-            channel.xmltvPrograms.Count);
-          
+            Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
+              currentGrabber.id.ToUpper(),
+              channel.name,
+              channel.xmltvPrograms.Count);
+          }
         }
         catch { }
       });
@@ -494,7 +496,7 @@ namespace wgmulti
         // Combine all xml guides into a single one
         Console.WriteLine("Saving EPG XML file");
 
-        foreach (var channel in rootConfig.GetActiveChannels())
+        foreach (var channel in rootConfig.channels)
         {
           if (channel.xmltvPrograms.Count > 0)
           {
@@ -508,6 +510,7 @@ namespace wgmulti
           }
           epg.allChannels.Add(channel.xmltvChannel);
         };
+        Console.WriteLine("Report empty channels: {0}", report.emptyChannels.Count);
       }
       catch (Exception ex)
       {

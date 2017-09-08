@@ -53,6 +53,8 @@ namespace wgmulti
     {
       if (outputFile == null)
         outputFile = file;
+      else
+        file = outputFile;
 
       tv.Add(new XAttribute("generator-info-name", generatorName));
       tv.Add(new XAttribute("generator-info-url", generatorUrl));
