@@ -11,6 +11,7 @@ namespace wgmulti
 {
   public class Program
   {
+    static String wgexe = "WebGrab+Plus.exe";
     public static Config rootConfig;
     public static Report report = new Report();
     public static List<String> failedChannelIds = new List<String>();
@@ -21,34 +22,39 @@ namespace wgmulti
 
     static void Main(string[] args)
     {
-      Console.WriteLine("\n#####################################################");
-      Console.WriteLine("#                                                   #");
-      Console.WriteLine("#        wgmulti for WebGrab++ by Harry_GG          #");
-      Console.WriteLine("#                                                   #");
-      Console.WriteLine("#####################################################\n");
-      Console.WriteLine(" System: {0}", Environment.OSVersion.Platform);
-      Console.WriteLine(" Arguments: {0}", Arguments.cmdArgs);
-      Console.WriteLine(" ConfigDir: {0}", Arguments.configDir);
-
-      if (Arguments.buildConfigFromJson)
-      {
-        Console.WriteLine(" Build config from JSON file: {0}", Arguments.buildConfigFromJson);
-        Console.WriteLine(" JsonConfigFileName: {0}", Arguments.jsonConfigFileName);
-      }
-
-      Console.WriteLine(" MaxAsyncProcesses: {0}", Arguments.maxAsyncProcesses);
-      Console.WriteLine(" GroupChannelsBySiteIni: {0}", Arguments.groupChannelsBySiteIni);
-      Console.WriteLine(" MaxChannelsInGroup: {0}", Arguments.maxChannelsInGroup);
-      Console.WriteLine(" ConvertTimesToLocal: {0}", Arguments.convertTimesToLocal);
-      Console.WriteLine(" ShowConsole: {0}", Arguments.showConsole);
-      Console.WriteLine("\n-----------------------------------------------------\n");
-      Console.WriteLine("Execution started at: " + DateTime.Now);
-
       Stopwatch stopWatch = new Stopwatch();
-      stopWatch.Start();
-
       try
       {
+        Console.WriteLine("\n#####################################################");
+        Console.WriteLine("#                                                   #");
+        Console.WriteLine("#        wgmulti for WebGrab++ by Harry_GG          #");
+        Console.WriteLine("#                                                   #");
+        Console.WriteLine("#####################################################\n");
+        Console.WriteLine(" System: {0}", Environment.OSVersion.Platform);
+        Console.WriteLine(" Arguments: {0}", Arguments.cmdArgs);
+        Console.WriteLine(" ConfigDir: {0}", Arguments.configDir);
+
+        var versionInfo = FileVersionInfo.GetVersionInfo(wgexe);
+        Console.WriteLine(" {0} version: {1}", wgexe, versionInfo.ProductVersion);
+
+        if (Arguments.buildConfigFromJson)
+        {
+          Console.WriteLine(" Build config from JSON file: {0}", Arguments.buildConfigFromJson);
+          Console.WriteLine(" JsonConfigFileName: {0}", Arguments.jsonConfigFileName);
+        }
+
+        Console.WriteLine(" MaxAsyncProcesses: {0}", Arguments.maxAsyncProcesses);
+        Console.WriteLine(" GroupChannelsBySiteIni: {0}", Arguments.groupChannelsBySiteIni);
+        //Console.WriteLine(" MaxChannelsInGroup: {0}", Arguments.maxChannelsInGroup);
+        Console.WriteLine(" ConvertTimesToLocal: {0}", Arguments.convertTimesToLocal);
+        Console.WriteLine(" ShowConsole: {0}", Arguments.showConsole);
+        Console.WriteLine("\n-----------------------------------------------------\n");
+        Console.WriteLine("Execution started at: " + DateTime.Now);
+
+
+        stopWatch.Start();
+
+
         rootConfig = InitConfig();
         report.total = rootConfig.activeChannels;
         Console.WriteLine("Cofig contains {0} channels for grabbing", rootConfig.activeChannels);
@@ -121,7 +127,7 @@ namespace wgmulti
           }
 
           Console.WriteLine("-----------------------------------------------------");
-          Console.WriteLine("---------------- Grabbing Round #{0} ------------------", siteiniIndex+1);
+          Console.WriteLine("---------------- Grabbing Round #{0} ------------------", siteiniIndex + 1);
           Console.WriteLine("-----------------------------------------------------");
           Console.WriteLine("Starting {0} grabbers asynchronously, {1} at a time",
             grabbersGroupParallel.Count + grabbersGroup2.Count, Arguments.maxAsyncProcesses);
@@ -151,10 +157,15 @@ namespace wgmulti
         //if (Arguments.combineLogFiles)
         //  MergeLogs();
       }
+      catch (FileNotFoundException)
+      {
+        Console.WriteLine("ERROR! WebGrab+Plus.exe not found or not executable!");
+        return;
+      }
       catch (Exception ex)
       {
-        if (ex.ToString().Contains("annot find the"))
-          Console.WriteLine("ERROR! WebGrab+Plus.exe not found and not executable!");
+        if (ex.ToString().Contains("annot find the")) //Could come from Linux based OS
+          Console.WriteLine("ERROR! WebGrab+Plus.exe not found or not executable!");
         else
           Console.WriteLine(ex.ToString());
         return;
@@ -362,7 +373,7 @@ namespace wgmulti
       startInfo.CreateNoWindow = false;
       startInfo.UseShellExecute = Arguments.showConsole;
       startInfo.WindowStyle = ProcessWindowStyle.Normal;
-      startInfo.FileName = "WebGrab+Plus.exe";
+      startInfo.FileName = wgexe;
       startInfo.Arguments = String.Format("\"{0}\"", grabber.config.folder);
       process.StartInfo = startInfo;
 
@@ -473,7 +484,7 @@ namespace wgmulti
       });
 
       if (i == 0)
-        Console.WriteLine("{0} | No programs grabbed by grabber", currentGrabber.id.ToUpper());
+        Console.WriteLine("Grabber {0} | No programs grabbed!!!", currentGrabber.id.ToUpper());
     }
 
 

@@ -55,7 +55,6 @@ namespace wgmulti
       { 
         siteinis = new List<SiteIni>();
         siteinis.Add(siteini);
-        isActive = false;
       }
       this.name = name;
       xmltv_id = xmltvId;
