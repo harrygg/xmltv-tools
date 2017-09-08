@@ -1,4 +1,0 @@
-#  Hot_Cookies, saved for the purpose of an actual WebGrab run
-#  Saved by WG++ 06/08/2017
-
-nova.bg	False	/schedule/index/5/2017/08/06	False	-62135600400	device	1
