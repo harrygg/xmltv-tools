@@ -157,9 +157,9 @@ namespace wgmulti
         //if (Arguments.combineLogFiles)
         //  MergeLogs();
       }
-      catch (FileNotFoundException)
+      catch (FileNotFoundException fnfe)
       {
-        Console.WriteLine("ERROR! WebGrab+Plus.exe not found or not executable!");
+        Console.WriteLine("ERROR! {0}", fnfe.Message);
         return;
       }
       catch (Exception ex)
