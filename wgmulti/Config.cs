@@ -16,7 +16,7 @@ namespace wgmulti
     public String logFilePath = "";
     public String folder = "";
     public String outputFilePath = "epg.xml";
-    public String epgFileName = "epg.xml";
+    public static String epgFileName = "epg.xml";
     public Proxy proxy { get; set; }
     //public List<Credentials> credentials { get; set; }
     public String mode { get; set; }
@@ -27,16 +27,12 @@ namespace wgmulti
     public String update { get; set; }
     public Retry retry { get; set; }
     public PostProcess postProcess { get; set; }
-    String postProcessConfigFileName = ".config.xml";
-    public String postProcessConfigFilePath = "";
-    public String postProcessOutputFilePath = "";
-    public XElement postProcessSettings;
     public List<Channel> channels { get; set; }
     public int activeChannels = 0;
     public IEnumerable<IGrouping<String, Channel>> grabbers;
     public String tempDir = Path.Combine(Path.GetTempPath(), "wgmulti");
 
-    public Config() { }
+    public Config() {}
     /// <summary>
     /// Create a config object. If a path to config.xml file is provided, settings will be loaded.
     /// Otherwise a default config file will be created
@@ -52,7 +48,7 @@ namespace wgmulti
       { 
         folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
         if (!Path.IsPathRooted(folder))
-          throw new ArgumentException("Config path must be an absolute path");
+          throw new ArgumentException("Config folder path must be an absolute path");
       }
       SetAbsPaths(folder);
 
@@ -70,12 +66,6 @@ namespace wgmulti
       configFilePath = Path.Combine(folder, configFileName);
       logFilePath = Path.Combine(folder, logFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
-      if (postProcess.run)
-      {
-        postProcessConfigFilePath = Path.Combine(folder, postProcess.type.ToString().ToLower(),
-          postProcess.type.ToString().ToLower() + postProcessConfigFileName);
-        postProcessOutputFilePath = Path.Combine(folder, postProcess.type.ToString().ToLower(), epgFileName);
-      }
     }
 
     public void LoadSettingsFromXmlFile(String file = "", bool loadChannels = true)
@@ -120,33 +110,12 @@ namespace wgmulti
       logging = StringToBool(settings.Element("logging"));
       retry = new Retry(settings.Element("retry"));
       postProcess = new PostProcess(settings.Element("postprocess"));
-
       Console.WriteLine("Is postprocess enabled: {0}", postProcess.run);
 
-      if (postProcess.run)
-      {
-        var postProcessDir = Path.Combine(folder, postProcess.type.ToString().ToLower());
-        Debug("postProcessDir=" + postProcessDir);
-        postProcessConfigFilePath = Path.Combine(postProcessDir, postProcess.type.ToString().ToLower() + postProcessConfigFileName);
-        Debug("postprocess config file path is: " + postProcessConfigFilePath);
-        try
-        {
-          var ppConfig = XDocument.Load(postProcessConfigFilePath);
-          postProcessSettings = ppConfig.Element("settings");
-          postProcessOutputFilePath = Path.Combine(postProcessDir, this.epgFileName);
-        }
-        catch (Exception ex)
-        {
-          Console.WriteLine(ex.Message);
-          Debug(ex.ToString());
-          postProcess.run = false;
-          Console.WriteLine("Postprocess operations will be disabled!");
-        }
-      }
-
       if (loadChannels)
-        channels = GetChannels();
+        channels = GetChannelsFromXml();
     }
+
     public static bool StringToBool(XElement el)
     {
       if (el != null)
@@ -177,7 +146,7 @@ namespace wgmulti
     /// Creates a list of channels from XML config file
     /// </summary>
     /// <returns></returns>
-    List<Channel> GetChannels()
+    List<Channel> GetChannelsFromXml()
     {
       channels = new List<Channel>();
       try
@@ -319,17 +288,9 @@ namespace wgmulti
 
         xdoc.Save(_filePath);
 
+        // Save postprocess configuration file as well
         if (postProcess.run)
-        {
-          // Always overwrite filename value
-          postProcessSettings.Element("filename").Value = postProcessOutputFilePath;
-          xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), postProcessSettings);
-
-          folder = new FileInfo(postProcessConfigFilePath).Directory.FullName;
-          if (!Directory.Exists(folder))
-            Directory.CreateDirectory(folder);
-          xdoc.Save(postProcessConfigFilePath);
-        }
+          postProcess.Save(folder);
       }
       catch (Exception ex)
       {
@@ -355,16 +316,15 @@ namespace wgmulti
     {
       var newConfig = (Config)this.MemberwiseClone();
       newConfig.SetAbsPaths(outputFolder);
-
       return newConfig;
     }
 
     /// <summary>
-    /// Creates a list of all channels that are not disabled
+    /// Removes all disabled channels 
     /// Adds 'site' attribute to 'same_as' channels so that the grouping works
     /// </summary>
     /// <returns>A list of channels enabled for grabbing</returns>
-    public void SetActiveChannels()
+    public void PurgeChannels()
     {
       foreach (var channel in channels.ToArray())
       {
@@ -419,13 +379,29 @@ namespace wgmulti
            yield return offset_channel;
       }
     }
-  }
 
-  public class PostProcess
+
+  public IEnumerable<Channel> GetEnabledChannels()
+  {
+    foreach (var channel in channels)
+    {
+      if (channel.enabled)
+        yield return channel;
+
+      if (channel.offset_channels == null)
+        continue;
+
+      foreach (var offset_channel in channel.offset_channels)
+        if (offset_channel.enabled)
+          yield return offset_channel;
+    }
+  }
+}
+public class PostProcess
   {
     /// <summary>
-    /// mdb runs a build in movie database grabber
-    /// rex runs a postprocess that re-allocates xmltv elements
+    /// mdb runs a movie database grabber
+    /// rex re-allocates xmltv elements
     /// </summary>
     public enum Type { MDB, REX };
     public Type type = Type.MDB;
@@ -437,8 +413,17 @@ namespace wgmulti
     /// Runs the postprocess
     /// </summary>
     public bool run = false;
+    public String fileName = "epg.xml";
+
+    public XElement settings;
+    XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null));
+
     public PostProcess() { }
 
+    /// <summary>
+    /// Constructor called when loading configuration from an XML file
+    /// </summary>
+    /// <param name="el"></param>
     public PostProcess(XElement el)
     {
       if (el == null)
@@ -454,6 +439,65 @@ namespace wgmulti
 
       if (el.Value.ToLower() != "" && el.Value.ToLower() != Type.MDB.ToString().ToLower())
         type = Type.REX;
+
+      // Load settings from file
+      if (run)
+        Load();
+    }
+
+    public String GetConfigFileName()
+    {
+      return type.ToString().ToLower() + ".config.xml";
+    }
+    public String GetRelativeFilePath()
+    {
+      return Path.Combine(GetFolderName(), GetConfigFileName());
+    }
+
+    public String GetFolderName()
+    {
+      return type.ToString().ToLower();
+    }
+
+    public void Load(String folderName = null)
+    {
+      try
+      {
+        var path = GetRelativeFilePath();
+        if (!String.IsNullOrEmpty(folderName))
+          path = Path.Combine(folderName, GetRelativeFilePath());
+
+        settings = XDocument.Load(path).Element("settings");
+        fileName = settings.Element("filename").Value;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+        run = false;
+      }
+    }
+
+    /// <summary>
+    /// The post process XML config file is always saved into a sub folder with the PP type name 
+    /// i.e. rex\rex.config.xml or mdb\mdb.config.xml
+    /// </summary>
+    /// <param name="folderName"></param>
+    public void Save(String folderName = null)
+    {
+      // Update the output XML file name so that it reflects the grabber temp dir
+      fileName = Config.epgFileName; // reset inherited file name to epg.xml
+      if (!String.IsNullOrEmpty(folderName))
+        fileName = Path.Combine(folderName, GetFolderName(), fileName);
+
+      settings.Element("filename").Value = fileName; 
+
+      xdoc.Add(settings);
+
+      var path = GetRelativeFilePath();
+      if (!String.IsNullOrEmpty(folderName))
+        path = Path.Combine(folderName, path);
+
+      xdoc.Save(path);
     }
 
     public override String ToString()
@@ -547,8 +591,8 @@ namespace wgmulti
 
   public class Timespan
   {
-    public int days = 0;
-    public string time = null;
+    public int days { get; set; }
+    public string time { get; set; }
     public Timespan() { }
 
     public Timespan(String t = null)
@@ -578,7 +622,7 @@ namespace wgmulti
       var el = new XElement("timespan");
 
       el.Value = days.ToString();
-      if (time != null)
+      if (!String.IsNullOrEmpty(time))
         el.Value += "," + time;
 
       return el;

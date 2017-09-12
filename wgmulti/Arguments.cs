@@ -14,7 +14,7 @@ namespace wgmulti
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
-    public static bool deleteWorkFolder = false;
+    public static String webGrabFolder;
     public static int maxAsyncProcesses = 10;
     public static bool groupChannelsBySiteIni = true;
     public static int maxChannelsInGroup = 10;
@@ -59,8 +59,8 @@ namespace wgmulti
 
       jsonConfigFileName = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? "wgmulti.channels.json";
 
-      val = ConfigurationManager.AppSettings["DeleteWorkFolder"] ?? "false";
-      deleteWorkFolder = Convert.ToBoolean(val);
+      val = ConfigurationManager.AppSettings["WebGrabFolder"] ?? "";
+      webGrabFolder = val;
 
       val = ConfigurationManager.AppSettings["BuildConfigFromJson"] ?? "true";
       buildConfigFromJson = Convert.ToBoolean(val);

@@ -59,7 +59,7 @@ namespace wgmulti
         
         config = (Config)Program.rootConfig.Clone(localDir);
         config.channels = group.channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
-        config.Save();
+        config.Save(); // Save config and postprocess config files
         enabled = true;
       }
       catch (Exception ex)
@@ -86,6 +86,42 @@ namespace wgmulti
         Directory.CreateDirectory(localDir);
 
       return localDir;
+    }
+
+    internal void ParseOutput()
+    {
+      Console.WriteLine("Grabber {0} | Parsing XML output", id.ToUpper());
+      //Parse xml file and assign programs to channels
+      var filePath = config.outputFilePath;
+      if (config.postProcess.run)
+        filePath = config.postProcess.fileName;
+
+      var xmltv = new Xmltv(filePath);
+      var i = 0;
+      // Iterate the channels in the EPG file, add their programmes to the active channels
+      xmltv.channels.ForEach(xmltvChannel => {
+        try
+        {
+          // If channel is offset channel, get it's parent first
+          var channel = Program.rootConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
+
+          if (channel.xmltvPrograms.Count == 0) // Update only if channel hasn't been populated from previous run
+          {
+            channel.xmltvChannel = xmltvChannel;
+            channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
+            i += channel.xmltvPrograms.Count;
+
+            Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
+              id.ToUpper(),
+              channel.name,
+              channel.xmltvPrograms.Count);
+          }
+        }
+        catch { }
+      });
+
+        if (i == 0)
+          Console.WriteLine("Grabber {0} | No programs grabbed!!!", id.ToUpper());
     }
   }
 }

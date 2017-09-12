@@ -11,7 +11,8 @@ namespace wgmulti
 {
   public class Program
   {
-    static String wgexe = "WebGrab+Plus.exe";
+    const String wgexe = "WebGrab+Plus.exe";
+    static String WgPath = Path.Combine(Arguments.webGrabFolder, wgexe);
     public static Config rootConfig;
     public static Report report = new Report();
     public static List<String> failedChannelIds = new List<String>();
@@ -27,14 +28,14 @@ namespace wgmulti
       {
         Console.WriteLine("\n#####################################################");
         Console.WriteLine("#                                                   #");
-        Console.WriteLine("#        wgmulti for WebGrab++ by Harry_GG          #");
+        Console.WriteLine("#      Wgmulti.exe for WebGrab+Plus by Harry_GG     #");
         Console.WriteLine("#                                                   #");
         Console.WriteLine("#####################################################\n");
         Console.WriteLine(" System: {0}", Environment.OSVersion.Platform);
+        Console.WriteLine(" Working Directory: {0}", Directory.GetCurrentDirectory());
+        Console.WriteLine(" Config Directory: {0}", Arguments.configDir);
         Console.WriteLine(" Arguments: {0}", Arguments.cmdArgs);
-        Console.WriteLine(" ConfigDir: {0}", Arguments.configDir);
-
-        var versionInfo = FileVersionInfo.GetVersionInfo(wgexe);
+        var versionInfo = FileVersionInfo.GetVersionInfo(WgPath);
         Console.WriteLine(" {0} version: {1}", wgexe, versionInfo.ProductVersion);
 
         if (Arguments.buildConfigFromJson)
@@ -51,9 +52,7 @@ namespace wgmulti
         Console.WriteLine("\n-----------------------------------------------------\n");
         Console.WriteLine("Execution started at: " + DateTime.Now);
 
-
         stopWatch.Start();
-
 
         rootConfig = InitConfig();
         report.total = rootConfig.activeChannels;
@@ -159,7 +158,7 @@ namespace wgmulti
       }
       catch (FileNotFoundException fnfe)
       {
-        Console.WriteLine("ERROR! {0}", fnfe.Message);
+        Console.WriteLine("ERROR! {0}", fnfe.ToString());
         return;
       }
       catch (Exception ex)
@@ -184,6 +183,7 @@ namespace wgmulti
       Console.WriteLine("Without EPG: {0}", report.emptyChannels.Count);
       Console.WriteLine("EPG size: {0}", report.fileSize);
       Console.WriteLine("EPG md5 hash: {0}", report.md5hash);
+      Console.WriteLine("Report saved to: {0}", report.fileName);
       Console.WriteLine("-----------------------------------------------------");
 
       stopWatch.Stop();
@@ -208,12 +208,14 @@ namespace wgmulti
       if (Arguments.buildConfigFromJson)
       {
         var jsonConfigPath = Path.Combine(Arguments.configDir, Arguments.jsonConfigFileName);
-        if (File.Exists(jsonConfigPath))
-        {
-          var js = new JavaScriptSerializer();
-          config = js.Deserialize<Config>(File.ReadAllText(jsonConfigPath));
-          config.SetAbsPaths(Arguments.configDir);
-        }
+
+        var js = new JavaScriptSerializer();
+        config = js.Deserialize<Config>(File.ReadAllText(jsonConfigPath));
+
+        config.SetAbsPaths(Arguments.configDir);
+
+        if (config.postProcess.run)
+          config.postProcess.Load(config.folder);
       }
       else
       {
@@ -222,7 +224,7 @@ namespace wgmulti
       }
 
       // Remove all disabled channels from the list
-      config.SetActiveChannels();
+      config.PurgeChannels();
 
       return config;
     }
@@ -373,7 +375,7 @@ namespace wgmulti
       startInfo.CreateNoWindow = false;
       startInfo.UseShellExecute = Arguments.showConsole;
       startInfo.WindowStyle = ProcessWindowStyle.Normal;
-      startInfo.FileName = wgexe;
+      startInfo.FileName = WgPath;
       startInfo.Arguments = String.Format("\"{0}\"", grabber.config.folder);
       process.StartInfo = startInfo;
 
@@ -440,7 +442,7 @@ namespace wgmulti
 
     static void SingleGrabberExited(object sender, EventArgs e, Grabber currentGrabber)
     {
-      ParseXml(currentGrabber);
+      currentGrabber.ParseOutput();
 
       Grabber temp = null;
       lock (grabbersGroup2)
@@ -453,38 +455,6 @@ namespace wgmulti
       }
       if (temp != null)
         StartWegGrabInstance(temp);
-    }
-
-    static void ParseXml(Grabber currentGrabber)
-    {
-      Console.WriteLine("Grabber {0} | Parsing XML output", currentGrabber.id.ToUpper());
-      //Parse xml file and assign programs to channels
-      var xmltv = new Xmltv(currentGrabber.config.outputFilePath);
-      var i = 0;
-      // Iterate the channels in the EPG file, add their programmes to the active channels
-      xmltv.channels.ForEach(xmltvChannel => {
-        try
-        {
-          // If channel is offset channel, get it's parent first
-          var channel = rootConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
-
-          if (channel.xmltvPrograms.Count == 0) // Update only if channel hasn't been populated from previous run
-          {
-            channel.xmltvChannel = xmltvChannel;
-            channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
-            i += channel.xmltvPrograms.Count;
-
-            Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
-              currentGrabber.id.ToUpper(),
-              channel.name,
-              channel.xmltvPrograms.Count);
-          }
-        }
-        catch { }
-      });
-
-      if (i == 0)
-        Console.WriteLine("Grabber {0} | No programs grabbed!!!", currentGrabber.id.ToUpper());
     }
 
 
@@ -507,7 +477,7 @@ namespace wgmulti
         // Combine all xml guides into a single one
         Console.WriteLine("Saving EPG XML file");
 
-        foreach (var channel in rootConfig.channels)
+        foreach (var channel in rootConfig.GetEnabledChannels())
         {
           if (channel.xmltvPrograms.Count > 0)
           {

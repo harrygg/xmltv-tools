@@ -12,13 +12,13 @@ namespace wgmulti
     XDocument root = new XDocument(new XDeclaration("1.0", "utf-8", null));
     XElement tv = new XElement("tv");
     String file = "epg.xml";
-    String generatorName = "";
-    String generatorUrl = "";
+    String generatorName = "WebGrab+Plus/w MDB &amp; REX Postprocess -- version  V2.1 -- Jan van Straaten";
+    String generatorUrl = "http://www.webgrabplus.com";
+    String generatorAutomationTool = "wgmulti.exe";
     public List<XElement> allChannels = new List<XElement>();
     public List<XElement> channels = new List<XElement>();
     public List<XElement> programmes = new List<XElement>();
     public List<String> emptyChannelNames = new List<String>();
-    //public List<String> notEmptyChannelNames = new List<String>();
 
     public Xmltv(String file = null)
     {
@@ -27,8 +27,12 @@ namespace wgmulti
 
       root = XDocument.Load(file);
       tv = root.Element("tv");
-      generatorName = tv.Attribute("generator-info-name") != null ? tv.Attribute("generator-info-name").Value : String.Empty;
-      generatorUrl = tv.Attribute("generator-info-url") != null ? tv.Attribute("generator-info-url").Value : String.Empty;
+
+      if (!(tv.Attribute("generator-info-name") != null))
+        generatorName = tv.Attribute("generator-info-name").Value;
+
+      if (!(tv.Attribute("generator-info-url") != null))
+        generatorUrl = tv.Attribute("generator-info-url").Value;
 
       // Get all channel xml nodes
       allChannels = (from e in tv.Elements("channel") select e).ToList();
@@ -58,6 +62,7 @@ namespace wgmulti
 
       tv.Add(new XAttribute("generator-info-name", generatorName));
       tv.Add(new XAttribute("generator-info-url", generatorUrl));
+      tv.Add(new XAttribute("generator-info-automation-tool", generatorAutomationTool));
 
       if (Arguments.removeChannelsWithNoProgrammes)
         tv.Add(channels.ToArray());

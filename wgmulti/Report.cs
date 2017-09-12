@@ -9,7 +9,7 @@ namespace wgmulti
   {
     public Report(){}
 
-    String fileName = "wgmulti.results.json";
+    public String fileName = "wgmulti.results.json";
     //public List<Channel> emptyChannelsObj = new List<Channel>();
     public List<String> channels = new List<String>();
     public List<String> emptyChannels = new List<String>();
