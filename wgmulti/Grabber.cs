@@ -78,9 +78,9 @@ namespace wgmulti
     /// <returns></returns>
     String GetLocalDir(Channel channel)
     {
-      var localDir = Path.Combine(Program.rootConfig.tempDir, id);
+      var localDir = Path.Combine(Arguments.grabingTempFolder, id);
       if (!Arguments.groupChannelsBySiteIni && Arguments.maxChannelsInGroup == 1)
-        localDir = Path.Combine(Program.rootConfig.tempDir, channel.name);
+        localDir = Path.Combine(Arguments.grabingTempFolder, channel.name);
 
       if (!Directory.Exists(localDir))
         Directory.CreateDirectory(localDir);
@@ -96,6 +96,11 @@ namespace wgmulti
       if (config.postProcess.run)
         filePath = config.postProcess.fileName;
 
+      if (!File.Exists(filePath))
+      {
+        Console.WriteLine("ERROR! Epg file not found {0}", filePath);
+        return;
+      }
       var xmltv = new Xmltv(filePath);
       var i = 0;
       // Iterate the channels in the EPG file, add their programmes to the active channels

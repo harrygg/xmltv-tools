@@ -30,7 +30,6 @@ namespace wgmulti
     public List<Channel> channels { get; set; }
     public int activeChannels = 0;
     public IEnumerable<IGrouping<String, Channel>> grabbers;
-    public String tempDir = Path.Combine(Path.GetTempPath(), "wgmulti");
 
     public Config() {}
     /// <summary>
@@ -43,7 +42,7 @@ namespace wgmulti
       postProcess = new PostProcess(); //init postprocess default values
 
       if (path == null)
-        folder = tempDir;
+        folder = Arguments.grabingTempFolder;
       else
       { 
         folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;

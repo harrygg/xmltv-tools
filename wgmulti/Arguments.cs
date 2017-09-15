@@ -10,11 +10,12 @@ namespace wgmulti
     public static String cmdArgs = "None";
     public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
     public static String jsonConfigFileName;
+    public static String webGrabFolder;
+    public static String grabingTempFolder = String.Empty;
     public static bool buildConfigFromJson;
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
-    public static String webGrabFolder;
     public static int maxAsyncProcesses = 10;
     public static bool groupChannelsBySiteIni = true;
     public static int maxChannelsInGroup = 10;
@@ -100,6 +101,9 @@ namespace wgmulti
         val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "true";
         showConsole = Convert.ToBoolean(val);
       //}
+
+      val = ConfigurationManager.AppSettings["GrabingTempFolder"] ?? Path.Combine(Path.GetTempPath(), "wgmulti");
+      grabingTempFolder = val;
     }
   }
 }
