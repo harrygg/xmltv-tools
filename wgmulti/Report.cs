@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Script.Serialization;
 
 namespace wgmulti
@@ -10,8 +11,8 @@ namespace wgmulti
     public Report(){}
 
     public String fileName = "wgmulti.results.json";
-    //public List<Channel> emptyChannelsObj = new List<Channel>();
     public List<String> channels = new List<String>();
+    public List<ActiveChannel> activeChannels = new List<ActiveChannel>();
     public List<String> emptyChannels = new List<String>();
     public int total = 0;
     public int missing = 0;
@@ -32,6 +33,38 @@ namespace wgmulti
       var json = serializer.Serialize(this);
       File.WriteAllText(file, json);
       Console.WriteLine("Report saved to {0}", file);
+    }
+
+    public ActiveChannel GetChannel(String name)
+    {
+      try
+      {
+        return activeChannels.First(channel => channel.name.Equals(name));
+      }
+      catch(Exception)
+      {
+        return null;
+      }
+    }
+  }
+
+  public class ActiveChannel
+  {
+    public String name = String.Empty;
+    public String siteini = String.Empty;
+    public int siteiniIndex = 0;
+    public bool hasEpg = false;
+    public String firstShowStartsAt = String.Empty;
+    public String lastShowStartsAt = String.Empty;
+    public int programsCount = 0;
+
+    public ActiveChannel()
+    {
+    }
+
+    public ActiveChannel(string name)
+    {
+      this.name = name;
     }
   }
 }

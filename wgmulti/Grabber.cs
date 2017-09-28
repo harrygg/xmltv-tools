@@ -43,20 +43,31 @@ namespace wgmulti
       try
       {
         // save ini files to temp dirs
-        foreach (var channel in group.channels)
+        //foreach (var channel in group.channels)
+        //{
+        //  localDir = GetLocalDir(channel);
+        //  if (!channel.GetActiveSiteIni().Save(localDir))
+        //  {
+        //    Console.WriteLine("Grabber {0} | DISABLED !!!", id.ToUpper());
+        //    return;
+        //  }
+        //  // If we are grouping by siteini and there was no siteini found (channel will be inactive) 
+        //  // we exit and don't enable the grabber.
+        //  if (Arguments.groupChannelsBySiteIni && !channel.enabled)
+        //    break;
+        //  // If we are grouping by siteini we copy the first ini file and exit.
+        //  if (Arguments.groupChannelsBySiteIni)
+        //    break;
+        //}
+
+        // save ini file to temp dir
+        localDir = GetLocalDir(group.channels[0]);
+        if (!group.channels[0].GetActiveSiteIni().Save(localDir))
         {
-          localDir = GetLocalDir(channel);
-          if (!channel.GetActiveSiteIni().Save(localDir))
-            channel.enabled = false;
-          // If we are grouping by siteini and there was no siteini found (channel will be inactive) 
-          // we exit and don't enable the grabber.
-          if (Arguments.groupChannelsBySiteIni && !channel.enabled)
-            return;
-          // If we are grouping by siteini we copy the first ini file and exit.
-          if (Arguments.groupChannelsBySiteIni)
-            break;
+          Console.WriteLine("Grabber {0} | DISABLED !!!", id.ToUpper());
+          return;
         }
-        
+
         config = (Config)Program.rootConfig.Clone(localDir);
         config.channels = group.channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
         config.Save(); // Save config and postprocess config files
@@ -64,7 +75,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Grabber ERROR | {0}" + ex.Message);
+        Console.WriteLine("Grabber {0} | ERROR {1}", id.ToUpper(), ex.Message);
         enabled = false;
       }
     }

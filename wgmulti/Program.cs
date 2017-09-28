@@ -55,7 +55,11 @@ namespace wgmulti
         stopWatch.Start();
 
         rootConfig = InitConfig();
+
         report.total = rootConfig.activeChannels;
+
+
+
         Console.WriteLine("Cofig contains {0} channels for grabbing", rootConfig.activeChannels);
 
         if (!rootConfig.postProcess.grab)
@@ -78,6 +82,9 @@ namespace wgmulti
           //Call GetActiveChannels everytime as channels are disabled
           foreach (var channel in rootConfig.GetActiveChannels())
           {
+            // Get channel in report and add its statistics
+            var reportChannel = report.GetChannel(channel.name);
+
             if (channel.xmltvPrograms.Count > 0)
             {
               // there is EPG for this channel so disable updates for next round
@@ -100,6 +107,12 @@ namespace wgmulti
             {
               channel.activeSiteIni = siteiniIndex;
               doGrabbing = true;
+
+              if (reportChannel != null)
+              {
+                reportChannel.siteiniIndex = siteiniIndex;
+                reportChannel.siteini = channel.GetActiveSiteIni().name;
+              }
 
               if (siteiniIndex > 0) // we are not in the first grabbing round
                 Console.WriteLine("Channel '{0}' has no programs. Switching to grabber {1}",
@@ -174,6 +187,19 @@ namespace wgmulti
       OutputEmptyChannels();
 
       // Calculate EPG file size and md5 hash
+      foreach (var channel in rootConfig.GetEnabledChannels())
+      {
+        var reportChannel = new ActiveChannel(channel.name);
+        if (channel.xmltvPrograms.Count > 0)
+        {
+          reportChannel.programsCount = channel.xmltvPrograms.Count;
+          reportChannel.hasEpg = true;
+          reportChannel.firstShowStartsAt = channel.xmltvPrograms[0].Attribute("start").Value;
+          reportChannel.lastShowStartsAt = channel.xmltvPrograms[0].Attribute("stop").Value;
+        }
+
+
+      }
       report.fileSize = epg.GetFileSize();
       report.md5hash = epg.GetMD5Hash();
 
