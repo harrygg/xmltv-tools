@@ -208,7 +208,7 @@ namespace wgmulti
       return channels;
     }
 
-    XElement CreateXml(bool saveChannels)
+    XElement CreateXml()
     {
       var settings = new XElement("settings");
 
@@ -238,7 +238,7 @@ namespace wgmulti
         settings.Add(retry.ToXElement());
         settings.Add(postProcess.ToXElement());
 
-        if (saveChannels && channels != null)
+        if (channels != null)
         {
           foreach (var c in channels)
           { 
@@ -262,7 +262,12 @@ namespace wgmulti
       return settings;
     }
 
-    public bool Save(String outputDir = null, bool saveChannels = true)
+    /// <summary>
+    /// Saves a XML config file to a folder
+    /// </summary>
+    /// <param name="outputDir">The folder where the config file should be saved</param>
+    /// <returns></returns>
+    public bool Save(String outputDir = null)
     {
       var _filePath = "";
       if (!String.IsNullOrEmpty(outputDir)) //If we want to overwrite
@@ -278,7 +283,7 @@ namespace wgmulti
 
       try
       {
-        var settings = CreateXml(saveChannels);
+        var settings = CreateXml();
         XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
 
         folder = new FileInfo(_filePath).Directory.FullName;
@@ -379,24 +384,48 @@ namespace wgmulti
       }
     }
 
-
-  public IEnumerable<Channel> GetEnabledChannels()
-  {
-    foreach (var channel in channels)
+    public IEnumerable<Channel> GetEnabledChannels()
     {
-      if (channel.enabled)
-        yield return channel;
+      foreach (var channel in channels)
+      {
+        if (channel.enabled)
+          yield return channel;
 
-      if (channel.offset_channels == null)
-        continue;
+        if (channel.offset_channels == null)
+          continue;
 
-      foreach (var offset_channel in channel.offset_channels)
-        if (offset_channel.enabled)
-          yield return offset_channel;
+        foreach (var offset_channel in channel.offset_channels)
+          if (offset_channel.enabled)
+            yield return offset_channel;
+      }
+    }
+
+    public Xmltv GetEpg()
+    {
+      Xmltv epg = new Xmltv();
+      try
+      {
+        // Combine all xml guides into a single one
+        Console.WriteLine("Saving EPG XML file");
+
+        foreach (var channel in GetEnabledChannels())
+        {
+          if (channel.xmltvPrograms.Count > 0)
+          {
+            epg.programmes.AddRange(channel.xmltvPrograms);
+            epg.channels.Add(channel.xmltvChannel);
+          }
+        };
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("Unable to merge EPGs");
+        Console.WriteLine(ex.ToString());
+      }
+      return epg;
     }
   }
-}
-public class PostProcess
+  public class PostProcess
   {
     /// <summary>
     /// mdb runs a movie database grabber

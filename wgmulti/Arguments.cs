@@ -23,6 +23,8 @@ namespace wgmulti
     public static bool showConsole = false;
     public static bool randomStartOrder = true;
     public static bool generateReport = true;
+    public static String reportFileName = "wgmulti.report.json";
+    public static String reportFolder = "";
     public static bool combineLogFiles = true;
     public static bool removeChannelsWithNoProgrammes = true;
     public static bool persistantGrabbing = true;
@@ -104,6 +106,12 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["GrabingTempFolder"] ?? Path.Combine(Path.GetTempPath(), "wgmulti");
       grabingTempFolder = val;
+
+      val = ConfigurationManager.AppSettings["ReportFileName"] ?? reportFileName;
+      reportFileName = val;
+
+      val = ConfigurationManager.AppSettings["ReportFolder"] ?? reportFolder;
+      reportFolder = val;
     }
   }
 }

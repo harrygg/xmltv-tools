@@ -11,11 +11,9 @@ namespace wgmulti
   public class Grabber
   {
     public Config config;
-    //Config rootConfig;
     public String id;
     public String currentChannel;
     public String localDir = "";
-    //String iniFilePath;
     public bool enabled = false;
 
     /// <summary>
@@ -24,7 +22,6 @@ namespace wgmulti
     /// <param name="group"></param>
     public Grabber(ChannelGroup group)
     {
-      //this.rootConfig = rootConfig;
       id = group.id;
 
       if (group.channels.Count == 0)
@@ -64,18 +61,18 @@ namespace wgmulti
         localDir = GetLocalDir(group.channels[0]);
         if (!group.channels[0].GetActiveSiteIni().Save(localDir))
         {
-          Console.WriteLine("Grabber {0} | DISABLED !!!", id.ToUpper());
+          Log("DISABLED !!!");
           return;
         }
 
-        config = (Config)Program.rootConfig.Clone(localDir);
+        config = (Config)Program.masterConfig.Clone(localDir);
         config.channels = group.channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
         config.Save(); // Save config and postprocess config files
         enabled = true;
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Grabber {0} | ERROR {1}", id.ToUpper(), ex.Message);
+        Log("ERROR!!! ", ex.Message);
         enabled = false;
       }
     }
@@ -101,7 +98,7 @@ namespace wgmulti
 
     internal void ParseOutput()
     {
-      Console.WriteLine("Grabber {0} | Parsing XML output", id.ToUpper());
+      Log("Parsing XML output");
       //Parse xml file and assign programs to channels
       var filePath = config.outputFilePath;
       if (config.postProcess.run)
@@ -109,7 +106,7 @@ namespace wgmulti
 
       if (!File.Exists(filePath))
       {
-        Console.WriteLine("ERROR! Epg file not found {0}", filePath);
+        Log("ERROR!!! Epg file not found:", filePath);
         return;
       }
       var xmltv = new Xmltv(filePath);
@@ -119,7 +116,7 @@ namespace wgmulti
         try
         {
           // If channel is offset channel, get it's parent first
-          var channel = Program.rootConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
+          var channel = Program.masterConfig.GetActiveChannels().First(c => c.name.Equals(xmltvChannel.Element("display-name").Value));
 
           if (channel.xmltvPrograms.Count == 0) // Update only if channel hasn't been populated from previous run
           {
@@ -127,17 +124,19 @@ namespace wgmulti
             channel.xmltvPrograms = xmltv.programmes.Where(p => p.Attribute("channel").Value == channel.xmltv_id).ToList();
             i += channel.xmltvPrograms.Count;
 
-            Console.WriteLine("Grabber {0} | {1} | {2} programms grabbed",
-              id.ToUpper(),
-              channel.name,
-              channel.xmltvPrograms.Count);
+            Log(channel.name + " | " + channel.xmltvPrograms.Count.ToString(), "programms grabbed");
           }
         }
         catch { }
       });
 
         if (i == 0)
-          Console.WriteLine("Grabber {0} | No programs grabbed!!!", id.ToUpper());
+          Log("No programs grabbed!!!");
+    }
+
+    void Log(String msg, String msg2 = "")
+    {
+      Console.WriteLine("#{0} Grabber {1} | {2} {3}", Program.currentSiteiniIndex + 1, id.ToUpper(), msg, msg2);
     }
   }
 }

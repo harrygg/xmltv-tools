@@ -26,7 +26,7 @@ namespace wgmulti
     /// no more siteinis and there are no programms grabbed
     /// </summary>
     public Boolean isActive = true;
-    public int activeSiteIni = 0;
+    public int siteiniIndex = 0;
     public List<Channel> offset_channels { get; set; }
     public XElement xmltvChannel;
     public List<XElement> xmltvPrograms = new List<XElement>();
@@ -112,7 +112,7 @@ namespace wgmulti
     {
       try
       {
-        return siteinis[activeSiteIni];
+        return siteinis[siteiniIndex];
       }
       catch
       {
@@ -147,25 +147,6 @@ namespace wgmulti
         enabled = false;
       }
     }
-
-    public static Channel GetParent(String channelName)
-    {
-      Channel _parent = null; 
-      try
-      {
-        if (new Regex(@"\+\d+").Match(channelName).Success)
-        {
-          return null;
-        }
-
-      }
-      catch(Exception ex)
-      {
-        Console.WriteLine(ex.ToString());
-        return null;
-      }
-      return _parent; 
-    }
   }
 
   public class SiteIni
@@ -192,7 +173,7 @@ namespace wgmulti
       if (!String.IsNullOrEmpty(path))
         return path;
 
-      var files = GetFilesToDepth(Program.rootConfig.folder, 4);
+      var files = GetFilesToDepth(Program.masterConfig.folder, 4);
       foreach (var f in files)
       { 
         if (f.EndsWith(GetName()))
