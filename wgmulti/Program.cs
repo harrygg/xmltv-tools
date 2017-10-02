@@ -241,7 +241,7 @@ namespace wgmulti
             report.channelsWithEpg += 1;
             channelInfo.programsCount = channel.xmltvPrograms.Count;
             channelInfo.firstShowStartsAt = channel.xmltvPrograms[0].Attribute("start").Value;
-            channelInfo.lastShowStartsAt = channel.xmltvPrograms[0].Attribute("stop").Value;
+            channelInfo.lastShowStartsAt = channel.xmltvPrograms[channelInfo.programsCount - 1].Attribute("stop").Value;
             //In case of offset channels, they don't have siteini
             try
             { 
