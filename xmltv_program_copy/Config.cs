@@ -13,7 +13,7 @@ namespace xmltv_program_copy
     public List<String> removeElements = new List<String>();
     public List<XElement> addElements = new List<XElement>();
     public List<XElement> channels = null;
-
+    public int days = 2;
 
     public Config(String fileName)
     {
@@ -29,7 +29,11 @@ namespace xmltv_program_copy
         return;
       }
 
-      ///Get list of channels that will be copied
+      // Get days to copy
+      if (xmlContent.Element("days") != null)
+        days = Convert.ToInt16(xmlContent.Element("days").Value);
+
+        // Get list of channels that will be copied
       if (xmlContent.Element("root").Element("channels") != null)
         channels = (from c in xmlContent.Element("root").Element("channels").Elements("channel") select c).ToList();
       else

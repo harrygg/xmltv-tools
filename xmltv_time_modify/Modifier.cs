@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -91,7 +92,8 @@ namespace wgmulti.xmltv_time_modify
           DateTime dt;
           try
           {
-            dt = DateTime.ParseExact(dateTimeString, dateFormat, null);
+            //DateTimeZone localZone = DateTimeZone.SystemDefault;
+            dt = DateTime.ParseExact(dateTimeString, dateFormat, CultureInfo.InvariantCulture);
           }
           catch (FormatException)
           {

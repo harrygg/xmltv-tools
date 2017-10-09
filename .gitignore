@@ -31,3 +31,9 @@ wgmulti/bin/Debug/*vshost*
 wgmulti/bin/Debug/wgmulti2*
 wgmulti/bin/Debug/xmltv*
 wgmulti/bin/Debug/robots/*
+xmltv_program_copy/bin/Debug/
+xmltv_program_copy/bin/Debug/*.*
+xmltv_merger/bin/Debug/
+xmltv_merger/bin/Debug/*.*
+xmltv_time_modify/bin/Debug/
+xmltv_time_modify/bin/Debug/*.*

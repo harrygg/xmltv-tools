@@ -77,7 +77,7 @@ namespace xmltv_program_copy
       if (channel != null)
       {
         var programmes = GetProgrammes(channel.Attribute("id").Value);
-        if (programmes != null)
+        if (programmes != null && programmes.Count > 0)
         {
           ///Modify display-name if new value is provided
           var channelName = channel.Element("display-name").Value;
@@ -139,9 +139,16 @@ namespace xmltv_program_copy
     {
       try
       {
-        return (from c in inputEpg.Elements("tv").Elements("programme")
-                where c.Attribute("channel").Value == channelId
-                select c).ToList();
+        var today = DateTime.Now;
+        var dates = new List<String>();
+
+        for (var i = 0; i < config.days; i++)
+          dates.Add(today.AddDays(i).ToString("yyyyMMdd"));
+
+        return (from p in inputEpg.Elements("tv").Elements("programme")
+                where p.Attribute("channel").Value == channelId 
+                      && dates.Contains(p.Attribute("start").Value.Substring(0,8))
+                select p).ToList();
       }
       catch (Exception ex)
       {
