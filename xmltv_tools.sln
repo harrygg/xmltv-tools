@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wgmutlti", "wgmulti\wgmutlti.csproj", "{8675D803-AB93-4320-BE6D-C73CE2CA5203}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ""Tests", ""Tests\Tests.csproj", "{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xmltv_time_modify", "xmltv_time_modify\xmltv_time_modify.csproj", "{8C46DD82-B715-4ADC-9840-90B101367E6B}"
 EndProject

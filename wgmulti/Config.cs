@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Script.Serialization;
 using System.Xml.Linq;
 
 namespace wgmulti
@@ -12,8 +13,8 @@ namespace wgmulti
     public const String dateFormat = "yyyyMMddHHmmss zzz";
     public const String configFileName = "WebGrab++.config.xml";
     public String configFilePath = "";
-    const String logFileName = "WebGrab++.log.txt";
-    public String logFilePath = "";
+    const String LogFileName = "WebGrab++.Log.txt";
+    public String LogFilePath = "";
     public String folder = "";
     public String outputFilePath = "epg.xml";
     public static String epgFileName = "epg.xml";
@@ -30,8 +31,28 @@ namespace wgmulti
     public List<Channel> channels { get; set; }
     public int activeChannels = 0;
     public IEnumerable<IGrouping<String, Channel>> grabbers;
+    public List<String> disabled_siteinis { get; set; }
 
-    public Config() {}
+    /// <summary>
+    /// Returns a list of dates in yyyyMMdd format used when copying EPG
+    /// </summary>
+    List<String> _dates = new List<String>();
+    public List<String> Dates {
+      get {
+        if (_dates.Count != 0)
+          return _dates;
+
+        var today = DateTime.Now;
+        for (var i = 0; i < timeSpan.days + 1; i++)
+          _dates.Add(today.AddDays(i).ToString("yyyyMMdd"));
+        return _dates;
+      }
+    }
+
+    public Config()
+    {
+      postProcess = new PostProcess(); //Default postProcess object
+    }
     /// <summary>
     /// Create a config object. If a path to config.xml file is provided, settings will be loaded.
     /// Otherwise a default config file will be created
@@ -63,7 +84,7 @@ namespace wgmulti
     {
       folder = configFolder; //when called from Clone()
       configFilePath = Path.Combine(folder, configFileName);
-      logFilePath = Path.Combine(folder, logFileName);
+      LogFilePath = Path.Combine(folder, LogFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
     }
 
@@ -73,15 +94,13 @@ namespace wgmulti
         file = configFilePath;
 
       if (!File.Exists(file))
-      {
-        //Debug("Configuration file " + file + " not found! Exiting...");
         throw new FileNotFoundException("Unable to find config file: " + file);
-      }
-      Debug("Loading configuration from " + file);
+      
+      Log.Debug("Loading configuration from " + file);
 
       xmlConfig = XDocument.Load(file);
       var settings = xmlConfig.Element("settings");
-      Debug("settings node loaded");
+      Log.Debug("settings node loaded");
 
       var epgFilePath = settings.Element("filename").Value;
       if (epgFilePath == "")
@@ -92,7 +111,7 @@ namespace wgmulti
       {
         outputFilePath = Path.IsPathRooted(epgFilePath) ? epgFilePath : Path.Combine(folder, epgFilePath);
       }
-      Debug("filename set to " + outputFilePath);
+      Log.Debug("filename set to " + outputFilePath);
 
       if (settings.Element("mode") != null)
         mode = settings.Element("mode").Value;
@@ -106,40 +125,15 @@ namespace wgmulti
       skip = new Skip(settings.Element("skip"));
       timeSpan = new Timespan(settings.Element("timespan"));
       proxy = new Proxy(settings.Element("proxy"));
-      logging = StringToBool(settings.Element("logging"));
+      logging = Utils.StringToBool(settings.Element("logging"));
       retry = new Retry(settings.Element("retry"));
       postProcess = new PostProcess(settings.Element("postprocess"));
-      Console.WriteLine("Is postprocess enabled: {0}", postProcess.run);
+      Log.Debug("Is postprocess enabled: {0}", postProcess.run);
 
       if (loadChannels)
         channels = GetChannelsFromXml();
     }
 
-    public static bool StringToBool(XElement el)
-    {
-      if (el != null)
-        return StringToBool(el.Value);
-      return false;
-    }
-
-    public static bool StringToBool(String val)
-    {
-      val = val.ToLower();
-      return (val == "y" || val == "yes" || val == "true" || val == "on");
-    }
-
-    void SetValue(ref String defaultValue, XElement x, string name, bool fromAttr = false)
-    {
-      try
-      {
-        defaultValue = fromAttr ? x.Attribute(name).Value : x.Element(name).Value;
-        Debug("\"" + name + "\" value is set to \"" + defaultValue + "\"");
-      }
-      catch
-      {
-        Debug("\"" + name + "\" value not found! Using the default value \"" + defaultValue + "\"");
-      }
-    }
 
     /// <summary>
     /// Creates a list of channels from XML config file
@@ -186,7 +180,7 @@ namespace wgmulti
             var same_as = c.Attribute("same_as") != null ? c.Attribute("same_as").Value : null;
             if (String.IsNullOrEmpty(site) && String.IsNullOrEmpty(same_as))
             {
-              Console.WriteLine("Skippping channel without \"site\" and \"same_as\" attributes");
+              Log.Warning("Skippping channel without \"site\" and \"same_as\" attributes");
               continue;
             }
             if (same_as != null)
@@ -196,14 +190,14 @@ namespace wgmulti
           }
           catch
           {
-            Console.WriteLine("Unable to parse channel");
-            Console.WriteLine(c.ToString());
+            Log.Error("Unable to parse channel");
+            Log.Error(c.ToString());
           }
         }
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex.ToString());
+        Log.Error(ex.ToString());
       }
       return channels;
     }
@@ -241,23 +235,12 @@ namespace wgmulti
         if (channels != null)
         {
           foreach (var c in channels)
-          { 
             settings.Add(c.ToXElement());
-            if (c.offset_channels != null)
-              foreach (var ch in c.offset_channels)
-              {
-                if (String.IsNullOrEmpty(ch.same_as))
-                {
-                  ch.same_as = c.name;
-                }
-                settings.Add(ch.ToXElement());
-              }
-          }
         }
       }
       catch (Exception e)
       {
-        Console.WriteLine(e.ToString());
+        Log.Error(e.ToString());
       }
       return settings;
     }
@@ -267,7 +250,7 @@ namespace wgmulti
     /// </summary>
     /// <param name="outputDir">The folder where the config file should be saved</param>
     /// <returns></returns>
-    public bool Save(String outputDir = null)
+    public String Save(String outputDir = null, bool toJson = false)
     {
       var _filePath = "";
       if (!String.IsNullOrEmpty(outputDir)) //If we want to overwrite
@@ -279,35 +262,37 @@ namespace wgmulti
       else
         _filePath = configFileName;
 
-      Debug("Saving config in " + _filePath);
-
       try
       {
-        var settings = CreateXml();
-        XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
+        if (!toJson)
+        {
+          var settings = CreateXml();
+          XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
 
-        folder = new FileInfo(_filePath).Directory.FullName;
-        if (!Directory.Exists(folder))
-          Directory.CreateDirectory(folder);
+          folder = new FileInfo(_filePath).Directory.FullName;
+          if (!Directory.Exists(folder))
+            Directory.CreateDirectory(folder);
 
-        xdoc.Save(_filePath);
+          xdoc.Save(_filePath);
 
-        // Save postprocess configuration file as well
-        if (postProcess.run)
-          postProcess.Save(folder);
+          // Save postprocess configuration file as well
+          if (postProcess.run)
+            postProcess.Save(folder);
+        }
+        else
+        {
+          var jsonConfigPath = Path.Combine(Arguments.configDir, "Converted_" + Arguments.jsonConfigFileName);
+          var js = new JavaScriptSerializer().Serialize(this);
+          File.WriteAllText(jsonConfigPath, js);
+        }
+
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex.ToString());
-        return false;
+        Log.Error(ex.ToString());
+        return null;
       }
-      return true;
-    }
-
-    public static void Debug(string v)
-    {
-      if (Arguments.debug)
-        Console.WriteLine(v);
+      return _filePath;
     }
 
     /// <summary>
@@ -318,17 +303,23 @@ namespace wgmulti
     /// <returns></returns>
     public Config Clone(String outputFolder)
     {
-      var newConfig = (Config)this.MemberwiseClone();
+      var newConfig = (Config) this.MemberwiseClone();
+
+      if (this.postProcess.run)
+        newConfig.postProcess = (PostProcess)this.postProcess.Clone();
+
       newConfig.SetAbsPaths(outputFolder);
       return newConfig;
     }
+
+
 
     /// <summary>
     /// Removes all disabled channels 
     /// Adds 'site' attribute to 'same_as' channels so that the grouping works
     /// </summary>
     /// <returns>A list of channels enabled for grabbing</returns>
-    public void PurgeChannels()
+    public void RemoveDisabledChannels()
     {
       foreach (var channel in channels.ToArray())
       {
@@ -340,7 +331,7 @@ namespace wgmulti
         {
           if (channel.siteinis == null || channel.siteinis.Count == 0)
           {
-            channel.isActive = false;
+            channel.active = false;
           }
           else
           {
@@ -361,43 +352,47 @@ namespace wgmulti
     }
 
     /// <summary>
-    /// Get enumeration of all currently active channels
-    /// TODO - FIX issue - some playlists contain offset channels without active parent channels
-    /// if playlist contains offset channel but no parent channel, 
-    /// then the parent channel will be inactive and so will be the child offset channel.
+    /// Returns enabled channels by various criteria
     /// </summary>
+    /// <param name="includeOffset">Include offset channels</param>
+    /// <param name="onlyActive">Include only active channels</param>
+    /// <param name="withoutPrograms">Include only channels that have no programs</param>
     /// <returns></returns>
-    public IEnumerable<Channel> GetActiveChannels()
+    public IEnumerable<Channel> GetChannels(bool includeOffset = false, bool onlyActive = false)
     {
       foreach (var channel in channels)
       {
-        if (!channel.isActive)
+        if (!channel.enabled || (onlyActive && !channel.active))
           continue;
 
         yield return channel;
 
-        if (channel.offset_channels == null)
+        if (!includeOffset || (includeOffset && channel.offset_channels == null))
           continue;
 
         foreach (var offset_channel in channel.offset_channels)
-           yield return offset_channel;
+        {
+          if (offset_channel.enabled)
+            yield return offset_channel;
+        }
       }
     }
 
-    public IEnumerable<Channel> GetEnabledChannels()
+    public Channel GetChannelByName(String name)
     {
-      foreach (var channel in channels)
+      try
       {
-        if (channel.enabled)
-          yield return channel;
-
-        if (channel.offset_channels == null)
-          continue;
-
-        foreach (var offset_channel in channel.offset_channels)
-          if (offset_channel.enabled)
-            yield return offset_channel;
+        return GetChannels().First(c => c.name.Equals(name));
       }
+      catch (Exception)
+      {
+      }
+      return null;
+    }
+
+    public int EmptyChannelsCount()
+    {
+       return GetChannels().Where(channel => channel.xmltv.programmes.Count == 0).ToList().Count;
     }
 
     public Xmltv GetEpg()
@@ -406,147 +401,29 @@ namespace wgmulti
       try
       {
         // Combine all xml guides into a single one
-        Console.WriteLine("Saving EPG XML file");
+        Log.Info("Merging channel guides, creating offset channel guides");
 
-        foreach (var channel in GetEnabledChannels())
+        foreach (var channel in GetChannels(includeOffset: true))
         {
-          if (channel.xmltvPrograms.Count > 0)
+          if (channel.xmltv.programmes.Count > 0)
           {
-            epg.programmes.AddRange(channel.xmltvPrograms);
-            epg.channels.Add(channel.xmltvChannel);
+            epg.programmes.AddRange(channel.xmltv.programmes);
+            epg.postProcessedProgrammes.AddRange(channel.xmltv.postProcessedProgrammes);
+            epg.channels.Add(channel.xmltv.channels[0]);
           }
-        };
+        }
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Unable to merge EPGs");
-        Console.WriteLine(ex.ToString());
+        Log.Error("Unable to merge EPGs");
+        Log.Error(ex.ToString());
       }
       return epg;
     }
-  }
-  public class PostProcess
-  {
-    /// <summary>
-    /// mdb runs a movie database grabber
-    /// rex re-allocates xmltv elements
-    /// </summary>
-    public enum Type { MDB, REX };
-    public Type type = Type.MDB;
-    /// <summary>
-    /// Grabs epg first
-    /// </summary>
-    public bool grab = true;
-    /// <summary>
-    /// Runs the postprocess
-    /// </summary>
-    public bool run = false;
-    public String fileName = "epg.xml";
 
-    public XElement settings;
-    XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null));
-
-    public PostProcess() { }
-
-    /// <summary>
-    /// Constructor called when loading configuration from an XML file
-    /// </summary>
-    /// <param name="el"></param>
-    public PostProcess(XElement el)
+    public override string ToString()
     {
-      if (el == null)
-        return;
-
-      var attr = el.Attribute("grab");
-      if (attr != null && attr.Value != "")
-        grab = Config.StringToBool(attr.Value);
-
-      attr = el.Attribute("run");
-      if (attr != null && attr.Value != "")
-        run = Config.StringToBool(attr.Value);
-
-      if (el.Value.ToLower() != "" && el.Value.ToLower() != Type.MDB.ToString().ToLower())
-        type = Type.REX;
-
-      // Load settings from file
-      if (run)
-        Load();
-    }
-
-    public String GetConfigFileName()
-    {
-      return type.ToString().ToLower() + ".config.xml";
-    }
-    public String GetRelativeFilePath()
-    {
-      return Path.Combine(GetFolderName(), GetConfigFileName());
-    }
-
-    public String GetFolderName()
-    {
-      return type.ToString().ToLower();
-    }
-
-    public void Load(String folderName = null)
-    {
-      try
-      {
-        var path = GetRelativeFilePath();
-        if (!String.IsNullOrEmpty(folderName))
-          path = Path.Combine(folderName, GetRelativeFilePath());
-
-        settings = XDocument.Load(path).Element("settings");
-        fileName = settings.Element("filename").Value;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.ToString());
-        run = false;
-      }
-    }
-
-    /// <summary>
-    /// The post process XML config file is always saved into a sub folder with the PP type name 
-    /// i.e. rex\rex.config.xml or mdb\mdb.config.xml
-    /// </summary>
-    /// <param name="folderName"></param>
-    public void Save(String folderName = null)
-    {
-      // Update the output XML file name so that it reflects the grabber temp dir
-      fileName = Config.epgFileName; // reset inherited file name to epg.xml
-      if (!String.IsNullOrEmpty(folderName))
-        fileName = Path.Combine(folderName, GetFolderName(), fileName);
-
-      settings.Element("filename").Value = fileName; 
-
-      xdoc.Add(settings);
-
-      var path = GetRelativeFilePath();
-      if (!String.IsNullOrEmpty(folderName))
-        path = Path.Combine(folderName, path);
-
-      xdoc.Save(path);
-    }
-
-    public override String ToString()
-    {
-      var _run = run ? "y" : "n";
-      var _grab = grab ? "y" : "n";
-      var _type = (type == Type.MDB) ? "mdb" : "rex";
-      return String.Format("<postprocess run=\"{0}\" grab=\"{1}\">{2}</postprocess>", _run, _grab, _type);
-    }
-
-    public XElement ToXElement()
-    {
-      var el = new XElement("postprocess");
-
-      var val = run ? "y" : "n";
-      el.Add(new XAttribute("run", val));
-      val = grab ? "y" : "n";
-      el.Add(new XAttribute("grab", val));
-      el.Value = (type == Type.MDB) ? "mdb" : "rex";
-
-      return el;
+      return "Master channels: " + channels.Count.ToString() + ", Active channels (incl. Offset): " + GetChannels(true).Count();
     }
   }
 

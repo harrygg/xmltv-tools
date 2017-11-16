@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace wgmulti
@@ -14,6 +12,7 @@ namespace wgmulti
     public String xmltv_id { get; set; }
     public List<SiteIni> siteinis { get; set; }
     public SiteIni siteini;
+    public int siteiniIndex = 0;
     public int? offset { get; set; }
     public String same_as { get; set; }
     public String period { get; set; }
@@ -21,33 +20,18 @@ namespace wgmulti
     public String exclude { get; set; }
     public String site_channel { get; set; }
     public Boolean enabled { get; set; }
-    /// <summary>
-    /// Channel is deactivated if during grabbing it has 
-    /// no more siteinis and there are no programms grabbed
-    /// </summary>
-    public Boolean isActive = true;
-    public int siteiniIndex = 0;
+    public Boolean active = true; //Channel is deactivated if during grabbing it has no more siteinis
     public List<Channel> offset_channels { get; set; }
-    public XElement xmltvChannel;
-    public List<XElement> xmltvPrograms = new List<XElement>();
-    //public String url;
+    public XElement xml;
+    public Xmltv xmltv = new Xmltv();
+    public String url;
+    public String icon;
 
     public Channel()
     {
-      // set defaults
-
-      //siteinis = new List<SiteIni>(); // init empty list so we don't get exceptions when there are no siteinis (in case of 'same_as' channels)
-      //offset_channels = new List<Channel>();
       enabled = true;
     }
 
-    /// <summary>
-    /// Creates a channel object
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="xmltvId"></param>
-    /// <param name="siteIni"></param>
-    /// <param name="updateType"></param>
     public Channel(String name, String xmltvId, SiteIni siteIni, String updateType = "")
     {
       siteini = siteIni;
@@ -62,13 +46,6 @@ namespace wgmulti
       enabled = true;
     }
 
-    public override string ToString()
-    {
-      var output = name;
-      if (GetActiveSiteIni() != null)
-        output += ", " + GetActiveSiteIni().name;
-      return output;
-    }
     public XElement ToXElement()
     {
 
@@ -99,15 +76,6 @@ namespace wgmulti
       return xEl;
     }
 
-    public XElement GetXmltvChannel(bool getUrl = true)
-    {
-      if (getUrl)
-        return xmltvChannel;
-      
-      xmltvChannel.Element("url").Remove();
-      return xmltvChannel;
-    }
-
     public SiteIni GetActiveSiteIni()
     {
       try
@@ -116,120 +84,97 @@ namespace wgmulti
       }
       catch
       {
+        //Console.WriteLine("ERROR!!! {0}", name);
+        //Console.WriteLine(ex.ToString());
         return null;
       }
     }
 
 
-    /// <summary>
-    /// Copies source siteini file from local to destination grabber folder
-    /// </summary>
-    /// <param name="grabber"></param>
-    public void CopyIni(Grabber grabber)
+    public bool CopyChannelXml(Xmltv _xmltv, String channel_id = null)
     {
-      String sIniFilePath = GetActiveSiteIni().GetPath();
-      var nIniFilePath = Path.Combine(grabber.localDir, GetActiveSiteIni().GetName());
-
       try
       {
-        File.Copy(sIniFilePath, nIniFilePath, true);
-      }
-      catch (FileNotFoundException)
-      {
-        Console.WriteLine("Grabber {0} | ERROR | Ini file does not exist. Grabbing will be skipped!\n{1}", 
-          grabber.id, sIniFilePath);
-        enabled = false;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine("Unable to copy source ini file to grabber dir");
-        Console.WriteLine(ex.ToString());
-        enabled = false;
-      }
-    }
-  }
-
-  public class SiteIni
-  {
-    public SiteIni(String site, String siteId = null)
-    {
-      this.name = site;
-      if (siteId != null)
-        site_id = siteId;
-    }
-    public SiteIni() {}
-    public String name { get; set; }
-    public String GetName() { return name + ".ini"; }
-    public String site_id { get; set; }
-    public String path { get; set; }
-
-    /// <summary>
-    /// Gets the path of the source INI file.
-    /// If not found in the current dir, searches recusively depth=6
-    /// </summary>
-    /// <returns></returns>
-    public String GetPath()
-    {
-      if (!String.IsNullOrEmpty(path))
-        return path;
-
-      var files = GetFilesToDepth(Program.masterConfig.folder, 4);
-      foreach (var f in files)
-      { 
-        if (f.EndsWith(GetName()))
+        // Create a new XElement to force copy by value
+        XElement _xmlChannel = null;
+        if (channel_id != null)
         {
-          path = f;
-          Console.WriteLine("Grabber {0} | Found siteini {1}", name.ToUpper(), path);
-          break;
+          try
+          {
+            // If channel is not found catch the exception
+            _xmlChannel = new XElement(_xmltv.channels.Where(c => c.Attribute("id").Value == channel_id).First());
+          } 
+          catch (Exception)
+          {
+            return false;
+          }
+          
         }
-      }
+        else
+          _xmlChannel = new XElement(_xmltv.channels[0]);
 
-      if (String.IsNullOrEmpty(path))
-        path = GetName();
+        _xmlChannel.Attribute("id").Value = xmltv_id;
+        _xmlChannel.Element("display-name").Value = name;
 
-      return path;
-    }
-
-    /// <summary>
-    /// Copies source siteini file from local to destination grabber folder
-    /// </summary>
-    /// <param name="grabber"></param>
-    public bool Save(String destDir)
-    {
-      try
-      {
-        var source = GetPath();
-        var file = Path.Combine(destDir, GetName());
-        File.Copy(source, file, true);
+        foreach (var el in _xmlChannel.Elements())
+        {
+          if (el.Name == "url" || el.Name == "icon")
+            el.Remove();
+        }
+        xmltv.channels.Add(_xmlChannel);
         return true;
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Grabber {0} | ERROR {1}", name.ToUpper(), ex.Message);
+        Log.Error(String.Format("#{0} | {1}", Program.currentSiteiniIndex + 1, ex.ToString()));
         return false;
       }
     }
 
-    private static IList<String> GetFilesToDepth(String path, int depth)
+    public void CopyProgramsXml(Xmltv _xmltv, String channel_id = null)
     {
-      var files = Directory.EnumerateFiles(path).ToList();
+      // If offset is null and convert to local times is true, then keep the offset null
+      offset = (offset == null && !Arguments.convertTimesToLocal) ? 0 : offset;
+      // If channel_id is null we are copying all programms from master channel
+      if (channel_id == null) 
+        channel_id = _xmltv.programmes[0].Attribute("channel").Value;
 
-      if (depth > 0)
-      {
-        var folders = Directory.EnumerateDirectories(path);
+      _xmltv.programmes.ForEach(program => {
+        var channel_name = program.Attribute("channel").Value;
+        var start_time = program.Attribute("start").Value;
+        var end_time = program.Attribute("stop").Value;
 
-        foreach (var folder in folders)
+        if (channel_name == channel_id && Program.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
         {
-          files.AddRange(GetFilesToDepth(folder, depth - 1));
-        }
-      }
+          program = new XElement(program); // Clone to a copy of the object
+          program.Attribute("channel").Value = xmltv_id; // Rename all 'channel' tags to reflect the new channel
+          program.Attribute("start").Value = Utils.AddOffset(start_time, offset); //If offset is null we will apply local time shift
+          program.Attribute("stop").Value = Utils.AddOffset(end_time, offset);
 
-      return files;
+          // Copy only the titles
+          if (offset != null && offset > 0) // if it's an offset channel remove all tags other then the 'title'
+          {
+            foreach (var el in program.Elements())
+            {
+              if (el.Name != "title")
+                el.Remove();
+            }
+          }
+          xmltv.programmes.Add(program);
+        }
+      });
     }
 
-    public override string ToString()
+    
+
+    public override String ToString()
     {
-      return name;
+      var output = name;
+      if (GetActiveSiteIni() != null)
+        output += ", " + GetActiveSiteIni().name + " (" + siteiniIndex + ")";
+      output += ", " + xmltv.programmes.Count + " pr.";
+      output += ", " + active.ToString();
+      return output;
     }
   }
 }

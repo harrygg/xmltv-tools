@@ -4,15 +4,16 @@ using System.IO;
 
 namespace wgmulti
 {
-  class Arguments
+  public class Arguments
   {
     public static String[] args = Environment.GetCommandLineArgs();
     public static String cmdArgs = "None";
     public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
     public static String jsonConfigFileName;
-    public static String webGrabFolder;
+    public static String webGrabFolder = "";
     public static String grabingTempFolder = String.Empty;
     public static bool buildConfigFromJson;
+    public static bool convertXmlConfigToJson = false;
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
@@ -29,6 +30,7 @@ namespace wgmulti
     public static bool removeChannelsWithNoProgrammes = true;
     public static bool persistantGrabbing = true;
     public static bool debug = false;
+    public static bool copyOnlyTitleForOffsetChannel = false;
 
     public static bool IsLinux()
     {
@@ -60,13 +62,15 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["Debug"] ?? "false";
       debug = Convert.ToBoolean(val);
 
-      jsonConfigFileName = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? "wgmulti.channels.json";
+      jsonConfigFileName = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? "wgmulti.config.json";
 
-      val = ConfigurationManager.AppSettings["WebGrabFolder"] ?? "";
-      webGrabFolder = val;
+      webGrabFolder = ConfigurationManager.AppSettings["WebGrabFolder"] ?? webGrabFolder;
 
       val = ConfigurationManager.AppSettings["BuildConfigFromJson"] ?? "true";
       buildConfigFromJson = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["ConvertXmlConfigToJson"] ?? "true";
+      convertXmlConfigToJson = Convert.ToBoolean(val) && !buildConfigFromJson;
 
       val = ConfigurationManager.AppSettings["GroupChannelsBySiteIni"] ?? "true";
       groupChannelsBySiteIni = Convert.ToBoolean(val);
@@ -97,10 +101,13 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["PersistantGrabbing"] ?? "true";
       persistantGrabbing = Convert.ToBoolean(val);
-      
+
+      val = ConfigurationManager.AppSettings["CopyOnlyTitleForOffsetChannel"] ?? copyOnlyTitleForOffsetChannel.ToString().ToLower();
+      copyOnlyTitleForOffsetChannel = Convert.ToBoolean(val);
+
       //if (!IsLinux())
       //{ 
-        val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "true";
+        val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "false";
         showConsole = Convert.ToBoolean(val);
       //}
 

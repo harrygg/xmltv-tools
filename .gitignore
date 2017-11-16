@@ -37,3 +37,5 @@ xmltv_merger/bin/Debug/
 xmltv_merger/bin/Debug/*.*
 xmltv_time_modify/bin/Debug/
 xmltv_time_modify/bin/Debug/*.*
+.vs/*.*
+.vs/
