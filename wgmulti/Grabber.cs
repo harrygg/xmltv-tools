@@ -203,7 +203,7 @@ namespace wgmulti
                 if (!channel.CopyChannelXml(grabberXmltv, channel_id))
                   WriteLog(String.Format("No XML channel {0} with id {1} not found!", channel.name, channel_id), LogLevel.ERROR);
 
-                channel.xmltv.programmes = grabberXmltv.GetProgramsById(channel_id, null, channel.xmltv_id);
+                channel.xmltv.programmes = grabberXmltv.GetProgramsById(channel_id, channel.offset, channel.xmltv_id);
 
                 //channel.CopyProgramsXml(grabberXmltv, channel_id);
                 i += channel.xmltv.programmes.Count;
@@ -219,34 +219,34 @@ namespace wgmulti
 
                   // Copy post processed data
                   if (type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
-                    channel.xmltv.postProcessedProgrammes = postProcessedXmltv.GetProgramsById(channel_id, null, channel.xmltv_id);
+                    channel.xmltv.postProcessedProgrammes = postProcessedXmltv.GetProgramsById(channel_id, channel.offset, channel.xmltv_id);
 
                   //If channel has offset channels, copy and offset the programs
                   if (channel.timeshifted != null) 
                   {
-                    foreach (var offset_channel in channel.timeshifted)
+                    foreach (var timeshifted in channel.timeshifted)
                     {
-                      WriteLog("Generating program for offset channel " + offset_channel.name);
+                      WriteLog("Generating program for offset channel " + timeshifted.name);
 
-                      offset_channel.CopyChannelXml(channel.xmltv);
+                      timeshifted.CopyChannelXml(channel.xmltv);
                       //offset_channel.CopyProgramsXml(channel.xmltv);
 
                       // Copy programs from the parent channel xmltv. Apply the offset and rename
-                      offset_channel.xmltv.programmes = channel.xmltv.GetProgramsById(
+                      timeshifted.xmltv.programmes = channel.xmltv.GetProgramsById(
                         channel.xmltv_id, 
-                        offset_channel.offset, 
-                        offset_channel.xmltv_id);
+                        timeshifted.offset, 
+                        timeshifted.xmltv_id);
 
                       // Copy post processed programs from the parent channel post processed programms
                       if (type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
                       {
-                        offset_channel.xmltv.postProcessedProgrammes = channel.xmltv.GetProgramsById(
+                        timeshifted.xmltv.postProcessedProgrammes = channel.xmltv.GetProgramsById(
                           channel.xmltv_id,
-                          offset_channel.offset,
-                          offset_channel.xmltv_id,
+                          timeshifted.offset,
+                          timeshifted.xmltv_id,
                           true);
                       }
-                      WriteLog(String.Format(" {0} - {1} programs grabbed", offset_channel.name, offset_channel.xmltv.programmes.Count));
+                      WriteLog(String.Format(" {0} - {1} programs grabbed", timeshifted.name, timeshifted.xmltv.programmes.Count));
                     }
                   }
                 }

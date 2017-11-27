@@ -165,10 +165,13 @@ namespace wgmulti
         _xmlChannel.Attribute("id").Value = xmltv_id;
         _xmlChannel.Element("display-name").Value = name;
 
-        foreach (var el in _xmlChannel.Elements())
+        if (Arguments.removeExtraChannelAttributes)
         {
-          if (el.Name == "url" || el.Name == "icon")
-            el.Remove();
+          foreach (var el in _xmlChannel.Elements())
+          {
+            if (el.Name == "url" || el.Name == "icon")
+              el.Remove();
+          }
         }
         xmltv.channels.Add(_xmlChannel);
         return true;
@@ -179,42 +182,6 @@ namespace wgmulti
         return false;
       }
     }
-
-    //public void CopyProgramsXml(Xmltv _xmltv, String channel_id = null)
-    //{
-    //  // If offset is null and convert to local times is true, then keep the offset null
-    //  offset = (offset == null && !Arguments.convertTimesToLocal) ? 0 : offset;
-    //  // If channel_id is null we are copying all programms from master channel
-    //  if (channel_id == null) 
-    //    channel_id = _xmltv.programmes[0].Attribute("channel").Value;
-
-    //  _xmltv.programmes.ForEach(program => {
-    //    var channel_name = program.Attribute("channel").Value;
-    //    var start_time = program.Attribute("start").Value;
-    //    var end_time = program.Attribute("stop").Value;
-
-    //    if (channel_name == channel_id && Program.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
-    //    {
-    //      program = new XElement(program); // Clone to a copy of the object
-    //      program.Attribute("channel").Value = xmltv_id; // Rename all 'channel' tags to reflect the new channel
-    //      program.Attribute("start").Value = Utils.AddOffset(start_time, offset); //If offset is null we will apply local time shift
-    //      program.Attribute("stop").Value = Utils.AddOffset(end_time, offset);
-
-    //      // Copy only the titles
-    //      if (offset != null && offset > 0) // if it's an offset channel remove all tags other then the 'title'
-    //      {
-    //        foreach (var el in program.Elements())
-    //        {
-    //          if (el.Name != "title")
-    //            el.Remove();
-    //        }
-    //      }
-    //      xmltv.programmes.Add(program);
-    //    }
-    //  });
-    //}
-
-    
 
     public override String ToString()
     {

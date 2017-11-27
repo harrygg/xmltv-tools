@@ -311,24 +311,19 @@ namespace wgmulti
       return conf;
     }
 
-
+    /// <summary>
+    /// Set the same_as attribute of all timeshifted channels. It should be equal to the parent channel xmltv_id
+    /// </summary>
+    /// <param name="c"></param>
     [OnDeserialized]
     void OnDeserialized(StreamingContext c)
     {
-      // Set the same_as attribute of all timeshifted channels. It should be equal to the parent channel xmltv_id
-
-      var parent = new Channel();
       foreach (var channel in GetChannels(includeOffset: true))
       {
-        if (channel.timeshifted != null && channel.timeshifted.Count > 0)
+        // If channel is not timeshifted and has no 'site' attribute, disable it
+        if (String.IsNullOrEmpty(channel.same_as) && String.IsNullOrEmpty(channel.site))
         {
-          parent = channel;
-          continue;
-        }
-
-        if (String.IsNullOrEmpty(channel.site) && String.IsNullOrEmpty(channel.same_as))
-        {
-          channel.same_as = parent.xmltv_id;
+          channel.Enabled = false;
         }
       }
     }
@@ -397,11 +392,13 @@ namespace wgmulti
     /// <returns></returns>
     public IEnumerable<Channel> GetChannels(bool includeOffset = false, bool onlyActive = false)
     {
+      var parent = new Channel();
       foreach (var channel in channels)
       {
         if (!channel.Enabled || (onlyActive && !channel.active))
           continue;
 
+        parent = channel;
         yield return channel;
 
         if (!includeOffset || (includeOffset && channel.timeshifted == null))
@@ -409,6 +406,9 @@ namespace wgmulti
 
         foreach (var timeshifted in channel.timeshifted)
         {
+          if (String.IsNullOrEmpty(timeshifted.same_as))
+            timeshifted.same_as = parent.xmltv_id;
+
           if (timeshifted.Enabled)
             yield return timeshifted;
         }

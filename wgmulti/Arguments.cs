@@ -29,6 +29,7 @@ namespace wgmulti
     public static bool persistantGrabbing = true;
     public static bool debug = false;
     public static bool copyOnlyTitleForOffsetChannel = false;
+    public static bool removeExtraChannelAttributes = false;
     public const String wgexe = "WebGrab+Plus.exe";
     public static String wgPath = "";
 
