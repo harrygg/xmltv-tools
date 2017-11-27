@@ -19,18 +19,17 @@ namespace wgmulti
     public String fileSize = String.Empty;
     public String md5hash = String.Empty;
 
-    public void Save(String path)
+    public void Save()
     {
       try
       {
-        if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
-          Directory.CreateDirectory(path);
+        if (!Directory.Exists(Arguments.reportFolder))
+          Directory.CreateDirectory(Arguments.reportFolder);
 
-        var file = Path.Combine(path, Arguments.reportFileName);
         var serializer = new JavaScriptSerializer();
         var json = serializer.Serialize(this);
-        File.WriteAllText(file, json);
-        Console.WriteLine("Report saved to {0}", file);
+        File.WriteAllText(Arguments.reportFilePath, json);
+        Console.WriteLine("Report saved to " + Arguments.reportFilePath);
       }
       catch (Exception ex)
       {

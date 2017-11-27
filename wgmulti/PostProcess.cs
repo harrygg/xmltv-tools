@@ -1,48 +1,66 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace wgmulti
 {
-
   /// <summary>
   /// mdb runs a movie database grabber
   /// rex re-allocates xmltv elements
   /// </summary>
+ [DataContract()]
   public class PostProcess : ICloneable
   {
-    public enum Type { MDB, REX };
+    [DataContract]
+    public enum Type
+    {
+      [XmlEnum(Name = "mdb")]
+      MDB,
+      [XmlEnum(Name = "rex")]
+      REX
+    };
+
+    [IgnoreDataMember, XmlIgnore]
     public Type type = Type.MDB;
+
+    [DataMember(Name = "type"), XmlText]
+    public String PPType
+    {
+      get { return type == Type.MDB ? "mdb" : "rex"; }
+      set { type = value == "mdb" ? Type.MDB : Type.REX; }
+    }
+
+    [DataMember, XmlIgnore]
     public bool grab = true;
+
+    [XmlAttribute("grab"), IgnoreDataMember]
+    public String Grab
+    {
+      get { return grab ? "y" : "n"; }
+      set { grab = value == "y" || value == "yes" || value == "on" || value == "true"; }
+    }
+
+    [DataMember, XmlIgnore]
     public bool run = false;
+
+    [XmlAttribute("run"), IgnoreDataMember]
+    public String Run
+    {
+      get { return run ? "y" : "n"; }
+      set { run = value == "y" || value == "yes" || value == "on" || value == "true"; }
+    }
+
+    [IgnoreDataMember, XmlIgnore]
     public String fileName = "epg.xml";
+
+    [IgnoreDataMember, XmlIgnore]
     XElement settings;
 
     public PostProcess()
     {
       settings = new XElement("settings");
-    }
-
-    /// <summary>
-     /// Constructor called when loading configuration from an XML file
-     /// </summary>
-     /// <param name="el"></param>
-    public PostProcess(XElement el)
-    {
-      if (el == null)
-        return;
-
-      var attr = el.Attribute("grab");
-      if (attr != null && attr.Value != "")
-        grab = Utils.StringToBool(attr.Value);
-
-      attr = el.Attribute("run");
-      if (attr != null && attr.Value != "")
-        run = Utils.StringToBool(attr.Value);
-
-      if (el.Value.ToLower() != "" && el.Value.ToLower() != Type.MDB.ToString().ToLower())
-        type = Type.REX;
-
       // Load settings from file
       if (run)
         Load();

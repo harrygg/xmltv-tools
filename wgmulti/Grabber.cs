@@ -38,7 +38,7 @@ namespace wgmulti
           return;
         }
 
-        if (Program.masterConfig.disabled_siteinis != null && Program.masterConfig.disabled_siteinis.Contains(id))
+        if (Application.masterConfig.disabled_siteinis != null && Application.masterConfig.disabled_siteinis.Contains(id))
         {
           WriteLog("Siteini disabled in configuration! Grabber disabled!", LogLevel.WARN);
           return;
@@ -62,10 +62,10 @@ namespace wgmulti
           return;
         }
 
-        if (channels[0].GetActiveSiteIni().grab_type == "copy")
+        if (channels[0].GetActiveSiteIni().type == GrabType.COPY)
           type = GrabType.COPY;
 
-        config = (Config)Program.masterConfig.Clone(localDir);
+        config = (Config)Application.masterConfig.Clone(localDir);
         config.channels = channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
 
         if (type == GrabType.COPY)
@@ -124,7 +124,7 @@ namespace wgmulti
         startInfo.CreateNoWindow = false;
         startInfo.UseShellExecute = Arguments.showConsole;
         startInfo.WindowStyle = ProcessWindowStyle.Normal;
-        startInfo.FileName = Program.WgPath;
+        startInfo.FileName = Arguments.wgPath;
         startInfo.Arguments = String.Format("\"{0}\"", config.folder);
         process.StartInfo = startInfo;
 
@@ -222,9 +222,9 @@ namespace wgmulti
                     channel.xmltv.postProcessedProgrammes = postProcessedXmltv.GetProgramsById(channel_id, null, channel.xmltv_id);
 
                   //If channel has offset channels, copy and offset the programs
-                  if (channel.offset_channels != null) 
+                  if (channel.timeshifted != null) 
                   {
-                    foreach (var offset_channel in channel.offset_channels)
+                    foreach (var offset_channel in channel.timeshifted)
                     {
                       WriteLog("Generating program for offset channel " + offset_channel.name);
 
@@ -267,7 +267,7 @@ namespace wgmulti
     {
       if (!String.IsNullOrEmpty(e.Data))
       {
-        if (Program.masterConfig.channels.Count == 1 || (Arguments.maxAsyncProcesses == 1 && Arguments.maxChannelsInGroup == 1))
+        if (Application.masterConfig.channels.Count == 1 || (Arguments.maxAsyncProcesses == 1 && Arguments.maxChannelsInGroup == 1))
         {
           Log.Error(e.Data);
           return;
@@ -439,7 +439,7 @@ namespace wgmulti
 
     void WriteLog(String msg, LogLevel level = LogLevel.INFO)
     {
-      msg = String.Format("{0}.{1} | {2} | {3}", Program.currentSiteiniIndex + 1, number, id.ToUpper(), msg);
+      msg = String.Format("{0}.{1} | {2} | {3}", Application.currentSiteiniIndex + 1, number, id.ToUpper(), msg);
 
       if (level == LogLevel.INFO)
         Log.Info(msg);

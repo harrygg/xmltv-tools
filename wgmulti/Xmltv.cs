@@ -87,7 +87,7 @@ namespace wgmulti
           var start_time = program.Attribute("start").Value;
           var end_time = program.Attribute("stop").Value;
 
-          if (channel_name == channel_id && Program.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
+          if (channel_name == channel_id && Application.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
           {
             var copiedProgram = new XElement(program); // Clone to a copy of the object
             if (!String.IsNullOrEmpty(newId))

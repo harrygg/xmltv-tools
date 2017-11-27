@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="Tests.ConfigTest.Deserialize_From_Json_File" /><Add Test="Tests.ConfigTest.Serialize_To_Json_File" /><Add Test="Tests.ConfigTest.Serialize_To_Xml_File" /><Add Test="Tests.ConfigTest.Deserialize_From_Xml_File" /><Add Test="Tests.ConfigTest.Deserialize_From_Xml_File_Nested_Channels" /></Playlist>

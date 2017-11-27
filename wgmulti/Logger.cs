@@ -87,6 +87,11 @@ namespace wgmulti
     {
       return filename;
     }
+
+    public static void Line()
+    {
+      Console.WriteLine("-----------------------------------------------------");
+    }
   }
 
   /// <summary>

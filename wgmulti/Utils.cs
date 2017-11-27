@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace wgmulti
@@ -46,7 +48,7 @@ namespace wgmulti
           try
           {
             //DateTimeZone localZone = DateTimeZone.SystemDefault;
-            dt = DateTime.ParseExact(dateTimeString, Config.dateFormat, CultureInfo.InvariantCulture);
+            dt = DateTime.ParseExact(dateTimeString, dateFormat, CultureInfo.InvariantCulture);
           }
           catch (FormatException)
           {
@@ -100,6 +102,21 @@ namespace wgmulti
     {
       val = val.ToLower();
       return (val == "y" || val == "yes" || val == "true" || val == "on");
+    }
+
+    public static IList<string> GetFilesToDepth(String path, int depth)
+    {
+      if (String.IsNullOrEmpty(path))
+        return null;
+
+      var files = Directory.EnumerateFiles(path).ToList();
+      if (depth > 0)
+      {
+        var folders = Directory.EnumerateDirectories(path);
+        foreach (var folder in folders)
+          files.AddRange(GetFilesToDepth(folder, depth - 1));
+      }
+      return files;
     }
   }
 }
