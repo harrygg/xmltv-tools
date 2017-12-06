@@ -9,6 +9,8 @@ namespace wgmulti
 {
   public class Utils
   {
+
+
     /// <summary>
     /// Creates and gets the name of the temp folder of the current grabber/copier. 
     /// </summary>
@@ -104,19 +106,26 @@ namespace wgmulti
       return (val == "y" || val == "yes" || val == "true" || val == "on");
     }
 
-    public static IList<string> GetFilesToDepth(String path, int depth)
+    static List<String> filesInDir;
+
+    public static List<String> GetFilesToDepth(String path, int depth)
     {
       if (String.IsNullOrEmpty(path))
         return null;
 
-      var files = Directory.EnumerateFiles(path).ToList();
+      if (filesInDir != null)
+        return filesInDir;
+      else
+        filesInDir = new List<String>();
+
+      filesInDir = Directory.EnumerateFiles(path, "*.ini").ToList();
       if (depth > 0)
       {
         var folders = Directory.EnumerateDirectories(path);
         foreach (var folder in folders)
-          files.AddRange(GetFilesToDepth(folder, depth - 1));
+          filesInDir.AddRange(GetFilesToDepth(folder, depth - 1));
       }
-      return files;
+      return filesInDir;
     }
   }
 }

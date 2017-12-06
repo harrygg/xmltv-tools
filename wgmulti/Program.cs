@@ -21,8 +21,9 @@ namespace wgmulti
       Log.Info("System: " + Environment.OSVersion.Platform);
       Log.Info("Working Directory: " + Directory.GetCurrentDirectory());
       Log.Info("Config Directory: " + Arguments.configDir);
-      var versionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath);
-      Log.Info(String.Format("{0} version: {1}", Arguments.wgexe, versionInfo.ProductVersion));
+      Log.Info("Grabbing Temp Directory: " + Arguments.grabingTempFolder);
+      //var versionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath);
+      //Log.Info(String.Format("{0} version: {1}", Arguments.wgexe, versionInfo.ProductVersion));
       if (Arguments.useJsonConfig)
       {
         Log.Info("Use JSON config file: " + Arguments.useJsonConfig);

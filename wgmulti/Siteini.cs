@@ -29,12 +29,15 @@ namespace wgmulti
     [XmlIgnore, IgnoreDataMember]
     public GrabType type { get; set; }
 
-    [DataMember(Name = "type", EmitDefaultValue = false), XmlIgnore]
+    [DataMember(Name = "grab_type", EmitDefaultValue = false), XmlIgnore]
     public String Type
     {
       get { return type == GrabType.COPY ? "copy" : null; }
       set { type = value == "scrub" || value == null ? GrabType.SCRUB : GrabType.COPY; }
     }
+
+    [XmlIgnore, IgnoreDataMember]
+    public bool enabled { get; set; }
 
     public SiteIni(String site, String siteId = null)
     {
@@ -49,7 +52,7 @@ namespace wgmulti
 
     /// <summary>
     /// Gets the path of the source INI file.
-    /// If not found in the current dir, searches recusively depth=6
+    /// If not found in the current dir, searches recusively depth=4
     /// </summary>
     /// <returns></returns>
     public String GetPath()
@@ -63,15 +66,10 @@ namespace wgmulti
         if (Path.GetFileName(file) == GetName())
         {
           path = file;
-          Log.Debug(String.Format("{0} | {1} | Found siteini {2}", Application.currentSiteiniIndex + 1, name.ToUpper(), path));
-          break;
+          return path;
         }
       }
-
-      if (String.IsNullOrEmpty(path))
-        path = GetName();
-
-      return path;
+      return null;      
     }
 
     /// <summary>
@@ -89,7 +87,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.currentSiteiniIndex + 1, name.ToUpper(), ex.ToString()));
+        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.currentSiteiniIndex + 1, name.ToUpper(), ex.Message));
         return false;
       }
     }

@@ -23,7 +23,7 @@ namespace wgmulti
     {
       try
       {
-        if (!Directory.Exists(Arguments.reportFolder))
+        if (!String.IsNullOrEmpty(Arguments.reportFolder) && !Directory.Exists(Arguments.reportFolder))
           Directory.CreateDirectory(Arguments.reportFolder);
 
         var serializer = new JavaScriptSerializer();

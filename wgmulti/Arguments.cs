@@ -106,6 +106,8 @@ namespace wgmulti
       //}
 
       val = ConfigurationManager.AppSettings["GrabingTempFolder"] ?? Path.Combine(Path.GetTempPath(), "wgmulti");
+      if (String.IsNullOrEmpty(val)) // If grabingTempFolder is empty in config file 
+        val = Arguments.configDir;
       grabingTempFolder = val;
 
       val = ConfigurationManager.AppSettings["ReportFileName"] ?? reportFileName;

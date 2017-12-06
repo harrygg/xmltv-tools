@@ -116,8 +116,15 @@ namespace wgmulti
     [XmlIgnore]
     public IEnumerable<IGrouping<String, Channel>> grabbers;
 
-    [DataMember(EmitDefaultValue = false, Order = 11), XmlIgnore]
-    public List<String> disabled_siteinis { get; set; }
+    [IgnoreDataMember, XmlIgnore]
+    public List<String> DisabledSiteiniNamesList
+    {
+      get { return disableSiteiniNames ?? new List<String>(); }
+      set { DisabledSiteiniNamesList = value; }
+    }
+
+    [DataMember(EmitDefaultValue = false, Order = 11, Name = "disabled_siteinis"), XmlIgnore]
+    List<String> disableSiteiniNames { get; set; }
 
     /// <summary>
     /// Returns a list of dates in yyyyMMdd format used when copying EPG
@@ -179,6 +186,8 @@ namespace wgmulti
       configFilePath = Path.Combine(folder, configFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
       jsonConfigFilePath = Path.Combine(folder, jsonConfigFileName);
+      if (postProcess.run && !Path.IsPathRooted(postProcess.configDir))
+        postProcess.configDir = Path.Combine(folder, postProcess.GetFolderName());
     }
 
     public String Serialize(bool toJson = false)
@@ -241,10 +250,16 @@ namespace wgmulti
       if (configFile == null)
         throw new Exception("Specify a config file!");
 
+      Log.Debug("Deserializing config object from file: " + configFile);
       Config conf = configFile.EndsWith(".xml") ? 
         DeserializeXmlFile(configFile) : DeserializeJsonFile(configFile);
 
       conf.SetAbsPaths(Arguments.configDir);
+
+      if (conf.postProcess.run)
+        conf.postProcess.Load();
+
+      Log.Info(String.Format("Config contains {0} channels for grabbing", conf.activeChannels));
 
       return conf;
     }
@@ -258,16 +273,17 @@ namespace wgmulti
       // XMLSerialization does not support OnDeserialize
       var channels = new List<Channel>();
       var parent_channel = new Channel();
+
       // We need to create a default SiteIni object for each channel
-      foreach (var channel in conf.channels)
+      foreach (var channel in conf.GetChannels(true))
       {
         // Is this a timeshifted channel, add it to the previous channel 
-        if (String.IsNullOrEmpty(channel.site))
+        if (!String.IsNullOrEmpty(channel.same_as))
         {
-          if (parent_channel.timeshifted == null)
-            parent_channel.timeshifted = new List<Channel>();
+          if (parent_channel.timeshifts == null)
+            parent_channel.timeshifts = new List<Channel>();
           channel.same_as = parent_channel.xmltv_id;
-          parent_channel.timeshifted.Add(channel);
+          parent_channel.timeshifts.Add(channel);
         }
         else
         {
@@ -333,21 +349,14 @@ namespace wgmulti
     /// </summary>
     /// <param name="outputDir">The folder where the config file should be saved</param>
     /// <returns></returns>
-    public String Save(String file = null, bool toJson = false)
+    public bool Save(String file = null, bool toJson = false)
     {
-      var _filePath = "";
+      var _filePath = configFilePath;
       if (!String.IsNullOrEmpty(file)) //If we want to overwrite during tests
         _filePath = file;
-      else if (!String.IsNullOrEmpty(configFilePath))
-        _filePath = configFilePath;
-      //else if (!String.IsNullOrEmpty(folder))
-      //  _filePath = Path.Combine(folder, configFileName);
-      else
-        _filePath = configFileName;
 
       try
       {
-        folder = new FileInfo(_filePath).Directory.FullName;
         if (!Directory.Exists(folder))
           Directory.CreateDirectory(folder);
 
@@ -361,9 +370,9 @@ namespace wgmulti
       catch (Exception ex)
       {
         Log.Error(ex.ToString());
-        return null;
+        return false;
       }
-      return _filePath;
+      return true;
     }
 
     /// <summary>
@@ -377,7 +386,7 @@ namespace wgmulti
       var newConfig = (Config) this.MemberwiseClone();
 
       if (this.postProcess.run)
-        newConfig.postProcess = (PostProcess)this.postProcess.Clone();
+        newConfig.postProcess = postProcess.Clone(outputFolder);
 
       newConfig.SetAbsPaths(outputFolder);
       return newConfig;
@@ -399,18 +408,22 @@ namespace wgmulti
           continue;
 
         parent = channel;
+        activeChannels++;
         yield return channel;
 
-        if (!includeOffset || (includeOffset && channel.timeshifted == null))
+        if (!includeOffset || (includeOffset && channel.timeshifts == null))
           continue;
 
-        foreach (var timeshifted in channel.timeshifted)
+        foreach (var timeshifted in channel.timeshifts)
         {
           if (String.IsNullOrEmpty(timeshifted.same_as))
             timeshifted.same_as = parent.xmltv_id;
 
           if (timeshifted.Enabled)
+          {
+            activeChannels++;
             yield return timeshifted;
+          }
         }
       }
     }
@@ -432,13 +445,13 @@ namespace wgmulti
        return GetChannels().Where(channel => channel.xmltv.programmes.Count == 0).ToList().Count;
     }
 
-    public Xmltv GetEpg()
+    public Xmltv GetChannelGuides()
     {
       Xmltv epg = new Xmltv();
       try
       {
         // Combine all xml guides into a single one
-        Log.Info("Merging channel guides, creating offset channel guides");
+        Log.Info("Merging channel guides");
 
         foreach (var channel in GetChannels(includeOffset: true))
         {

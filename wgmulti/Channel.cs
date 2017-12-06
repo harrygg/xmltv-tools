@@ -25,13 +25,14 @@ namespace wgmulti
       get
       {
         return (siteinis != null && siteinis.Count > 0) ? 
-          siteinis[0].name : ""; }
+          siteinis[siteiniIndex].name : "";
+      }
 
       set {
         if (siteinis == null)
           siteinis = new List<SiteIni>();
         if (siteinis.Count > 0)
-          siteinis[0].name = value;
+          siteinis[siteiniIndex].name = value;
         else
         {
           var siteini = new SiteIni(value);
@@ -43,13 +44,13 @@ namespace wgmulti
     [IgnoreDataMember, XmlAttribute()]
     public String site_id
     {
-      get { return (siteinis != null && siteinis.Count > 0) ? siteinis[0].site_id : ""; }
+      get { return (siteinis != null && siteinis.Count > 0) ? siteinis[siteiniIndex].site_id : ""; }
       set
       {
         if (siteinis == null)
           siteinis = new List<SiteIni>();
         if (siteinis.Count > 0)
-          siteinis[0].site_id = value;
+          siteinis[siteiniIndex].site_id = value;
         else
         {
           var siteini = new SiteIni();
@@ -110,10 +111,10 @@ namespace wgmulti
     public Boolean active = true;
     
     [DataMember(EmitDefaultValue = false, Order = 11), XmlIgnore]
-    public List<Channel> timeshifted { get; set; }
+    public List<Channel> timeshifts { get; set; }
 
     [IgnoreDataMember, XmlIgnore]
-    public Xmltv xmltv;
+    public Xmltv xmltv = new Xmltv();
 
     public Channel()
     {
@@ -125,6 +126,27 @@ namespace wgmulti
       active = true;
       enabled = (enabled == null || enabled == true) ? true : false;
       xmltv = new Xmltv();
+    }
+
+    public void SetActiveSiteIni()
+    {
+      bool found = false;
+      for (var i = siteiniIndex; i < siteinis.Count; i++)
+      {
+        if (!found && siteinis[i].enabled)
+        {
+          siteiniIndex = i;
+          found = true;
+          String.Format("Channel '{0}' has no programs. Using to grabber {1}",
+              name, GetActiveSiteIni().name.ToUpper());
+        }
+      }
+
+      if (!found)
+      {
+        Log.Info(String.Format("No alternative siteinis found for '{0}'. Channel deactivated.", name));
+        active = false;
+      }
     }
 
     public SiteIni GetActiveSiteIni()

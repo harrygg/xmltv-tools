@@ -11,7 +11,7 @@ namespace wgmulti
   /// rex re-allocates xmltv elements
   /// </summary>
  [DataContract()]
-  public class PostProcess : ICloneable
+  public class PostProcess
   {
     [DataContract]
     public enum Type
@@ -56,14 +56,31 @@ namespace wgmulti
     public String fileName = "epg.xml";
 
     [IgnoreDataMember, XmlIgnore]
+    public String ConfigFileName
+    {
+      get { return GetFolderName() + ".config.xml"; }
+      set { }
+    }
+
+    /// <summary>
+    /// the abs path to the rex or mdb folder
+    /// </summary>
+    [IgnoreDataMember, XmlIgnore]
+    public String configDir = String.Empty;
+
+    [IgnoreDataMember, XmlIgnore]
+    public String ConfigFilePath
+    {
+      get { return Path.Combine(configDir, ConfigFileName); }
+      set { }
+    }
+
+    [IgnoreDataMember, XmlIgnore]
     XElement settings;
 
     public PostProcess()
     {
       settings = new XElement("settings");
-      // Load settings from file
-      if (run)
-        Load();
     }
 
     /// <summary>
@@ -71,22 +88,27 @@ namespace wgmulti
     /// The 'settings' element must be a new object
     /// </summary>
     /// <returns></returns>
-    public Object Clone()
+    public PostProcess Clone(String outputFolder)
     {
       var cloned = (PostProcess)this.MemberwiseClone();
+      cloned.configDir = Path.Combine(outputFolder, GetFolderName());
       cloned.settings = new XElement(settings);
+      cloned.fileName = Path.Combine(cloned.configDir, "epg.xml");
+      cloned.settings.Element("filename").Value = cloned.fileName;
       return cloned;
     }
 
-    public String GetConfigFileName()
-    {
-      return type.ToString().ToLower() + ".config.xml";
-    }
+
+
     public String GetRelativeFilePath()
     {
-      return Path.Combine(GetFolderName(), GetConfigFileName());
+      return Path.Combine(GetFolderName(), ConfigFileName);
     }
 
+    /// <summary>
+    /// Returns the current active folder name rex or mdb
+    /// </summary>
+    /// <returns></returns>
     public String GetFolderName()
     {
       return type.ToString().ToLower();
@@ -100,12 +122,18 @@ namespace wgmulti
     {
       try
       {
-        var path = GetRelativeFilePath();
-        if (!String.IsNullOrEmpty(folderName))
-          path = Path.Combine(folderName, GetRelativeFilePath());
-
-        settings = XDocument.Load(path).Element("settings");
-        fileName = settings.Element("filename").Value;
+        if (!String.IsNullOrEmpty(ConfigFilePath) && ConfigFilePath.EndsWith(".xml"))
+        {
+          settings = XDocument.Load(ConfigFilePath).Element("settings");
+          fileName = settings.Element("filename").Value;
+          if (!Path.IsPathRooted(fileName))
+            fileName = Path.Combine(Path.GetDirectoryName(ConfigFilePath), fileName);
+        }
+        else
+        {
+          Log.Error("Could not load postprocess settings from file " + ConfigFilePath);
+          run = false;
+        }
       }
       catch (Exception ex)
       {
@@ -121,49 +149,18 @@ namespace wgmulti
     /// <param name="folderName"></param>
     public void Save(String folderName = null)
     {
-
-      // Update the output XML file name so that it contains the correct grabber dir
-      fileName = Config.epgFileName; // reset inherited file name to epg.xml
-      if (!String.IsNullOrEmpty(folderName))
-        fileName = Path.Combine(folderName, GetFolderName(), fileName);
-
-      if (settings.Element("filename") != null)
-        settings.Element("filename").Value = fileName;
-      else
-        settings.Add(new XElement("filename", fileName));
-
       XDocument xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), settings);
 
-      // Create post process dir if it doesn't exist
-      var dir = GetFolderName();
-      if (!String.IsNullOrEmpty(folderName))
-        dir = Path.Combine(folderName, dir);
-      if (!Directory.Exists(dir))
-        Directory.CreateDirectory(dir);
+      if (!Directory.Exists(configDir))
+        Directory.CreateDirectory(configDir);
 
       // Get full path of config file and save it to grabber work folder
-      var path = Path.Combine(dir, GetConfigFileName());
-      xdoc.Save(path);
+      xdoc.Save(ConfigFilePath);
     }
 
     public override String ToString()
     {
       return String.Format("Run: {0}, Grab: {1}, Type: {2}", run, grab, type.ToString());
-    }
-
-    public XElement ToXElement()
-    {
-      var el = new XElement("postprocess");
-
-      var val = run ? "y" : "n";
-      el.Add(new XAttribute("run", val));
-
-      val = grab ? "y" : "n";
-      el.Add(new XAttribute("grab", val));
-
-      el.Value = type.ToString().ToLower();
-
-      return el;
     }
   }
 

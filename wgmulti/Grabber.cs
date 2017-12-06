@@ -6,7 +6,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace wgmulti
 {
@@ -35,12 +34,6 @@ namespace wgmulti
         if (channels.Count == 0)
         {
           WriteLog("Grabber has no channels. Grabber disabled!", LogLevel.ERROR);
-          return;
-        }
-
-        if (Application.masterConfig.disabled_siteinis != null && Application.masterConfig.disabled_siteinis.Contains(id))
-        {
-          WriteLog("Siteini disabled in configuration! Grabber disabled!", LogLevel.WARN);
           return;
         }
 
@@ -86,13 +79,12 @@ namespace wgmulti
             return;
           }
           // Save config and postprocess config files
-          var dir = config.Save();
-          if (dir == null)
+          if (!config.Save())
           {
             WriteLog("Unable to save config file in " + config.configFilePath, LogLevel.ERROR);
             return;
           }
-          WriteLog("Saved config file in " + dir, LogLevel.DEBUG);
+          WriteLog("Saved config file in " + config.configFilePath, LogLevel.DEBUG);
         }
       }
       catch (Exception ex)
@@ -134,7 +126,7 @@ namespace wgmulti
           process.OutputDataReceived += new DataReceivedEventHandler((sender, e) => DataReceived(sender, e));
         }
 
-        WriteLog(String.Format("Starting a new instance of {0} with argument{1}", startInfo.FileName, startInfo.Arguments));
+        WriteLog(String.Format("Starting a new instance of {0} with argument {1}", startInfo.FileName, startInfo.Arguments));
         process.Start();
 
         process.EnableRaisingEvents = true;
@@ -191,7 +183,11 @@ namespace wgmulti
       // Loop through all channels in grabber's config and get their programs
       channels.ForEach(
           channel => {
-            if (channel.xmltv.programmes.Count == 0)
+            if (channel.xmltv.programmes.Count > 0)
+            {
+              channel.update = UpdateType.None;
+            }
+            else
             {
               var channel_id = "";
               try
@@ -203,14 +199,13 @@ namespace wgmulti
                 if (!channel.CopyChannelXml(grabberXmltv, channel_id))
                   WriteLog(String.Format("No XML channel {0} with id {1} not found!", channel.name, channel_id), LogLevel.ERROR);
 
-                channel.xmltv.programmes = grabberXmltv.GetProgramsById(channel_id, channel.offset, channel.xmltv_id);
-
-                //channel.CopyProgramsXml(grabberXmltv, channel_id);
+                channel.xmltv.programmes = grabberXmltv.GetProgramsById(
+                  channel_id, channel.offset, channel.xmltv_id);
                 i += channel.xmltv.programmes.Count;
 
                 if (channel.xmltv.programmes.Count == 0)
                 {
-                  WriteLog(String.Format("No XML programms found for channel {0} with id '{1}' found in EPG!", 
+                  WriteLog(String.Format("No XML programms found for channel {0} with id '{1}' found in EPG!",
                     channel.name, channel_id), LogLevel.ERROR);
                 }
                 else
@@ -222,9 +217,9 @@ namespace wgmulti
                     channel.xmltv.postProcessedProgrammes = postProcessedXmltv.GetProgramsById(channel_id, channel.offset, channel.xmltv_id);
 
                   //If channel has offset channels, copy and offset the programs
-                  if (channel.timeshifted != null) 
+                  if (channel.timeshifts != null)
                   {
-                    foreach (var timeshifted in channel.timeshifted)
+                    foreach (var timeshifted in channel.timeshifts)
                     {
                       WriteLog("Generating program for offset channel " + timeshifted.name);
 
@@ -233,8 +228,8 @@ namespace wgmulti
 
                       // Copy programs from the parent channel xmltv. Apply the offset and rename
                       timeshifted.xmltv.programmes = channel.xmltv.GetProgramsById(
-                        channel.xmltv_id, 
-                        timeshifted.offset, 
+                        channel.xmltv_id,
+                        timeshifted.offset,
                         timeshifted.xmltv_id);
 
                       // Copy post processed programs from the parent channel post processed programms
