@@ -67,7 +67,7 @@ namespace wgmulti
     public int siteiniIndex = 0;
 
     [DataMember(EmitDefaultValue = false, Order = 5), XmlIgnore]
-    public int? offset { get; set; }
+    public double? offset { get; set; }
 
     [XmlAttribute("offset")]
     public String Offset
@@ -77,8 +77,8 @@ namespace wgmulti
       {
         if (!String.IsNullOrEmpty(value))
         {
-          int i;
-          if (int.TryParse(value, out i))
+					double i;
+          if (double.TryParse(value, out i))
             offset = i;
         }
       }

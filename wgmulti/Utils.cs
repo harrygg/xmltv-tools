@@ -38,7 +38,7 @@ namespace wgmulti
     /// <param name="dateTimeString">xmltv date i.e. 20170109110000 +0200</param>
     /// <param name="offset">offset value. If null we will convert to local time</param>
     /// <returns>modified date as string i.e. 20170109123000 +0200</returns>
-    public static String AddOffset(String dateTimeString, int? offset = null)
+    public static String AddOffset(String dateTimeString, double? offset = null)
     {
       var result = "";
       var dateFormat = "yyyyMMddHHmmss zzz";

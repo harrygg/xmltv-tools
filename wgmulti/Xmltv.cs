@@ -71,7 +71,7 @@ namespace wgmulti
     /// <param name="offset">The offset of programs. If different than null it will be applied to start and end times. If null local conversion will be applied</param>
     /// <param name="newId">The new channel id of the programs. If specified the channel id of the program will be renamed</param>
     /// <returns></returns>
-    public List<XElement> GetProgramsById(String channel_id, int? offset = null, String newId = null, bool usePostProcessedData = false)
+    public List<XElement> GetProgramsById(String channel_id, double? offset = null, String newId = null, bool usePostProcessedData = false)
     {
       var _programs = new List<XElement>();
       // If we are copying from regular programs or from post processed programs

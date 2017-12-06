@@ -154,7 +154,6 @@ namespace wgmulti
           return;
         }
       }
-      //ScrubbingFinished(null, null);
       ParseOutput();
     }
 
