@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>##filename##</filename>
+  <postprocess run="##postProcessRun##" grab="y">##postProcessName##</postprocess>
+  <logging>on</logging>
+  <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">1</retry>
+  <skip>noskip</skip>
+  <timespan>0</timespan>
+  <update></update>
+
+  <channel update="i" site="siteini" site_id="chanel_1" xmltv_id="Channel1ID">Channel1</channel>
+  <channel same_as="Channel1" offset="1" xmltv_id="Channel1ID +1">Channel1 +1</channel>
+  <channel update="i" site="siteiniCET" site_id="chanel_2" xmltv_id="Channel2ID">Channel2</channel>
+</settings>

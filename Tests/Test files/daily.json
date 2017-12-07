@@ -1,0 +1,50 @@
+﻿[
+  {
+    "starttime": "00:00",
+    "title": "Program title 0"
+  },
+  {
+    "starttime": "02:00",
+    "title": "Program title 2"
+  },
+  {
+    "starttime": "04:00",
+    "title": "Program title 4"
+  },
+  {
+    "starttime": "06:00",
+    "title": "Program title 6"
+  },
+  {
+    "starttime": "08:00",
+    "title": "Program title 8"
+  },
+  {
+    "starttime": "10:00",
+    "title": "Program title 10"
+  },
+  {
+    "starttime": "12:00",
+    "title": "Program title 12"
+  },
+  {
+    "starttime": "14:00",
+    "title": "Program title 14"
+  },
+  {
+    "starttime": "16:00",
+    "title": "Program title 16"
+  },
+  {
+    "starttime": "18:00",
+    "title": "Program title 18"
+  },
+  {
+    "starttime": "20:00",
+    "title": "Program title 20"
+  },
+  {
+    "starttime": "22:00",
+    "title": "Program title 22"
+  }
+]

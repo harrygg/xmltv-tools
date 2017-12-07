@@ -1,0 +1,12 @@
+{
+  "name": "Channel 1",
+  "xmltv_id": "Channel 1 ID",
+  "update": "i",
+  "offset_channels": [
+    {
+      "name": "Channel 1 +1",
+      "xmltv_id": "Channel 1 +1 ID",
+      "offset": 1
+    }
+  ]
+}

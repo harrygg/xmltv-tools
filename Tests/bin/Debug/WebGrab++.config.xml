@@ -1,0 +1,80 @@
+﻿<?xml version="1.0"?>
+<!-- Configuration file for WebGrab+Plus, the incremental Electronic-Program-Guide web grabber
+by Jan van Straaten, December 2011
+Version V1.1.1 -->
+
+<settings>
+  <!-- filename      
+The path (required) + filename where the epgguide xml file is /will be located. It must include drive and folder. Like C:\ProgramData\ServerCare\WebGrab\guide.xml
+If the file already exist (from last run or from another xmltv source) it will read it and use what fits the requested output. In that case the file will be updated. If no such file exist it will be created.
+Change the following to your own needs  :
+-->
+ <filename>C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug\epg.xml</filename>
+  
+  <!-- modes:   
+d or debug    saves the output xmltv file in a file with -debug addition in the file name . The original xmltv file will be kept.  
+m or measure  measures the time for each updated show or new show added 
+n = nomark    disables the update-type marking (n) (c) (g) (r) at the end of the description
+v or verify   verifies the result following a channel update
+w or wget     use wget as grab engine (might improve site recognition in rare cases)
+Note that modes can be added in one line, separated by comma's or spaces, or both. 
+-->
+  <mode></mode>
+
+<user-agent>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36</user-agent>
+
+  <logging>on</logging>
+
+  <!--retry
+The most simple form of retry defines the amount of times the grabber engine should attempt to capture a web page before giving up and continuing with the next page, like <retry>4</retry>
+It is also the place to specify delays between retries and the grabbing of html pages with the following attributes: timeout; the delay between retries (default is 10 sec), channel-delay; the delay between subsequent channels (default is 0), index-delay; the delay between the grabbing of index pages (default is 0), show-delay; the delay between the grabbing of detail show pages (default is 0). In the most complete version it will look like this:
+<retry time-out="5" channel-delay="5" index-delay="1" show-delay="1">4</retry> show-delay="2"
+-->
+  <retry time-out="15">3</retry>
+
+  <!--skip
+It takes two values H,m  separated by a comma: 
+The first H : if a show takes more than H hours, it's either tellsell or other commercial fluff, or simply a mistake or error, we want to skip such shows.
+The second m : if a show is less or equal than m minutes it is probably an announcement , in any case not a real show. 
+When entered as <skip></skip> the defaults are 12 hours, 1 minute, same as <skip>12,1</skip>. To disable this function enter  or just leave out this entry completely<skip>14, 1</skip><skip>16,1</skip>
+-->
+  
+<skip>12,1</skip>
+  
+  <!--timespan
+The timespan for which shows will be grabbed.
+It takes one or two values separated by a comma or a space. The first is the number of days (including today) to download, note that 0 is today. The second (optional) is a time specified between 0:00 and 24:00 which will reduce the download to only the one show (per day) which is scheduled around the specified time. Any value between start time (including) and stop time will do
+This -one-show-only mode is helpfull if a SiteIni file needs to be debugged
+-->
+
+<postprocess run="y" grab="y">rex</postprocess>
+  <!-- update mode
+i or incremental     only updates of changes , gabs, repairs and new shows
+l or light           forces update of today and new shows, rest as incremental
+s or smart           forces update of today and tomorrow and new shows, rest as light
+f or full or force   forces full update 
+If one of these values is entered here it will apply to all channels selected for update 
+(see channel).  This value overrules the value of 'update' for in the individual channels 
+If no value is entered here the individual 'update' values from the channellist are taken 
+-->
+  <update></update>
+<!-- <channel update="f" site="pikbg" site_id="hbo" xmltv_id="hbo">hbo</channel> -->
+    <!-- <channel update="i" site="pikbg" site_id="bnt1" xmltv_id="bnt1">bnt1</channel> -->
+  <timespan>2</timespan>
+  <proxy user="myuser" password="mypass">myserver:8080</proxy>
+    <!-- <proxy>127.0.0.1:8888</proxy> -->
+  <!-- <channel update="i" site="vsetv.com" site_id="504" xmltv_id="Viasat Sport Baltics">Viasat Sport Baltics</channel> -->
+  <!-- <channel same_as="Viasat Sport Baltics" offset="1" xmltv_id="Viasat Sport Baltics +1">Viasat Sport Baltics +1</channel> -->
+  <!-- <channel update="i" site="horizon.tv.pl" site_id="627525671287" xmltv_id="Sundance Channel HD">Sundance Channel HD</channel> -->
+  <channel update="i" site="m.tvprofil.net" site_id="pink-koncert" xmltv_id="Pink Koncert">Pink Koncert</channel>
+  <channel offset="1" same_as="Pink Koncert" xmltv_id="Pink Koncert +1">Pink Koncert +1</channel>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    </settings>

@@ -1,0 +1,2005 @@
+{
+  "retry": {
+    "atttempts": 4,
+    "channelDelay": 0,
+    "indexDelay": 0,
+    "showDelay": 0,
+    "timeOut": 5
+  },
+  "timespan": {
+    "days": 6,
+    "time": ""
+  },
+  "mode": "n,m,w",
+  "filename": "C:\\Users\\genevh\\AppData\\Local\\WebGrab+Plus\\epg.xml",
+  "update": "i",
+  "skip": "15,0",
+  "postprocess": {
+    "grab": true,
+    "run": false,
+    "type": "mdb"
+  },
+  "logging": true,
+  "channels": [
+    {
+      "name": "Rai 1 HD",
+      "xmltv_id": "Rai 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-uno"
+        }
+      ]
+    },
+    {
+      "name": "Rai 2 HD",
+      "xmltv_id": "Rai 2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-due"
+        }
+      ]
+    },
+    {
+      "name": "Rai 3 HD",
+      "xmltv_id": "Rai 3 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-tre"
+        }
+      ]
+    },
+    {
+      "name": "Rete 4 HD",
+      "xmltv_id": "Rete 4 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "R4"
+        }
+      ]
+    },
+    {
+      "name": "Canale 5 HD",
+      "xmltv_id": "Canale 5 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "C5"
+        }
+      ]
+    },
+    {
+      "name": "Canale 5 HD H265",
+      "xmltv_id": "Canale 5 HD H265",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "C5"
+        }
+      ]
+    },
+    {
+      "name": "Italia 1 HD",
+      "xmltv_id": "Italia 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "I1"
+        }
+      ]
+    },
+    {
+      "name": "Italia 2",
+      "xmltv_id": "Italia 2",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "I2"
+        }
+      ]
+    },
+    {
+      "name": "Rsi La1 HD",
+      "xmltv_id": "Rsi La1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "horizon.tv.ch",
+          "site_id": "27909159218"
+        }
+      ]
+    },
+    {
+      "name": "Rsi La2 HD",
+      "xmltv_id": "Rsi La2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "horizon.tv.ch",
+          "site_id": "27909159251"
+        }
+      ]
+    },
+    {
+      "name": "La 5",
+      "xmltv_id": "La 5",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "staseraintv.com",
+          "site_id": "la5"
+        }
+      ]
+    },
+    {
+      "name": "LA7",
+      "xmltv_id": "LA7",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "la7"
+        }
+      ]
+    },
+    {
+      "name": "LA7 D",
+      "xmltv_id": "LA7 D",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "staseraintv.com",
+          "site_id": "la7d"
+        }
+      ]
+    },
+    {
+      "name": "TV 8",
+      "xmltv_id": "TV 8",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "staseraintv.com",
+          "site_id": "tv8"
+        }
+      ]
+    },
+    {
+      "name": "Nove HD",
+      "xmltv_id": "Nove HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "staseraintv.com",
+          "site_id": "nove"
+        }
+      ]
+    },
+    {
+      "name": "Top Crime",
+      "xmltv_id": "Top Crime",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "top-crime"
+        }
+      ]
+    },
+    {
+      "name": "Mediaset Extra",
+      "xmltv_id": "Mediaset Extra",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "KQ"
+        }
+      ]
+    },
+    {
+      "name": "Rai Storia",
+      "xmltv_id": "Rai Storia",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-storia"
+        }
+      ]
+    },
+    {
+      "name": "Iris",
+      "xmltv_id": "Iris",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediaset.it",
+          "site_id": "KI"
+        }
+      ]
+    },
+    {
+      "name": "Rai Sport 1 HD",
+      "xmltv_id": "Rai Sport 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-sport-1"
+        }
+      ]
+    },
+    {
+      "name": "Rai Sport 2 HD",
+      "xmltv_id": "Rai Sport 2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-sport-2"
+        }
+      ]
+    },
+    {
+      "name": "Rai Premium HD",
+      "xmltv_id": "Rai Premium HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-premium"
+        }
+      ]
+    },
+    {
+      "name": "Rai 4 HD",
+      "xmltv_id": "Rai 4 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-4"
+        }
+      ]
+    },
+    {
+      "name": "Rai 5 HD",
+      "xmltv_id": "Rai 5 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-5"
+        }
+      ]
+    },
+    {
+      "name": "Rai Movie HD",
+      "xmltv_id": "Rai Movie HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "rai-movie"
+        }
+      ]
+    },
+    {
+      "name": "Giallo",
+      "xmltv_id": "Giallo",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "giallo"
+        }
+      ]
+    },
+    {
+      "name": "LEI",
+      "xmltv_id": "LEI",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "lei"
+        }
+      ]
+    },
+    {
+      "name": "LaEffe",
+      "xmltv_id": "LaEffe",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "laeffe"
+        }
+      ]
+    },
+    {
+      "name": "La3",
+      "xmltv_id": "La3",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "programmi-tv.eu",
+          "site_id": "la3"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema 1 HD",
+      "xmltv_id": "Sky Cinema 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-uno-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema 1 SuperHD",
+      "xmltv_id": "Sky Cinema 1 SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-uno-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema +1",
+      "xmltv_id": "Sky Cinema +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-+-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema +24 SuperHD",
+      "xmltv_id": "Sky Cinema +24 SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-+-24-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema +24",
+      "xmltv_id": "Sky Cinema +24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-+-24-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Hits HD",
+      "xmltv_id": "Sky Cinema Hits HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-hits-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Hits SuperHD",
+      "xmltv_id": "Sky Cinema Hits SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-hits-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Family HD",
+      "xmltv_id": "Sky Cinema Family HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-family-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Family SuperHD",
+      "xmltv_id": "Sky Cinema Family SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-family-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Passion HD",
+      "xmltv_id": "Sky Cinema Passion HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-passion-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Comedy",
+      "xmltv_id": "Sky Cinema Comedy",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-comedy-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Classics",
+      "xmltv_id": "Sky Cinema Classics",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-classics-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Max HD",
+      "xmltv_id": "Sky Cinema Max HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-max-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Max Super hd",
+      "xmltv_id": "Sky Cinema Max Super hd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-max-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Max +1",
+      "xmltv_id": "Sky Cinema Max +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-max-+-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Cinema Cult HD",
+      "xmltv_id": "Sky Cinema Cult HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-cinema-cult-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky TG24",
+      "xmltv_id": "Sky TG24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-tg24-hd"
+        }
+      ]
+    },
+    {
+      "name": "TGcom 24",
+      "xmltv_id": "TGcom 24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "programmi-tv.eu",
+          "site_id": "tgcom24"
+        }
+      ]
+    },
+    {
+      "name": "Rai News 24",
+      "xmltv_id": "Rai News 24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "programmi-tv.eu",
+          "site_id": "rainews24"
+        }
+      ]
+    },
+    {
+      "name": "Sky Uno HD",
+      "xmltv_id": "Sky Uno HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-uno--hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Uno +1",
+      "xmltv_id": "Sky Uno +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-uno-+-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "SKY CLASSICA HD",
+      "xmltv_id": "SKY CLASSICA HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "classica-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Atlantic HD",
+      "xmltv_id": "Sky Atlantic HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-atlantic-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Atlantic +1",
+      "xmltv_id": "Sky Atlantic +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-atlantic-+1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox HD",
+      "xmltv_id": "Fox HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox +1",
+      "xmltv_id": "Fox +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-+1"
+        }
+      ]
+    },
+    {
+      "name": "Fox Life HD",
+      "xmltv_id": "Fox Life HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-life-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox Life +1",
+      "xmltv_id": "Fox Life +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-life-+1"
+        }
+      ]
+    },
+    {
+      "name": "Fox Crime HD",
+      "xmltv_id": "Fox Crime HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-crime-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox Crime +1",
+      "xmltv_id": "Fox Crime +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-crime-+1"
+        }
+      ]
+    },
+    {
+      "name": "Fox Comedy HD",
+      "xmltv_id": "Fox Comedy HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-comedy-hd"
+        }
+      ]
+    },
+    {
+      "name": "Comedy Central",
+      "xmltv_id": "Comedy Central",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "comedy-central"
+        }
+      ]
+    },
+    {
+      "name": "Sky Fox Animation HD",
+      "xmltv_id": "Sky Fox Animation HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-animation-hd"
+        }
+      ]
+    },
+    {
+      "name": "CI Crime+Investigation HD",
+      "xmltv_id": "CI Crime+Investigation HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "ci-crime+-investigation-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky AXN",
+      "xmltv_id": "Sky AXN",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "axn"
+        }
+      ]
+    },
+    {
+      "name": "Sky AXN SciFi",
+      "xmltv_id": "Sky AXN SciFi",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "axn-sci-fi"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport F1 HD",
+      "xmltv_id": "Sky Sport F1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-f1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport F1 SuperHD",
+      "xmltv_id": "Sky Sport F1 SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-f1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky MotoGP HD",
+      "xmltv_id": "Sky MotoGP HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-motogp-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky motoGP superHD",
+      "xmltv_id": "Sky motoGP superHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-motogp-hd"
+        }
+      ]
+    },
+    {
+      "name": "Bike Channel",
+      "xmltv_id": "Bike Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "bike-channel-hd"
+        }
+      ]
+    },
+    {
+      "name": "Eurosport 1",
+      "xmltv_id": "Eurosport 1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "eurosport-hd"
+        }
+      ]
+    },
+    {
+      "name": "Eurosport 2",
+      "xmltv_id": "Eurosport 2",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "eurosport-2-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 24 HD",
+      "xmltv_id": "Sky Sport 24 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport24-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 24 SuperHD",
+      "xmltv_id": "Sky Sport 24 SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport24-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 1 HD",
+      "xmltv_id": "Sky Sport 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 1 SuperHD",
+      "xmltv_id": "Sky Sport 1 SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 2 HD",
+      "xmltv_id": "Sky Sport 2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-2-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport 3 HD",
+      "xmltv_id": "Sky Sport 3 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-3-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport Plus HD",
+      "xmltv_id": "Sky Sport Plus HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-plus-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Sport Mix",
+      "xmltv_id": "Sky Sport Mix",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-sport-mix-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox Sports HD",
+      "xmltv_id": "Fox Sports HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-sports-hd"
+        }
+      ]
+    },
+    {
+      "name": "Fox Sports SuperHD",
+      "xmltv_id": "Fox Sports SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "fox-sports-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Supercalcio HD",
+      "xmltv_id": "Sky Supercalcio HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-supercalcio-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Supercalcio SuperHD",
+      "xmltv_id": "Sky Supercalcio SuperHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-supercalcio-hd"
+        }
+      ]
+    },
+    {
+      "name": "Eurosport 1 Italia",
+      "xmltv_id": "Eurosport 1 Italia",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "eurosport-hd"
+        }
+      ]
+    },
+    {
+      "name": "Eurosport 2 Italia",
+      "xmltv_id": "Eurosport 2 Italia",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "eurosport-2-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 1 HD",
+      "xmltv_id": "Sky Calcio 1 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 1 SuperHD",
+      "xmltv_id": "Sky Calcio 1 SuperHDD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-1-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 2 HD",
+      "xmltv_id": "Sky Calcio 2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-2-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 3 HD",
+      "xmltv_id": "Sky Calcio 3 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-3-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 4 HD",
+      "xmltv_id": "Sky Calcio 4 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-4-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 5 HD",
+      "xmltv_id": "Sky Calcio 5 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-5-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 6 sd",
+      "xmltv_id": "Sky Calcio 6 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-6-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 7 sd",
+      "xmltv_id": "Sky Calcio 7 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-7-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 8 sd",
+      "xmltv_id": "Sky Calcio 8 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-8-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 9 sd",
+      "xmltv_id": "Sky Calcio 9 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-9"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 10 sd",
+      "xmltv_id": "Sky Calcio 10 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-10"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 11 sd",
+      "xmltv_id": "Sky Calcio 11 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-11"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 12 sd",
+      "xmltv_id": "Sky Calcio 12 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-12"
+        }
+      ]
+    },
+    {
+      "name": "Sky Calcio 13 sd",
+      "xmltv_id": "Sky Calcio 13 sd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-calcio-13"
+        }
+      ]
+    },
+    {
+      "name": "Super Tennis HD",
+      "xmltv_id": "Super Tennis HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "supertennis-hd"
+        }
+      ]
+    },
+    {
+      "name": "Milan Channel",
+      "xmltv_id": "Milan Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "milan-tv-hd"
+        }
+      ]
+    },
+    {
+      "name": "Juventus Channel",
+      "xmltv_id": "Juventus Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "j-%7C-juventus-tv"
+        }
+      ]
+    },
+    {
+      "name": "Inter Channel",
+      "xmltv_id": "Inter Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "inter-channel"
+        }
+      ]
+    },
+    {
+      "name": "Roma Channel",
+      "xmltv_id": "Roma Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "roma-tv"
+        }
+      ]
+    },
+    {
+      "name": "Lazio Style Channel",
+      "xmltv_id": "Lazio Style Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "lazio-style-channel"
+        }
+      ]
+    },
+    {
+      "name": "Sky arte hd",
+      "xmltv_id": "Sky arte hd",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "sky-arte-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Discovery Channel HD",
+      "xmltv_id": "Discovery Channel HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "discovery-channel-hd"
+        }
+      ]
+    },
+    {
+      "name": "Discovery Science",
+      "xmltv_id": "Discovery Science",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "discovery-science-hd"
+        }
+      ]
+    },
+    {
+      "name": "Discovery Travel Living",
+      "xmltv_id": "Discovery Travel Living",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "discovery-travel-&-living-hd"
+        }
+      ]
+    },
+    {
+      "name": "NatGeoWild",
+      "xmltv_id": "NatGeoWild",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "nat-geo-wild-hd"
+        }
+      ]
+    },
+    {
+      "name": "National Geographic",
+      "xmltv_id": "National Geographic",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "national-geo-hd"
+        }
+      ]
+    },
+    {
+      "name": "National geo H265",
+      "xmltv_id": "National geo H265",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "national-geo-hd"
+        }
+      ]
+    },
+    {
+      "name": "NatGeoPeople",
+      "xmltv_id": "NatGeoPeople",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "nat-geo-people-hd"
+        }
+      ]
+    },
+    {
+      "name": "History Channel HD",
+      "xmltv_id": "History Channel HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "history-channel-hd"
+        }
+      ]
+    },
+    {
+      "name": "Focus",
+      "xmltv_id": "Focus",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "focus-tv"
+        }
+      ]
+    },
+    {
+      "name": "Dmax",
+      "xmltv_id": "Dmax",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "dmax-hd"
+        }
+      ]
+    },
+    {
+      "name": "Real Time HD",
+      "xmltv_id": "Real Time HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "real-time-hd"
+        }
+      ]
+    },
+    {
+      "name": "Sky Caccia e Pesca",
+      "xmltv_id": "Sky Caccia e Pesca",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "caccia-e-pesca"
+        }
+      ]
+    },
+    {
+      "name": "Sky Pesca e Caccia",
+      "xmltv_id": "Sky Pesca e Caccia",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "pesca-e-caccia"
+        }
+      ]
+    },
+    {
+      "name": "Cielo",
+      "xmltv_id": "Cielo",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "cielo-hd"
+        }
+      ]
+    },
+    {
+      "name": "Animal Planet",
+      "xmltv_id": "Animal Planet",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "animal-planet"
+        }
+      ]
+    },
+    {
+      "name": "Gambero Rosso",
+      "xmltv_id": "Gambero Rosso",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "gambero-rosso-hd"
+        }
+      ]
+    },
+    {
+      "name": "Alice",
+      "xmltv_id": "Alice",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "italiasmart.tv",
+          "site_id": "alice"
+        }
+      ]
+    },
+    {
+      "name": "Marcopolo",
+      "xmltv_id": "Marcopolo",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "italiasmart.tv",
+          "site_id": "marcopolo"
+        }
+      ]
+    },
+    {
+      "name": "Dove TV",
+      "xmltv_id": "Dove TV",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "dove"
+        }
+      ]
+    },
+    {
+      "name": "Cielo HD",
+      "xmltv_id": "Cielo HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "cielo-hd"
+        }
+      ]
+    },
+    {
+      "name": "Rai Gulp HD",
+      "xmltv_id": "Rai Gulp HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "rai.it",
+          "site_id": "RaiGulp"
+        }
+      ]
+    },
+    {
+      "name": "Rai YoYo HD",
+      "xmltv_id": "Rai YoYo HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "rai.it",
+          "site_id": "Yoyo"
+        }
+      ]
+    },
+    {
+      "name": "Cartoon Network",
+      "xmltv_id": "Cartoon Network",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "cartoon-network"
+        }
+      ]
+    },
+    {
+      "name": "Disney XD",
+      "xmltv_id": "Disney XD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "disney-xd-hd"
+        }
+      ]
+    },
+    {
+      "name": "Disney Channel",
+      "xmltv_id": "Disney Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "disney-channel-hd"
+        }
+      ]
+    },
+    {
+      "name": "Disney Channel +1",
+      "xmltv_id": "Disney Channel +1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "disney-channel-+1"
+        }
+      ]
+    },
+    {
+      "name": "Cartonito",
+      "xmltv_id": "Cartonito",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "cartoonito"
+        }
+      ]
+    },
+    {
+      "name": "Baby TV",
+      "xmltv_id": "Baby TV",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "baby-tv"
+        }
+      ]
+    },
+    {
+      "name": "Nickelodeon",
+      "xmltv_id": "Nickelodeon",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "nickelodeon"
+        }
+      ]
+    },
+    {
+      "name": "DeA Junior",
+      "xmltv_id": "DeA Junior",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "dea-junior"
+        }
+      ]
+    },
+    {
+      "name": "DeAKids",
+      "xmltv_id": "DeAKids",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "deakids"
+        }
+      ]
+    },
+    {
+      "name": "Sky Teen Nick",
+      "xmltv_id": "Sky Teen Nick",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "teennick"
+        }
+      ]
+    },
+    {
+      "name": "Disney Junior",
+      "xmltv_id": "Disney Junior",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "disney-junior"
+        }
+      ]
+    },
+    {
+      "name": "Super !",
+      "xmltv_id": "Super !",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "super!"
+        }
+      ]
+    },
+    {
+      "name": "Boing",
+      "xmltv_id": "Boing",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "boing"
+        }
+      ]
+    },
+    {
+      "name": "Man-Ga",
+      "xmltv_id": "Man-Ga",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "man-ga"
+        }
+      ]
+    },
+    {
+      "name": "Frisbee",
+      "xmltv_id": "Frisbee",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "frisbee"
+        }
+      ]
+    },
+    {
+      "name": "Nick Junior",
+      "xmltv_id": "Nick Junior",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "nick-junior"
+        }
+      ]
+    },
+    {
+      "name": "K2",
+      "xmltv_id": "K2",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "k2"
+        }
+      ]
+    },
+    {
+      "name": "Boomerang",
+      "xmltv_id": "Boomerang",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "guidatv.sky.it",
+          "site_id": "boomerang"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema HD",
+      "xmltv_id": "Premium Cinema HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KE"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema +24",
+      "xmltv_id": "Premium Cinema +24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LX"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema 2",
+      "xmltv_id": "Premium Cinema 2",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LM"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema 2 +24",
+      "xmltv_id": "Premium Cinema 2 +24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LW"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema Energy",
+      "xmltv_id": "Premium Cinema Energy",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KG"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema Emotion",
+      "xmltv_id": "Premium Cinema Emotion",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KO"
+        }
+      ]
+    },
+    {
+      "name": "Premium Cinema Comedy",
+      "xmltv_id": "Premium Cinema Comedy",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LC"
+        }
+      ]
+    },
+    {
+      "name": "Premium Investigation Discovery",
+      "xmltv_id": "Premium Investigation Discovery",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "EH"
+        }
+      ]
+    },
+    {
+      "name": "Studio Universal",
+      "xmltv_id": "Studio Universal",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KR"
+        }
+      ]
+    },
+    {
+      "name": "Paramount Channel",
+      "xmltv_id": "Paramount Channel",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KR"
+        }
+      ]
+    },
+    {
+      "name": "Premium Action HD",
+      "xmltv_id": "Premium Action HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KS"
+        }
+      ]
+    },
+    {
+      "name": "Premium Action +24",
+      "xmltv_id": "Premium Action +24",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LU"
+        }
+      ]
+    },
+    {
+      "name": "Premium Crime",
+      "xmltv_id": "Premium Crime",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LR"
+        }
+      ]
+    },
+    {
+      "name": "Premium Joy",
+      "xmltv_id": "Premium Joy",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KJ"
+        }
+      ]
+    },
+    {
+      "name": "Premium Stories",
+      "xmltv_id": "Premium Stories",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KD"
+        }
+      ]
+    },
+    {
+      "name": "Premium Sport superHD",
+      "xmltv_id": "Premium Sport superHD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "LV"
+        }
+      ]
+    },
+    {
+      "name": "Premium Sport 2 HD",
+      "xmltv_id": "Premium Sport 2 HD",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KC"
+        }
+      ]
+    },
+    {
+      "name": "Premium Calcio 1",
+      "xmltv_id": "Premium Calcio 1",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "mediasetpremium.it",
+          "site_id": "KC"
+        }
+      ]
+    }
+  ]
+}
