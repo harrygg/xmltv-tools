@@ -1,6 +1,6 @@
 [Oo]bj/
-Tests/bin/Debug/*
-Tests/bin/Release/*
+Tests/bin/Debug/
+Tests/bin/Release/
 Tests/obj/
 *.suo
 *.user
