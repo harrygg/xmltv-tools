@@ -29,7 +29,7 @@ namespace wgmulti
     [XmlIgnore]
     public String folder = String.Empty;
 
-    [DataMember(Name = "filename", Order = 5), XmlElement("filename")]
+    [DataMember(Name = "filename", Order = 5, IsRequired = true), XmlElement("filename")]
     public String outputFilePath = "epg.xml";
 
     public static String epgFileName = "epg.xml";
@@ -58,7 +58,7 @@ namespace wgmulti
     public String skip = "noskip";
 
 
-    [DataMember(Order = 2, Name = "timespan", IsRequired = true), XmlIgnore]
+    [DataMember(Order = 2, Name = "timespan"), XmlIgnore]
     public Period period { get; set; }
 
     [XmlElement("timespan"), IgnoreDataMember]
@@ -93,7 +93,7 @@ namespace wgmulti
     [DataMember(Order = 8, Name = "postprocess"), XmlElement("postprocess")]
     public PostProcess postProcess { get; set; }
 
-    [DataMember(Order = 10), XmlIgnore]
+    [DataMember(Order = 10, IsRequired = true), XmlIgnore]
     public List<Channel> channels
     {
       get;
@@ -334,6 +334,15 @@ namespace wgmulti
     [OnDeserialized]
     void OnDeserialized(StreamingContext c)
     {
+      if (postProcess == null)
+        postProcess = new PostProcess();
+
+      if (retry == null)
+        retry = new Retry();
+      
+      if (period == null)
+        period = new Period();
+
       foreach (var channel in GetChannels(includeOffset: true))
       {
         // If channel is not timeshifted and has no 'site' attribute, disable it
