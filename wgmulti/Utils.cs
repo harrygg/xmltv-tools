@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace wgmulti
 {
@@ -16,7 +15,7 @@ namespace wgmulti
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static String CreateLocalDir(String name)
+    public static String CreateGrabberTempDir(String name)
     {
       try
       {
@@ -83,49 +82,56 @@ namespace wgmulti
       return result.Replace(":", "");
     }
 
-    /// <summary>
-    /// Converts an XML element to a boolean. Useful when we don't know if the element exist
-    /// </summary>
-    /// <param name="el"></param>
-    /// <returns></returns>
-    public static bool StringToBool(XElement el)
+    ///// <summary>
+    ///// Converts an XML element to a boolean. Useful when we don't know if the element exist
+    ///// </summary>
+    ///// <param name="el"></param>
+    ///// <returns></returns>
+    //public static bool StringToBool(XElement el)
+    //{
+    //  if (el != null)
+    //    return StringToBool(el.Value);
+    //  return false;
+    //}
+
+    ///// <summary>
+    ///// Converts various stirngs to boolean
+    ///// </summary>
+    ///// <param name="val"></param>
+    ///// <returns></returns>
+    //public static bool StringToBool(String val)
+    //{
+    //  val = val.ToLower();
+    //  return (val == "y" || val == "yes" || val == "true" || val == "on");
+    //}
+
+    public static List<String> GetIniFilesInDir(String path)
     {
-      if (el != null)
-        return StringToBool(el.Value);
-      return false;
+      if (iniFilesInDir == null)
+        iniFilesInDir = new List<string>();
+
+      iniFilesInDir.AddRange(GetFilesToDepth(path));
+      iniFilesInDir.AddRange(GetFilesToDepth(Path.Combine(path, "siteini.user"), 6));
+      iniFilesInDir.AddRange(GetFilesToDepth(Path.Combine(path, "siteini.pack"), 6));
+
+      return iniFilesInDir;
     }
 
-    /// <summary>
-    /// Converts various stirngs to boolean
-    /// </summary>
-    /// <param name="val"></param>
-    /// <returns></returns>
-    public static bool StringToBool(String val)
+    static List<String> iniFilesInDir;
+
+    static List<String> GetFilesToDepth(String path, int depth = 0)
     {
-      val = val.ToLower();
-      return (val == "y" || val == "yes" || val == "true" || val == "on");
-    }
+      if (!Directory.Exists(path))
+        return new List<String>();
 
-    static List<String> filesInDir;
-
-    public static List<String> GetFilesToDepth(String path, int depth)
-    {
-      if (String.IsNullOrEmpty(path))
-        return null;
-
-      if (filesInDir != null)
-        return filesInDir;
-      else
-        filesInDir = new List<String>();
-
-      filesInDir = Directory.EnumerateFiles(path, "*.ini").ToList();
+      var iniFiles = Directory.EnumerateFiles(path, "*.ini").ToList();
       if (depth > 0)
       {
         var folders = Directory.EnumerateDirectories(path);
         foreach (var folder in folders)
-          filesInDir.AddRange(GetFilesToDepth(folder, depth - 1));
+          iniFiles.AddRange(GetFilesToDepth(folder, depth - 1));
       }
-      return filesInDir;
+      return iniFiles;
     }
   }
 }

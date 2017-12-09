@@ -24,15 +24,19 @@ namespace wgmulti
     {
       get
       {
-        return (siteinis != null && siteinis.Count > 0) ? 
-          siteinis[siteiniIndex].name : "";
+        if (siteinis != null && siteinis.Count > 0)
+          return siteiniIndex == -1 ? siteinis[siteiniIndex + 1].name : siteinis[siteiniIndex].name;
+        return "";
       }
 
       set {
         if (siteinis == null)
           siteinis = new List<SiteIni>();
         if (siteinis.Count > 0)
-          siteinis[siteiniIndex].name = value;
+        {
+          var idx = siteiniIndex == -1 ? siteiniIndex + 1 : siteiniIndex;
+          siteinis[idx].name = value;
+        }
         else
         {
           var siteini = new SiteIni(value);
@@ -44,13 +48,18 @@ namespace wgmulti
     [IgnoreDataMember, XmlAttribute()]
     public String site_id
     {
-      get { return (siteinis != null && siteinis.Count > 0) ? siteinis[siteiniIndex].site_id : ""; }
+      get
+      {
+        var idx = siteiniIndex == -1 ? 0 : siteiniIndex;
+        return (siteinis != null && siteinis.Count > 0) ? siteinis[idx].site_id : "";
+      }
       set
       {
         if (siteinis == null)
           siteinis = new List<SiteIni>();
+        var idx = siteiniIndex == -1 ? 0 : siteiniIndex;
         if (siteinis.Count > 0)
-          siteinis[siteiniIndex].site_id = value;
+          siteinis[idx].site_id = value;
         else
         {
           var siteini = new SiteIni();
@@ -62,9 +71,6 @@ namespace wgmulti
 
     [DataMember(EmitDefaultValue = false, Order = 4), XmlIgnore]
     public List<SiteIni> siteinis { get; set; }
-
-    [XmlIgnore]
-    public int siteiniIndex = 0;
 
     [DataMember(EmitDefaultValue = false, Order = 5), XmlIgnore]
     public double? offset { get; set; }
@@ -106,6 +112,9 @@ namespace wgmulti
       set { enabled = value; }
     }
 
+    [XmlIgnore]
+    public int siteiniIndex = -1;
+
     //Channel is deactivated if during grabbing it has no more siteinis
     [XmlIgnore]
     public Boolean active = true;
@@ -116,14 +125,37 @@ namespace wgmulti
     [IgnoreDataMember, XmlIgnore]
     public Xmltv xmltv = new Xmltv();
 
+    [IgnoreDataMember, XmlIgnore]
+    public Channel parent;
+
+    public bool IsTimeshifted
+    {
+      get { return parent != null; }
+    }
+
+    public bool HasChildren
+    {
+      get { return timeshifts != null && timeshifts.Count > 0; }
+    }
+
+    public bool HasPrograms
+    {
+      get { return xmltv != null && xmltv.programmes.Count > 0; }
+    }
+
     public Channel()
     {
     }
 
+    /// <summary>
+    /// Set default channel values
+    /// </summary>
+    /// <param name="c"></param>
     [OnDeserialized]
     void OnDeserialized(StreamingContext c)
     {
       active = true;
+      siteiniIndex = -1;
       enabled = (enabled == null || enabled == true) ? true : false;
       xmltv = new Xmltv();
     }
@@ -131,7 +163,7 @@ namespace wgmulti
     public void SetActiveSiteIni()
     {
       bool found = false;
-      for (var i = siteiniIndex; i < siteinis.Count; i++)
+      for (var i = siteiniIndex + 1; i < siteinis.Count; i++)
       {
         if (!found && siteinis[i].enabled)
         {
@@ -153,11 +185,13 @@ namespace wgmulti
     {
       try
       {
-        return siteinis[siteiniIndex];
+        var idx = siteiniIndex == -1 ? 0 : siteiniIndex;
+        return siteinis[idx];
       }
       catch
       {
-        return null;
+        Log.Error("GetActiveSiteIni() error for channel '" + name + "'! siteiniIndex: " + siteiniIndex);
+        return new SiteIni();
       }
     }
 
@@ -200,7 +234,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Log.Error(String.Format("#{0} | {1}", Application.currentSiteiniIndex + 1, ex.ToString()));
+        Log.Error(String.Format("#{0} | {1}", Application.grabbingRound + 1, ex.ToString()));
         return false;
       }
     }

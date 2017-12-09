@@ -57,19 +57,33 @@ namespace wgmulti
     /// <returns></returns>
     public String GetPath()
     {
-      if (!String.IsNullOrEmpty(path))
-        return path;
-
-      var files = Utils.GetFilesToDepth(Application.masterConfig.folder, 4);
-      foreach (var file in files)
+      try
       {
-        if (Path.GetFileName(file) == GetName())
+        if (!String.IsNullOrEmpty(path))
         {
-          path = file;
-          return path;
+          if (path.StartsWith("http") || 
+              path.StartsWith("ftp") || 
+              File.Exists(path))
+            return path;
+
+          Log.Warning("Siteini has 'path' attribute pointing to a non existing file: " + path + ". Searching for another one.");
+        }
+
+        var files = Utils.GetIniFilesInDir(Application.masterConfig.folder);
+        foreach (var file in files)
+        {
+          if (Path.GetFileName(file) == GetName())
+          {
+            this.path = file;
+            return path;
+          }
         }
       }
-      return null;      
+      catch (Exception ex)
+      {
+        Log.Error(ex.Message);
+      }
+      return null;
     }
 
     /// <summary>
@@ -87,7 +101,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.currentSiteiniIndex + 1, name.ToUpper(), ex.Message));
+        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRound + 1, name.ToUpper(), ex.Message));
         return false;
       }
     }

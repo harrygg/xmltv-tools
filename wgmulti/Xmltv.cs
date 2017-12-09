@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using System.Linq;
-using System.Security.Cryptography;
-using System.IO;
+using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace wgmulti
 {
@@ -140,35 +138,6 @@ namespace wgmulti
       if (outputFile == null)
         outputFile = file;
       root.Save(outputFile);
-    }
-
-    public String GetMD5Hash()
-    {
-      try
-      {
-        var md5 = MD5.Create();
-        var stream = File.OpenRead(file);
-        return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
-      }
-      catch (Exception ex)
-      {
-        Log.Error(ex.ToString());
-        return String.Empty;
-      }
-    }
-
-    public String GetFileSize()
-    {
-      try
-      {
-        var fi = new FileInfo(file);
-        return fi.Length.ToString();
-      }
-      catch (Exception ex)
-      {
-        Log.Error(ex.ToString());
-        return String.Empty;
-      }
     }
   }
 }

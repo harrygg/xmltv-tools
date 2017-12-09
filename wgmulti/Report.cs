@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Security.Cryptography;
 
 namespace wgmulti
 {
@@ -18,6 +19,67 @@ namespace wgmulti
     public String generatedOn = String.Empty;
     public String fileSize = String.Empty;
     public String md5hash = String.Empty;
+
+    public void Generate(Config config)
+    {
+      foreach (var channel in config.GetChannels(includeOffset: true))
+      {
+        total += 1;
+        var channelInfo = new ChannelInfo(channel.name);
+        if (channel.HasPrograms)
+        {
+          channelsWithEpg += 1;
+          channelInfo.siteiniIndex = channel.siteiniIndex;
+          channelInfo.programsCount = channel.xmltv.programmes.Count;
+          channelInfo.firstShowStartsAt = channel.xmltv.programmes[0].Attribute("start").Value;
+          channelInfo.lastShowStartsAt = channel.xmltv.programmes[channelInfo.programsCount - 1].Attribute("stop").Value;
+
+          if (!channel.IsTimeshifted)
+            channelInfo.siteiniName = channel.GetActiveSiteIni().name;
+          else
+            channelInfo.siteiniName = channel.parent.GetActiveSiteIni().name;
+        }
+        else
+        {
+          channelsWithoutEpg += 1;
+          emptyChannels.Add(channel.name);
+        }
+        channels.Add(channelInfo);
+      }
+
+      fileSize = GetFileSize(config.outputFilePath);
+      md5hash = GetMD5Hash(config.outputFilePath);
+    }
+
+
+    String GetMD5Hash(String file)
+    {
+      try
+      {
+        var md5 = MD5.Create();
+        var stream = File.OpenRead(file);
+        return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
+      }
+      catch (Exception ex)
+      {
+        Log.Error(ex.ToString());
+        return String.Empty;
+      }
+    }
+
+    String GetFileSize(String file)
+    {
+      try
+      {
+        var fi = new FileInfo(file);
+        return fi.Length.ToString();
+      }
+      catch (Exception ex)
+      {
+        Log.Error(ex.ToString());
+        return String.Empty;
+      }
+    }
 
     public void Save()
     {

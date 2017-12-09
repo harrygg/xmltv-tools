@@ -8,7 +8,6 @@ namespace Tests
   {
     public String configFolder = "";
     public String configFolderName = "wgmulti_tests";
-    public HttpServer ws;
     //public Config config;
     String wgFolder = Environment.GetEnvironmentVariable("WGPATH");
     public String testReportFilePath;
@@ -110,13 +109,8 @@ namespace Tests
       // Save CET siteini
       buff = File.ReadAllText(@"..\..\Test Files\siteiniCET.ini");
       File.WriteAllText(Path.Combine(configFolder, "siteiniCET.ini"), buff);
-    }
 
-    void RunServer()
-    {
-      // Run the HTTP server for dummy grabbing
-      ws = new HttpServer(5);
-      ws.Start(19801);
+      File.Copy(@"..\..\Test Files\siteiniEmpty.ini", Path.Combine(configFolder, "siteiniEmpty.ini"));
     }
 
     public void Destroy()

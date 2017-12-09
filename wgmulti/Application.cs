@@ -10,7 +10,7 @@ namespace wgmulti
   public class Application
   {
     public static Config masterConfig;
-    public static int currentSiteiniIndex = 0;
+    public static int grabbingRound = 0;
     public static Report report = new Report();
     public static Xmltv epg = new Xmltv();
 
@@ -43,18 +43,19 @@ namespace wgmulti
           return;
         }
 
-        DisableMissingSiteInis();
+        masterConfig.PrepareSiteinis();
 
         // Grab channel programs
         DoGrabbing();
 
         // Create the combined xmltv EPG
-        epg = masterConfig.GetChannelGuides();
+        epg = masterConfig.GetChannelsGuides();
 
-        // Save EPG file
+        // Save post process EPG file
         if (masterConfig.postProcess.run)
           epg.Save(masterConfig.postProcess.fileName, true);
 
+        // Save main EPG file
         epg.Save(masterConfig.outputFilePath);
 
       }
@@ -68,47 +69,27 @@ namespace wgmulti
         if (ex.ToString().Contains("annot find the")) //Could come from Linux based OS
           Log.Error("WebGrab+Plus.exe not found or not executable!");
         else
-          Log.Error(ex.ToString());
+          Log.Error(ex.Message);
         return;
       }
 
       stopWatch.Stop();
       var ts = stopWatch.Elapsed;
 
-      report.fileSize = epg.GetFileSize();
-      report.md5hash = epg.GetMD5Hash();
+      report.Generate(masterConfig);
 
-      GenerateReport();
-    }
+      if (Arguments.generateReport)
+        report.Save();
 
-    static void DisableMissingSiteInis()
-    {
-      List<SiteIni> disabledSiteinis = new List<SiteIni>();
+      // Output names of channels with no EPG
+      var n = 0;
+      Log.Info("Channels with no EPG: ");
 
-      foreach (var channel in masterConfig.GetChannels())
-      {
-        foreach (var siteini in channel.siteinis)
-        {
-          if (masterConfig.DisabledSiteiniNamesList.Contains(siteini.name))
-          {
-            Log.Error(String.Format("Siteini {0} disabled in JSON configuraiton!", siteini.GetName()));
-            siteini.enabled = false;
-          }
-          else
-          {
-            siteini.path = siteini.GetPath();
-            if (!String.IsNullOrEmpty(siteini.path))
-            {
-              siteini.enabled = true;
-            }
-            else
-            {
-              masterConfig.DisabledSiteiniNamesList.Add(siteini.name);
-              Log.Error(String.Format("Siteini {0} not found! Siteini disabled!", siteini.GetName()));
-            }
-          }
-        }
-      }
+      foreach (var name in report.emptyChannels)
+        Log.Info(String.Format("{0}. {1}", ++n, name));
+
+      if (n == 0)
+        Log.Info("None!");
     }
 
     static void DoGrabbing()
@@ -125,7 +106,7 @@ namespace wgmulti
         // Get only the currently active channels every time
         foreach (var channel in masterConfig.GetChannels(onlyActive: true))
         {
-          if (channel.update != UpdateType.None)
+          if (!channel.HasPrograms)
             channel.SetActiveSiteIni();
 
           // Channel could be deactivated if no active siteini is set
@@ -137,87 +118,43 @@ namespace wgmulti
           break;
 
         // Each grabber contains one or more channels grouped by Siteini
-        IEnumerable<Grabber> grabberGroups;
-        grabberGroups = (from channel in masterConfig.GetChannels(onlyActive: true)
-                         group channel by channel.GetActiveSiteIni().name into grouped
-                         select new Grabber(grouped.Key, grouped.ToList()))
-                        .Where(grabber => grabber.enabled);
+        var i = 1;
+        List<Grabber> grabberGroups = (
+          from channel in masterConfig.GetChannels(onlyActive: true)
+          group channel by channel.GetActiveSiteIni().name into grouped
+          select new Grabber(grouped.Key, grouped.ToList(), i++)
+          ).Where(grabber => grabber.enabled).ToList();
 
-        if (grabberGroups.Count() == 0)
+        if (grabberGroups.Count == 0)
         {
           Log.Info("No active grabbers created. Exiting!");
           break;
         }
 
         if (Arguments.randomStartOrder && grabberGroups.Count() > 1)
-        {
-          grabberGroups = grabberGroups.OrderBy(
-            item => new Random().Next()).ToList();
-        }
+          grabberGroups = grabberGroups.OrderBy(item => new Random().Next()).ToList();
 
         Log.Line();
-        Log.Info(String.Format("---------------- Grabbing Round #{0} ------------------", currentSiteiniIndex + 1));
+        Log.Info(String.Format("----------------- Grabbing Round {0} ------------------", grabbingRound + 1));
         Log.Line();
-        Log.Info(String.Format("#{0} Starting {1} grabbers asynchronously, {2} at a time",
-          currentSiteiniIndex + 1, grabberGroups.Count(), Arguments.maxAsyncProcesses));
+        Log.Info(String.Format("Round {0} Starting {1} grabbers asynchronously, {2} at a time",
+          grabbingRound + 1, grabberGroups.Count(), Arguments.maxAsyncProcesses));
 
-        var i = 1;
+
         var options = new ParallelOptions { MaxDegreeOfParallelism = Arguments.maxAsyncProcesses };
 
-        Parallel.ForEach(grabberGroups, options, grabber => {
-          grabber.number = i++;
-          Log.Debug("Grab() started for " + grabber.id.ToUpper());
-          grabber.Grab();
-        });
+        Parallel.ForEach(grabberGroups, options, grabber => { grabber.Grab(); });
 
         Log.Line();
-        var emptyChnnels = masterConfig.EmptyChannelsCount();
-        Log.Info(String.Format("Grabbing round #{0} finished. {1} channels grabbed.", currentSiteiniIndex + 1, (masterConfig.GetChannels(includeOffset: true).Count() - emptyChnnels)));
 
-        // If there are no more channels without programs
-        if (emptyChnnels == 0)
+        var countedChannels = masterConfig.GetChannelsCount();
+        Log.Info(String.Format("Grabbing round {0} finished. {1} channels have programs.", grabbingRound + 1, countedChannels["withPrograms"]));
+
+        if (countedChannels["withoutPrograms"] == 0)
           break;
 
-        currentSiteiniIndex++;
+        grabbingRound++;
       }
-    }
-
-    static void GenerateReport()
-    {
-      var lastSiteIni = "";
-      foreach (var channel in masterConfig.GetChannels(includeOffset: true))
-      {
-        report.total += 1;
-        var channelInfo = new ChannelInfo(channel.name);
-        if (channel.xmltv.programmes.Count > 0)
-        {
-          report.channelsWithEpg += 1;
-          channelInfo.programsCount = channel.xmltv.programmes.Count;
-          channelInfo.firstShowStartsAt = channel.xmltv.programmes[0].Attribute("start").Value;
-          channelInfo.lastShowStartsAt = channel.xmltv.programmes[channelInfo.programsCount - 1].Attribute("stop").Value;
-          //In case of offset channels, they don't have siteini
-          try
-          {
-            channelInfo.siteiniName = channel.GetActiveSiteIni().name;
-            lastSiteIni = channelInfo.siteiniName;
-          }
-          catch
-          {
-            if (channel.offset != null)
-              channelInfo.siteiniName = lastSiteIni;
-          }
-          channelInfo.siteiniIndex = channel.siteiniIndex;
-        }
-        else
-        {
-          report.channelsWithoutEpg += 1;
-          report.emptyChannels.Add(channel.name);
-        }
-        report.channels.Add(channelInfo);
-      }
-
-      if (Arguments.generateReport)
-        report.Save();
     }
   }
 }

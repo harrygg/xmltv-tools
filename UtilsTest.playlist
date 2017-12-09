@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="Tests.UtilsTest.Test_GetIniFilesInDir" /><Add Test="Tests.UtilsTest.Test_AddOffset_AddDouble" /><Add Test="Tests.UtilsTest.Test_AddOffset_AddInt" /><Add Test="Tests.UtilsTest.Test_AddOffset_ConvertToLocal" /></Playlist>

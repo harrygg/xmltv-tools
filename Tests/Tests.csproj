@@ -65,7 +65,8 @@
     <Compile Include="TestEnvironment.cs" />
     <Compile Include="EndToEndTests.cs" />
     <Compile Include="ConfigTest.cs" />
-    <Compile Include="WebServer.cs" />
+    <Compile Include="ApplicationTests.cs" />
+    <Compile Include="UtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\wgmulti\wgmutlti.csproj">
@@ -89,8 +90,11 @@
     <None Include="Test files\daily.json" />
     <None Include="Test files\siteiniCET.ini" />
     <None Include="Test files\siteini.ini" />
+    <None Include="Test files\siteiniEmpty.ini" />
+    <None Include="Test files\wgmulti.config.disabled.siteinis.json" />
     <None Include="Test files\wgmulti.config.json" />
     <None Include="Test files\wgmulti.config.minimal.json" />
+    <None Include="Test files\wgmulti.config.minimal.nositeini.json" />
     <None Include="Test files\wgmulti.config.multi.disabled.siteini.json" />
     <None Include="Test files\wgmulti.config.multi.siteinis.json" />
     <None Include="Test files\wgmulti.config.single.json" />

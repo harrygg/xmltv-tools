@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Net;
+using System.Linq;
+using System.Diagnostics;
+using System.IO.Compression;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace wgmulti
@@ -16,64 +16,50 @@ namespace wgmulti
   public class Grabber
   {
     public Config config;
-    public String id;
-    public String currentChannel;
-    public String localDir = String.Empty;
+    public String name;
+    public String currentChannelName;
+    public String tempDir = String.Empty;
     public String path = String.Empty;
     public bool enabled = false;
-    public int number = 0;
-    public GrabType type = GrabType.SCRUB;
+    public int id = 1;
     public List<Channel> channels = new List<Channel>();
-    public Grabber(String id, List<Channel> channels)
+    public SiteIni ActiveSiteini
     {
+      get { return channels[0].GetActiveSiteIni(); }
+    }
 
-      this.id = id; // Set it first in order for WriteLog to work
+    public Grabber(String siteiniName, List<Channel> groupedChannels, int id = 1)
+    {
+      // Set it first in order for WriteLog to work
+      name = siteiniName; 
+      channels = groupedChannels;
+      this.id = id;
 
       try
-      {
-        if (channels.Count == 0)
-        {
-          WriteLog("Grabber has no channels. Grabber disabled!", LogLevel.ERROR);
-          return;
-        }
-
-        this.channels = channels;
-
+      { 
         // If all channels have update type None (possible when grabbing from backup siteinis), disable the grabber
         if (channels.Where(ch => (ch.update == UpdateType.None)).Count() == channels.Count)
         {
-          WriteLog("No channels require an update! Grabber disabled!", LogLevel.WARN);
+          WriteLog("No channels require an update! Grabber disabled!", LogLevel.INFO);
           return;
         }
 
-        // Make sure the temp dir exists
-        localDir = Utils.CreateLocalDir(id);
+        // Make sure the grabber's working dir exists
+        tempDir = Utils.CreateGrabberTempDir(name);
 
-        if (localDir == null)
+        if (String.IsNullOrEmpty(tempDir))
         {
           WriteLog("Unable to create local temp dir! Grabber disabled!", LogLevel.ERROR);
           return;
         }
 
-        if (channels[0].GetActiveSiteIni().type == GrabType.COPY)
-          type = GrabType.COPY;
+        config = (Config)Application.masterConfig.Clone(tempDir);
+        config.channels = channels.ToList();
 
-        config = (Config)Application.masterConfig.Clone(localDir);
-        config.channels = channels.Where(ch => (ch.enabled == true)).ToList<Channel>();
-
-        if (type == GrabType.COPY)
-        {
-          path = channels[0].GetActiveSiteIni().path;
-          if (String.IsNullOrEmpty(path))
-          {
-            WriteLog("Path attribute does not exist in Siteini configuraiton. Grabber disabled!", LogLevel.ERROR);
-            return;
-          }
-        }
-        else 
+        if (ActiveSiteini.type == GrabType.SCRUB)
         {
           // If grabbing type is Scrub, copy siteinis to temp folder
-          if (!channels[0].GetActiveSiteIni().Save(localDir))
+          if (!ActiveSiteini.Save(tempDir))
           {
             WriteLog("Siteini not saved to temp folder. Grabber disabled!", LogLevel.ERROR);
             return;
@@ -89,7 +75,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        WriteLog(String.Format("{0} Grabber disabled!", ex.ToString()), LogLevel.ERROR);
+        WriteLog(String.Format("{0}. Grabber disabled!", ex.Message), LogLevel.ERROR);
         return;
       }
 
@@ -100,8 +86,11 @@ namespace wgmulti
 
     public void Grab()
     {
-      WriteLog("GrabType is " + type.ToString(), LogLevel.DEBUG);
-      if (type == GrabType.SCRUB)
+      WriteLog(
+        String.Format("Grabing started for {0}, type is {1}", name.ToUpper(), ActiveSiteini.type.ToString()), 
+        LogLevel.DEBUG);
+
+      if (ActiveSiteini.type == GrabType.SCRUB)
         ScrubData();
       else
         CopyData();
@@ -171,7 +160,7 @@ namespace wgmulti
 
       // Get postprocessed data
       Xmltv postProcessedXmltv = null;
-      if (type == GrabType.SCRUB && config.postProcess.run)
+      if (ActiveSiteini.type == GrabType.SCRUB && config.postProcess.run)
       {
         postProcessedXmltv = new Xmltv(config.postProcess.fileName);
         if (postProcessedXmltv == null)
@@ -182,17 +171,13 @@ namespace wgmulti
       // Loop through all channels in grabber's config and get their programs
       channels.ForEach(
           channel => {
-            if (channel.xmltv.programmes.Count > 0)
-            {
-              channel.update = UpdateType.None;
-            }
-            else
+            if (channel.update != UpdateType.None)
             {
               var channel_id = "";
               try
               {
-                channel_id = (type == GrabType.COPY) ? channel.GetActiveSiteIni().site_id : channel.xmltv_id;
-                if (type == GrabType.COPY)
+                channel_id = (ActiveSiteini.type == GrabType.COPY) ? channel.GetActiveSiteIni().site_id : channel.xmltv_id;
+                if (ActiveSiteini.type == GrabType.COPY)
                   WriteLog(String.Format("Copying data for channel {0} by id {1}", channel.name, channel_id));
 
                 if (!channel.CopyChannelXml(grabberXmltv, channel_id))
@@ -202,21 +187,23 @@ namespace wgmulti
                   channel_id, channel.offset, channel.xmltv_id);
                 i += channel.xmltv.programmes.Count;
 
-                if (channel.xmltv.programmes.Count == 0)
+                if (!channel.HasPrograms)
                 {
                   WriteLog(String.Format("No XML programms found for channel {0} with id '{1}' found in EPG!",
                     channel.name, channel_id), LogLevel.ERROR);
                 }
                 else
                 {
+                  channel.update = UpdateType.None;
+
                   WriteLog(String.Format(" {0} - {1} programs grabbed", channel.name, channel.xmltv.programmes.Count));
 
                   // Copy post processed data
-                  if (type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
+                  if (ActiveSiteini.type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
                     channel.xmltv.postProcessedProgrammes = postProcessedXmltv.GetProgramsById(channel_id, channel.offset, channel.xmltv_id);
 
-                  //If channel has offset channels, copy and offset the programs
-                  if (channel.timeshifts != null)
+                  //If channel has timeshifted channels, copy and offset the programs
+                  if (channel.HasChildren)
                   {
                     foreach (var timeshifted in channel.timeshifts)
                     {
@@ -232,7 +219,7 @@ namespace wgmulti
                         timeshifted.xmltv_id);
 
                       // Copy post processed programs from the parent channel post processed programms
-                      if (type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
+                      if (ActiveSiteini.type == GrabType.SCRUB && config.postProcess.run && postProcessedXmltv != null)
                       {
                         timeshifted.xmltv.postProcessedProgrammes = channel.xmltv.GetProgramsById(
                           channel.xmltv_id,
@@ -245,9 +232,9 @@ namespace wgmulti
                   }
                 }
               }
-              catch (Exception)
+              catch (Exception ex)
               {
-                //WriteLog(ex.ToString());
+                WriteLog(ex.Message + ": " + ex.ToString(), LogLevel.ERROR);
                 WriteLog(String.Format("NO programs for channel '{0}' with id '{1}'", channel.name, channel_id), LogLevel.ERROR);
               }
             }
@@ -267,9 +254,9 @@ namespace wgmulti
           return;
         }
 
-        var name = id.ToUpper();
+        var name = this.name.ToUpper();
         var reg = new Regex(@"xmltv_id=(.*?)\)");
-        try { currentChannel = reg.Matches(e.Data)[0].Groups[1].Value; } catch { }
+        try { currentChannelName = reg.Matches(e.Data)[0].Groups[1].Value; } catch { }
 
         if (e.Data.Contains("started") || e.Data.Contains("finished"))
           WriteLog(e.Data.Replace(name, ""));
@@ -278,16 +265,16 @@ namespace wgmulti
           WriteLog("starting " + e.Data.Replace("(   ", "").Replace("   ) " + name + " -- chan. (xmltv_id=", " ").Replace(") --", " "));
 
         if (e.Data.ToLower().Contains("error"))
-          WriteLog(String.Format("{0} {1}", currentChannel, e.Data), LogLevel.ERROR);
+          WriteLog(String.Format("{0} {1}", currentChannelName, e.Data), LogLevel.ERROR);
 
         if (e.Data.Contains("no shows in indexpage"))
-          WriteLog(String.Format("no shows in indexpage for channel {0}", currentChannel), LogLevel.ERROR);
+          WriteLog(String.Format("no shows in indexpage for channel {0}", currentChannelName), LogLevel.ERROR);
 
         if (e.Data.Contains("no index page data"))
           WriteLog(String.Format("{0}", e.Data), LogLevel.ERROR);
 
         if (e.Data.Contains("unable to update channel"))
-          WriteLog(String.Format("{0} {1}", currentChannel, e.Data), LogLevel.ERROR);
+          WriteLog(String.Format("{0} {1}", currentChannelName, e.Data), LogLevel.ERROR);
       }
     }
 
@@ -302,7 +289,7 @@ namespace wgmulti
     /// <returns></returns>
     public override String ToString()
     {
-      return String.Format("{0} | {1} | {2}", id.ToUpper(), enabled, channels.Count);
+      return String.Format("{0} | {1} | {2}", name.ToUpper(), enabled, channels.Count);
     }
 
 
@@ -336,7 +323,7 @@ namespace wgmulti
         var fileName = Path.GetFileName(fileUrl);
         fileName = Path.Combine(tempDir, fileName);
         var doDownload = true;
-        //Check if file exists and is fresh
+        //Check if file exists and is new
         if (File.Exists(fileName))
         {
           var fi = new FileInfo(fileName);
@@ -350,20 +337,12 @@ namespace wgmulti
           WriteLog("Starting download of " + fileUrl);
           WebClient client = new WebClient();
           client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-          //client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-          //client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadCompleted);
-          //client.DownloadFileAsync(new Uri(fileUrl), fileName);
           client.DownloadFile(new Uri(fileUrl), fileName);
           var fi = new FileInfo(fileName);
           WriteLog(String.Format("File downloaded! Size {0} bytes, Saved to {1}", fi.Length, fileName));
         }
         else
           WriteLog(String.Format("File {0} is new and will not be downloaded!", fileName), LogLevel.WARN);
-
-        //while (client.IsBusy)
-        //{
-        //  System.Threading.Thread.Sleep(100);
-        //}
 
         return fileName;
       }
@@ -433,7 +412,7 @@ namespace wgmulti
 
     void WriteLog(String msg, LogLevel level = LogLevel.INFO)
     {
-      msg = String.Format("{0}.{1} | {2} | {3}", Application.currentSiteiniIndex + 1, number, id.ToUpper(), msg);
+      msg = String.Format("{0}.{1} | {2} | {3}", Application.grabbingRound + 1, id, name.ToUpper(), msg);
 
       if (level == LogLevel.INFO)
         Log.Info(msg);

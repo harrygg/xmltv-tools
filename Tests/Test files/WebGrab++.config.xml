@@ -9,7 +9,7 @@
   <update></update>
   <proxy>automatic</proxy>
   <channel update="i" site="siteini" site_id="channel_1" xmltv_id="Канал 1 ID">Канал 1</channel>
-  <channel same_as="Канал 1" offset="1" xmltv_id="Канал 1 +1 ID">Канал 1 +1</channel>
+  <channel same_as="Канал 1 ID" offset="1" xmltv_id="Канал 1 +1 ID">Канал 1 +1</channel>
   <channel update="i" site="siteiniCET" site_id="chanel_2" xmltv_id="Channel2ID" include="III" exclude="EEE">Channel2</channel>
   
 </settings>

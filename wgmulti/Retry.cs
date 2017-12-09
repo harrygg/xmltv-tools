@@ -20,7 +20,7 @@ namespace wgmulti
     public int showDelay = 0;
 
     [DataMember(Order = 1), XmlText]
-    public int atttempts = 4;
+    public int attempts = 6;
 
     public Retry()
     {
@@ -29,7 +29,7 @@ namespace wgmulti
     public override String ToString()
     {
       return 
-        String.Format("Attempts:{0}, time-out:{1}, channel-delay:{2}, index-delay:{3}, show-delay:{4}", atttempts, timeOut, channelDelay, indexDelay, showDelay, atttempts);
+        String.Format("Attempts:{0}, time-out:{1}, channel-delay:{2}, index-delay:{3}, show-delay:{4}", attempts, timeOut, channelDelay, indexDelay, showDelay, attempts);
     }
   }
 }

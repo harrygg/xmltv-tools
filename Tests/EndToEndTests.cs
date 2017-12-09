@@ -213,12 +213,13 @@ namespace Tests
     }
 
     [TestMethod]
-    public void Run_Internal_JSON_Config_Test_Missing_Siteini()
+    public void Run_Internal_JSON_Config_Test_Grab_From_Second_Siteini()
     {
       var te = new TestEnvironment(ppType: PostProcessType.NONE);
       Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
       Arguments.configDir = Arguments.grabingTempFolder;
       Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.reportFilePath = Path.Combine(Arguments.configDir, "report.json");
       Arguments.useJsonConfig = true;
       File.Copy(@"..\..\Test files\wgmulti.config.multi.siteinis.json",
         Path.Combine(Arguments.configDir, "wgmulti.config.json"), true);

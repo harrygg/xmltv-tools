@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <startup>
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
@@ -7,12 +7,16 @@
     <add key="Debug" value="true" />
     <!-- WebGrabFolder - the path to the directory of the WebGrab+Plus.exe executable. If empty, wgmulti and WebGrab must be in the same directory -->
     <add key="WebGrabFolder" value="" />
-    <!-- ConfigDir - default folder where configuration will be loaded from (if not arguments are provided) -->
-    <add key="ConfigDir" value="C:\inetpub\wwwroot\www\EPG\config\" />
-    <!-- JsonConfigFileName - the name of the JSON file containing the IDs of the channels to be grabbed (currenlty not used) -->
+    <!-- UseJsonConfig - the name of the JSON file containing the IDs of the channels to be grabbed (currenlty not used) -->
     <add key="UseJsonConfig" value="true" /> 
-    <!-- ProcessTimeout - time in minutes, after it expires, if the WebGrab process is still running it will be killed -->
-    <add key="ProcessTimeout" value="40" />
+    <!-- JsonConfigFileName - the name of the JSON file containing the IDs of the channels to be grabbed (currenlty not used) -->
+    <add key="JsonConfigFileName" value="wgmulti.config.full.json" />
+    <!-- ConvertXmlConfigToJson if set to 'true', the xml config file will be translated to JSON and saved as per the JsonConfigFileName value -->    
+    <add key="ConvertXmlConfigToJson" value="true" />
+    <!-- ProcessTimeout after which the webgrab will be killed -->    
+    <add key="ProcessTimeout" value="240" />
+    <!-- ConfigDir - default folder where configuration will be loaded from (if not arguments are provided) -->
+    <add key="ConfigDir" value="C:\Users\genevh\Documents\GitHub\xmltv-tools\wgmulti\bin\Debug" />
     <!-- ConvertTimesToLocal - If set to true will convert all programmes times to local time -->
     <add key="ConvertTimesToLocal" value="true" />
     <!-- MaxAsyncProcesses - The maximum number of WebGrab processes that can be started asynchronously -->
@@ -23,13 +27,15 @@
     <add key="ShowWebGrabConsole" value="false" />
     <!-- Remove channel elements that have no programmes (currently not used) -->
     <add key="RemoveChannelsWithNoProgrammes" value="true" />
+    <!-- If after the initial grabbing the channel has no programmes, the grabbing will be attempted again with the next available siteini until programmes are grabbed or there are no more siteinis. (Works only when JSON config is used and channels have multiple siteinis. ) -->
+    <add key="PersistantGrabbing" value="true" />    
     <!-- GrabingTempFolder - the path to the directory where temporary EPG, config and ini files will be stored. Each grabber will create it's own directory. If empty, the System %temp% folder will be used -->
-    <add key="GrabingTempFolder" value="C:\inetpub\wwwroot\www\EPG\temp\" />
+    <add key="GrabingTempFolder" value="C:\inetpub\wwwroot\www\EPG\temp" />
     <!-- GenerateResultsReport true or false - generates a JSON file with the results of the successfully grabbed channels, the failed ones and the time taken. -->
     <add key="GenerateResultsReport" value="true" />
     <!-- ReportFileName - The name of the report file. -->
     <add key="ReportFileName" value="wgmulti.report.json" />
     <!-- ReportFolder - The name of the folder where the report file will be saved. By default it's the wgmulti's directory. -->
-    <add key="ReportFolder" value="C:\inetpub\wwwroot\www\EPG\logs\" />
+    <add key="ReportFolder" value="" />
   </appSettings>
 </configuration>

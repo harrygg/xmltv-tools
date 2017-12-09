@@ -38,14 +38,33 @@ namespace Tests
     {
       var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.minimal.json");
 
+      if (conf.retry.attempts != 6)
+        Assert.Fail("Retry attempts are not default 6! Actual: " + conf.retry.attempts);
+
       if (conf.channels.Count != 1)
-        Assert.Fail("Channel count is wrong!");
+        Assert.Fail("Channel count is wrong! Actual: " + conf.channels.Count);
 
       if (conf.period.days != 0)
-        Assert.Fail("timespan period is not default!");
+        Assert.Fail("Timespan period is not default! Actual: " + conf.period.days);
 
       if (conf.postProcess.run)
-        Assert.Fail("default post process is not false");
+        Assert.Fail("Default post process is not false! Actual: " + conf.postProcess.run);
+
+      if (!conf.channels[0].Enabled)
+        Assert.Fail("Channel 1 is not enabled!");
+
+      if (conf.channels[0].update != UpdateType.None)
+        Assert.Fail("Channel 1 default update is not NONE!");
+    }
+
+
+    [TestMethod]
+    public void Deserialize_From_Json_No_Siteini()
+    {
+      var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.minimal.nositeini.json");
+      conf.PrepareSiteinis();
+      if (conf.channels[0].active)
+        Assert.Fail("Channel 1 is not deactivated!");
     }
 
     [TestMethod]
@@ -149,7 +168,7 @@ namespace Tests
       if (!content.Contains("settings>\r\n"))
         Assert.Fail("Missing settings>\r\n element");
 
-      if (!content.Contains("automatic"))
+      if (!content.Contains(">automatic<"))
         Assert.Fail("Proxy value not matching expectations!");
     }
 
@@ -172,7 +191,7 @@ namespace Tests
       if (!conf.postProcess.run)
         Assert.Fail("Postproces run is not enabled");
       if (2 != conf.channels.Count)
-        Assert.Fail("Channels in the config file are not {0}, expected 2", conf.channels.Count);
+        Assert.Fail("Channels in the config file are {0}, expected 2", conf.channels.Count);
       if ("12,1" != conf.skip)
         Assert.Fail("Skip value is no 12,1");
       if ("Канал 1" != cha1.name)
@@ -213,7 +232,6 @@ namespace Tests
 
       // Read config object from file
       var conf = Config.DeserializeFromFile(te.configFileXml);
-
       var file = Path.Combine(te.configFolder, "exported_wgmulti.config.json");
 
       File.WriteAllText(
@@ -222,8 +240,21 @@ namespace Tests
       CheckMandatoryElementsInJsonConfig(file);
     }
 
+
     [TestMethod]
-    public void NOTEST_Convert_Big_JSON_Config_To_XML()
+    public void Clone_JSON_Config_To_XML()
+    {
+      // Read config object from file
+      var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.multi.siteinis.json");
+      var conf2 = (Config)conf.Clone(Directory.GetCurrentDirectory());
+      File.WriteAllText("Exported.WebGrab++.config.xml", conf2.Serialize());
+
+      //Check(file);
+    }
+
+
+    [TestMethod]
+    public void Convert_Big_JSON_Config_To_XML()
     {
       var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.big.json");
       File.WriteAllText("WebGrab.Big.xml", conf.Serialize());
@@ -231,14 +262,39 @@ namespace Tests
 
 
     [TestMethod]
-    public void NOTEST_Convert_Big_XML_Config_To_JSON()
+    public void Convert_Big_XML_Config_To_JSON()
     {
       var conf = Config.DeserializeFromFile(@"webgrab.config.test.big.xml");
       File.WriteAllText("webgrab.config.test.big.json", conf.Serialize(true));
     }
 
+    [TestMethod]
+    public void Test_DisableMissingSiteinis()
+    {
 
-		void VerifyJsonDeserializedData(Config conf, bool isCopyEnabled = false)
+      var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.disabled.siteinis.json");
+      conf.PrepareSiteinis();
+
+      if (conf.channels[0].siteinis[0].enabled)
+        Assert.Fail("Channel 1 first siteini is enabled");
+
+      if (!conf.channels[1].siteinis[0].enabled)
+        Assert.Fail("Channel 2 siteini should be enabled");
+
+      if (conf.channels[2].siteinis[0].enabled)
+        Assert.Fail("Channel 3 first siteini is enabled");
+
+      if (conf.channels[2].siteinis[1].enabled)
+        Assert.Fail("Channel 3 second siteini is enabled");
+
+      if (conf.channels[3].siteinis[0].enabled)
+        Assert.Fail("Channel 4 siteini 1 is enabled");
+
+      if (conf.channels[3].siteinis[1].enabled)
+        Assert.Fail("Channel 4 siteini 2 is enabled");
+    }
+
+    void VerifyJsonDeserializedData(Config conf, bool isCopyEnabled = false)
 		{
 			var cha1 = conf.channels[0];
 			var cha2 = conf.channels[1];
@@ -329,6 +385,9 @@ namespace Tests
 
 			if (!content.Contains("\"automatic"))
 				Assert.Fail("Proxy setting automatic not found in json");
+
+      if (!content.Contains("retry time-out=\"20\" channel-delay=\"1\" index-delay=\"1\" show-delay=\"1\">4</retry>"))
+        Assert.Fail("Retry settings are wrong");
 		}
 
 		public Config CreateDefaultConfigObject()
@@ -336,8 +395,8 @@ namespace Tests
       Config conf = new Config(); // Default config values
       conf.retry.timeOut = 15;
       conf.proxy = new Proxy();
-      conf.proxy.user = "myuser";
-      conf.proxy.password = "mypass";
+      conf.proxy.user = "";
+      conf.proxy.password = "";
       conf.proxy.server = "automatic";
 
       var siteini = new SiteIni("siteini", "channel_1");

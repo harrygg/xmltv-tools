@@ -270,34 +270,37 @@ namespace wgmulti
       var ms = GetMemoryStreamFromFile(file);
       var conf = (Config)ser.Deserialize(ms);
 
-      // XMLSerialization does not support OnDeserialize
-      var channels = new List<Channel>();
-      var parent_channel = new Channel();
+      conf.OnXmlDeserialized();
 
-      // We need to create a default SiteIni object for each channel
-      foreach (var channel in conf.GetChannels(true))
+      return conf;
+    }
+
+    void OnXmlDeserialized()
+    {
+      // XMLSerialization does not support OnDeserialize
+      var deflatedChannels = new List<Channel>();
+      var previous = new Channel();
+
+      // Add all timeshifted channels as sub channels to their parents
+      foreach (var channel in GetChannels(includeOffset: true))
       {
         // Is this a timeshifted channel, add it to the previous channel 
-        if (!String.IsNullOrEmpty(channel.same_as))
+        if (String.IsNullOrEmpty(channel.same_as))
         {
-          if (parent_channel.timeshifts == null)
-            parent_channel.timeshifts = new List<Channel>();
-          channel.same_as = parent_channel.xmltv_id;
-          parent_channel.timeshifts.Add(channel);
+          previous = channel;
+          deflatedChannels.Add(previous);
+          activeChannels++;
         }
         else
         {
-          var siteini = new SiteIni(channel.site, channel.site_id);
-          channel.siteinis = new List<SiteIni>();
-          channel.siteinis.Add(siteini);
-          parent_channel = channel;
-          channels.Add(parent_channel);
+          if (previous.timeshifts == null)
+            previous.timeshifts = new List<Channel>();
+          previous.timeshifts.Add(channel);
+          activeChannels++;
         }
       }
 
-      conf.channels = channels;
-
-      return conf;
+      channels = deflatedChannels;
     }
 
     static MemoryStream GetMemoryStreamFromFile(String file)
@@ -317,18 +320,19 @@ namespace wgmulti
 
     static Config DeserializeJsonFile(String file)
     {
-      Config conf;
+      Config conf = null;
+
       var txt = File.ReadAllText(file);
       using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(txt)))
       {
         var sr = new DataContractJsonSerializer(typeof(Config));
-        conf = (Config) sr.ReadObject(ms);
+        conf = (Config)sr.ReadObject(ms);
       }
       return conf;
     }
 
     /// <summary>
-    /// Set the same_as attribute of all timeshifted channels. It should be equal to the parent channel xmltv_id
+    /// Executed only when reading a JSON file
     /// </summary>
     /// <param name="c"></param>
     [OnDeserialized]
@@ -343,13 +347,72 @@ namespace wgmulti
       if (period == null)
         period = new Period();
 
+      // Set update type to channels with missing update type
       foreach (var channel in GetChannels(includeOffset: true))
       {
-        // If channel is not timeshifted and has no 'site' attribute, disable it
-        if (String.IsNullOrEmpty(channel.same_as) && String.IsNullOrEmpty(channel.site))
+        activeChannels++;
+        if (channel.update == null && !channel.IsTimeshifted)
         {
-          channel.Enabled = false;
+          channel.update = UpdateType.None;
+          Log.Error("Channel '" + channel.name + "' has no update type. Update set to None!");
+          activeChannels--;
         }
+
+        if (channel.siteinis == null && !channel.IsTimeshifted)
+        {
+          Log.Error("Channel '" + channel.name + "' has no siteinis!");
+          channel.siteinis = new List<SiteIni>();
+        }
+      }
+    }
+
+    public void PrepareSiteinis()
+    {
+      Log.Info("Searching for siteinis. Disabling missing ones.");
+      try
+      {
+        List<SiteIni> siteIniWithMissingFile = new List<SiteIni>();
+
+        foreach (var channel in GetChannels(includeOffset: false))
+        {
+          if (channel.siteinis == null || channel.siteinis.Count == 0)
+          {
+            Log.Warning(String.Format("Channel '{0}' has no available siteinis. Channel deactivated!", channel.name));
+            channel.active = false;
+            continue;
+          }
+
+          foreach (var siteini in channel.siteinis)
+          {
+            if (DisabledSiteiniNamesList.Contains(siteini.name))
+            {
+              Log.Error(String.Format("Siteini {0} disabled in JSON configuraiton!", siteini.GetName()));
+              siteini.enabled = false;
+            }
+            else
+            {
+              if (!siteIniWithMissingFile.Contains(siteini))
+              {
+                siteini.path = siteini.GetPath();
+                if (!String.IsNullOrEmpty(siteini.path))
+                {
+                  siteini.enabled = true;
+                }
+                else
+                {
+                  siteIniWithMissingFile.Add(siteini);
+                  Log.Error(String.Format("Siteini {0} not found in config folder {1} or siteini.user/siteini.pack sub folders (Depth=6). Siteini will be disabled globally!", siteini.GetName(), folder));
+                }
+              }
+              else
+                siteini.enabled = false;
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        Log.Error(ex.Message + ": " + ex.ToString());
       }
     }
 
@@ -410,14 +473,11 @@ namespace wgmulti
     /// <returns></returns>
     public IEnumerable<Channel> GetChannels(bool includeOffset = false, bool onlyActive = false)
     {
-      var parent = new Channel();
       foreach (var channel in channels)
       {
         if (!channel.Enabled || (onlyActive && !channel.active))
           continue;
-
-        parent = channel;
-        activeChannels++;
+        
         yield return channel;
 
         if (!includeOffset || (includeOffset && channel.timeshifts == null))
@@ -425,14 +485,12 @@ namespace wgmulti
 
         foreach (var timeshifted in channel.timeshifts)
         {
+          timeshifted.parent = channel;
           if (String.IsNullOrEmpty(timeshifted.same_as))
-            timeshifted.same_as = parent.xmltv_id;
+            timeshifted.same_as = timeshifted.parent.xmltv_id;
 
           if (timeshifted.Enabled)
-          {
-            activeChannels++;
             yield return timeshifted;
-          }
         }
       }
     }
@@ -441,7 +499,7 @@ namespace wgmulti
     {
       try
       {
-        return GetChannels().First(c => c.name.Equals(name));
+        return GetChannels(includeOffset: true).First(c => c.name.Equals(name));
       }
       catch (Exception)
       {
@@ -449,12 +507,31 @@ namespace wgmulti
       return null;
     }
 
-    public int EmptyChannelsCount()
+    public Dictionary<String, int> GetChannelsCount()
     {
-       return GetChannels().Where(channel => channel.xmltv.programmes.Count == 0).ToList().Count;
+      var res = new Dictionary<String, int>();
+      res.Add("withoutPrograms", 0);
+      res.Add("withPrograms", 0);
+
+      foreach (var channel in GetChannels(includeOffset: true))
+      {
+        var key = "withoutPrograms";
+        if (channel.HasPrograms)
+          key = "withPrograms";
+
+        if (res.ContainsKey(key))
+        {
+          res[key]++;
+        }
+        else
+        {
+          res.Add(key, 1);
+        }
+      }
+      return res;
     }
 
-    public Xmltv GetChannelGuides()
+    public Xmltv GetChannelsGuides()
     {
       Xmltv epg = new Xmltv();
       try
