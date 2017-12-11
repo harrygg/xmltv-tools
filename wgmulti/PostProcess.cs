@@ -128,6 +128,8 @@ namespace wgmulti
           fileName = settings.Element("filename").Value;
           if (!Path.IsPathRooted(fileName))
             fileName = Path.Combine(Path.GetDirectoryName(ConfigFilePath), fileName);
+
+          Log.Debug("Post process config successfully loaded!");
         }
         else
         {
@@ -137,7 +139,9 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Log.Error(ex.ToString());
+        Log.Error(ex.Message);
+        Log.Debug(ex.ToString());
+        Log.Error("Post process disabled!");
         run = false;
       }
     }

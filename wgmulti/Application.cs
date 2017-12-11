@@ -13,7 +13,7 @@ namespace wgmulti
     public static int grabbingRound = 0;
     public static Report report = new Report();
     public static Xmltv epg = new Xmltv();
-
+    public static Stopwatch stopWatch = new Stopwatch();
     /// <summary>
     /// Start the main application
     /// </summary>
@@ -23,7 +23,6 @@ namespace wgmulti
       if (configDir != null)
         Arguments.configDir = configDir;
 
-      var stopWatch = new Stopwatch();
       stopWatch.Start();
 
       try
@@ -74,22 +73,10 @@ namespace wgmulti
       }
 
       stopWatch.Stop();
-      var ts = stopWatch.Elapsed;
 
       report.Generate(masterConfig);
-
       if (Arguments.generateReport)
         report.Save();
-
-      // Output names of channels with no EPG
-      var n = 0;
-      Log.Info("Channels with no EPG: ");
-
-      foreach (var name in report.emptyChannels)
-        Log.Info(String.Format("{0}. {1}", ++n, name));
-
-      if (n == 0)
-        Log.Info("None!");
     }
 
     static void DoGrabbing()

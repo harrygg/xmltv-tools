@@ -22,35 +22,53 @@ namespace wgmulti
 
     public void Generate(Config config)
     {
-      foreach (var channel in config.GetChannels(includeOffset: true))
+      try
       {
-        total += 1;
-        var channelInfo = new ChannelInfo(channel.name);
-        if (channel.HasPrograms)
+        foreach (var channel in config.GetChannels(includeOffset: true))
         {
-          channelsWithEpg += 1;
-          channelInfo.siteiniIndex = channel.siteiniIndex;
-          channelInfo.programsCount = channel.xmltv.programmes.Count;
-          channelInfo.firstShowStartsAt = channel.xmltv.programmes[0].Attribute("start").Value;
-          channelInfo.lastShowStartsAt = channel.xmltv.programmes[channelInfo.programsCount - 1].Attribute("stop").Value;
+          total += 1;
+          var channelInfo = new ChannelInfo(channel.name);
+          if (channel.HasPrograms)
+          {
+            channelsWithEpg += 1;
+            channelInfo.siteiniIndex = channel.siteiniIndex;
+            channelInfo.programsCount = channel.xmltv.programmes.Count;
+            channelInfo.firstShowStartsAt = channel.xmltv.programmes[0].Attribute("start").Value;
+            channelInfo.lastShowStartsAt = channel.xmltv.programmes[channelInfo.programsCount - 1].Attribute("stop").Value;
 
-          if (!channel.IsTimeshifted)
-            channelInfo.siteiniName = channel.GetActiveSiteIni().name;
+            if (!channel.IsTimeshifted)
+              channelInfo.siteiniName = channel.GetActiveSiteIni().name;
+            else
+              channelInfo.siteiniName = channel.parent.GetActiveSiteIni().name;
+          }
           else
-            channelInfo.siteiniName = channel.parent.GetActiveSiteIni().name;
+          {
+            channelsWithoutEpg += 1;
+            emptyChannels.Add(channel.name);
+          }
+          channels.Add(channelInfo);
         }
-        else
-        {
-          channelsWithoutEpg += 1;
-          emptyChannels.Add(channel.name);
-        }
-        channels.Add(channelInfo);
+
+        fileSize = GetFileSize(config.outputFilePath);
+        md5hash = GetMD5Hash(config.outputFilePath);
+        generatedOn = DateTime.Now.ToString();
+
+        // Output names of channels with no EPG
+        var n = 0;
+        Log.Info("Channels with no EPG: ");
+        foreach (var name in emptyChannels)
+          Log.Info(String.Format("{0}. {1}", ++n, name));
+        if (n == 0)
+          Log.Info("None!");
+
+        var ts = Application.stopWatch.Elapsed;
+        generationTime = String.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
       }
-
-      fileSize = GetFileSize(config.outputFilePath);
-      md5hash = GetMD5Hash(config.outputFilePath);
+      catch (Exception ex)
+      {
+        Log.Error(ex.Message);
+      }
     }
-
 
     String GetMD5Hash(String file)
     {

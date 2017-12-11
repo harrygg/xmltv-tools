@@ -19,7 +19,6 @@ namespace wgmulti
     public String name;
     public String currentChannelName;
     public String tempDir = String.Empty;
-    public String path = String.Empty;
     public bool enabled = false;
     public int id = 1;
     public List<Channel> channels = new List<Channel>();
@@ -134,9 +133,9 @@ namespace wgmulti
     void CopyData()
     {
       ///If we are downloading the xmltv, GetRemoteFile will download and extract
-      if (path.StartsWith("http") || path.StartsWith("ftp"))
+      if (ActiveSiteini.path.StartsWith("http") || ActiveSiteini.path.StartsWith("ftp"))
       {
-        var result = GetRemoteFile(path, config.outputFilePath);
+        var result = GetRemoteFile(ActiveSiteini.path, config.outputFilePath);
         if (result == null)
         {
           WriteLog("GetRemoteFile() failed!", LogLevel.ERROR);

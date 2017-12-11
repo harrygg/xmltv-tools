@@ -91,6 +91,24 @@ namespace Tests
       if (copyChannel)
       {
         siteini = "{\r\n          \"grab_type\": \"copy\",\r\n          \"name\": \"Channel3Epg\",\r\n          \"site_id\": \"Channel 3 ID\",\r\n          \"path\": \"http://localhost/epg/epg-cet.xml.gz\"\r\n        }";
+
+        var epg = File.ReadAllText(@"..\..\Test Files\epg-cet.xml");
+        var now = DateTime.Now;
+        var today = now.ToString("yyyyMMdd");
+        now = now.AddDays(1);
+        var tomorrow = now.ToString("yyyyMMdd");
+        epg = epg.Replace("##TODAY##", today).Replace("##TOMORROW##", tomorrow);
+        File.WriteAllText(@"C:\wamp64\www\epg\epg-cet.xml", epg);
+        var gzippedFile = @"C:\wamp64\www\epg\epg-cet.xml.gz";
+        if (File.Exists(gzippedFile))
+          File.Delete(gzippedFile);
+
+        var bytes = File.ReadAllBytes(@"C:\wamp64\www\epg\epg-cet.xml");
+        using (FileStream fs = new FileStream(gzippedFile, FileMode.CreateNew))
+        using (var zipStream = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress, false))
+        {
+          zipStream.Write(bytes, 0, bytes.Length);
+        }
       }
       else
       {

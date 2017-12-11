@@ -104,6 +104,7 @@ namespace wgmulti
                   el.Remove();
               }
             }
+
             _programs.Add(copiedProgram);
           }
         });

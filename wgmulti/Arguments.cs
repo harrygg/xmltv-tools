@@ -93,12 +93,12 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["RemoveChannelsWithNoProgrammes"] ?? "true";
       removeChannelsWithNoProgrammes = Convert.ToBoolean(val);
 
-      val = ConfigurationManager.AppSettings["PersistantGrabbing"] ?? "true";
-      persistantGrabbing = Convert.ToBoolean(val);
-
       val = ConfigurationManager.AppSettings["CopyOnlyTitleForOffsetChannel"] ?? copyOnlyTitleForOffsetChannel.ToString().ToLower();
       copyOnlyTitleForOffsetChannel = Convert.ToBoolean(val);
 
+      val = ConfigurationManager.AppSettings["RemoveExtraChannelAttributes"] ?? removeExtraChannelAttributes.ToString().ToLower();
+      removeExtraChannelAttributes = Convert.ToBoolean(val);
+ 
       //if (!IsLinux())
       //{ 
         val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "false";
