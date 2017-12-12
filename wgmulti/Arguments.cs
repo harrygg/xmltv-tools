@@ -6,14 +6,11 @@ namespace wgmulti
 {
   public class Arguments
   {
-    public static String[] args = Environment.GetCommandLineArgs();
-    public static String cmdArgs = "None";
-    public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-    public static String jsonConfigFileName;
+    public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
     public static String webGrabFolder = "";
     public static String grabingTempFolder = String.Empty;
-    public static bool buildConfigFromJson;
-    public static bool convertXmlConfigToJson = false;
+    public static bool useJsonConfig;
+    public static bool exportJsonConfig = true;
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
@@ -24,13 +21,17 @@ namespace wgmulti
     public static bool showConsole = false;
     public static bool randomStartOrder = true;
     public static bool generateReport = true;
-    public static String reportFileName = "wgmulti.report.json";
+    static String reportFileName = "wgmulti.report.json";
     public static String reportFolder = "";
+    public static String reportFilePath = "";
     public static bool combineLogFiles = true;
     public static bool removeChannelsWithNoProgrammes = true;
     public static bool persistantGrabbing = true;
     public static bool debug = false;
     public static bool copyOnlyTitleForOffsetChannel = false;
+    public static bool removeExtraChannelAttributes = false;
+    public const String wgexe = "WebGrab+Plus.exe";
+    public static String wgPath = "";
 
     public static bool IsLinux()
     {
@@ -40,9 +41,9 @@ namespace wgmulti
 
     static Arguments()
     {
-      var val = ConfigurationManager.AppSettings["configDir"] ?? @"ServerCare\WebGrab";
+      var val = ConfigurationManager.AppSettings["configDir"] ?? @"WebGrab+Plus";
 
-      if (val == @"ServerCare\WebGrab")
+      if (val == @"WebGrab+Plus")
       {
         if (IsLinux())
           configDir = Directory.GetCurrentDirectory();
@@ -50,27 +51,20 @@ namespace wgmulti
           configDir = Path.Combine(configDir, val);
       }
       else
-        configDir = val;      
+        configDir = val;
 
-      ///Overwrite config dir by cmd
-      if (args.Length == 2)
-      {
-        configDir = args[1];
-        cmdArgs = args[1];
-      }
 
       val = ConfigurationManager.AppSettings["Debug"] ?? "false";
       debug = Convert.ToBoolean(val);
 
-      jsonConfigFileName = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? "wgmulti.config.json";
-
       webGrabFolder = ConfigurationManager.AppSettings["WebGrabFolder"] ?? webGrabFolder;
+      wgPath = Path.Combine(Arguments.webGrabFolder, Arguments.wgexe);
 
-      val = ConfigurationManager.AppSettings["BuildConfigFromJson"] ?? "true";
-      buildConfigFromJson = Convert.ToBoolean(val);
+      val = ConfigurationManager.AppSettings["UseJsonConfig"] ?? "true";
+      useJsonConfig = Convert.ToBoolean(val);
 
-      val = ConfigurationManager.AppSettings["ConvertXmlConfigToJson"] ?? "true";
-      convertXmlConfigToJson = Convert.ToBoolean(val) && !buildConfigFromJson;
+      val = ConfigurationManager.AppSettings["ExportJsonConfig"] ?? "true";
+      exportJsonConfig = Convert.ToBoolean(val) && !useJsonConfig;
 
       val = ConfigurationManager.AppSettings["GroupChannelsBySiteIni"] ?? "true";
       groupChannelsBySiteIni = Convert.ToBoolean(val);
@@ -99,12 +93,12 @@ namespace wgmulti
       val = ConfigurationManager.AppSettings["RemoveChannelsWithNoProgrammes"] ?? "true";
       removeChannelsWithNoProgrammes = Convert.ToBoolean(val);
 
-      val = ConfigurationManager.AppSettings["PersistantGrabbing"] ?? "true";
-      persistantGrabbing = Convert.ToBoolean(val);
-
       val = ConfigurationManager.AppSettings["CopyOnlyTitleForOffsetChannel"] ?? copyOnlyTitleForOffsetChannel.ToString().ToLower();
       copyOnlyTitleForOffsetChannel = Convert.ToBoolean(val);
 
+      val = ConfigurationManager.AppSettings["RemoveExtraChannelAttributes"] ?? removeExtraChannelAttributes.ToString().ToLower();
+      removeExtraChannelAttributes = Convert.ToBoolean(val);
+ 
       //if (!IsLinux())
       //{ 
         val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "false";
@@ -112,6 +106,8 @@ namespace wgmulti
       //}
 
       val = ConfigurationManager.AppSettings["GrabingTempFolder"] ?? Path.Combine(Path.GetTempPath(), "wgmulti");
+      if (String.IsNullOrEmpty(val)) // If grabingTempFolder is empty in config file 
+        val = Arguments.configDir;
       grabingTempFolder = val;
 
       val = ConfigurationManager.AppSettings["ReportFileName"] ?? reportFileName;
@@ -119,6 +115,8 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["ReportFolder"] ?? reportFolder;
       reportFolder = val;
+
+      reportFilePath = Path.Combine(reportFolder, reportFileName);
     }
   }
 }

@@ -1,0 +1,15 @@
+﻿{
+  "filename":"epg.xml",
+  "channels":[
+    {
+      "name":"Канал 1",
+      "xmltv_id":"Канал 1 ID",
+      "siteinis":[
+        {
+          "name": "siteini",
+          "site_id":"channel_1"
+        }
+      ],
+    }
+  ]
+}

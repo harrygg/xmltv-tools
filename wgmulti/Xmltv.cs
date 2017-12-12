@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using System.Linq;
-using System.Security.Cryptography;
-using System.IO;
+using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace wgmulti
 {
@@ -71,7 +69,7 @@ namespace wgmulti
     /// <param name="offset">The offset of programs. If different than null it will be applied to start and end times. If null local conversion will be applied</param>
     /// <param name="newId">The new channel id of the programs. If specified the channel id of the program will be renamed</param>
     /// <returns></returns>
-    public List<XElement> GetProgramsById(String channel_id, int? offset = null, String newId = null, bool usePostProcessedData = false)
+    public List<XElement> GetProgramsById(String channel_id, double? offset = null, String newId = null, bool usePostProcessedData = false)
     {
       var _programs = new List<XElement>();
       // If we are copying from regular programs or from post processed programs
@@ -87,7 +85,7 @@ namespace wgmulti
           var start_time = program.Attribute("start").Value;
           var end_time = program.Attribute("stop").Value;
 
-          if (channel_name == channel_id && Program.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
+          if (channel_name == channel_id && Application.masterConfig.Dates.Contains(start_time.Substring(0, 8)))
           {
             var copiedProgram = new XElement(program); // Clone to a copy of the object
             if (!String.IsNullOrEmpty(newId))
@@ -106,6 +104,7 @@ namespace wgmulti
                   el.Remove();
               }
             }
+
             _programs.Add(copiedProgram);
           }
         });
@@ -140,35 +139,6 @@ namespace wgmulti
       if (outputFile == null)
         outputFile = file;
       root.Save(outputFile);
-    }
-
-    public String GetMD5Hash()
-    {
-      try
-      {
-        var md5 = MD5.Create();
-        var stream = File.OpenRead(file);
-        return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
-      }
-      catch (Exception ex)
-      {
-        Log.Error(ex.ToString());
-        return String.Empty;
-      }
-    }
-
-    public String GetFileSize()
-    {
-      try
-      {
-        var fi = new FileInfo(file);
-        return fi.Length.ToString();
-      }
-      catch (Exception ex)
-      {
-        Log.Error(ex.ToString());
-        return String.Empty;
-      }
     }
   }
 }

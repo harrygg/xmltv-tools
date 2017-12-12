@@ -1,0 +1,66 @@
+﻿{
+  "retry": {
+    "attempts": 1,
+    "channelDelay": 1,
+    "indexDelay": 1,
+    "showDelay": 1,
+    "timeOut": 20
+  },
+  "logging": true,
+  "timespan": {
+    "days": 2,
+    "time": ""
+  },
+  "skip": "12,1",
+  "update": "i",
+  "filename":"epg.xml",
+  "channels":[
+    {
+      "name":"Канал 1",
+      "xmltv_id":"Канал 1 ID",
+      "enabled":true,
+      "update":"i",
+      "siteinis":[
+        {
+          "name": "siteiniEmpty",
+          "site_id":""
+        },
+        {
+          "name": "siteini",
+          "site_id":"channel_1"
+        }
+      ],
+      "timeshifts":[
+        {
+          "name":"Канал 1 +1",
+          "xmltv_id":"Канал 1 +1 ID",
+          "offset":1
+        }
+      ]
+    },
+    {
+      "name": "Channel2",
+      "xmltv_id": "Channel2ID",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "siteini",
+          "site_id": "chanel_2"
+        }
+      ]
+    }
+  ],
+  "proxy": {
+    "password": "",
+    "user": "",
+    "server": "automatic"
+  },
+  "postprocess": {
+    "type":"rex",
+    "run":false,
+    "grab":true
+  },
+  "useragent": "",
+  "mode": "m,nomark"
+}

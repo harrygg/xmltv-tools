@@ -1,5 +1,7 @@
 [Oo]bj/
-Tests/
+Tests/bin/Debug/
+Tests/bin/Release/
+Tests/obj/
 *.suo
 *.user
 TestResults/
