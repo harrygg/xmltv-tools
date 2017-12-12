@@ -4,25 +4,22 @@
     "channelDelay": 5,
     "showDelay": 1,
     "indexDelay": 1,
-    "value": 2
+    "attempts": 2
   },
   "logging": true,
-  "skip": {
-    "max":13, 
-    "min":1
-    },
+  "skip": "12,1",
   "timespan": {
     "days":0,
     "time":""
     },
-  "update": "i",
+  "update": "",
   "filename": "epg.xml",
   "useragent": "Mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/54.0.2840.99 safari/537.36",
   "mode": "m,nomark",
   "proxy": {
     "user":"",
     "password":"",
-    "value":""
+    "server":""
     },
   "postprocess": {
     "type": "rex",
@@ -39,9 +36,15 @@
         {
           "site_id": "index_hbo",
           "name": "hbo.bg"
+        },
+        {
+          "path": "http://path-to-already-existing-epg/epg.xml.gz",
+          "site_id": "HBO 1 ID",
+          "name": "READY_EPG",
+          "type": "copy"
         }
       ],
-      "offset_channels": [
+      "timeshifts": [
         {
           "name": "HBO +1",
           "xmltv_id": "HBO +1",
