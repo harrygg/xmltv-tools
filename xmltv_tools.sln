@@ -1,17 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wgmutlti", "wgmulti\wgmutlti.csproj", "{8675D803-AB93-4320-BE6D-C73CE2CA5203}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xmltv_time_modify", "xmltv_time_modify\xmltv_time_modify.csproj", "{8C46DD82-B715-4ADC-9840-90B101367E6B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xmltv_merger", "xmltv_merger\xmltv_merger.csproj", "{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xmltv_program_copy", "xmltv_program_copy\xmltv_program_copy.csproj", "{910BAA5D-7233-49E7-8CB7-056F59D2B740}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,20 +21,11 @@ Global
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C46DD82-B715-4ADC-9840-90B101367E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C46DD82-B715-4ADC-9840-90B101367E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C46DD82-B715-4ADC-9840-90B101367E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C46DD82-B715-4ADC-9840-90B101367E6B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{910BAA5D-7233-49E7-8CB7-056F59D2B740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{910BAA5D-7233-49E7-8CB7-056F59D2B740}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{910BAA5D-7233-49E7-8CB7-056F59D2B740}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{910BAA5D-7233-49E7-8CB7-056F59D2B740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {444674EA-3BFD-4FB7-B190-5AEDA7061465}
 	EndGlobalSection
 EndGlobal

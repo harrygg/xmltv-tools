@@ -73,14 +73,6 @@
       <Project>{8675D803-AB93-4320-BE6D-C73CE2CA5203}</Project>
       <Name>wgmutlti</Name>
     </ProjectReference>
-    <ProjectReference Include="..\xmltv_merger\xmltv_merger.csproj">
-      <Project>{C22D2DAE-FA54-46E8-BEBD-2EF574CC2E26}</Project>
-      <Name>xmltv_merger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xmltv_time_modify\xmltv_time_modify.csproj">
-      <Project>{8c46dd82-b715-4adc-9840-90b101367e6b}</Project>
-      <Name>xmltv_time_modify</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test files\epg-cet.xml" />
