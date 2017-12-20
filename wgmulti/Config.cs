@@ -384,7 +384,7 @@ namespace wgmulti
             continue;
           }
 
-          // Iterate over channel siteinis and enable/disable them
+          // Iterate over channel siteinis and enable/disable them or add properties
           foreach (var siteini in channel.siteinis)
           {
             // Search for global siteini 
@@ -404,11 +404,13 @@ namespace wgmulti
                 globalSiteini.path = globalSiteini.GetPath(folder);
                 if (!String.IsNullOrEmpty(globalSiteini.path))
                 {
+                  // If path is valid and existing assign it to the local ini path
                   siteini.path = globalSiteini.path;
-                  // If there is no overwriting global timespan value use the default period days value
+                  // If there is no overwriting global timespan value use the default period days value from master config
                   siteini.timespan = globalSiteini.timespan ?? period.days;
                   // If we don't have global siteini offset use config offset
                   siteini.offset = globalSiteini.offset ?? offset;
+                  // assign the type
                   siteini.type = globalSiteini.type;
                 }
                 else
@@ -419,7 +421,7 @@ namespace wgmulti
                 }
               }
             }
-            else // There is no global siteini for this siteini
+            else // There is no global siteini for this siteini, so we will add one
             {
               // Get local siteini ini path
               siteini.path = siteini.GetPath(folder);
@@ -429,7 +431,8 @@ namespace wgmulti
                 siteini.Enabled = true;
                 // Since this is a local siteini and there was no overwriting global siteini use default timespan
                 siteini.timespan = period.days;
-                // If there is no global siteini offset, overwrite with config offset
+                // Since there is no global siteini offset, overwrite with config offset
+                // Later it could be overwritten by channel offset
                 siteini.offset = offset;
               }
               else
