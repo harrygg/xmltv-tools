@@ -72,6 +72,12 @@ namespace wgmulti
     [DataMember(EmitDefaultValue = false, Order = 4), XmlIgnore]
     public List<SiteIni> siteinis { get; set; }
 
+    [IgnoreDataMember, XmlIgnore]
+    public bool HasSiteinis
+    {
+      get { return siteinis != null && siteinis.Count > 0; }
+    }
+
     [DataMember(EmitDefaultValue = false, Order = 5), XmlIgnore]
     public double? offset { get; set; }
 
@@ -165,7 +171,7 @@ namespace wgmulti
       bool found = false;
       for (var i = siteiniIndex + 1; i < siteinis.Count; i++)
       {
-        if (!found && siteinis[i].enabled)
+        if (!found && siteinis[i].Enabled)
         {
           siteiniIndex = i;
           found = true;

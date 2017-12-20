@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
@@ -62,10 +65,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ResultChecks.cs" />
     <Compile Include="TestEnvironment.cs" />
     <Compile Include="EndToEndTests.cs" />
     <Compile Include="ConfigTest.cs" />
     <Compile Include="ApplicationTests.cs" />
+    <Compile Include="NunitTest.cs" />
     <Compile Include="UtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,17 +85,20 @@
     <Content Include="Test files\WebGrab++.config.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="packages.config" />
     <None Include="Test files\daily.json" />
     <None Include="Test files\siteiniCET.ini" />
     <None Include="Test files\siteini.ini" />
     <None Include="Test files\siteiniEmpty.ini" />
     <None Include="Test files\wgmulti.config.disabled.siteinis.json" />
+    <None Include="Test files\wgmulti.config.global.siteinis.offset.json" />
     <None Include="Test files\wgmulti.config.json" />
     <None Include="Test files\wgmulti.config.minimal.json" />
     <None Include="Test files\wgmulti.config.minimal.nositeini.json" />
     <None Include="Test files\wgmulti.config.multi.disabled.siteini.json" />
     <None Include="Test files\wgmulti.config.multi.siteinis.json" />
     <None Include="Test files\wgmulti.config.single.json" />
+    <None Include="Test files\wgmulti.config.global.siteinis.timestamp.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

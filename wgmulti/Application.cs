@@ -42,7 +42,7 @@ namespace wgmulti
           return;
         }
 
-        masterConfig.PrepareSiteinis();
+        //masterConfig.InitSiteinis();
 
         // Grab channel programs
         DoGrabbing();

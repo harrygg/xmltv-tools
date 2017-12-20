@@ -1,0 +1,47 @@
+﻿{
+  "timespan": {
+    "days": 0,
+    "time": ""
+  },
+  "filename":"epg.xml",
+  "channels":[
+    {
+      "name":"Канал 1",
+      "xmltv_id":"Канал 1 ID",
+      "enabled":true,
+      "update":"i",
+      "siteinis":[
+        {
+          "name": "siteini",
+          "site_id":"channel_1",
+          "timespan": 5
+        }
+      ],
+      "timeshifts":[
+        {
+          "name":"Канал 1 +1",
+          "xmltv_id":"Канал 1 +1 ID",
+          "offset":1
+        }
+      ]
+    },
+    {
+      "name": "Channel2",
+      "xmltv_id": "Channel2ID",
+      "update": "i",
+      "enabled": true,
+      "siteinis": [
+        {
+          "name": "siteiniCET",
+          "site_id": "chanel_2"
+        }
+      ]
+    }
+  ],
+  "siteinis": [
+    {
+      "name": "siteini",
+      "timespan": 2
+    }
+  ]
+}

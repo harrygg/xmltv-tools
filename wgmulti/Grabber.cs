@@ -54,6 +54,16 @@ namespace wgmulti
 
         config = (Config)Application.masterConfig.Clone(tempDir);
         config.channels = channels.ToList();
+        config.period.days = ActiveSiteini.timespan ?? config.period.days;
+
+        // Apply offsets
+        foreach (var channel in channels)
+        {
+          // Get global offset or overwriting siteini offset
+          var _offset = ActiveSiteini.offset ?? config.offset;
+          // if channel doesn't have offset, overwrite it with global
+          channel.offset = channel.offset ?? _offset;
+        }
 
         if (ActiveSiteini.type == GrabType.SCRUB)
         {

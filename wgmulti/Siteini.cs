@@ -36,8 +36,28 @@ namespace wgmulti
       set { type = value == "scrub" || value == null ? GrabType.SCRUB : GrabType.COPY; }
     }
 
+    [XmlIgnore, DataMember(EmitDefaultValue = false)]
+    bool? enabled { get; set; }
+
     [XmlIgnore, IgnoreDataMember]
-    public bool enabled { get; set; }
+    public bool Enabled
+    {
+      get { return enabled.HasValue ? (bool)enabled : true; }
+      set { enabled = value; }
+    }
+
+    [XmlIgnore, DataMember(EmitDefaultValue = false)]
+    public double? offset { get; set; }
+
+    [XmlIgnore, DataMember(EmitDefaultValue = false)]
+    public int? timespan { get; set; }
+
+    [XmlIgnore, IgnoreDataMember]
+    public int Timespan
+    {
+      get { return timespan.HasValue ? (int)timespan : 0; }
+      set { timespan = value; }
+    }
 
     public SiteIni(String site, String siteId = null)
     {
@@ -55,8 +75,11 @@ namespace wgmulti
     /// If not found in the current dir, searches recusively depth=4
     /// </summary>
     /// <returns></returns>
-    public String GetPath()
+    public String GetPath(String iniMasterFolder = null)
     {
+      if (String.IsNullOrEmpty(iniMasterFolder))
+        iniMasterFolder = Application.masterConfig.folder;
+
       try
       {
         if (!String.IsNullOrEmpty(path))
@@ -69,7 +92,7 @@ namespace wgmulti
           Log.Warning("Siteini has 'path' attribute pointing to a non existing file: " + path + ". Searching for another one.");
         }
 
-        var files = Utils.GetIniFilesInDir(Application.masterConfig.folder);
+        var files = Utils.GetIniFilesInDir(iniMasterFolder);
         foreach (var file in files)
         {
           if (Path.GetFileName(file) == GetName())
@@ -109,7 +132,7 @@ namespace wgmulti
 
     public override string ToString()
     {
-      return name;
+      return name + ", " + Enabled + ", " + (path ?? "");
     }
   }
 }

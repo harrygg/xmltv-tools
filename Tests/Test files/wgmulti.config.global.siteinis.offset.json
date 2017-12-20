@@ -1,18 +1,9 @@
-{
-  "retry": {
-    "attempts": 1,
-    "channelDelay": 1,
-    "indexDelay": 1,
-    "showDelay": 1,
-    "timeOut": 20
-  },
-  "logging": true,
+﻿{
   "timespan": {
-    "days": 2,
+    "days": 0,
     "time": ""
   },
-  "skip": "12,1",
-  "update": "i",
+  "offset": 1,
   "filename":"epg.xml",
   "channels":[
     {
@@ -23,27 +14,27 @@
       "siteinis":[
         {
           "name": "siteini",
-          "site_id": "channel_1"
+          "site_id":"channel_1"
         }
       ],
-      "timeshifts":[
+      "timeshifts": [
         {
           "name":"Канал 1 +1",
           "xmltv_id":"Канал 1 +1 ID",
-          "offset":1
+          "offset": 1
         }
       ]
     },
     {
       "name": "Channel2",
       "xmltv_id": "Channel2ID",
-      "enabled": true,
       "update": "i",
+      "enabled": true,
+      "offset": 2,
       "siteinis": [
         {
-          "site_id": "chanel_2",
           "name": "siteiniCET",
-          "path": "..\\..\\Test files\\siteiniCET.ini"
+          "site_id": "chanel_2",
         }
       ]
     },
@@ -51,19 +42,19 @@
       "name": "Channel 3",
       "xmltv_id": "Channel 3 ID",
       "update": "i",
-      "enabled": false,
+      "enabled": true,
+      "offset": 3,
       "siteinis": [
         {
-          "name": "siteini",
+          "name": "siteiniEmpty",
           "site_id": "chanel_3"
         },
         {
           "name": "siteini2",
-          "site_id": "chanel_3"
+          "site_id": "chanel_3",
+          "offset": 2
         }
-      ],
-      "include": "III",
-      "exclude": "EEE"
+      ]
     },
     {
       "name": "Channel 4",
@@ -72,17 +63,36 @@
       "enabled": true,
       "siteinis": 
       [
-         {
-          "name": "siteini2",
-          "site_id": "chanel_4"
-         },
-         {
-          "name": "siteini4",
+        {
+          "name": "siteini",
           "site_id": "chanel_4",
-          "path": "c:\\temp\\siteini_missing.ini"
+          "offset": 15
+        }
+      ]
+    },
+    {
+      "name": "Channel 5",
+      "xmltv_id": "Channel 5 ID",
+      "update": "i",
+      "enabled": true,
+      "siteinis": 
+      [
+        {
+          "name": "siteini2",
+          "site_id": "chanel_5",
+          "offset": 1
         }
       ]
     }
   ],
-  "disabled_siteinis": ["siteini"]
+  "siteinis": [
+    {
+      "name": "siteiniEmpty",
+      "offset": 3
+    },
+    {
+      "name": "siteini2",
+      "offset": 5
+    }
+  ]
 }

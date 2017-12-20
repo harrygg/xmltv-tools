@@ -81,5 +81,5 @@
   },
   "useragent": "",
   "mode": "m,nomark",
-  "disabled_siteinis": []
+  "siteinis": [##globalSiteinis##]
 }

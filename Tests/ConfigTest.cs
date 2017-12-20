@@ -62,7 +62,7 @@ namespace Tests
     public void Deserialize_From_Json_No_Siteini()
     {
       var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.minimal.nositeini.json");
-      conf.PrepareSiteinis();
+      conf.InitSiteinis();
       if (conf.channels[0].active)
         Assert.Fail("Channel 1 is not deactivated!");
     }
@@ -93,8 +93,32 @@ namespace Tests
       VerifyJsonDeserializedData(conf, true);
     }
 
+    [TestMethod]
+    public void Deserialize_From_Json_File_Global_Siteinis()
+    {
+      var te = new TestEnvironment();
+      Arguments.configDir = te.configFolder;
+      // Create the env. and the configuration file WebGrab++.config.xml
+      File.Copy(@"..\..\Test files\wgmulti.config.siteinis.timespan.json",
+        te.configFileJson, true);
 
-		[TestMethod]
+      // Read config object from file
+      var conf = Config.DeserializeFromFile(te.configFileJson);
+       conf.InitSiteinis();
+
+      if (conf.siteinis == null)
+        Assert.Fail("Config has no global siteinis!");
+
+      if (conf.siteinis[0].timespan != 2)
+        Assert.Fail("Global siteini has no valid timestamp. Expected 2, actual " + conf.siteinis[0].timespan);
+
+      if (conf.channels[0].GetActiveSiteIni().timespan != 2)
+        Assert.Fail("Local siteini has no valid timestamp. Expected 2, actual " + conf.channels[0].GetActiveSiteIni().timespan);
+
+      //VerifyJsonDeserializedData(conf);
+    }
+
+    [TestMethod]
     public void Serialize_To_Xml_File()
     {
       var conf = CreateDefaultConfigObject();
@@ -273,24 +297,24 @@ namespace Tests
     {
 
       var conf = Config.DeserializeFromFile(@"..\..\Test files\wgmulti.config.disabled.siteinis.json");
-      conf.PrepareSiteinis();
+      conf.InitSiteinis();
 
-      if (conf.channels[0].siteinis[0].enabled)
+      if (conf.channels[0].siteinis[0].Enabled)
         Assert.Fail("Channel 1 first siteini is enabled");
 
-      if (!conf.channels[1].siteinis[0].enabled)
+      if (!conf.channels[1].siteinis[0].Enabled)
         Assert.Fail("Channel 2 siteini should be enabled");
 
-      if (conf.channels[2].siteinis[0].enabled)
+      if (conf.channels[2].siteinis[0].Enabled)
         Assert.Fail("Channel 3 first siteini is enabled");
 
-      if (conf.channels[2].siteinis[1].enabled)
+      if (conf.channels[2].siteinis[1].Enabled)
         Assert.Fail("Channel 3 second siteini is enabled");
 
-      if (conf.channels[3].siteinis[0].enabled)
+      if (conf.channels[3].siteinis[0].Enabled)
         Assert.Fail("Channel 4 siteini 1 is enabled");
 
-      if (conf.channels[3].siteinis[1].enabled)
+      if (conf.channels[3].siteinis[1].Enabled)
         Assert.Fail("Channel 4 siteini 2 is enabled");
     }
 
@@ -310,8 +334,8 @@ namespace Tests
 					Assert.Fail("Channe 1 siteini type is not 'COPY'!");
 			}
 
-			if (cha4.Enabled)
-				Assert.Fail("Channel 4 exists but it should have been disabled as it does not have a valid siteini");
+			if (cha4.active)
+				Assert.Fail("Channel 4 is active but it should have been disactivated as it does not have a valid siteini");
 
 			if (2 != conf.period.days)
 				Assert.Fail("timespan does not have vlaue of 2");

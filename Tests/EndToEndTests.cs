@@ -90,7 +90,59 @@ namespace Tests
         Assert.Fail(String.Format("Start time of first program in channel {0} is {1}, 0600 was expected since channel has offset=1 and the parent channel has offset=5.5", channel.name, time));
     }
 
+    [TestMethod]
+    public void Run_JSON_Config_Test_Offset_Global()
+    {
+      var te = new TestEnvironment(ppType: PostProcessType.NONE);
 
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = true;
+
+      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.offset.json", te.configFileJson, true);
+
+      Application.Run(te.configFolder);
+
+      var root = XDocument.Load(te.outputEpg);
+      var tv = root.Element("tv");
+
+      Func<String, String> GetStartHour = delegate (String id)
+      {
+        try
+        {
+          return tv.Elements("programme")
+          .Where(p => p.Attribute("channel").Value
+          .Equals(id))
+          .First().Attribute("start").Value.Substring(8, 4);
+        }
+        catch { return ""; }
+      };
+
+      var time = GetStartHour("Канал 1 ID");
+      if (time != "0100")
+        Assert.Fail(String.Format("Start time of first program in Канал 1 is {0}, 0100 was expected", time));
+
+      time = GetStartHour("Канал 1 +1 ID");
+      if (time != "0200")
+        Assert.Fail(String.Format("Start time of first program in channel Канал 1 +1 ID is {0}, 0200 was expected since channel has offset=1 added to the parent offset.", time));
+
+      time = GetStartHour("Channel2ID");
+      if (time != "0200")
+        Assert.Fail(String.Format("Start time of first program in channel Channel2ID is {0}, 0200 was expected since channel has offset=2.", time));
+
+      time = GetStartHour("Channel 3 ID");
+      if (time != "0300")
+        Assert.Fail(String.Format("Start time of first program in channel Channel 3 ID is {0}, 0300 was expected since channel offset should overwrite global", time));
+
+      time = GetStartHour("Channel 4 ID");
+      if (time != "0100")
+        Assert.Fail(String.Format("Start time of first program in channel Channel 4 ID is {0}, 0100 was expected since channel local siteini offset should be ignored.", time));
+
+      time = GetStartHour("Channel 5 ID");
+      if (time != "0500")
+        Assert.Fail(String.Format("Start time of first program in channel Channel 5 ID is {0}, 0500 was expected since channel has global siteini offset.", time));
+    }
 
     [TestMethod]
     public void Run_Internal_JSON_Config_REX_PostProcess()
@@ -189,6 +241,17 @@ namespace Tests
       Debug.WriteLine("Channel copied and renamed!");
     }
 
+    ////TODO
+    //[TestMethod]
+    //public void Run_External_JSON_Config_Copy_Channel_Offset_Minus_One()
+    //{
+    //  var te = new TestEnvironment(ppType: PostProcessType.NONE, copyChannel: true);
+    //  te.RunWgmulti(useJsonConfig: true);
+
+    //  CheckMandatoryElementsExist(te.outputEpg);
+    //  Debug.WriteLine("Channel copied and renamed!");
+    //}
+
     [TestMethod]
     public void Run_External_JSON_Config_REX_Copy_Channel()
     {
@@ -246,6 +309,78 @@ namespace Tests
     }
 
     [TestMethod]
+    public void Global_Siteini_With_Different_Timespan()
+    {
+      var te = new TestEnvironment();
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = true;
+      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.timestamp.json",
+        Path.Combine(Arguments.configDir, "wgmulti.config.json"), true);
+
+      Application.Run(te.configFolder);
+
+      CheckMandatoryElementsExist(te.outputEpg);
+
+      // Check the content of the webgrab file it should contain timespan 2
+      var conf = Config.DeserializeFromFile(
+        Path.Combine(Arguments.grabingTempFolder, "siteini", "WebGrab++.config.xml"));
+
+      if (conf.period.days != 2)
+        Assert.Fail("siteini period is not 2. Actual: " + conf.period.days);
+
+      if (conf.channels[0].siteinis[0].timespan != 2)
+        Assert.Fail("siteini period is not 2. Actual: " + conf.channels[0].siteinis[0].timespan);
+
+      conf = Config.DeserializeFromFile(
+        Path.Combine(Arguments.grabingTempFolder, "siteiniCET", "WebGrab++.config.xml"));
+
+      if (conf.period.days != 0)
+        Assert.Fail("siteini period is not 0. Actual: " + conf.period.days);
+    }
+
+    [TestMethod]
+    public void Global_Siteini_With_Different_Offset()
+    {
+      var te = new TestEnvironment();
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = true;
+      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.offset.json",
+        te.configFileJson, true);
+
+      //Application.Run(te.configFolder);
+
+      //CheckMandatoryElementsExist(te.outputEpg);
+
+      // Check the content of the webgrab file it should contain timespan 2
+      var conf = Config.DeserializeFromFile(te.configFileJson);
+
+      if (conf.offset != 1)
+        Assert.Fail("Config global offset is not 1. Actual: " + conf.offset);
+
+      //if (conf.channels[0].offset != 1)
+      //  Assert.Fail("Channel 1 offset is not 1. Actual: " + conf.channels[0].offset);
+
+      if (conf.channels[0].siteinis[0].offset != 1)
+        Assert.Fail("siteini offset is not 1. Actual: " + conf.siteinis[0].offset);
+
+      //if (conf.channels[1].offset != 2)
+      //  Assert.Fail("Channel 2 offset is not 2. Actual: " + conf.period.days);
+
+      //if (conf.channels[2].offset != 3)
+      //  Assert.Fail("Channel 3 offset is not 3. Actual: " + conf.period.days);
+
+      //if (conf.channels[3].offset != 1)
+      //  Assert.Fail("Channel 4 offset is not 1. Actual: " + conf.period.days);
+
+      if (conf.channels[3].siteinis[0].offset != 1)
+        Assert.Fail("Channel 4 siteini offset is not 1. It's not overwritten. Actual: " + conf.channels[3].siteinis[0].offset);
+    }
+
+    [TestMethod]
     public void NOTEST_Build_Env_Only()
     {
       var te = new TestEnvironment(ppType: PostProcessType.NONE);
@@ -259,54 +394,56 @@ namespace Tests
       Debug.WriteLine("Test Environment is up in {0}", te.configFolder);
     }
 
-		void CheckElementsAfterNoPostProcess(TestEnvironment te)
-		{
-			// Verify that the output EPG file exists
-			if (!File.Exists(te.outputEpg))
-				Assert.Fail("File does not exist: " + te.outputEpg);
+    void CheckElementsAfterNoPostProcess(TestEnvironment te)
+    {
+      // Verify that the output EPG file exists
+      if (!File.Exists(te.outputEpg))
+        Assert.Fail("File does not exist: " + te.outputEpg);
 
-			// Verify 3 channel tags exsits, more than 0 programmes tags and 0 desc tags
-			CheckMandatoryElementsExist(te.outputEpg);
-			Debug.WriteLine("Mandatory elements exist");
+      // Verify 3 channel tags exsits, more than 0 programmes tags and 0 desc tags
+      CheckMandatoryElementsExist(te.outputEpg);
+      Debug.WriteLine("Mandatory elements exist");
 
-			// Verify that the first program of 'Channel1' starts 1 hour before the program of 'Channel1 +1'
-			OffsetProgramStartTimeIsDifferent(te.outputEpg);
-			Debug.WriteLine("Offset time is correct");
+      // Verify that the first program of 'Channel1' starts 1 hour before the program of 'Channel1 +1'
+      OffsetProgramStartTimeIsDifferent(te.outputEpg);
+      Debug.WriteLine("Offset time is correct");
 
-			// Verify that the Channel2 programs times are converted to EEST time
-			TimesConvertedToLocal(te.outputEpg);
-			Debug.WriteLine("Times are converted to local");
-		}
-		void ChecksAfterPostProcess(TestEnvironment te)
-		{
-			// Verify that the input config file exists
-			if (!File.Exists(te.wgmultiConfig))
-				Assert.Fail("File does not exist: " + te.wgmultiConfig);
+      // Verify that the Channel2 programs times are converted to EEST time
+      TimesConvertedToLocal(te.outputEpg);
+      Debug.WriteLine("Times are converted to local");
+    }
 
-			// Verify that the output EPG file exists
-			if (!File.Exists(te.outputEpg))
-				Assert.Fail("File does not exist: " + te.outputEpg);
 
-			// Verify 3 channel tags exsits, more than 0 programmes tags and 0 desc tags
-			CheckMandatoryElementsExist(te.outputEpg);
-			Debug.WriteLine("Mandatory elements exist");
+    void ChecksAfterPostProcess(TestEnvironment te)
+    {
+      // Verify that the input config file exists
+      if (!File.Exists(te.wgmultiConfig))
+        Assert.Fail("File does not exist: " + te.wgmultiConfig);
 
-			// Verify that the output EPG file exists
-			if (!File.Exists(te.outputEpgAfterPostProcess))
-				Assert.Fail("File does not exist: " + te.outputEpgAfterPostProcess);
+      // Verify that the output EPG file exists
+      if (!File.Exists(te.outputEpg))
+        Assert.Fail("File does not exist: " + te.outputEpg);
 
-			CheckMandatoryElementsExist(te.outputEpgAfterPostProcess, true);
-			Debug.WriteLine("Mandatory elements in postprocess EPG exist");
+      // Verify 3 channel tags exsits, more than 0 programmes tags and 0 desc tags
+      CheckMandatoryElementsExist(te.outputEpg);
+      Debug.WriteLine("Mandatory elements exist");
 
-			// Verify that the first program of 'Channel1' starts 1 hour before the program of 'Channel1 +1'
-			OffsetProgramStartTimeIsDifferent(te.outputEpg);
-			Debug.WriteLine("Offset time is correct");
+      // Verify that the output EPG file exists
+      if (!File.Exists(te.outputEpgAfterPostProcess))
+        Assert.Fail("File does not exist: " + te.outputEpgAfterPostProcess);
 
-			// Verify that the Channel2 programs times are converted to EEST time
-			TimesConvertedToLocal(te.outputEpg);
-		}
+      CheckMandatoryElementsExist(te.outputEpgAfterPostProcess, true);
+      Debug.WriteLine("Mandatory elements in postprocess EPG exist");
 
-		void CheckMandatoryElementsExist(String filename, bool includePostProcessed = false)
+      // Verify that the first program of 'Channel1' starts 1 hour before the program of 'Channel1 +1'
+      OffsetProgramStartTimeIsDifferent(te.outputEpg);
+      Debug.WriteLine("Offset time is correct");
+
+      // Verify that the Channel2 programs times are converted to EEST time
+      TimesConvertedToLocal(te.outputEpg);
+    }
+
+    void CheckMandatoryElementsExist(String filename, bool includePostProcessed = false)
     {
       var root = XDocument.Load(filename);
       var tv = root.Element("tv");
@@ -316,7 +453,7 @@ namespace Tests
         try { return tv.Elements("programme").First(p => p.Attribute("channel").Value.Equals(id)) == null; }
         catch { return true; }
       };
-      
+
       try
       {
         if (ElementNotExist("Канал 1 ID"))
@@ -338,7 +475,7 @@ namespace Tests
         {
           if (el == null)
             Assert.Fail("Postprocess is enabled but 'desc' element does not exist in the epg data!");
-        } 
+        }
         else
         {
           if (el != null)

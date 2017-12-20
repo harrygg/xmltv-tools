@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Xml;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace wgmulti
@@ -116,15 +115,18 @@ namespace wgmulti
     [XmlIgnore]
     public IEnumerable<IGrouping<String, Channel>> grabbers;
 
+    [DataMember(EmitDefaultValue = false, Order = 12), XmlIgnore]
+    public List<SiteIni> siteinis { get; set; }
+
     [IgnoreDataMember, XmlIgnore]
-    public List<String> DisabledSiteiniNamesList
+    public List<SiteIni> Siteinis
     {
-      get { return disableSiteiniNames ?? new List<String>(); }
-      set { DisabledSiteiniNamesList = value; }
+      get { return siteinis == null ? new List<SiteIni>() : siteinis; }
+      set { }
     }
 
-    [DataMember(EmitDefaultValue = false, Order = 11, Name = "disabled_siteinis"), XmlIgnore]
-    List<String> disableSiteiniNames { get; set; }
+    [XmlIgnore, DataMember(EmitDefaultValue = false)]
+    public double? offset { get; set; }
 
     /// <summary>
     /// Returns a list of dates in yyyyMMdd format used when copying EPG
@@ -163,17 +165,17 @@ namespace wgmulti
     /// <param name="path">Directory where the configuration exists or will be created</param>
     public Config(String path = null)
     {
-      postProcess = new PostProcess(); //init postprocess default values
+      //postProcess = new PostProcess(); //init postprocess default values
 
-      if (path == null)
-        folder = Arguments.grabingTempFolder;
-      else
-      {
-        folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
-        if (!Path.IsPathRooted(folder))
-          throw new ArgumentException("Config folder path must be an absolute path");
-      }
-      SetAbsPaths(folder);
+      //if (path == null)
+      //  folder = Arguments.grabingTempFolder;
+      //else
+      //{
+      //  folder = path.EndsWith(".xml") ? new FileInfo(path).Directory.FullName : path;
+      //  if (!Path.IsPathRooted(folder))
+      //    throw new ArgumentException("Config folder path must be an absolute path");
+      //}
+      //SetAbsPaths(folder);
     }
 
     /// <summary>
@@ -255,6 +257,7 @@ namespace wgmulti
         DeserializeXmlFile(configFile) : DeserializeJsonFile(configFile);
 
       conf.SetAbsPaths(Arguments.configDir);
+      conf.InitSiteinis();
 
       if (conf.postProcess.run)
         conf.postProcess.Load();
@@ -366,46 +369,76 @@ namespace wgmulti
       }
     }
 
-    public void PrepareSiteinis()
+    public void InitSiteinis()
     {
       Log.Info("Searching for siteinis. Disabling missing ones.");
       try
       {
-        List<SiteIni> siteIniWithMissingFile = new List<SiteIni>();
-
         foreach (var channel in GetChannels(includeOffset: false))
         {
-          if (channel.siteinis == null || channel.siteinis.Count == 0)
+          // Skip channels that have no siteinis
+          if (!channel.HasSiteinis)
           {
-            Log.Warning(String.Format("Channel '{0}' has no available siteinis. Channel deactivated!", channel.name));
+            Log.Warning("Channel '" + channel.name + "' has no available siteinis. Channel deactivated!");
             channel.active = false;
             continue;
           }
 
+          // Iterate over channel siteinis and enable/disable them
           foreach (var siteini in channel.siteinis)
           {
-            if (DisabledSiteiniNamesList.Contains(siteini.name))
+            // Search for global siteini 
+            var globalSiteini = GetGlobalSiteini(siteini);
+            if (globalSiteini != null)
             {
-              Log.Error(String.Format("Siteini {0} disabled in JSON configuraiton!", siteini.GetName()));
-              siteini.enabled = false;
-            }
-            else
-            {
-              if (!siteIniWithMissingFile.Contains(siteini))
+              // If global siteini is not enabled, disable all local siteinis
+              if (!globalSiteini.Enabled)
               {
-                siteini.path = siteini.GetPath();
-                if (!String.IsNullOrEmpty(siteini.path))
+                siteini.Enabled = false;
+                Log.Error(String.Format("Siteini {0} disabled in global siteinis configuraiton!", siteini.name));
+              }
+              else
+              {
+                siteini.Enabled = true;
+                // Global siteini is enabled, check whether it has a valid path (.ini file exists)
+                globalSiteini.path = globalSiteini.GetPath(folder);
+                if (!String.IsNullOrEmpty(globalSiteini.path))
                 {
-                  siteini.enabled = true;
+                  siteini.path = globalSiteini.path;
+                  // If there is no overwriting global timespan value use the default period days value
+                  siteini.timespan = globalSiteini.timespan ?? period.days;
+                  // If we don't have global siteini offset use config offset
+                  siteini.offset = globalSiteini.offset ?? offset;
+                  siteini.type = globalSiteini.type;
                 }
                 else
                 {
-                  siteIniWithMissingFile.Add(siteini);
-                  Log.Error(String.Format("Siteini {0} not found in config folder {1} or siteini.user/siteini.pack sub folders (Depth=6). Siteini will be disabled globally!", siteini.GetName(), folder));
+                  // No .ini file was found so disable the global and local siteini
+                  globalSiteini.Enabled = false;
+                  siteini.Enabled = globalSiteini.Enabled;
                 }
               }
+            }
+            else // There is no global siteini for this siteini
+            {
+              // Get local siteini ini path
+              siteini.path = siteini.GetPath(folder);
+              if (!String.IsNullOrEmpty(siteini.path))
+              {
+                // if siteini file exists
+                siteini.Enabled = true;
+                // Since this is a local siteini and there was no overwriting global siteini use default timespan
+                siteini.timespan = period.days;
+                // If there is no global siteini offset, overwrite with config offset
+                siteini.offset = offset;
+              }
               else
-                siteini.enabled = false;
+              {
+                siteini.Enabled = false;
+                Log.Error(String.Format("Siteini {0} not found in config folder {1} or siteini.user/siteini.pack sub folders (Depth=6). Siteini will be disabled globally!", siteini.GetName(), folder));
+              }
+              // Create a global siteini and add it to the list
+              Siteinis.Add(siteini);
             }
           }
         }
@@ -413,6 +446,18 @@ namespace wgmulti
       catch (Exception ex)
       {
         Log.Error(ex.Message + ": " + ex.ToString());
+      }
+    }
+
+    private SiteIni GetGlobalSiteini(SiteIni siteini)
+    {
+      try
+      {
+        return Siteinis.Where(s => s.name == siteini.name).First();
+      }
+      catch
+      {
+        return null;
       }
     }
 
