@@ -183,6 +183,9 @@ namespace Tests
       if (!content.Contains("time-out=\"15"))
         Assert.Fail("time-out value is not 15");
 
+      if (!content.Contains("\">5</retry>"))
+        Assert.Fail("time-out value is not 15");
+
       if (!content.Contains(">mdb<"))
         Assert.Fail("Post process is not mdb");
 
@@ -418,6 +421,7 @@ namespace Tests
     {
       Config conf = new Config(); // Default config values
       conf.retry.timeOut = 15;
+      conf.retry.attempts = 5;
       conf.proxy = new Proxy();
       conf.proxy.user = "";
       conf.proxy.password = "";
