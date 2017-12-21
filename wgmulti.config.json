@@ -36,12 +36,6 @@
         {
           "site_id": "index_hbo",
           "name": "hbo.bg"
-        },
-        {
-          "path": "http://path-to-already-existing-epg/epg.xml.gz",
-          "site_id": "HBO 1 ID",
-          "name": "READY_EPG",
-          "type": "copy"
         }
       ],
       "timeshifts": [
