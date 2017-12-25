@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.0
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wgmutlti", "wgmulti\wgmutlti.csproj", "{8675D803-AB93-4320-BE6D-C73CE2CA5203}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit", "NUnit\NUnit.csproj", "{91D1D48B-AE16-4D73-B59A-39ED1A8DFEAE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8675D803-AB93-4320-BE6D-C73CE2CA5203} = {8675D803-AB93-4320-BE6D-C73CE2CA5203}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06214FF3-04F1-44F2-ADEB-AE4431FBFD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D1D48B-AE16-4D73-B59A-39ED1A8DFEAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D1D48B-AE16-4D73-B59A-39ED1A8DFEAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D1D48B-AE16-4D73-B59A-39ED1A8DFEAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D1D48B-AE16-4D73-B59A-39ED1A8DFEAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

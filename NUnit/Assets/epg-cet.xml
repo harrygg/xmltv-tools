@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="WebGrab+Plus/w MDB &amp; REX Postprocess -- version  V2.1 -- Jan van Straaten" generator-info-url="http://www.webgrabplus.com">
+  <channel id="Channel 3 ID">
+    <display-name lang="en">Channel 3</display-name>
+    <url>http://www.siteiniCET</url>
+  </channel>
+  <programme start="##TODAY##000000 +0100" stop="##TODAY##020000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 0</title>
+  </programme>
+  <programme start="##TODAY##020000 +0100" stop="##TODAY##040000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 2</title>
+  </programme>
+  <programme start="##TODAY##040000 +0100" stop="##TODAY##060000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 4</title>
+  </programme>
+  <programme start="##TODAY##060000 +0100" stop="##TODAY##080000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 6</title>
+  </programme>
+  <programme start="##TODAY##080000 +0100" stop="##TODAY##100000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 8</title>
+  </programme>
+  <programme start="##TODAY##100000 +0100" stop="##TODAY##120000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 10</title>
+  </programme>
+  <programme start="##TODAY##120000 +0100" stop="##TODAY##140000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 12</title>
+  </programme>
+  <programme start="##TODAY##140000 +0100" stop="##TODAY##160000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 14</title>
+  </programme>
+  <programme start="##TODAY##160000 +0100" stop="##TODAY##180000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 16</title>
+  </programme>
+  <programme start="##TODAY##180000 +0100" stop="##TODAY##200000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 18</title>
+  </programme>
+  <programme start="##TODAY##200000 +0100" stop="##TODAY##220000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 20</title>
+  </programme>
+  <programme start="##TODAY##220000 +0100" stop="##TOMORROW##0000000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 22</title>
+  </programme>
+  <programme start="##TOMORROW##0000000 +0100" stop="##TOMORROW##0020000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 0</title>
+  </programme>
+  <programme start="##TOMORROW##0020000 +0100" stop="##TOMORROW##0040000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 2</title>
+  </programme>
+  <programme start="##TOMORROW##0040000 +0100" stop="##TOMORROW##0060000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 4</title>
+  </programme>
+  <programme start="##TOMORROW##0060000 +0100" stop="##TOMORROW##0080000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 6</title>
+  </programme>
+  <programme start="##TOMORROW##0080000 +0100" stop="##TOMORROW##0100000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 8</title>
+  </programme>
+  <programme start="##TOMORROW##0100000 +0100" stop="##TOMORROW##0120000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 10</title>
+  </programme>
+  <programme start="##TOMORROW##0120000 +0100" stop="##TOMORROW##0140000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 12</title>
+  </programme>
+  <programme start="##TOMORROW##0140000 +0100" stop="##TOMORROW##0160000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 14</title>
+  </programme>
+  <programme start="##TOMORROW##0160000 +0100" stop="##TOMORROW##0180000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 16</title>
+  </programme>
+  <programme start="##TOMORROW##0180000 +0100" stop="##TOMORROW##0200000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 18</title>
+  </programme>
+  <programme start="##TOMORROW##0200000 +0100" stop="##TOMORROW##0220000 +0100" channel="Channel 3 ID">
+    <title lang="en">Program title 20</title>
+  </programme>
+</tv>

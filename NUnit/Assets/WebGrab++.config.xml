@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>epg.xml</filename>
+  <postprocess run="n" grab="y">rex</postprocess>
+  <logging>on</logging>
+  <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">1</retry>
+  <skip>12,1</skip>
+  <timespan>2</timespan>
+  <update></update>
+  <proxy>automatic</proxy>
+  <channel update="i" site="siteini" site_id="channel_1" xmltv_id="Канал 1 ID">Канал 1</channel>
+  <channel same_as="Канал 1 ID" offset="1" xmltv_id="Канал 1 +1 ID">Канал 1 +1</channel>
+  <channel update="i" site="siteiniCET" site_id="chanel_2" xmltv_id="Channel2ID" include="III" exclude="EEE">Channel2</channel>
+  
+</settings>
