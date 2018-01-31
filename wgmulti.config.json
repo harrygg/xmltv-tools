@@ -9,9 +9,10 @@
   "logging": true,
   "skip": "12,1",
   "timespan": {
-    "days":0,
-    "time":""
-    },
+    "days": 2,
+    "pastdays":1,
+    "time": ""
+  },
   "update": "",
   "filename": "epg.xml",
   "useragent": "Mozilla/5.0 (windows nt 6.1; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/54.0.2840.99 safari/537.36",
