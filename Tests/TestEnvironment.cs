@@ -77,27 +77,29 @@ namespace Tests
       // Save global XML config
       path = Path.Combine(testsbindebug, @"..\..\Test Files\WebGrab++.config.xml");
       var buff = File.ReadAllText(path);
-      buff = buff.Replace("##filename##", outputEpg);
-      buff = buff.Replace("##postProcessName##", postProcessName);
-      buff = buff.Replace("##postProcessRun##", postprocessEnabled.ToString().ToLower());
+      buff = buff.Replace("epg.xml", outputEpg);
+      buff = buff.Replace("rex", postProcessName);
+      buff = buff.Replace("run=\"n", "run=\"" + postprocessEnabled.ToString().ToLower());
       File.WriteAllText(configFileXml, buff);
 
       //Save global JSON config
       path = Path.Combine(testsbindebug, @"..\..\Test Files\wgmulti.config.json");
       buff = File.ReadAllText(path);
-      buff = buff.Replace("##filename##", outputEpg.Replace("\\", "\\\\"));
-      buff = buff.Replace("##postProcessName##", postProcessName);
-      buff = buff.Replace("##postProcessRun##", postprocessEnabled.ToString().ToLower());
+      buff = buff.Replace("epg.xml", outputEpg.Replace("\\", "\\\\"));
+      buff = buff.Replace("rex", postProcessName);
+      buff = buff.Replace("run\":false",  "run\":" + postprocessEnabled.ToString().ToLower());
 
-      var siteini = "";
       // If copyChannel is enabled use grab type COPY otherwise use a regular siteini
       if (copyChannel)
       {
-        siteini = "{\r\n          \"name\": \"Channel3Epg\",\r\n          \"site_id\": \"Channel 3 ID\"\r\n        }";
-        buff = buff.Replace("##siteini##", siteini);
+        var siteini = "{\r\n          \"name\": \"siteini\",\r\n          \"site_id\": \"channel_1\"\r\n        }";
+
+        var siteini_copy = "{\r\n          \"name\": \"Channel3Epg\",\r\n          \"site_id\": \"Channel 3 ID\"\r\n        }";
+
+        buff = buff.Replace(siteini, siteini_copy);
 
         var globalSiteini = "{\r\n          \"grab_type\": \"copy\",\r\n          \"name\": \"Channel3Epg\",\r\n          \"path\": \"http://localhost/epg/epg-cet.xml.gz\"\r\n        }";
-        buff = buff.Replace("##globalSiteinis##", globalSiteini);
+        buff = buff.Replace("siteinis\": [ ]", "siteinis\": [" + globalSiteini + "]");
 
         var epg = File.ReadAllText(Path.Combine(testsbindebug, @"..\..\Test Files\epg-cet.xml"));
         var now = DateTime.Now;
@@ -117,13 +119,6 @@ namespace Tests
           zipStream.Write(bytes, 0, bytes.Length);
         }
       }
-      else
-      {
-        siteini = "{\r\n          \"name\": \"siteini\",\r\n          \"site_id\": \"channel_1\"\r\n          }";
-        buff = buff.Replace("##siteini##", siteini);
-
-      }
-
 
       File.WriteAllText(configFileJson, buff);
 

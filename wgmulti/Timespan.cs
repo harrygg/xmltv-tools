@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace wgmulti
 {
-
   [DataContract]
   public class Period
   {
-    [DataMember(Name = "days")]
+    [DataMember(Order = 1), XmlText]
     public int days = 0;
 
-    [DataMember(Name = "time")]
+    [DataMember(Order = 2), XmlAttribute("oneshowonly")]
     public String time = "";
+
+    [DataMember(Order = 3), XmlAttribute("keeppastdays")]
+    public int pastdays = 0;
 
     public Period()
     {
@@ -19,7 +22,7 @@ namespace wgmulti
 
     public override String ToString()
     {
-      return days.ToString();
+      return "Days: " + days.ToString() + (pastdays > 0 ? ", keep last " + pastdays.ToString() : "");
     }
   }
 

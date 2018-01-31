@@ -9,11 +9,12 @@
   "logging": true,
   "timespan": {
     "days": 2,
+    "pastdays":1,
     "time": ""
   },
   "skip": "12,1",
   "update": "i",
-  "filename":"##filename##",
+  "filename":"epg.xml",
   "channels":[
     {
       "name":"Канал 1",
@@ -21,7 +22,10 @@
       "enabled":true,
       "update":"i",
       "siteinis":[
-        ##siteini##
+        {
+          "name": "siteini",
+          "site_id": "channel_1"
+        }
       ],
       "timeshifts":[
         {
@@ -75,11 +79,11 @@
     "server": "automatic"
   },
   "postprocess": {
-    "type":"##postProcessName##",
-    "run":##postProcessRun##,
+    "type":"rex",
+    "run":false,
     "grab":true
   },
   "useragent": "",
   "mode": "m,nomark",
-  "siteinis": [##globalSiteinis##]
+  "siteinis": [ ]
 }

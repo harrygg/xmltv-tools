@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-  <filename>##filename##</filename>
-  <postprocess run="##postProcessRun##" grab="y">##postProcessName##</postprocess>
+  <filename>epg.xml</filename>
+  <postprocess run="n" grab="y">rex</postprocess>
   <logging>on</logging>
   <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">1</retry>
   <skip>12,1</skip>
-  <timespan>2</timespan>
+  <timespan keeppastdays="1" oneshowonly="12:00">2</timespan>
   <update></update>
   <proxy>automatic</proxy>
   <channel update="i" site="siteini" site_id="channel_1" xmltv_id="Канал 1 ID">Канал 1</channel>

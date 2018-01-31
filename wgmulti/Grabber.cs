@@ -259,9 +259,9 @@ namespace wgmulti
       {
         if (Application.masterConfig.channels.Count == 1 || (Arguments.maxAsyncProcesses == 1 && Arguments.maxChannelsInGroup == 1))
         {
-          Log.Error(e.Data);
+          Log.Info(e.Data);
           return;
-        }
+        } 
 
         var name = this.name.ToUpper();
         var reg = new Regex(@"xmltv_id=(.*?)\)");

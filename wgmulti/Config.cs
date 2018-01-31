@@ -29,9 +29,9 @@ namespace wgmulti
     public String folder = String.Empty;
 
     [DataMember(Name = "filename", Order = 5, IsRequired = true), XmlElement("filename")]
-    public String outputFilePath = "epg.xml";
+    public String outputFilePath = "";
 
-    public static String epgFileName = "epg.xml";
+    public static String epgFileName = null;
 
     [DataMember(EmitDefaultValue = false, Order = 9), XmlElement]
     public Proxy proxy { get; set; }
@@ -56,32 +56,8 @@ namespace wgmulti
     [DataMember(Order = 7), XmlElement]
     public String skip = "noskip";
 
-
-    [DataMember(Order = 2, Name = "timespan"), XmlIgnore]
+    [DataMember(Order = 2, Name = "timespan"), XmlElement("timespan")]
     public Period period { get; set; }
-
-    [XmlElement("timespan"), IgnoreDataMember]
-    public String Period
-    {
-      get
-      {
-        var t = period.days.ToString();
-        if (!String.IsNullOrEmpty(period.time))
-          t += "," + period.time;
-        return t;
-      }
-      set
-      {
-        if (value.Contains(","))
-        {
-          var arr = value.Split(',');
-          period.days = Convert.ToInt16(arr[0]);
-          period.time = arr[1];
-        }
-        else
-          period.days = Convert.ToInt16(value);
-      }
-    }
 
     [DataMember(Order = 6), XmlElement]
     public String update = String.Empty;
@@ -143,7 +119,7 @@ namespace wgmulti
           _dates = new List<String>();
 
         var today = DateTime.Now;
-        for (var i = 0; i < period.days + 1; i++)
+        for (var i = 0 - period.pastdays; i < period.days + 1; i++)
           _dates.Add(today.AddDays(i).ToString("yyyyMMdd"));
         return _dates;
       }
@@ -283,6 +259,7 @@ namespace wgmulti
       // XMLSerialization does not support OnDeserialize
       var deflatedChannels = new List<Channel>();
       var previous = new Channel();
+      epgFileName = Path.GetFileName(outputFilePath);
 
       // Add all timeshifted channels as sub channels to their parents
       foreach (var channel in GetChannels(includeOffset: true))
@@ -349,6 +326,8 @@ namespace wgmulti
       
       if (period == null)
         period = new Period();
+
+      epgFileName = Path.GetFileName(outputFilePath);
 
       // Set update type to channels with missing update type
       foreach (var channel in GetChannels(includeOffset: true))

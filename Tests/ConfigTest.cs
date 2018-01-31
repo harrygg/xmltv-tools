@@ -213,30 +213,46 @@ namespace Tests
 
       if (2 != conf.period.days)
         Assert.Fail("timespan does not have vlaue of 2");
-      if (String.Empty != conf.period.time)
-        Assert.Fail("timespan does not have an empty time value");
+
+      if (1 != conf.period.pastdays)
+        Assert.Fail("timespan's keeppastdays attribute does not have vlaue of 1");
+
+      if ("12:00" != conf.period.time)
+        Assert.Fail("timespan's oneshowonly attribute does not have vlaue of 12:00");
+
       if (!conf.postProcess.run)
         Assert.Fail("Postproces run is not enabled");
+
       if (2 != conf.channels.Count)
         Assert.Fail("Channels in the config file are {0}, expected 2", conf.channels.Count);
+
       if ("12,1" != conf.skip)
         Assert.Fail("Skip value is no 12,1");
+
       if ("Канал 1" != cha1.name)
         Assert.Fail("First channel name is not Канал 1");
+
       if ("Канал 1 +1" != cha1.timeshifts[0].name)
         Assert.Fail("First timeshifted channel name is not Канал 1 +1");
+
       if (cha1.xmltv_id != cha1.timeshifts[0].same_as)
         Assert.Fail("Timeshifted same_as value doesn't match parent channel value");
+
       if (!cha1.active)
         Assert.Fail("Channel 1 is not active!");
+
       if (!cha1.Enabled)
         Assert.Fail("Channel 1 is not enabeld");
+
       if (!cha2.Enabled)
         Assert.Fail("Channel 2 is not enabeld");
+
       if (1 != cha1.siteinis.Count)
         Assert.Fail("Channel 1 siteinis is not 1, it is {0}", cha1.siteinis.Count);
+
       if ("III" != cha2.include)
         Assert.Fail("Channel 2 include value is not expected. Actual: {0}", cha2.include);
+
       if ("automatic" != conf.proxy.server)
         Assert.Fail("proxy server value is not expected. Actual {0}", conf.proxy.server);
     }
@@ -346,7 +362,10 @@ namespace Tests
 			if (String.Empty != conf.period.time)
 				Assert.Fail("timespan does not have an empty time value");
 
-			if (!conf.postProcess.run)
+      if (1 != conf.period.pastdays)
+        Assert.Fail("timespan's passdays attribute does not have vlaue of 1");
+
+      if (!conf.postProcess.run)
 				Assert.Fail("Postproces run is not enabled");
 
 			if (conf.channels.Count < 3)

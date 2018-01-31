@@ -160,6 +160,47 @@ namespace Tests
     }
 
     [TestMethod]
+    public void Run_Internal_JSON_Config_Different_Output_Filename()
+    {
+      var te = new TestEnvironment(ppType: PostProcessType.NONE);
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = true;
+
+      // Change output filename
+      var content = File.ReadAllText(te.configFileJson);
+      content = content.Replace("epg.xml", "guide.xml");
+      File.WriteAllText(te.configFileJson, content);
+      te.outputEpg = Path.Combine(te.configFolder, "guide.xml");
+
+      Application.Run(te.configFolder);
+
+      CheckElementsAfterNoPostProcess(te);
+    }
+
+
+    [TestMethod]
+    public void Run_Internal_XML_Config_Different_Output_Filename()
+    {
+      var te = new TestEnvironment(ppType: PostProcessType.NONE);
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = false;
+
+      // Change output filename
+      var content = File.ReadAllText(te.configFileXml);
+      content = content.Replace("epg.xml", "guide.xml");
+      File.WriteAllText(te.configFileXml, content);
+      te.outputEpg = Path.Combine(te.configFolder, "guide.xml");
+
+      Application.Run(te.configFolder);
+
+      CheckElementsAfterNoPostProcess(te);
+    }
+
+    [TestMethod]
     public void Run_External_JSON_Config()
     {
       var te = new TestEnvironment(ppType: PostProcessType.NONE);
@@ -409,7 +450,7 @@ namespace Tests
       Debug.WriteLine("Offset time is correct");
 
       // Verify that the Channel2 programs times are converted to EEST time
-      TimesConvertedToLocal(te.outputEpg);
+      TimesConvertedToLocal(te);
       Debug.WriteLine("Times are converted to local");
     }
 
@@ -440,7 +481,7 @@ namespace Tests
       Debug.WriteLine("Offset time is correct");
 
       // Verify that the Channel2 programs times are converted to EEST time
-      TimesConvertedToLocal(te.outputEpg);
+      TimesConvertedToLocal(te);
     }
 
     void CheckMandatoryElementsExist(String filename, bool includePostProcessed = false)
@@ -522,11 +563,11 @@ namespace Tests
     }
 
 
-    void TimesConvertedToLocal(String filename)
+    void TimesConvertedToLocal(TestEnvironment te)
     {
       try
       {
-        var root = XDocument.Load(filename);
+        var root = XDocument.Load(te.outputEpg);
         var tv = root.Element("tv");
 
         Func<String, String> GetStringDate = delegate (String id)
@@ -542,7 +583,7 @@ namespace Tests
 
         var p1 = GetStringDate("Channel2ID");
 
-        root = XDocument.Load(Path.Combine(Path.GetDirectoryName(filename), "siteiniCET", "epg.xml"));
+        root = XDocument.Load(Path.Combine(te.configFolder, "siteiniCET", Path.GetFileName(te.outputEpg)));
         tv = root.Element("tv");
         var p2 = GetStringDate("Channel2ID");
 
