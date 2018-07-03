@@ -83,7 +83,17 @@ namespace Tests
 
     }
 
-    [TestMethod]
+
+        [TestMethod]
+        public void Deserialize_From_Xml_EPG_Absolute_Path()
+        {
+            var conf = Config.DeserializeFromFile(@"..\..\Test files\WebGrab++.config.absolute-path.xml");
+
+            if (conf.outputFilePath != "C:\\Temp\\demoepg.xml")
+                Assert.Fail("epg.xml path is wrong!");
+        }
+
+        [TestMethod]
     public void Deserialize_From_Json_Copy_Grab_Type()
     {
       // Create the env. and the configuration file WebGrab++.config.xml
