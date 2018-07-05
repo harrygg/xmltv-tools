@@ -20,8 +20,8 @@ namespace Tests
     public String outputEpgAfterPostProcess = "";
     public String temp = Path.GetTempPath();
     public String wgmultiConfig = "wgmulti.exe.config";
-    public static String testsbindebug;
-
+    public String wgExe = "WebGrab+Plus.exe";
+    public String wgDll = "xmltv.dll";
     /// <summary>
     /// Create the temp dir
     /// Save the WebGrab XML config
@@ -37,12 +37,15 @@ namespace Tests
       if (String.IsNullOrEmpty(wgFolder))
         throw new Exception("%WGPATH% variable does not exist!");
 
-      testsbindebug = Environment.GetEnvironmentVariable("testsbindebug", EnvironmentVariableTarget.Machine);
+      File.Copy(Path.Combine(wgFolder, wgExe), Path.Combine(Directory.GetCurrentDirectory(), wgExe));
+      File.Copy(Path.Combine(wgFolder, wgDll), Path.Combine(Directory.GetCurrentDirectory(), wgDll));
+
       //Create temp config dir with appropriate files inside
       configFolder = Path.Combine(temp, configFolderName);
       configFileXml = Path.Combine(configFolder, configFileXml);
       configFileJson = Path.Combine(configFolder, configFileJson);
       outputEpg = Path.Combine(configFolder, outputEpg);
+      
 
       Destroy(); //Clean up 
 
@@ -75,7 +78,7 @@ namespace Tests
 
 
       // Save global XML config
-      path = Path.Combine(testsbindebug, @"..\..\Test Files\WebGrab++.config.xml");
+      path = (@"..\..\Test Files\WebGrab++.config.xml");
       var buff = File.ReadAllText(path);
       buff = buff.Replace("epg.xml", outputEpg);
       buff = buff.Replace("rex", postProcessName);
@@ -83,7 +86,7 @@ namespace Tests
       File.WriteAllText(configFileXml, buff);
 
       //Save global JSON config
-      path = Path.Combine(testsbindebug, @"..\..\Test Files\wgmulti.config.json");
+      path = (@"..\..\Test Files\wgmulti.config.json");
       buff = File.ReadAllText(path);
       buff = buff.Replace("epg.xml", outputEpg.Replace("\\", "\\\\"));
       buff = buff.Replace("rex", postProcessName);
@@ -101,7 +104,7 @@ namespace Tests
         var globalSiteini = "{\r\n          \"grab_type\": \"copy\",\r\n          \"name\": \"Channel3Epg\",\r\n          \"path\": \"http://localhost/epg/epg-cet.xml.gz\"\r\n        }";
         buff = buff.Replace("siteinis\": [ ]", "siteinis\": [" + globalSiteini + "]");
 
-        var epg = File.ReadAllText(Path.Combine(testsbindebug, @"..\..\Test Files\epg-cet.xml"));
+        var epg = File.ReadAllText(@"..\..\Test Files\epg-cet.xml");
         var now = DateTime.Now;
         var today = now.ToString("yyyyMMdd");
         now = now.AddDays(1);
@@ -125,17 +128,15 @@ namespace Tests
       //config = new Config(configFolder);
 
       // Create 2 test ini files. First save the EEST site ini
-      buff = File.ReadAllText(Path.Combine(testsbindebug, @"..\..\Test Files\siteini.ini"));
+      buff = File.ReadAllText(@"..\..\Test Files\siteini.ini");
       File.WriteAllText(Path.Combine(configFolder, "siteini.ini"), buff);
       // Save CET siteini
-      buff = File.ReadAllText(Path.Combine(testsbindebug, @"..\..\Test Files\siteiniCET.ini"));
+      buff = File.ReadAllText(@"..\..\Test Files\siteiniCET.ini");
       File.WriteAllText(Path.Combine(configFolder, "siteiniCET.ini"), buff);
 
-      File.Copy(Path.Combine(testsbindebug, @"..\..\Test Files\siteiniEmpty.ini"), 
-        Path.Combine(configFolder, "siteiniEmpty.ini"));
+      File.Copy(@"..\..\Test Files\siteiniEmpty.ini", Path.Combine(configFolder, "siteiniEmpty.ini"));
 
-      File.Copy(Path.Combine(testsbindebug, @"..\..\Test Files\siteini2.ini"),
-        Path.Combine(configFolder, "siteini2.ini"));
+      File.Copy(@"..\..\Test Files\siteini2.ini", Path.Combine(configFolder, "siteini2.ini"));
 
       Debug.WriteLine("Environment created in {0}", configFolder);
     }
@@ -158,7 +159,10 @@ namespace Tests
 
       var startInfo = new ProcessStartInfo();
       startInfo.UseShellExecute = false;
-      startInfo.FileName = Path.Combine(testsbindebug, "wgmulti.exe");
+      startInfo.FileName = @"C:\Users\hristo\source\repos\xmltv-tools\Tests\bin\Debug\wgmulti.exe";
+      startInfo.FileName = "wgmulti.exe";
+      startInfo.UseShellExecute = false;
+      
 
       var process = new Process();
       process.StartInfo = startInfo;
@@ -175,7 +179,7 @@ namespace Tests
         "<add key=\"GrabingTempFolder\" value=\"" + configFolder + "\" />\r\n  " +
         "</appSettings>\r\n</configuration>";
 
-      File.WriteAllText(Path.Combine(testsbindebug, wgmultiConfig), xml);
+      File.WriteAllText(wgmultiConfig, xml);
     }
   }
 

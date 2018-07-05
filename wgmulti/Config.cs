@@ -232,13 +232,14 @@ namespace wgmulti
       Config conf = configFile.EndsWith(".xml") ? 
         DeserializeXmlFile(configFile) : DeserializeJsonFile(configFile);
 
-      //conf.SetAbsPaths(Arguments.configDir);
-      if (!Path.IsPathRooted(conf.outputFilePath))
-        conf.outputFilePath = Path.Combine(Arguments.configDir, epgFileName);
-      if (!Path.IsPathRooted(conf.jsonConfigFilePath))
-        conf.jsonConfigFilePath = Path.Combine(Arguments.configDir, jsonConfigFileName);
-      if (conf.postProcess.run && !Path.IsPathRooted(conf.postProcess.configDir))
-        conf.postProcess.configDir = Path.Combine(Arguments.configDir, conf.postProcess.GetFolderName());
+      conf.SetAbsPaths(Arguments.configDir);
+      //conf.folder = Arguments.configDir;
+      //if (!Path.IsPathRooted(conf.outputFilePath))
+      //  conf.outputFilePath = Path.Combine(Arguments.configDir, epgFileName);
+      //if (!Path.IsPathRooted(conf.jsonConfigFilePath))
+      //  conf.jsonConfigFilePath = Path.Combine(Arguments.configDir, jsonConfigFileName);
+      //if (conf.postProcess.run && !Path.IsPathRooted(conf.postProcess.configDir))
+      //  conf.postProcess.configDir = Path.Combine(Arguments.configDir, conf.postProcess.GetFolderName());
 
       conf.InitSiteinis();
 
