@@ -10,8 +10,8 @@ namespace wgmulti
   {
     public static void Main(string[] args)
     {
-      if (args.Count() == 2)
-        Arguments.configDir = args[1];
+      if (args.Count() == 1)
+        Arguments.configDir = args[0];
 
       Log.Info("#####################################################");
       Log.Info("#                                                   #");

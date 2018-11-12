@@ -119,7 +119,16 @@ namespace wgmulti
       {
         var source = GetPath();
         var file = Path.Combine(destDir, GetName());
-        File.Copy(source, file, true);
+        if (source != file)
+        {
+          File.Copy(source, file, true);
+          Log.Debug(String.Format("#{0} GRABBER {1} | {2}", 
+            Application.grabbingRound + 1, name.ToUpper(), 
+            String.Format("Copied siteini file {0} to {1}", source, file)));
+        }
+        else
+          Log.Debug(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRound + 1, name.ToUpper(), "Source and destination INI file are the same. Coping skipped."));
+        
         return true;
       }
       catch (Exception ex)
