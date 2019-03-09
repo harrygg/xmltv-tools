@@ -27,7 +27,7 @@ namespace wgmulti
 
       try
       {
-        var configFilePath = Arguments.useJsonConfig ? Config.jsonConfigFileName : Config.configFileName;
+        var configFilePath = Arguments.useJsonConfig ? Arguments.jsonConfigFileName : Config.configFileName;
         configFilePath = Path.Combine(Arguments.configDir, configFilePath);
         masterConfig = Config.DeserializeFromFile(configFilePath);
 
@@ -47,6 +47,10 @@ namespace wgmulti
         // Grab channel programs
         DoGrabbing();
 
+        // Save separate EPG files for each channel
+        if (Arguments.saveStandaloneGuides)
+          masterConfig.SaveStandaloneGuides();
+
         // Create the combined xmltv EPG
         epg = masterConfig.GetChannelsGuides();
 
@@ -56,6 +60,10 @@ namespace wgmulti
 
         // Save main EPG file
         epg.Save(masterConfig.outputFilePath);
+
+        // Run Postprocess script
+        if (Arguments.runPostprocessScript && Arguments.postprocessScript != "")
+          RunPostProcessScript();
 
       }
       catch (FileNotFoundException fnfe)
@@ -143,5 +151,39 @@ namespace wgmulti
         grabbingRound++;
       }
     }
+
+    private static void RunPostProcessScript()
+    {
+      try
+      {
+        var process = new Process();
+        var startInfo = new ProcessStartInfo();
+        startInfo.CreateNoWindow = false;
+        startInfo.UseShellExecute = false;
+        startInfo.WindowStyle = ProcessWindowStyle.Normal;
+        startInfo.FileName = Arguments.postprocessScript;
+        startInfo.Arguments = Arguments.postprocessArguments;
+        startInfo.RedirectStandardError = true;
+        startInfo.RedirectStandardOutput = true;
+        startInfo.RedirectStandardInput = false;
+        process.StartInfo = startInfo;
+        process.OutputDataReceived += (a, b) => Log.Info(b.Data);
+        process.ErrorDataReceived += (a, b) => Log.Error(b.Data);
+
+        Log.Info(String.Format("Starting post process command {0} with arguments {1}", startInfo.FileName, startInfo.Arguments));
+        process.Start();
+        //String output = process.StandardOutput.ReadToEnd();
+        process.BeginErrorReadLine();
+        process.BeginOutputReadLine();
+
+        process.WaitForExit(1000 * 60 * 15);
+        Log.Info("Finished post process command");
+      }
+      catch(Exception ex)
+      {
+        Log.Error(ex.ToString());
+      }
+    }
+
   }
 }

@@ -163,7 +163,7 @@ namespace wgmulti
       folder = configFolder; //when called from Clone()
       configFilePath = Path.Combine(folder, configFileName);
       outputFilePath = Path.Combine(folder, epgFileName);
-      jsonConfigFilePath = Path.Combine(folder, jsonConfigFileName);
+      jsonConfigFilePath = Path.Combine(folder, Arguments.jsonConfigFileName);
       if (postProcess.run && !Path.IsPathRooted(postProcess.configDir))
         postProcess.configDir = Path.Combine(folder, postProcess.GetFolderName());
     }
@@ -237,7 +237,7 @@ namespace wgmulti
       if (!Path.IsPathRooted(conf.outputFilePath))
         conf.outputFilePath = Path.Combine(Arguments.configDir, epgFileName);
       if (!Path.IsPathRooted(conf.jsonConfigFilePath))
-        conf.jsonConfigFilePath = Path.Combine(Arguments.configDir, jsonConfigFileName);
+        conf.jsonConfigFilePath = Path.Combine(Arguments.configDir, Arguments.jsonConfigFileName);
       if (conf.postProcess.run && !Path.IsPathRooted(conf.postProcess.configDir))
         conf.postProcess.configDir = Path.Combine(Arguments.configDir, conf.postProcess.GetFolderName());
 
@@ -595,6 +595,26 @@ namespace wgmulti
     public override string ToString()
     {
       return "Master channels: " + channels.Count.ToString() + ", Active channels (incl. Offset): " + GetChannels(true).Count();
+    }
+
+    internal void SaveStandaloneGuides()
+    {
+      try
+      {
+        Log.Info("Saving stand alone channel guides in " + folder);
+
+        foreach (var channel in GetChannels(includeOffset: true))
+          if (channel.xmltv.programmes.Count > 0)
+          {
+            var _folder = String.IsNullOrEmpty(Arguments.standaloneGuidesFolder) ? folder : Arguments.standaloneGuidesFolder;
+            channel.xmltv.Save(Path.Combine(_folder, channel.xmltv_id + ".epg.xml"), true);
+          }
+      }
+      catch (Exception ex)
+      {
+        Log.Error("Error during saving standalone guides");
+        Log.Error(ex.ToString());
+      }
     }
   }
 

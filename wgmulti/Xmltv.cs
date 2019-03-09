@@ -128,7 +128,7 @@ namespace wgmulti
       else
         tv.Add(allChannels.ToArray());
 
-      if (usePostProcessedPrograms)
+      if (usePostProcessedPrograms && postProcessedProgrammes.Count() > 0)
         tv.Add(postProcessedProgrammes.ToArray());
       else
         tv.Add(programmes.ToArray());

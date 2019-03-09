@@ -149,6 +149,9 @@ namespace wgmulti
       get { return xmltv != null && xmltv.programmes.Count > 0; }
     }
 
+    [DataMember(Name = "id", EmitDefaultValue = false), XmlIgnore]
+    public int? id = null;
+
     public Channel()
     {
     }

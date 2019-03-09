@@ -10,8 +10,9 @@ namespace wgmulti
   {
     public static void Main(string[] args)
     {
-      if (args.Count() == 1)
-        Arguments.configDir = args[0];
+
+      if (!Arguments.ParseArguments(args))
+        return;
 
       Log.Info("#####################################################");
       Log.Info("#                                                   #");
@@ -23,23 +24,23 @@ namespace wgmulti
       Log.Info("Config Directory: " + Arguments.configDir);
       Log.Info("Grabbing Temp Directory: " + Arguments.grabingTempFolder);
       Log.Info("Path to WebGrab+Plus.exe: " + Arguments.wgPath);
+
       if (!File.Exists(Arguments.wgPath))
       {
         Log.Error("WebGrab+Plus.exe does not exist! Exiting.");
         return;
       }
+
       if (Arguments.IsLinux())
-      {
-        if (!TestWebGrabExe())
+        if (!VerifyWebGrabExe())
           return;
-      }
 
       var versionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath);
       Log.Info(String.Format("{0} version: {1}", Arguments.wgexe, versionInfo.ProductVersion));
       if (Arguments.useJsonConfig)
       {
         Log.Info("Use JSON config file: " + Arguments.useJsonConfig);
-        Log.Info("JsonConfigFileName: " + Config.jsonConfigFileName);
+        Log.Info("JsonConfigFileName: " + Arguments.jsonConfigFileName);
       }
       else
         Log.Info("ConvertXmlConfigToJson: " + Arguments.exportJsonConfig);
@@ -47,6 +48,7 @@ namespace wgmulti
       Log.Info("CombineLogFiles: " + Arguments.combineLogFiles);
       Log.Info("ConvertTimesToLocal: " + Arguments.convertTimesToLocal);
       Log.Info("GenerateResultsReport: " + Arguments.generateReport);
+      Log.Info("SaveStandaloneGuides: " + Arguments.saveStandaloneGuides);
       Log.Info("ShowConsole: " + Arguments.showConsole);
       Log.Line();
       Log.Info("Execution started at: " + DateTime.Now);
@@ -63,7 +65,7 @@ namespace wgmulti
       Log.Line();
     }
 
-    static bool TestWebGrabExe()
+    static bool VerifyWebGrabExe()
     {
       try
       {

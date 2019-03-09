@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
+
 
 namespace wgmulti
 {
@@ -8,9 +10,57 @@ namespace wgmulti
   {
     public static String configDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
     public static String webGrabFolder = "";
+
+    internal static bool ParseArguments(string[] args)
+    {
+      try
+      {
+        if (args.Length == 1)
+        {
+          if (args[0] == "-h" || args[0] == "-?" || args[0] == "--help" || args[0] == "/?" || args[0] == "/h")
+          {
+            DisplayHelp();
+            return false;
+          }
+          else
+          {
+            Arguments.configDir = args[0];
+          }
+        }
+
+        if (args.Length > 1)
+        {
+          for(var i=0; i < args.Length; i++)
+          {
+            if (args[i].Contains("configDir"))
+              configDir = args[i+1];
+
+            if (args[i].Contains("reportFolder"))
+              configDir = args[i + 1];
+          }
+        }
+      }
+      catch(Exception ex)
+      {
+        Log.Error("Error while partins command line arguments");
+        Log.Error(ex.ToString());
+        return false;
+      }
+      return true;
+    }
+
+    private static void DisplayHelp()
+    {
+      Console.WriteLine("USAGE:");
+      Console.WriteLine("wgmulti <path-to-config-folder>");
+      Console.WriteLine("wgmulti -configDir <path-to-config-folder>");
+      Console.WriteLine("wgmulti -configDir <path-to-config-folder> -reportFolder <path-to-folder-where-report-will-be-created>");
+    }
+
     public static String grabingTempFolder = String.Empty;
     public static bool useJsonConfig;
     public static bool exportJsonConfig = true;
+    public static String jsonConfigFileName = "wgmulti.config.json";
     public static Double timeOffset = 0;
     public static bool help = false;
     public static bool convertTimesToLocal = true;
@@ -24,6 +74,7 @@ namespace wgmulti
     static String reportFileName = "wgmulti.report.json";
     public static String reportFolder = "";
     public static String reportFilePath = "";
+    public static bool saveStandaloneReports = false;
     public static bool combineLogFiles = true;
     public static bool removeChannelsWithNoProgrammes = true;
     public static bool persistantGrabbing = true;
@@ -32,6 +83,11 @@ namespace wgmulti
     public static bool removeExtraChannelAttributes = false;
     public const String wgexe = "WebGrab+Plus.exe";
     public static String wgPath = "";
+    public static bool saveStandaloneGuides = false;
+    public static String standaloneGuidesFolder = "";
+    public static bool runPostprocessScript = false;
+    public static String postprocessScript = "";
+    public static String postprocessArguments = "";
 
     public static bool IsLinux()
     {
@@ -62,6 +118,9 @@ namespace wgmulti
 
       val = ConfigurationManager.AppSettings["UseJsonConfig"] ?? "true";
       useJsonConfig = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["JsonConfigFileName"] ?? jsonConfigFileName;
+      jsonConfigFileName = val;
 
       val = ConfigurationManager.AppSettings["ExportJsonConfig"] ?? "true";
       exportJsonConfig = Convert.ToBoolean(val) && !useJsonConfig;
@@ -101,7 +160,7 @@ namespace wgmulti
  
       //if (!IsLinux())
       //{ 
-        val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? "false";
+        val = ConfigurationManager.AppSettings["ShowWebGrabConsole"] ?? showConsole.ToString().ToLower();
         showConsole = Convert.ToBoolean(val);
       //}
 
@@ -111,12 +170,30 @@ namespace wgmulti
       grabingTempFolder = val;
 
       val = ConfigurationManager.AppSettings["ReportFileName"] ?? reportFileName;
-      reportFileName = val;
+      reportFileName = val;    
 
       val = ConfigurationManager.AppSettings["ReportFolder"] ?? reportFolder;
       reportFolder = val;
 
+      val = ConfigurationManager.AppSettings["SaveStandaloneReports"] ?? saveStandaloneReports.ToString();
+      saveStandaloneReports = Convert.ToBoolean(val);
+
       reportFilePath = Path.Combine(reportFolder, reportFileName);
+
+      val = ConfigurationManager.AppSettings["SaveStandaloneGuides"] ?? saveStandaloneGuides.ToString().ToLower();
+      saveStandaloneGuides = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["StandaloneGuidesFolder"] ?? standaloneGuidesFolder;
+      standaloneGuidesFolder = val;
+
+      val = ConfigurationManager.AppSettings["RunPostprocessScript"] ?? runPostprocessScript.ToString().ToLower();
+      runPostprocessScript = Convert.ToBoolean(val);
+
+      val = ConfigurationManager.AppSettings["PostprocessScript"] ?? postprocessScript;
+      postprocessScript = val;
+
+      val = ConfigurationManager.AppSettings["PostprocessArguments"] ?? postprocessArguments;
+      postprocessArguments = val.Replace("%JsonConfigFileName%", jsonConfigFileName);
     }
   }
 }

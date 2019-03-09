@@ -27,11 +27,11 @@ namespace wgmulti
         foreach (var channel in config.GetChannels(includeOffset: true))
         {
           total += 1;
-          var channelInfo = new ChannelInfo(channel.name);
+          var channelInfo = new ChannelInfo(channel.name, channel.xmltv_id);
           if (channel.HasPrograms)
           {
             channelsWithEpg += 1;
-            channelInfo.siteiniIndex = channel.siteiniIndex;
+            channelInfo.siteiniIndex = channel.siteiniIndex + 1;
             channelInfo.programsCount = channel.xmltv.programmes.Count;
             channelInfo.firstShowStartsAt = channel.xmltv.programmes[0].Attribute("start").Value;
             channelInfo.lastShowStartsAt = channel.xmltv.programmes[channelInfo.programsCount - 1].Attribute("stop").Value;
@@ -110,6 +110,17 @@ namespace wgmulti
         var json = serializer.Serialize(this);
         File.WriteAllText(Arguments.reportFilePath, json);
         Console.WriteLine("Report saved to " + Arguments.reportFilePath);
+
+        if (Arguments.saveStandaloneReports)
+        {
+          Console.WriteLine("Saving separate report files");
+          foreach (var c in channels)
+          {
+            File.WriteAllText(Path.Combine(Arguments.reportFolder, c.id + ".report.json"), c.ToString());
+          }
+        }
+
+
       }
       catch (Exception ex)
       {
@@ -121,15 +132,24 @@ namespace wgmulti
   public class ChannelInfo
   {
     public String name = String.Empty;
+    public String id = String.Empty;
     public String siteiniName = String.Empty;
     public int siteiniIndex = 0;
     public String firstShowStartsAt = String.Empty;
     public String lastShowStartsAt = String.Empty;
     public int programsCount = 0;
 
-    public ChannelInfo(String name)
+    public ChannelInfo(String name, String id)
     {
       this.name = name;
+      this.id = id;
+    }
+
+    public override String ToString()
+    {
+
+      return "{" + String.Format("\"name\":\"{0}\",\"siteiniName\":\"{1}\",\"siteiniIndex\":{2},\"firstShowStartsAt\":\"{3}\",\"lastShowStartsAt\":\"{4}\",\"programsCount\":{5}", 
+        name, siteiniName, siteiniIndex, firstShowStartsAt, lastShowStartsAt, programsCount) + "}";
     }
   }
 }
