@@ -84,14 +84,14 @@ namespace Tests
     }
 
 
-        [TestMethod]
-        public void Deserialize_From_Xml_EPG_Absolute_Path()
-        {
-            var conf = Config.DeserializeFromFile(@"..\..\Test files\WebGrab++.config.absolute-path.xml");
+    [TestMethod]
+    public void Deserialize_From_Xml_EPG_Absolute_Path()
+    {
+        var conf = Config.DeserializeFromFile(@"..\..\Test files\WebGrab++.config.absolute-path.xml");
 
-            if (conf.outputFilePath != "C:\\Temp\\demoepg.xml")
-                Assert.Fail("epg.xml path is wrong!");
-        }
+        if (conf.outputFilePath != "C:\\Temp\\demoepg.xml")
+            Assert.Fail("epg.xml path is wrong!");
+    }
 
         [TestMethod]
     public void Deserialize_From_Json_Copy_Grab_Type()
@@ -126,6 +126,45 @@ namespace Tests
         Assert.Fail("Local siteini has no valid timestamp. Expected 2, actual " + conf.channels[0].GetActiveSiteIni().timespan);
 
       //VerifyJsonDeserializedData(conf);
+    }
+
+    [TestMethod]
+    public void Deserialize_From_Json_File_Check_Global_Siteinis_Count()
+    {
+      var te = new TestEnvironment();
+      Arguments.configDir = te.configFolder;
+      // Create the env. and the configuration file WebGrab++.config.xml
+      File.Copy(@"..\..\Test files\wgmulti.config.disabled.siteinis.json",
+        te.configFileJson, true);
+
+      // Read config object from file
+      var conf = Config.DeserializeFromFile(te.configFileJson);
+      conf.InitSiteinis();
+
+      if (conf.siteinis.Count() != 4)
+        Assert.Fail("Config has wrong number of global siteinis!");
+      
+    }
+
+    [TestMethod]
+    public void Deserialize_From_Json_File_Global_Siteinis_With_Drcryptkeys()
+    {
+      var te = new TestEnvironment();
+      Arguments.configDir = te.configFolder;
+      // Create the env. and the configuration file WebGrab++.config.xml
+      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.decryptkeys.json",
+        te.configFileJson, true);
+
+      // Read config object from file
+      var conf = Config.DeserializeFromFile(te.configFileJson);
+      conf.InitSiteinis();
+
+      if (conf.siteinis == null)
+        Assert.Fail("Config has no global siteinis!");
+
+      if (conf.siteinis[0].decryptkey != "AAAAA")
+        Assert.Fail("Global siteini has no valid decrypt key. Expected AAA, actual " + conf.siteinis[0].decryptkey);
+
     }
 
     [TestMethod]
@@ -210,6 +249,28 @@ namespace Tests
     }
 
     [TestMethod]
+    public void Serialize_To_Xml_File_With_Decryptkeys()
+    {
+      var configFileName = "Config_Decryptkeys.xml";
+      var conf = CreateDefaultConfigObject();
+      conf.decryptkeys = new List<Decryptkey>();
+      conf.decryptkeys.Add( new Decryptkey(conf.channels[0].site, "AAAAA"));
+      conf.decryptkeys.Add( new Decryptkey(conf.channels[1].site, "BBBBB"));
+      
+
+      var content = conf.Serialize();
+      File.WriteAllText(configFileName, content);
+
+      var root = XDocument.Load(configFileName);
+
+      var decryptkeys = root.Element("settings").Elements("decryptkey").ToList();
+      if (decryptkeys[0].Value != "AAAAA" || decryptkeys[0].Attribute("site").Value != conf.channels[0].siteinis[0].name)
+        Assert.Fail("Channel 1 siteini has wrong decryptkey!");
+      if (decryptkeys[1].Value != "BBBBB" || decryptkeys[1].Attribute("site").Value != conf.channels[2].siteinis[0].name)
+        Assert.Fail("Channel 2 siteini has wrong decryptkey!");
+    }
+
+    [TestMethod]
     public void Deserialize_From_Xml_File()
     {
       // Create the env. and the configuration file WebGrab++.config.xml
@@ -276,9 +337,21 @@ namespace Tests
         Assert.Fail("channels count is not correct");
     }
 
+    [TestMethod]
+    public void Deserialize_From_Xml_With_Decryptkeys()
+    {
+      // Read config object from file
+      var conf = Config.DeserializeFromFile("..\\..\\Test files\\WebGrab++.config-decryptkeys.xml");
+      if (!conf.channels[1].siteinis[0].decryptkey.Equals("7XJH9"))
+        Assert.Fail("channel1 siteinis decryptkey is not correct");
+
+      if (!conf.channels[2].siteinis[0].decryptkey.Equals("BBBBB"))
+        Assert.Fail("channel2 siteinis decryptkey is not correct");
+    }
+
 
     [TestMethod]
-    public void Convert_XML_Config_To_JSON()
+    public void Convert_Minimal_XML_Config_To_JSON()
     {
       // Create the env. and the configuration file WebGrab++.config.xml
       var te = new TestEnvironment(ppType: PostProcessType.REX);
@@ -293,6 +366,22 @@ namespace Tests
       CheckMandatoryElementsInJsonConfig(file);
     }
 
+    [TestMethod]
+    public void Convert_Full_XML_Config_To_JSON()
+    {
+      // Create the env. and the configuration file WebGrab++.config.xml
+      var te = new TestEnvironment(ppType: PostProcessType.REX, useDecryptkeys: true);
+
+      // Read config object from file
+      var conf = Config.DeserializeFromFile(te.configFileXml);
+      var file = Path.Combine(te.configFolder, "exported_full_wgmulti.config.json");
+
+      File.WriteAllText(
+        Path.Combine(te.configFolder, file), conf.Serialize(true));
+
+      CheckMandatoryElementsInJsonConfig(file);
+
+    }
 
     [TestMethod]
     public void Clone_JSON_Config_To_XML()
@@ -417,7 +506,36 @@ namespace Tests
 
 		}
 
-		void CheckMandatoryElementsInJsonConfig(String file)
+    void CheckMinimumElementsInJsonConfig(String file)
+    {
+      var content = File.ReadAllText(file);
+
+      if (!content.Contains("\"name\": \"Канал 1\""))
+        Assert.Fail("Name 'Канал 1' not found in json");
+
+      if (!content.Contains("\"name\": \"Канал 1 +1\""))
+        Assert.Fail("Name 'Канал 1 +1' not found in json");
+
+      if (!content.Contains("\"xmltv_id\": \"Канал 1 +1 ID\""))
+        Assert.Fail("xmltv_id 'Канал 1 +1 ID' not found in json");
+
+      if (!content.Contains("\"logging\":"))
+        Assert.Fail("logging property not found in json");
+
+      if (!content.Contains("\"timeshifts\":"))
+        Assert.Fail("timeshift property not found in json");
+
+      if (!content.Contains("\"type\": \""))
+        Assert.Fail("type property not found in json");
+
+      if (!content.Contains("\"automatic"))
+        Assert.Fail("Proxy setting automatic not found in json");
+
+      if (!content.Contains("\"retry\": {\r\n    \"attempts\": 1,\r\n    \"channelDelay\": 5,\r\n    \"indexDelay\": 1,\r\n    \"showDelay\": 1"))
+        Assert.Fail("Retry settings are wrong");
+    }
+
+    void CheckMandatoryElementsInJsonConfig(String file)
 		{
 			var content = File.ReadAllText(file);
 
@@ -442,8 +560,10 @@ namespace Tests
 			if (!content.Contains("\"automatic"))
 				Assert.Fail("Proxy setting automatic not found in json");
 
-      if (!content.Contains("retry time-out=\"20\" channel-delay=\"1\" index-delay=\"1\" show-delay=\"1\">4</retry>"))
+      if (!content.Contains("\"retry\": {\r\n    \"attempts\": 1,\r\n    \"channelDelay\": 5,\r\n    \"indexDelay\": 1,\r\n    \"showDelay\": 1"))
         Assert.Fail("Retry settings are wrong");
+
+
 		}
 
 		public Config CreateDefaultConfigObject()

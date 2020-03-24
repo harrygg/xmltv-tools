@@ -59,6 +59,9 @@ namespace wgmulti
       set { timespan = value; }
     }
 
+    [DataMember(EmitDefaultValue = false), XmlIgnore]
+    public String decryptkey = String.Empty;
+
     public SiteIni(String site, String siteId = null)
     {
       this.name = site;
@@ -68,7 +71,6 @@ namespace wgmulti
     public SiteIni()
     {
     }
-
 
     /// <summary>
     /// Gets the path of the source INI file.

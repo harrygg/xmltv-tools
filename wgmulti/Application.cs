@@ -14,6 +14,7 @@ namespace wgmulti
     public static Report report = new Report();
     public static Xmltv epg = new Xmltv();
     public static Stopwatch stopWatch = new Stopwatch();
+
     /// <summary>
     /// Start the main application
     /// </summary>

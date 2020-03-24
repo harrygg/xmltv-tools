@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Diagnostics;
 
 namespace wgmulti
 {
@@ -19,11 +17,11 @@ namespace wgmulti
       Log.Info("#      Wgmulti.exe for WebGrab+Plus by Harry_GG     #");
       Log.Info("#                                                   #");
       Log.Info("#####################################################");
-      Log.Info("System: " + Environment.OSVersion.Platform);
-      Log.Info("Working Directory: " + Directory.GetCurrentDirectory());
-      Log.Info("Config Directory: " + Arguments.configDir);
-      Log.Info("Grabbing Temp Directory: " + Arguments.grabingTempFolder);
-      Log.Info("Path to WebGrab+Plus.exe: " + Arguments.wgPath);
+      Log.Info($"System: {Environment.OSVersion.Platform}");
+      Log.Info($"Working Directory: {Directory.GetCurrentDirectory()}");
+      Log.Info($"Config Directory: {Arguments.configDir}");
+      Log.Info($"Grabbing Temp Directory: {Arguments.grabingTempFolder}");
+      Log.Info($"Path to WebGrab+Plus.exe: {Arguments.wgPath}");
 
       if (!File.Exists(Arguments.wgPath))
       {
@@ -36,32 +34,39 @@ namespace wgmulti
           return;
 
       var versionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath);
-      Log.Info(String.Format("{0} version: {1}", Arguments.wgexe, versionInfo.ProductVersion));
+      Log.Info($"{Arguments.wgexe}: {versionInfo.ProductVersion}");
+      Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+      DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+      Log.Info($"wgmulti.exe version: {version} built on {buildDate}");
+
       if (Arguments.useJsonConfig)
       {
-        Log.Info("Use JSON config file: " + Arguments.useJsonConfig);
-        Log.Info("JsonConfigFileName: " + Arguments.jsonConfigFileName);
+        Log.Info($"Use JSON config file: {Arguments.useJsonConfig}");
+        Log.Info($"JsonConfigFileName: {Arguments.jsonConfigFileName}");
       }
       else
-        Log.Info("ConvertXmlConfigToJson: " + Arguments.exportJsonConfig);
-      Log.Info("MaxAsyncProcesses: " + Arguments.maxAsyncProcesses);
-      Log.Info("CombineLogFiles: " + Arguments.combineLogFiles);
-      Log.Info("ConvertTimesToLocal: " + Arguments.convertTimesToLocal);
-      Log.Info("GenerateResultsReport: " + Arguments.generateReport);
-      Log.Info("SaveStandaloneGuides: " + Arguments.saveStandaloneGuides);
-      Log.Info("ShowConsole: " + Arguments.showConsole);
+      {
+        Log.Info($"ConvertXmlConfigToJson: {Arguments.exportJsonConfig}");
+      }
+
+      Log.Info($"MaxAsyncProcesses: {Arguments.maxAsyncProcesses}");
+      Log.Info($"CombineLogFiles: {Arguments.combineLogFiles}");
+      Log.Info($"ConvertTimesToLocal: {Arguments.convertTimesToLocal}");
+      Log.Info($"GenerateResultsReport: {Arguments.generateReport}");
+      Log.Info($"SaveStandaloneGuides: {Arguments.saveStandaloneGuides}");
+      Log.Info($"ShowConsole: {Arguments.showConsole}");
       Log.Line();
-      Log.Info("Execution started at: " + DateTime.Now);
+      Log.Info($"Execution started at: {DateTime.Now}");
 
       Application.Run();
 
       Log.Line();
-      Log.Info("Total channels: " + Application.report.total);
-      Log.Info("With EPG: " + Application.report.channelsWithEpg);
-      Log.Info("Without EPG: " + Application.report.emptyChannels.Count);
-      Log.Info("EPG size: " + Application.report.fileSize);
-      Log.Info("EPG md5 hash: " + Application.report.md5hash);
-      Log.Info("Report saved to: " + Arguments.reportFilePath);
+      Log.Info($"Total channels: {Application.report.total}");
+      Log.Info($"With EPG: {Application.report.channelsWithEpg}");
+      Log.Info($"Without EPG: {Application.report.emptyChannels.Count}");
+      Log.Info($"EPG size: {Application.report.fileSize}");
+      Log.Info($"EPG md5 hash: {Application.report.md5hash}");
+      Log.Info($"Report saved to: {Arguments.reportFilePath}");
       Log.Line();
     }
 

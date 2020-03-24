@@ -68,7 +68,10 @@ namespace wgmulti
     [DataMember(Order = 8, Name = "postprocess"), XmlElement("postprocess")]
     public PostProcess postProcess { get; set; }
 
-    [DataMember(Order = 10, IsRequired = true), XmlIgnore]
+    [XmlElement("decryptkey")]
+    public List<Decryptkey> decryptkeys;
+
+    [XmlIgnore, DataMember(Order = 10, IsRequired = true)]
     public List<Channel> channels
     {
       get;
@@ -91,15 +94,19 @@ namespace wgmulti
     [XmlIgnore]
     public IEnumerable<IGrouping<String, Channel>> grabbers;
 
-    [DataMember(EmitDefaultValue = false, Order = 12), XmlIgnore]
+    [XmlIgnore, DataMember(EmitDefaultValue = false, Order = 12)]
     public List<SiteIni> siteinis { get; set; }
 
-    [IgnoreDataMember, XmlIgnore]
-    public List<SiteIni> Siteinis
-    {
-      get { return siteinis == null ? new List<SiteIni>() : siteinis; }
-      set { }
-    }
+    //[XmlIgnore, DataMember(EmitDefaultValue = false, Order = 12)]
+    //public List<SiteIni> Siteinis
+    //{
+    //  get {
+    //    if (siteinis == null)
+    //      siteinis = new List<SiteIni>();
+    //    return siteinis;
+    //  }
+    //  set { }
+    //}
 
     [XmlIgnore, DataMember(EmitDefaultValue = false)]
     public double? offset { get; set; }
@@ -180,6 +187,7 @@ namespace wgmulti
       try
       {
         // OnSerialize is not supported by XmlSerializer
+        // Update the channels list with all available channels
         channels = GetChannels(includeOffset: true, onlyActive: false).ToList();
         var ser = new XmlSerializer(typeof(Config));
         String buff;
@@ -208,6 +216,7 @@ namespace wgmulti
     {
       try
       {
+
         var ms = new MemoryStream();
         var sr = new DataContractJsonSerializer(typeof(Config));
         var writer = JsonReaderWriterFactory.CreateJsonWriter(ms, Encoding.UTF8, true, true, "  ");
@@ -427,11 +436,29 @@ namespace wgmulti
                 siteini.Enabled = false;
                 Log.Error(String.Format("Siteini {0} not found in config folder {1} or siteini.user/siteini.pack sub folders (Depth=6). Siteini will be disabled globally!", siteini.GetName(), folder));
               }
+
+              Log.Debug("Adding decryptkeys to siteinis");
+              if (decryptkeys != null)
+              {
+                foreach (var key in decryptkeys)
+                {
+                  if (key.site == siteini.name)
+                  {
+                    siteini.decryptkey = key.key;
+                    break;
+                  }
+                }
+              }
+
               // Create a global siteini and add it to the list
-              Siteinis.Add(siteini);
+              if (siteinis == null)
+                siteinis = new List<SiteIni>();
+              siteinis.Add(siteini);
             }
           }
         }
+
+
       }
       catch (Exception ex)
       {
@@ -443,7 +470,7 @@ namespace wgmulti
     {
       try
       {
-        return Siteinis.Where(s => s.name == siteini.name).First();
+        return siteinis.Where(s => s.name == siteini.name).First();
       }
       catch
       {

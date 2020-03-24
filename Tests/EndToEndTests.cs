@@ -255,6 +255,22 @@ namespace Tests
       CheckElementsAfterNoPostProcess(te);
     }
 
+    [TestMethod]
+    public void Run_Internal_XML_Config_With_Decryptkeys()
+    {
+      var te = new TestEnvironment(ppType: PostProcessType.NONE, useDecryptkeys: true);
+
+      Arguments.grabingTempFolder = Path.Combine(Path.GetTempPath(), "wgmulti_tests");
+      Arguments.configDir = Arguments.grabingTempFolder;
+      Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
+      Arguments.useJsonConfig = false;
+      Arguments.exportJsonConfig = false;
+      Arguments.showConsole = true;
+
+      Application.Run(te.configFolder);
+
+      //CheckElementsAfterNoPostProcess(te);
+    }
 
     [TestMethod]
     public void Run_Internal_XML_Config_REX_PostProcess()
@@ -357,7 +373,7 @@ namespace Tests
       Arguments.configDir = Arguments.grabingTempFolder;
       Arguments.webGrabFolder = Environment.GetEnvironmentVariable("wgpath");
       Arguments.useJsonConfig = true;
-      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.timestamp.json",
+      File.Copy(@"..\..\Test files\wgmulti.config.global.siteinis.timespan.json",
         Path.Combine(Arguments.configDir, "wgmulti.config.json"), true);
 
       Application.Run(te.configFolder);

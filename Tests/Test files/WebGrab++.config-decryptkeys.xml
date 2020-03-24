@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>epg.xml</filename>
+  <postprocess run="n" grab="y">rex</postprocess>
+  <logging>on</logging>
+  <retry time-out="20" channel-delay="5" index-delay="1" show-delay="1">1</retry>
+  <skip>12,1</skip>
+  <timespan keeppastdays="1" oneshowonly="12:00">2</timespan>
+  <update></update>
+  <proxy>automatic</proxy>
+  <decryptkey site="hbo.bg.K">7XJH9</decryptkey>
+  <decryptkey site="siteiniB.K">BBBBB</decryptkey>
+  <channels >
+    <channel update="i" site="siteini" site_id="chanel_1" xmltv_id="Канал 1 ID">Канал 1</channel>
+    <channel same_as="Канал 1 ID" offset="1" xmltv_id="Канал 1 +1 ID">Канал 1 +1</channel>
+    <channel update="i" site="hbo.bg.K" site_id="index_hbo" xmltv_id="Channel2ID">Channel2</channel>
+    <channel update="i" site="siteiniB.K" site_id="None" xmltv_id="Channel3ID">Channel2</channel>
+  </channels>
+</settings>

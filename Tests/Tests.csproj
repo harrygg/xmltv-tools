@@ -81,24 +81,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test files\epg-cet.xml" />
+    <Content Include="Test files\WebGrab++.config-decryptkeys.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Test files\WebGrab++.config-nested.xml" />
     <Content Include="Test files\WebGrab++.config.xml">
       <SubType>Designer</SubType>
     </Content>
     <None Include="packages.config" />
     <None Include="Test files\daily.json" />
+    <None Include="Test files\hbo.bg.K.ini" />
+    <None Include="Test files\siteiniB.K.ini" />
     <None Include="Test files\siteiniCET.ini" />
     <None Include="Test files\siteini.ini" />
     <None Include="Test files\siteiniEmpty.ini" />
     <None Include="Test files\wgmulti.config.disabled.siteinis.json" />
     <None Include="Test files\wgmulti.config.global.siteinis.offset.json" />
+    <None Include="Test files\wgmulti.config.global.siteinis.decryptkeys.json" />
     <None Include="Test files\wgmulti.config.json" />
     <None Include="Test files\wgmulti.config.minimal.json" />
     <None Include="Test files\wgmulti.config.minimal.nositeini.json" />
     <None Include="Test files\wgmulti.config.multi.disabled.siteini.json" />
     <None Include="Test files\wgmulti.config.multi.siteinis.json" />
     <None Include="Test files\wgmulti.config.single.json" />
-    <None Include="Test files\wgmulti.config.global.siteinis.timestamp.json" />
+    <None Include="Test files\wgmulti.config.global.siteinis.timespan.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

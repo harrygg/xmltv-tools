@@ -31,14 +31,14 @@ namespace Tests
     /// Start the http service listening on localhost:19801
     /// </summary>
     /// <param name="postProcessName"></param>
-    public TestEnvironment(PostProcessType ppType = PostProcessType.NONE, bool copyChannel = false)
+    public TestEnvironment(PostProcessType ppType = PostProcessType.NONE, bool copyChannel = false, bool useDecryptkeys = false)
     {
       var path = "";
       if (String.IsNullOrEmpty(wgFolder))
         throw new Exception("%WGPATH% variable does not exist!");
 
-      File.Copy(Path.Combine(wgFolder, wgExe), Path.Combine(Directory.GetCurrentDirectory(), wgExe));
-      File.Copy(Path.Combine(wgFolder, wgDll), Path.Combine(Directory.GetCurrentDirectory(), wgDll));
+      File.Copy(Path.Combine(wgFolder, wgExe), Path.Combine(Directory.GetCurrentDirectory(), wgExe), true);
+      File.Copy(Path.Combine(wgFolder, wgDll), Path.Combine(Directory.GetCurrentDirectory(), wgDll), true);
 
       //Create temp config dir with appropriate files inside
       configFolder = Path.Combine(temp, configFolderName);
@@ -78,7 +78,8 @@ namespace Tests
 
 
       // Save global XML config
-      path = (@"..\..\Test Files\WebGrab++.config.xml");
+      path = useDecryptkeys ? 
+        @"..\..\Test Files\WebGrab++.config-decryptkeys.xml" : @"..\..\Test Files\WebGrab++.config.xml";
       var buff = File.ReadAllText(path);
       buff = buff.Replace("epg.xml", outputEpg);
       buff = buff.Replace("rex", postProcessName);
@@ -128,15 +129,17 @@ namespace Tests
       //config = new Config(configFolder);
 
       // Create 2 test ini files. First save the EEST site ini
-      buff = File.ReadAllText(@"..\..\Test Files\siteini.ini");
-      File.WriteAllText(Path.Combine(configFolder, "siteini.ini"), buff);
+      File.Copy(@"..\..\Test Files\siteini.ini", Path.Combine(configFolder, "siteini.ini"), true);
       // Save CET siteini
-      buff = File.ReadAllText(@"..\..\Test Files\siteiniCET.ini");
-      File.WriteAllText(Path.Combine(configFolder, "siteiniCET.ini"), buff);
+      File.Copy(@"..\..\Test Files\siteiniCET.ini", Path.Combine(configFolder, "siteiniCET.ini"), true);
 
-      File.Copy(@"..\..\Test Files\siteiniEmpty.ini", Path.Combine(configFolder, "siteiniEmpty.ini"));
+      // Save encrypted siteini
+      if (useDecryptkeys)
+        File.Copy(@"..\..\Test Files\hbo.bg.K.ini", Path.Combine(configFolder, "hbo.bg.K.ini"), true);
 
-      File.Copy(@"..\..\Test Files\siteini2.ini", Path.Combine(configFolder, "siteini2.ini"));
+      File.Copy(@"..\..\Test Files\siteiniEmpty.ini", Path.Combine(configFolder, "siteiniEmpty.ini"), true);
+
+      File.Copy(@"..\..\Test Files\siteini2.ini", Path.Combine(configFolder, "siteini2.ini"), true);
 
       Debug.WriteLine("Environment created in {0}", configFolder);
     }
