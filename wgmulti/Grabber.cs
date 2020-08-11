@@ -95,14 +95,38 @@ namespace wgmulti
 
     public void Grab()
     {
-      WriteLog(
-        String.Format("Grabing started for {0}, type is {1}", name.ToUpper(), ActiveSiteini.type.ToString()), 
-        LogLevel.DEBUG);
+      var stopwatch = new Stopwatch();
+      stopwatch.Start();
+
+      WriteLog($"Grabing started for {name.ToUpper()}, type is {ActiveSiteini.type.ToString()}", LogLevel.DEBUG);
 
       if (ActiveSiteini.type == GrabType.SCRUB)
         ScrubData();
       else
         CopyData();
+
+      stopwatch.Stop();
+      
+      try
+      {
+        var grd = Report.grabbingRoundsData.ElementAt(Application.grabbingRoundNumber);
+        grd.grabbingTimes.Add(name, stopwatch.Elapsed.Seconds);
+      }
+      catch (Exception ex)
+      {
+        Log.Error(ex.ToString());
+      }
+
+      //if (grd.grabbingTimes.ContainsKey(name))
+      //{
+      //  Log.Debug($"Adding {stopwatch.Elapsed.Seconds} seconds to overal grabbing time for grabber {name} which already had {Report.grabbingTimes[name]} seconds");
+      //  Report.grabbingTimes[name] += stopwatch.Elapsed.Seconds;
+      //}
+      //else
+      //  Report.grabbingTimes.Add(name, stopwatch.Elapsed.Seconds);
+
+      TimeSpan t = TimeSpan.FromSeconds(stopwatch.Elapsed.Seconds);
+      WriteLog($"Grabber finished for { t }"); //.ToString(@"hh\:mm\:ss")}");
     }
 
     void ScrubData()
@@ -421,7 +445,7 @@ namespace wgmulti
 
     void WriteLog(String msg, LogLevel level = LogLevel.INFO)
     {
-      msg = String.Format("{0}.{1} | {2} | {3}", Application.grabbingRound + 1, id, name.ToUpper(), msg);
+      msg = String.Format("{0}.{1} | {2} | {3}", Application.grabbingRoundNumber + 1, id, name.ToUpper(), msg);
 
       if (level == LogLevel.INFO)
         Log.Info(msg);

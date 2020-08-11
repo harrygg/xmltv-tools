@@ -437,7 +437,7 @@ namespace wgmulti
                 Log.Error(String.Format("Siteini {0} not found in config folder {1} or siteini.user/siteini.pack sub folders (Depth=6). Siteini will be disabled globally!", siteini.GetName(), folder));
               }
 
-              Log.Debug("Adding decryptkeys to siteinis");
+              //Log.Debug("Adding decryptkeys to siteinis");
               if (decryptkeys != null)
               {
                 foreach (var key in decryptkeys)
@@ -568,31 +568,7 @@ namespace wgmulti
       }
       return null;
     }
-
-    public Dictionary<String, int> GetChannelsCount()
-    {
-      var res = new Dictionary<String, int>();
-      res.Add("withoutPrograms", 0);
-      res.Add("withPrograms", 0);
-
-      foreach (var channel in GetChannels(includeOffset: true))
-      {
-        var key = "withoutPrograms";
-        if (channel.HasPrograms)
-          key = "withPrograms";
-
-        if (res.ContainsKey(key))
-        {
-          res[key]++;
-        }
-        else
-        {
-          res.Add(key, 1);
-        }
-      }
-      return res;
-    }
-
+    
     public Xmltv GetChannelsGuides()
     {
       Xmltv epg = new Xmltv();
@@ -628,7 +604,7 @@ namespace wgmulti
     {
       try
       {
-        Log.Info("Saving stand alone channel guides in " + folder);
+        Log.Info("Saving standalone channel guides in " + folder);
 
         foreach (var channel in GetChannels(includeOffset: true))
           if (channel.xmltv.programmes.Count > 0)

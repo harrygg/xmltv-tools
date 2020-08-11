@@ -178,7 +178,7 @@ namespace wgmulti
         {
           siteiniIndex = i;
           found = true;
-          String.Format("Channel '{0}' has no programs. Using to grabber {1}",
+          String.Format("Channel '{0}' has no programs. Using grabber {1}",
               name, GetActiveSiteIni().name.ToUpper());
         }
       }
@@ -188,6 +188,11 @@ namespace wgmulti
         Log.Info(String.Format("No alternative siteinis found for '{0}'. Channel deactivated.", name));
         active = false;
       }
+    }
+
+    public bool HasSiteini(string name)
+    {
+      return siteinis.Where(siteini => siteini.name == name).Count() > 0;
     }
 
     public SiteIni GetActiveSiteIni()
@@ -204,6 +209,17 @@ namespace wgmulti
       }
     }
 
+    public SiteIni GetSiteiniAtIndex(int index)
+    {
+      try
+      {
+        return siteinis[index];
+      }
+      catch (Exception)
+      {
+        return null;
+      }
+    }
 
     public bool CopyChannelXml(Xmltv _xmltv, String channel_id = null)
     {
@@ -243,7 +259,7 @@ namespace wgmulti
       }
       catch (Exception ex)
       {
-        Log.Error(String.Format("#{0} | {1}", Application.grabbingRound + 1, ex.ToString()));
+        Log.Error(String.Format("#{0} | {1}", Application.grabbingRoundNumber + 1, ex.ToString()));
         return false;
       }
     }

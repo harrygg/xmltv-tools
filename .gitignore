@@ -33,6 +33,7 @@ wgmulti/bin/Debug/*vshost*
 wgmulti/bin/Debug/wgmulti2*
 wgmulti/bin/Debug/xmltv*
 wgmulti/bin/Debug/robots/*
+wgmulti/bin/Debug/wgmulti.report.html
 xmltv_program_copy/bin/Debug/
 xmltv_program_copy/bin/Debug/*.*
 xmltv_merger/bin/Debug/

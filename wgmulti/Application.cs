@@ -10,10 +10,8 @@ namespace wgmulti
   public class Application
   {
     public static Config masterConfig;
-    public static int grabbingRound = 0;
-    public static Report report = new Report();
+    public static int grabbingRoundNumber = 0;
     public static Xmltv epg = new Xmltv();
-    public static Stopwatch stopWatch = new Stopwatch();
 
     /// <summary>
     /// Start the main application
@@ -24,13 +22,14 @@ namespace wgmulti
       if (configDir != null)
         Arguments.configDir = configDir;
 
-      stopWatch.Start();
+      Report.executionStartTime = DateTime.Now;
 
       try
       {
         var configFilePath = Arguments.useJsonConfig ? Arguments.jsonConfigFileName : Config.configFileName;
         configFilePath = Path.Combine(Arguments.configDir, configFilePath);
         masterConfig = Config.DeserializeFromFile(configFilePath);
+        Report.ActiveConfig = masterConfig;
 
         // Export json config if we are using xml config
         if (Arguments.exportJsonConfig)
@@ -81,11 +80,10 @@ namespace wgmulti
         return;
       }
 
-      stopWatch.Stop();
+      Report.executionEndTime = DateTime.Now;
 
-      report.Generate(masterConfig);
       if (Arguments.generateReport)
-        report.Save();
+        Report.Save();
     }
 
     static void DoGrabbing()
@@ -94,18 +92,29 @@ namespace wgmulti
       // until there are no more site inis or all channels have programmes
       Log.Line();
       var doGrabbing = true;
+      var maxGrabbingRounds = 999;
 
       while (doGrabbing)
       {
+        if (grabbingRoundNumber == maxGrabbingRounds)
+        {
+          Log.Info($"Max grabbing rounds limit reached. Stopping.");
+          break;
+        }
+
         doGrabbing = false;
 
         // Get only the currently active channels every time
-        foreach (var channel in masterConfig.GetChannels(onlyActive: true))
+        var activeChannels = masterConfig.GetChannels(onlyActive: true);
+        foreach (var channel in activeChannels)
         {
+          // TODO rewrite channel activiation deactivation to handle it here not in the SetActiveSiteIni funciton. 
+          // Also, SetActiveSiteIni automatically as per the grabbing round
+          // Set next siteini as active, or deactivate channel if there are no more siteinis
           if (!channel.HasPrograms)
             channel.SetActiveSiteIni();
 
-          // Channel could be deactivated if no active siteini is set
+          // Even if we have a single active channel, we will proceed with grabbing
           if (channel.active)
             doGrabbing = true;
         }
@@ -116,7 +125,7 @@ namespace wgmulti
         // Each grabber contains one or more channels grouped by Siteini
         var i = 1;
         List<Grabber> grabberGroups = (
-          from channel in masterConfig.GetChannels(onlyActive: true)
+          from channel in masterConfig.GetChannels(onlyActive: true).Where(channel => !channel.HasPrograms)
           group channel by channel.GetActiveSiteIni().name into grouped
           select new Grabber(grouped.Key, grouped.ToList(), i++)
           ).Where(grabber => grabber.enabled).ToList();
@@ -130,26 +139,32 @@ namespace wgmulti
         if (Arguments.randomStartOrder && grabberGroups.Count() > 1)
           grabberGroups = grabberGroups.OrderBy(item => new Random().Next()).ToList();
 
+        var grd = new GrabbingRoundStats(grabbingRoundNumber);
+        Report.grabbingRoundsData.Add(grd);
+
         Log.Line();
-        Log.Info(String.Format("----------------- Grabbing Round {0} ------------------", grabbingRound + 1));
+        Log.Info(String.Format("----------------- Grabbing Round {0} ------------------", grabbingRoundNumber + 1));
         Log.Line();
         Log.Info(String.Format("Round {0} Starting {1} grabbers asynchronously, {2} at a time",
-          grabbingRound + 1, grabberGroups.Count(), Arguments.maxAsyncProcesses));
-
+          grabbingRoundNumber + 1, grabberGroups.Count(), Arguments.maxAsyncProcesses));
 
         var options = new ParallelOptions { MaxDegreeOfParallelism = Arguments.maxAsyncProcesses };
 
         Parallel.ForEach(grabberGroups, options, grabber => { grabber.Grab(); });
 
         Log.Line();
+        
+        var channels = masterConfig.GetChannels(includeOffset: true, onlyActive: true);
+        var channelsWithEpg = channels.Where(channel => channel.HasPrograms).Count();
+        Log.Info($"Grabbing round {grabbingRoundNumber + 1} finished. {channelsWithEpg} channels have programs.");
 
-        var countedChannels = masterConfig.GetChannelsCount();
-        Log.Info(String.Format("Grabbing round {0} finished. {1} channels have programs.", grabbingRound + 1, countedChannels["withPrograms"]));
+        grd.endTime = DateTime.Now;
+        Log.Info($"Grabber round #{grabbingRoundNumber} finished for {grd.TotalDurationFormatted}");
 
-        if (countedChannels["withoutPrograms"] == 0)
+        if (channels.Count() == channelsWithEpg)
           break;
 
-        grabbingRound++;
+        grabbingRoundNumber++;
       }
     }
 

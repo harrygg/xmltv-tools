@@ -33,11 +33,11 @@ namespace wgmulti
         if (!VerifyWebGrabExe())
           return;
 
-      var versionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath);
-      Log.Info($"{Arguments.wgexe}: {versionInfo.ProductVersion}");
-      Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-      DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
-      Log.Info($"wgmulti.exe version: {version} built on {buildDate}");
+      Report.wgVersionInfo = FileVersionInfo.GetVersionInfo(Arguments.wgPath).ProductVersion;
+      Log.Info($"{Arguments.wgexe}: {Report.wgVersionInfo}");
+      Report.wgmultiVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+      Report.wgmultiBuildDate = new DateTime(2000, 1, 1).AddDays(Report.wgmultiVersion.Build).AddSeconds(Report.wgmultiVersion.Revision * 2);
+      Log.Info($"wgmulti.exe version: {Report.wgmultiVersion} built on {Report.wgmultiBuildDate}");
 
       if (Arguments.useJsonConfig)
       {
@@ -61,12 +61,26 @@ namespace wgmulti
       Application.Run();
 
       Log.Line();
-      Log.Info($"Total channels: {Application.report.total}");
-      Log.Info($"With EPG: {Application.report.channelsWithEpg}");
-      Log.Info($"Without EPG: {Application.report.emptyChannels.Count}");
-      Log.Info($"EPG size: {Application.report.fileSize}");
-      Log.Info($"EPG md5 hash: {Application.report.md5hash}");
-      Log.Info($"Report saved to: {Arguments.reportFilePath}");
+      Log.Info($"Total channels: {Report.totalChannels}");
+      if (Report.totalChannels > 0)
+      {
+        Log.Info($"With EPG: {Report.channelsWithEpg}");
+        Log.Info($"Without EPG: {Report.channelsWithoutEpg}");
+        Log.Info($"EPG size: {Report.fileSize}");
+        Log.Info($"EPG md5 hash: {Report.md5hash}");
+        if (Arguments.generateReport)
+        {
+          Log.Info($"Report saved to: {Arguments.reportFilePath}");
+          Log.Info($"HTML report saved to: {Arguments.reportFilePath}");
+        }
+
+        // Output names of channels with no EPG
+        var n = 0;
+        Log.Info("Channels with no EPG:");
+        Report.emptyChannels.ForEach(channel => { Log.Info($"{++n}. {channel.name}"); });
+        if (n == 0)
+          Log.Info("None!");
+      }
       Log.Line();
     }
 

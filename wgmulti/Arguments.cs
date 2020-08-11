@@ -71,7 +71,7 @@ namespace wgmulti
     public static bool showConsole = false;
     public static bool randomStartOrder = true;
     public static bool generateReport = true;
-    static String reportFileName = "wgmulti.report.json";
+    public static String reportFileName = "wgmulti.report.html";
     public static String reportFolder = "";
     public static String reportFilePath = "";
     public static bool saveStandaloneReports = false;

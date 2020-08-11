@@ -125,17 +125,17 @@ namespace wgmulti
         {
           File.Copy(source, file, true);
           Log.Debug(String.Format("#{0} GRABBER {1} | {2}", 
-            Application.grabbingRound + 1, name.ToUpper(), 
+            Application.grabbingRoundNumber + 1, name.ToUpper(), 
             String.Format("Copied siteini file {0} to {1}", source, file)));
         }
         else
-          Log.Debug(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRound + 1, name.ToUpper(), "Source and destination INI file are the same. Coping skipped."));
+          Log.Debug(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRoundNumber + 1, name.ToUpper(), "Source and destination INI file are the same. Coping skipped."));
         
         return true;
       }
       catch (Exception ex)
       {
-        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRound + 1, name.ToUpper(), ex.Message));
+        Log.Error(String.Format("#{0} GRABBER {1} | {2}", Application.grabbingRoundNumber + 1, name.ToUpper(), ex.Message));
         return false;
       }
     }
