@@ -66,31 +66,52 @@ namespace wgmulti
           i++;
           var color = channel.xmltv.programmes.Count > 0 ? "lime" : "red";
           var attemptedSiteinis = "";
+          html.Append($"<tr>");
+          html.Append($"<td style='background-color: {color}'>{i}</td>");
+          html.Append($"<td>{channel.name}</td>");
+
           try
           {
             if (channel.HasPrograms)
               attemptedSiteinis = !channel.IsTimeshifted ? channel.GetActiveSiteIni().name : channel.parent.GetActiveSiteIni().name;
             else
               attemptedSiteinis = string.Join(", ", channel.siteinis.Select(s => s.name));
-
-            html.Append($"<tr><td style='background-color: {color}'>{i}</td>");
-            html.Append($"<td>{channel.name}</td><td>{attemptedSiteinis}</td>");
-            html.Append($"<td>{channel.siteiniIndex + 1}</td>");
-            if (channel.HasPrograms)
-            {
-              html.Append($"<td>{channel.xmltv.programmes[0].Attribute("start").Value}</td>");
-              html.Append($"<td>{channel.xmltv.programmes[channel.xmltv.programmes.Count - 1].Attribute("stop").Value}</td>");
-            }
-            else
-            {
-              html.Append($"<td></td><td></td>");
-            }
-            html.Append($"<td>{channel.xmltv.programmes.Count}</td></tr>\r\n");
           }
-          catch (Exception ex)
+          catch(Exception ex)
           {
-            html.Append($"<td style='backgorund-color: red;' colspan='5'>{ex.ToString()}</td></tr>\r\n");
+            attemptedSiteinis = ex.ToString();
           }
+          html.Append($"<td>{attemptedSiteinis}</td>");
+          html.Append($"<td>{channel.siteiniIndex + 1}</td>");
+
+
+          if (channel.HasPrograms)
+          {
+            try
+            {
+              html.Append($"<td>{ channel.xmltv.programmes[0].Attribute("start").Value }</td>");
+            }
+            catch (Exception ex)
+            {
+              html.Append($"<td>{ ex.ToString() }</td>");
+            }
+
+            try
+            {
+              html.Append($"<td>{ channel.xmltv.programmes[channel.xmltv.programmes.Count - 1].Attribute("stop").Value }</td>");
+            }
+            catch (Exception ex)
+            {
+              html.Append($"<td>{ ex.ToString() }</td>");
+            }
+          }
+          else
+          {
+            html.Append($"<td></td><td></td>");
+          }
+
+          html.Append($"<td>{channel.xmltv.programmes.Count}</td>");
+          html.Append("</tr>\r\n");
         });
 
         html.Append("</table>\r\n");
@@ -103,15 +124,22 @@ namespace wgmulti
           html.Append($"Ended at: {gr.endTime}<br />\r\n");
           html.Append($"Duration: {gr.TotalDurationFormatted}<br />\r\n");
           html.Append("<table border='1' cellspacing='0' cellpadding='0'>\r\n");
-          html.Append("<tr><th>#</th><th>Siteini name</th><th>Grabbing time</th><th>Used for channels</th><th>Total programs grabbed</th></tr>\r\n");
+          html.Append("<tr>");
+          html.Append($"<th>#</th>");
+          html.Append("<th>Siteini name</th>");
+          html.Append("<th>Grabbing time</th>");
+          html.Append("<th>Used for channels</th>");
+          html.Append("<th>Total programs grabbed</th>");
+          html.Append("</tr>\r\n");
+
           i = 0;
           //var ordered = gr.grabbingTimes.OrderByDescending(gt => gt.Value);
           foreach (var entry in gr.grabbingTimes)
           {
             try
             {
-              List<Channel> channelsForGrabber = channels.Where(channel => 
-                channel.GetSiteiniAtIndex(gr.roundNumber) != null && channel.GetSiteiniAtIndex(gr.roundNumber).name == entry.Key).ToList();
+              var channelsForGrabber = channels.Where(channel => 
+                channel.GetSiteiniAtIndex(gr.roundNumber) != null && channel.GetSiteiniAtIndex(gr.roundNumber).name == entry.Key);
               var channelsForGrabberCount = channelsForGrabber.Count();
               var programmesForGrabber = channelsForGrabber.Select(channel => channel.xmltv.programmes.Count).Sum();
               var color = programmesForGrabber == 0 ? "red" : "lime";
@@ -125,13 +153,18 @@ namespace wgmulti
             }
             catch (Exception ex)
             {
-              html.Append($"<tr><td>{++i}</td><td style='background-color: red'>{entry.Key}</td><td colspan='3'>{ex.ToString()}</td></tr>\r\n");
+              html.Append($"<tr>");
+              html.Append($"<td>{ ++i }</td>");
+              html.Append($"<td style='background-color: red'>{ entry.Key }</td>");
+              html.Append($"<td colspan='3'>{ ex.ToString() }</td>");
+              html.Append("</tr>\r\n");
             }
           }
           html.Append("</table>\r\n");
         });
 
-        html.Append("</body>\r\n</html>");
+        html.Append("</body>\r\n");
+        html.Append("</html>");
         Log.Debug("Finished HTML report generation");
       }
       catch (Exception ex)

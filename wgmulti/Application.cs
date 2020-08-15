@@ -28,6 +28,7 @@ namespace wgmulti
       {
         var configFilePath = Arguments.useJsonConfig ? Arguments.jsonConfigFileName : Config.configFileName;
         configFilePath = Path.Combine(Arguments.configDir, configFilePath);
+
         masterConfig = Config.DeserializeFromFile(configFilePath);
         Report.ActiveConfig = masterConfig;
 
@@ -108,11 +109,12 @@ namespace wgmulti
         var activeChannels = masterConfig.GetChannels(onlyActive: true);
         foreach (var channel in activeChannels)
         {
-          // TODO rewrite channel activiation deactivation to handle it here not in the SetActiveSiteIni funciton. 
-          // Also, SetActiveSiteIni automatically as per the grabbing round
-          // Set next siteini as active, or deactivate channel if there are no more siteinis
           if (!channel.HasPrograms)
-            channel.SetActiveSiteIni();
+          {
+            // Deactivate channels that have no more available siteinis
+            if (!channel.ActivateNextAvailableSiteini())
+              channel.active = false;
+          }
 
           // Even if we have a single active channel, we will proceed with grabbing
           if (channel.active)

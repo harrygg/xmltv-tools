@@ -169,28 +169,27 @@ namespace wgmulti
       xmltv = new Xmltv();
     }
 
-    public void SetActiveSiteIni()
+    /// <summary>
+    /// Attempts to activate the next available siteini in the siteinis list.
+    /// </summary>
+    /// <returns>true on success, false if there are no more siteinis</returns>
+    public bool ActivateNextAvailableSiteini()
     {
-      bool found = false;
       for (var i = siteiniIndex + 1; i < siteinis.Count; i++)
       {
-        if (!found && siteinis[i].Enabled)
+        if (siteinis[i].Enabled)
         {
+          // Update the active siteini index
           siteiniIndex = i;
-          found = true;
-          String.Format("Channel '{0}' has no programs. Using grabber {1}",
-              name, GetActiveSiteIni().name.ToUpper());
+          Log.Info($"Channel '{name}' has no programs. Switching to grabber { GetActiveSiteIni().name.ToUpper() }");
+          return true;
         }
       }
-
-      if (!found)
-      {
-        Log.Info(String.Format("No alternative siteinis found for '{0}'. Channel deactivated.", name));
-        active = false;
-      }
+      Log.Info($"No alternative siteinis found for channel '{name}'.");
+      return false;
     }
 
-    public bool HasSiteini(string name)
+    public bool HasSiteini(String name)
     {
       return siteinis.Where(siteini => siteini.name == name).Count() > 0;
     }

@@ -375,7 +375,7 @@ namespace wgmulti
           // Skip channels that have no siteinis
           if (!channel.HasSiteinis)
           {
-            Log.Warning("Channel '" + channel.name + "' has no available siteinis. Channel deactivated!");
+            Log.Warning($"Channel '{channel.name}' has no available siteinis. Channel deactivated!");
             channel.active = false;
             continue;
           }
