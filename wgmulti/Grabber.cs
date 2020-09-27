@@ -117,16 +117,8 @@ namespace wgmulti
         Log.Error(ex.ToString());
       }
 
-      //if (grd.grabbingTimes.ContainsKey(name))
-      //{
-      //  Log.Debug($"Adding {stopwatch.Elapsed.Seconds} seconds to overal grabbing time for grabber {name} which already had {Report.grabbingTimes[name]} seconds");
-      //  Report.grabbingTimes[name] += stopwatch.Elapsed.Seconds;
-      //}
-      //else
-      //  Report.grabbingTimes.Add(name, stopwatch.Elapsed.Seconds);
-
       TimeSpan t = TimeSpan.FromSeconds(stopwatch.Elapsed.Seconds);
-      WriteLog($"Grabber finished for { t }"); //.ToString(@"hh\:mm\:ss")}");
+      WriteLog($"Grabber finished for { t }");
     }
 
     void ScrubData()

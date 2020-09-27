@@ -42,7 +42,7 @@ namespace wgmulti
       }
       catch(Exception ex)
       {
-        Log.Error("Error while partins command line arguments");
+        Log.Error("Error parsing command line arguments");
         Log.Error(ex.ToString());
         return false;
       }

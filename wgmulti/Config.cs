@@ -260,7 +260,7 @@ namespace wgmulti
       return conf;
     }
 
-    static Config DeserializeXmlFile(String file)
+    public static Config DeserializeXmlFile(String file)
     {
       var ser = new XmlSerializer(typeof(Config));
       var ms = GetMemoryStreamFromFile(file);

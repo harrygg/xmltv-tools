@@ -45,7 +45,7 @@ namespace wgmulti
 
         html.Append($"<html>\r\n<header>\r\n<title>WGMULTI Report from {generatedOn}</title>\r\n<style>td, th {{padding: 3px; }}\r\n</style>\r\n</header>\r\n<body>");
         html.Append("<h2>General info:</h2>\r\n");
-        html.Append($"Total channels: {totalChannels}<br />\r\n");
+        html.Append($"Total enabled channels: {totalChannels}<br />\r\n");
         html.Append($"With EPG: {channelsWithEpg}<br />\r\n");
         html.Append($"Without EPG: {channelsWithoutEpg}<br />\r\n");
         html.Append($"Grabbing started on: {executionStartTime}<br />\r\n");

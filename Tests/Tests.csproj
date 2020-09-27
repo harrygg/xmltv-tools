@@ -69,15 +69,9 @@
     <Compile Include="TestEnvironment.cs" />
     <Compile Include="EndToEndTests.cs" />
     <Compile Include="ConfigTest.cs" />
-    <Compile Include="ApplicationTests.cs" />
+    <Compile Include="Xmltv_Time_Modify_Tests.cs" />
     <Compile Include="NunitTest.cs" />
     <Compile Include="UtilsTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\wgmulti\wgmutlti.csproj">
-      <Project>{8675D803-AB93-4320-BE6D-C73CE2CA5203}</Project>
-      <Name>wgmutlti</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test files\epg-cet.xml" />
@@ -111,6 +105,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\wgmulti\wgmutlti.csproj">
+      <Project>{8675d803-ab93-4320-be6d-c73ce2ca5203}</Project>
+      <Name>wgmutlti</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xmltv_time_modify\xmltv_time_modify.csproj">
+      <Project>{8c46dd82-b715-4adc-9840-90b101367e6b}</Project>
+      <Name>xmltv_time_modify</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
