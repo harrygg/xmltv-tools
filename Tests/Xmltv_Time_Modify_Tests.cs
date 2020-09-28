@@ -270,8 +270,8 @@ namespace Tests
     [TestMethod]
     public void E2E_RunExe_DisplayHelp()
     {
-      RunExe($"/?");
-      //Program.Main(new String[] { $"/h" });
+      //RunExe($"-h");
+      Program.Main(new String[] { $"-h" });
       Assert.IsTrue(true);
 
     }
