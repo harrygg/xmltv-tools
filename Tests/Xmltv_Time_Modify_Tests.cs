@@ -18,13 +18,19 @@ namespace Tests
     readonly string outputXml = "Guide_corrected.xml";
     readonly string defaultInputXml = "epg.xml";
     readonly string defaultOutputXml = "epg_corrected.xml";
-    readonly string channelsLocalCorrection = "channelsLocalCorrection.xml";
-    readonly string channelsVaiousCorrection = "channelsVaiousCorrection.xml";
+    readonly string channelsLocalCorrectionFile = "channelsLocalCorrection.xml";
+    readonly string channelsVaiousCorrectionFile = "channelsVaiousCorrection.xml";
     readonly string channel1Id = "Channel1Id";
     readonly string channel2Id = "Channel2Id";
     readonly string channel3Id = "Channel3Id";
     bool isDaylight = false;
     List<String> filesToCleanUp;
+
+    // XML Content
+    readonly string channelsLocalCorrection = "<channels>\n\t<channel id=\"ChannelId1\" correction=\"local\" />" +
+        "\n\t<channel id=\"ChannelId2\" correction=\"local\" />\n</channels>";
+    readonly string channelsVaiousCorrection = "<channels>\n\t<channel id=\"ChannelId1\" correction=\"+1\" />" +
+        "\n\t<channel id=\"ChannelId2\" correction=\"+2\" />\n</channels>";
 
     [TestInitialize]
     public void SetUp() 
@@ -33,10 +39,8 @@ namespace Tests
       isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now);
 
       File.WriteAllText(inputXml, "");
-      File.WriteAllText(channelsLocalCorrection, "<channels>\n\t<channel id=\"ChannelId1\" correction=\"local\" />" +
-        "\n\t<channel id=\"ChannelId2\" correction=\"local\" />\n</channels>");
-      File.WriteAllText(channelsVaiousCorrection, "<channels>\n\t<channel id=\"ChannelId1\" correction=\"+1\" />" +
-        "\n\t<channel id=\"ChannelId2\" correction=\"+2\" />\n</channels>");
+      File.WriteAllText(channelsLocalCorrectionFile, channelsLocalCorrection);
+      File.WriteAllText(channelsVaiousCorrectionFile, channelsVaiousCorrection);
     }
 
     [TestCleanup]
@@ -58,6 +62,7 @@ namespace Tests
       Assert.AreEqual(config.correction, "local");
       Assert.IsTrue(config.applyCorrectionToAll);
       Assert.IsTrue(config.convertToLocal);
+      Assert.IsFalse(config.removeOffset);
     }
 
     [TestMethod]
@@ -68,6 +73,16 @@ namespace Tests
 
       Assert.AreEqual(config.inputXml, inputXml);
       Assert.AreEqual(config.outputXml, outputXml);
+    }
+
+
+    [TestMethod]
+    public void ArgumentsProvideRemoveOffset()
+    {
+      string[] args = new string[] { "/ro" };
+      var config = new Configuration(args);
+
+      Assert.IsTrue(config.removeOffset);
     }
 
     [TestMethod]
@@ -264,6 +279,42 @@ namespace Tests
 
       RunExe($"/out:{outFile}");
       Assert.IsTrue(File.Exists(outFile));
+
+    }
+
+    [TestMethod]
+    public void E2E_RunExe_OffsetRemove()
+    {
+      var outFile = "E2E_RunExe_OffsetRemove.xml";
+      filesToCleanUp.Add(outFile);
+
+      RunExe($"/out:{outFile} /ro");
+      //Program.Main(new String[] { $"/out:{outFile}", "/ro" });
+
+      var actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, outFile);
+      Assert.IsFalse(actualStartTime.Contains(" "));
+    }
+
+
+    [TestMethod]
+    public void E2E_RunExe_OffsetAdd()
+    {
+      var inFile = "E2E_RunExe_OffsetAdd_In";
+      var outFile = "E2E_RunExe_OffsetAdd_Out.xml";
+      File.WriteAllText(inFile, "<?xml version=\"1.0\" encoding=\"utf-8\"?><tv><channel id=\"Channel1Id\">" +
+        "<display-name lang=\"bg\">Channel 1</display-name></channel><programme channel=\"Channel1Id\" " + 
+        "start=\"20200924051000\" stop=\"20200924060000\"><title lang=\"bg\">Боен клуб</title>" +
+        "</programme></tv>");
+
+      filesToCleanUp.Add(inFile);
+      filesToCleanUp.Add(outFile);
+
+
+      RunExe($"/in:{inFile} /out:{outFile}");
+      //Program.Main(new String[] { $"/out:{inFile}", $"/out:{outFile}" });
+
+      var actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, outFile);
+      Assert.IsTrue(actualStartTime.Contains(" "));
 
     }
 

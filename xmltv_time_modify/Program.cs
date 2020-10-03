@@ -46,7 +46,7 @@ namespace xmltv_time_modify
         foreach (var groupOfPrograms in groups)
         {
           groupOfPrograms.ToList().ForEach(
-              program => Utils.ModifyProgramTimings(ref program, config.correction));
+              program => Utils.ModifyProgramTimings(ref program, config.correction, config.removeOffset));
           Console.WriteLine($"{groupOfPrograms.Count()} programs modified for channel '{groupOfPrograms.Key}'. Applied correction: '{config.correction}'");
         }
       }
