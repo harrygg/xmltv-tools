@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Linq;
 
@@ -31,15 +32,25 @@ namespace xmltv_time_modify
         if (correction.ToLower() == "local")
         {
           dto = dto.ToLocalTime();
-        } 
+        }
         else if (correction.ToLower() == "utc")
         {
           dto = dto.ToUniversalTime();
         }
         else
         {
-          dto = DateTimeOffset.ParseExact(intputDateTime, dateFormat, null);
-          dto = dto.AddHours(Convert.ToDouble(correction));
+          // correct to given offset i.e. +01:00
+          if (correction.Contains(":"))
+          {
+            var ts = TimeSpan.Parse(correction.Trim('+'), null);
+            dto = dto.ToOffset(ts);
+          }
+          // correct with given hours
+          else
+          {
+            dto = DateTimeOffset.ParseExact(intputDateTime, dateFormat, null);
+            dto = dto.AddHours(Convert.ToDouble(correction));
+          }
         }
 
         result = dto.ToString("yyyyMMddHHmmss K").Replace(":", "");       
@@ -52,16 +63,12 @@ namespace xmltv_time_modify
       return result;
     }
 
-    //Reverses the number (positve to negative)
-    public static Double ToHours(String correction)
-    {
-      var result = (correction.StartsWith("-")) ? correction.Replace("-", "") : "-" + correction.Replace("+", "");
-      return Convert.ToDouble(result);
-    }
-
     public static bool HasOffset(String datetimeString)
     {
-      if (datetimeString.Contains(" +") || datetimeString.Contains(" -"))
+      if (datetimeString.Trim().Contains(" ") 
+        || datetimeString.Trim().Contains(":") 
+        || datetimeString.Trim().Contains("-") 
+        || datetimeString.Trim().Contains("+"))
         return true;
       return false;
     }

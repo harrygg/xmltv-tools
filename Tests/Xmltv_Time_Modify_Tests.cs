@@ -321,8 +321,8 @@ namespace Tests
     [TestMethod]
     public void E2E_RunExe_DisplayHelp()
     {
-      //RunExe($"-h");
-      Program.Main(new String[] { $"-h" });
+      RunExe($"-h");
+      //Program.Main(new String[] { $"-h" });
       Assert.IsTrue(true);
 
     }
@@ -365,6 +365,26 @@ namespace Tests
 
 
     [TestMethod]
+    public void Unit_ApplyOffsetTimespan()
+    {
+      String actualValue = Utils.ApplyCorrection("20170109120000 +0000", "+02:00");
+      var expectedValue = "20170109140000 +0200";
+      Assert.AreEqual(expectedValue, actualValue);
+
+      actualValue = Utils.ApplyCorrection("20170109120000 +0100", "-01:00");
+      expectedValue = "20170109100000 -0100";
+      Assert.AreEqual(expectedValue, actualValue);
+      
+      actualValue = Utils.ApplyCorrection("20170109120000 +0100", "+05:30");
+      expectedValue = "20170109163000 +0530";
+      Assert.AreEqual(expectedValue, actualValue);
+
+      actualValue = Utils.ApplyCorrection("20170109020000 +0000", "-05:00");
+      expectedValue = "20170108210000 -0500";
+      Assert.AreEqual(expectedValue, actualValue);
+    }
+
+    [TestMethod]
     public void Unit_StripOffset()
     {
       Assert.AreEqual("20170109130000", Utils.StripOffset("20170109130000 +0100"));
@@ -375,6 +395,9 @@ namespace Tests
     public void Unit_HasOffset()
     {
       Assert.IsTrue(Utils.HasOffset("20170109130000 +0100"));
+      Assert.IsTrue(Utils.HasOffset("+0300"));
+      Assert.IsTrue(Utils.HasOffset("-0300"));
+      Assert.IsTrue(Utils.HasOffset("05:00"));
       Assert.IsFalse(Utils.HasOffset("20170109103000"));
     }
 
