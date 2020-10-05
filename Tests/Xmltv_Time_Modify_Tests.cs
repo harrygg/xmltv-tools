@@ -12,25 +12,28 @@ namespace Tests
   [TestClass]
   public class Xmltv_Time_Modify_Tests
   {
-    readonly string inputArgument = "/in:Guide.xml";
-    readonly string outputArgument = "/out:Guide_corrected.xml";
-    readonly string inputXml = "Guide.xml";
-    readonly string outputXml = "Guide_corrected.xml";
-    readonly string defaultInputXml = "epg.xml";
-    readonly string defaultOutputXml = "epg_corrected.xml";
-    readonly string channelsLocalCorrectionFile = "channelsLocalCorrection.xml";
-    readonly string channelsVaiousCorrectionFile = "channelsVaiousCorrection.xml";
-    readonly string channel1Id = "Channel1Id";
-    readonly string channel2Id = "Channel2Id";
-    readonly string channel3Id = "Channel3Id";
-    bool isDaylight = false;
+    readonly static string inputArgument = "/in:Guide.xml";
+    readonly static string outputArgument = "/out:Guide_corrected.xml";
+    readonly static string inputXml = "Guide.xml";
+    readonly static string outputXml = "Guide_corrected.xml";
+    readonly static string defaultInputXml = "epg.xml";
+    readonly static string defaultOutputXml = "epg_corrected.xml";
+    readonly static string channelsLocalCorrectionFile = "channelsLocalCorrection.xml";
+    readonly static string channelsVaiousCorrectionFile = "channelsVaiousCorrection.xml";
+    readonly static string iniFile = "channelsLocalCorrection.ini";
+    readonly static string channel1Id = "Channel1Id";
+    readonly static string channel2Id = "Channel2Id";
+    readonly static string channel3Id = "Channel3Id";
+    static bool isDaylight = false;
     List<String> filesToCleanUp;
 
     // XML Content
-    readonly string channelsLocalCorrection = "<channels>\n\t<channel id=\"ChannelId1\" correction=\"local\" />" +
-        "\n\t<channel id=\"ChannelId2\" correction=\"local\" />\n</channels>";
-    readonly string channelsVaiousCorrection = "<channels>\n\t<channel id=\"ChannelId1\" correction=\"+1\" />" +
-        "\n\t<channel id=\"ChannelId2\" correction=\"+2\" />\n</channels>";
+    readonly static string xmlContentChannelsLocalCorrection = $"<channels>\n\t<channel id=\"{channel1Id}\" correction=\"local\" />" +
+        $"\n\t<channel id=\"{channel2Id}\" correction=\"local\" />\n</channels>";
+    readonly static string xmlContentChannelsVaiousCorrection = $"<channels>\n\t<channel id=\"{channel1Id}\" correction=\"+1\" />" +
+        $"\n\t<channel id=\"{channel2Id}\" correction=\"02:00\" />" +
+        $"\n\t<channel id=\"{channel3Id}\" correction=\"-1,5\" />\n</channels>";
+    readonly static string iniContent = $"{channel1Id}=+1\n{channel2Id}=+02:00\n{channel3Id}=-1,5";
 
     [TestInitialize]
     public void SetUp() 
@@ -39,13 +42,22 @@ namespace Tests
       isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now);
 
       File.WriteAllText(inputXml, "");
-      File.WriteAllText(channelsLocalCorrectionFile, channelsLocalCorrection);
-      File.WriteAllText(channelsVaiousCorrectionFile, channelsVaiousCorrection);
+      filesToCleanUp.Add(inputXml);
+      File.WriteAllText(channelsLocalCorrectionFile, xmlContentChannelsLocalCorrection);
+      filesToCleanUp.Add(channelsLocalCorrectionFile);
+      File.WriteAllText(channelsVaiousCorrectionFile, xmlContentChannelsVaiousCorrection);
+      filesToCleanUp.Add(channelsVaiousCorrectionFile);
+      File.WriteAllText(iniFile, iniContent);
+      filesToCleanUp.Add(iniFile);
+
     }
 
     [TestCleanup]
     public void TearDown()
     {
+      GC.Collect();
+      GC.WaitForPendingFinalizers();
+
       foreach (var file in filesToCleanUp)
         if (File.Exists(file))
           File.Delete(file);
@@ -103,7 +115,7 @@ namespace Tests
     }
 
     [TestMethod]
-    public void ArgumentsProvideChannelsFromFile()
+    public void ArgumentsProvideChannelsFromXmlFile()
     {
       string[] args = new string[] { "/channels:channelsLocalCorrection.xml" };
       var config = new Configuration(args);
@@ -111,6 +123,15 @@ namespace Tests
       Assert.IsFalse(config.applyCorrectionToAll);
     }
 
+    [TestMethod]
+    public void ArgumentsProvideChannelsFromIniFile()
+    {
+
+      string[] args = new string[] { $"/channels:{iniFile}" };
+      var config = new Configuration(args);
+      Assert.IsTrue(config.channelsToModify.Count > 1);
+      Assert.IsFalse(config.applyCorrectionToAll);
+    }
 
     [TestMethod]
     public void ArgumentsProvideChannelsListFromArguments()
@@ -255,6 +276,43 @@ namespace Tests
     }
 
     [TestMethod]
+    public void E2E_RunExe_ApplyCorrectionFromIniFile()
+    {
+      var out_E2E_RunExe_ApplyCorrectionFromIniFile = "E2E_RunExe_ApplyCorrectionFromIniFile.xml";
+      filesToCleanUp.Add(out_E2E_RunExe_ApplyCorrectionFromIniFile);
+
+      RunExe($"/channels:{iniFile} /out:{out_E2E_RunExe_ApplyCorrectionFromIniFile}");
+
+      var actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, out_E2E_RunExe_ApplyCorrectionFromIniFile);
+      Assert.AreEqual("20200924061000 +0100", actualStartTime);
+
+      actualStartTime = GetFirstShowStartTimeForChannel(channel2Id, out_E2E_RunExe_ApplyCorrectionFromIniFile);
+      Assert.AreEqual("20200924071000 +0200", actualStartTime);
+
+      actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, out_E2E_RunExe_ApplyCorrectionFromIniFile);
+      Assert.AreEqual("20200924034000 +0000", actualStartTime);
+    }
+
+    [TestMethod]
+    public void E2E_RunExe_ApplyCorrectionFromXmlFile()
+    {
+      var E2E_RunExe_ApplyCorrectionFromXmlFile = "E2E_RunExe_ApplyCorrectionFromXmlFile.xml";
+      filesToCleanUp.Add(E2E_RunExe_ApplyCorrectionFromXmlFile);
+
+      RunExe($"/channels:{channelsVaiousCorrectionFile} /out:{E2E_RunExe_ApplyCorrectionFromXmlFile}");
+      //Program.Main(new String[] { $"/channels:{channelsVaiousCorrectionFile}", $"/out:{ E2E_RunExe_ApplyCorrectionFromXmlFile }" });
+
+      var actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, E2E_RunExe_ApplyCorrectionFromXmlFile);
+      Assert.AreEqual("20200924061000 +0100", actualStartTime);
+
+      actualStartTime = GetFirstShowStartTimeForChannel(channel2Id, E2E_RunExe_ApplyCorrectionFromXmlFile);
+      Assert.AreEqual("20200924071000 +0200", actualStartTime);
+
+      actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, E2E_RunExe_ApplyCorrectionFromXmlFile);
+      Assert.AreEqual("20200924034000 +0000", actualStartTime);
+    }
+
+    [TestMethod]
     public void E2E_ApplyLocalCorrectionToSomeChannels()
     {
       Program.Main(new String[] { $"/channels:{channel3Id}" });
@@ -308,7 +366,6 @@ namespace Tests
 
       filesToCleanUp.Add(inFile);
       filesToCleanUp.Add(outFile);
-
 
       RunExe($"/in:{inFile} /out:{outFile}");
       //Program.Main(new String[] { $"/out:{inFile}", $"/out:{outFile}" });

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace xmltv_time_modify
 {
@@ -68,6 +64,10 @@ namespace xmltv_time_modify
           Console.WriteLine("Loading list of channels from file " + channels);
           channelsToModify = GetChannels(channels);
         }
+        else if (channels.EndsWith(".ini"))
+        {
+          channelsToModify = ParseIni(channels);
+        }
         else
         {
           Console.WriteLine("" + channels);
@@ -77,6 +77,21 @@ namespace xmltv_time_modify
             channelsToModify.Add(name, correction);
         }
       }
+    }
+
+    private Dictionary<string, string> ParseIni(string filePath)
+    {
+      var channels = new Dictionary<string, string>();
+      int counter = 0;
+      string line;
+      var file = new StreamReader(filePath);
+      while ((line = file.ReadLine()) != null)
+      {
+        var channelInfo = line.Split('=');
+        channels.Add(channelInfo[0], channelInfo[1]);  
+        counter++;
+      }
+      return channels;
     }
 
     private Dictionary<String, String> GetChannels(String channelsXml)
