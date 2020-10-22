@@ -43,7 +43,8 @@ namespace xmltv_time_modify
           if (correction.Contains(":"))
           {
             var ts = TimeSpan.Parse(correction.Trim('+'), null);
-            dto = dto.ToOffset(ts);
+            dto = dto.Add(ts);
+            //dto = dto.ToOffset(ts);
           }
           // correct with given hours
           else

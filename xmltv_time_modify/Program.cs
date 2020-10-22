@@ -76,28 +76,39 @@ namespace xmltv_time_modify
     static void DisplayHelp()
     {
 
-      Console.WriteLine($"xmltv_time_modify v. {version} - a tool for modifies XMLTV timings by Hristo Genev");
+      Console.WriteLine($"xmltv_time_modify v. {version} - a tool for modifying XMLTV timings by Hristo Genev");
       Console.WriteLine("");
       Console.WriteLine("Arguments:");
       Console.WriteLine("");
-      Console.WriteLine("  /h              Displays the help.");
-      Console.WriteLine("  /in             Provide the path to the input XMLTV guide. Default is epg.xml");
-      Console.WriteLine("  /out            Provide the path to the output XMLTV guide where all changes will be saved. \n" +
-                        "                  Default is epg_corrected.xml");
-      Console.WriteLine("  /correction     Specify the correction to be applied. Accepts value in hours or offset. \n" +
-                        "                  Example values: local, utc, +1, -1, +1,5 (or +1.5), +02:00, -05:00 etc.\n" +
-                        "                  Default is local, which automatically converts the timings to user's current timezone.");
-      Console.WriteLine("  /channels       Provide a list of channels to be corrected or a path to an XML file containing the list of channels.\n" +
-                        "                  For example: \n" +
-                        "                  /channels:all - applies the correction to all channels.\n" +
-                        "                  /channels:channels.ini - reads the channels and time corrections from a file 'channels.ini'.\n" +
-                        "                  /channels:channels.xml - reads the channels and time corrections from a file 'channels.xml'.\n" +
-                        "                  /channels:\"Channel1ID, Channel2ID, Channel3ID\" - applies the correction to the given channel ids. \n" +
-                        "                  Default is 'all'.");
+      Console.WriteLine("  /h              Display help.");
+      Console.WriteLine("  /in             Provide the path to the input XMLTV file. Defaults to epg.xml");
+      Console.WriteLine("  /out            Provide the path to the output XMLTV file where all changes will be saved.\n" +
+                        "                  Defaults to epg_corrected.xml");
+      Console.WriteLine("  /correction     Specify the correction to be applied globally to all channels.\n" +
+                        "                  Default is local, which automatically converts the timings to user current timezone.\n" +
+                        "                  Other acceptable values:\n" +
+                        "                  /correction:local - convert to user local time\n" +
+                        "                  /correction:utc - convert to UTC\n" +
+                        "                  /correction:+1 - adds 1 hour\n" +
+                        "                  /correction:-1,5 (or -1.5) - subtracts 1 and a half hours\n" +
+                        "                  /correction:+02:15 - adds 2 hours and 15 minutes\n" +
+                        "                  /correction:-05:30 - subtracts 5 hours and 30 minutes");
+      Console.WriteLine("  /channels       Provide a list of channels to be corrected or a path to a file containing\n" +
+                        "                  the list of channels and their correction values. Acceptable values are: \n" +
+                        "                  /channels:all - applies the correction to all channels. This is the default.\n" +
+                        "                  /channels:\"Channel1ID, Channel2ID, Channel 3 ID\" - applies the correction to the given channel ids.\n" +
+                        "                  /channels:C:\\EPG\\channels_and_corrections.ini - reads the channels and time corrections from a file.");
+      Console.WriteLine("                  The file channels_and_corrections.ini should contain the channel ids and their correction values\n" +
+                        "                  separated by \"=\". Prepending # to the channel name disables the channel correction.");
+      Console.WriteLine("                  Example file content:");
+      Console.WriteLine("                  Channel1Id=+1");
+      Console.WriteLine("                  Channel2Id=+02:45");
+      Console.WriteLine("                  Channel 3 Id=-1,5");
+      Console.WriteLine("                  #Channel4Id=-01:10 #will be skipped");
       Console.WriteLine("  /ro             Removes the offset. For instance \"20200924061000 +0000\" becomes \"20200924061000\".\n" +
                         "                  Default is false. If the input datetime string has no offset, it will be appended.");
       Console.WriteLine("");
-      Console.WriteLine("Example usage (for questions feel free to contact harrygg@gmail.com):");
+      Console.WriteLine("Example usage (for questions feel free to contact hristo[dot]genev@gmail[dot]com):");
       Console.WriteLine("Running without provided arguments is equivalent to:");
       Console.WriteLine("xmltv_time_modify.exe /in:epg.xml /out:epg_corrected.xml /channels:all /correction:local");
       Console.WriteLine("");
@@ -110,34 +121,25 @@ namespace xmltv_time_modify
       Console.WriteLine("Apply global correction to UTC to all channels:");
       Console.WriteLine("xmltv_time_modify /correction:utc");
       Console.WriteLine("");
-      Console.WriteLine("Modify all channels timings to timezone -05:00:");
-      Console.WriteLine("xmltv_time_modify /correction:-05:00");
+      Console.WriteLine("Subtrack 5 hours and 15 minutes from all channels:");
+      Console.WriteLine("xmltv_time_modify /correction:-05:15");
       Console.WriteLine("");
-      Console.WriteLine("Read the channels and their correction values from a INI file:");
-      Console.WriteLine("xmltv_time_modify /channels:channels.ini");
-      Console.WriteLine("The file channels.ini should contain the channel ids and their correction values separated with \"=\".");
-      Console.WriteLine("Example content:");
-      Console.WriteLine("Channel1Id=+1");
-      Console.WriteLine("Channel2Id=+02:00");
-      Console.WriteLine("Channel3Id=-1,5");
-      Console.WriteLine("");
-      Console.WriteLine("Read the channels and their correction values from a XML file:");
-      Console.WriteLine("xmltv_time_modify /channels:channels.xml");
-      Console.WriteLine("The file channels.xml should have the following syntax:");
-      Console.WriteLine("Example content:");
-      Console.WriteLine("<channels>");
-      Console.WriteLine("    <channel id=\"Channel1Id\" correction=\"+1\" />");
-      Console.WriteLine("    <channel id=\"Channel2Id\" correction=\"+02:00\" />");
-      Console.WriteLine("    <channel id=\"Channel3Id\" correction=\"-1,5\" />");
-      Console.WriteLine("</channels>");
+      Console.WriteLine("Read the channels and their correction values from a file with an INI format:");
+      Console.WriteLine("xmltv_time_modify /channels:channels_and_corrections.ini");
+
+      //Console.WriteLine("Read the channels and their correction values from a XML file:");
+      //Console.WriteLine("xmltv_time_modify /channels:channels_and_corrections.xml");
+      //Console.WriteLine("The file channels_and_corrections.xml should have the following syntax:");
+      //Console.WriteLine("Example content:");
+      //Console.WriteLine("<channels>");
+      //Console.WriteLine("    <channel id=\"Channel1Id\" correction=\"+1\" />");
+      //Console.WriteLine("    <channel id=\"Channel2Id\" correction=\"+02:15\" />");
+      //Console.WriteLine("    <channel id=\"Channel 3 Id\" correction=\"-1,5\" />");
+      //Console.WriteLine("</channels>");
       Console.WriteLine("");
       Console.WriteLine("Provide a list of channels to apply correction of -2 hours:");
       Console.WriteLine("xmltv_time_modify /channels:\"Channel1Id, Channel2Id, Channel3Id\" /correction:-2");
-      Console.WriteLine("");
-      Console.WriteLine("Provide a list of channels to change their timings to +01:00 timezone");
-      Console.WriteLine("xmltv_time_modify /channels:\"Channel1Id, Channel2Id, Channel3Id\" /correction:+01:00");
-      Console.WriteLine("");
-
+      //Console.WriteLine("");
     }
   }
 

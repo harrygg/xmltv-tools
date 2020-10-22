@@ -74,7 +74,7 @@ namespace xmltv_time_modify
           channels = channels.Replace("\"", "");
           string[] names = channels.Split(',');
           foreach (var name in names)
-            channelsToModify.Add(name, correction);
+            channelsToModify.Add(name.Trim(), correction);
         }
       }
     }
@@ -87,8 +87,10 @@ namespace xmltv_time_modify
       var file = new StreamReader(filePath);
       while ((line = file.ReadLine()) != null)
       {
+        if (line.StartsWith("#"))
+          continue;
         var channelInfo = line.Split('=');
-        channels.Add(channelInfo[0], channelInfo[1]);  
+        channels.Add(channelInfo[0].Trim(), channelInfo[1].Trim());  
         counter++;
       }
       return channels;
@@ -109,8 +111,8 @@ namespace xmltv_time_modify
         {
           try
           {
-            var id = childNode.Attributes["id"].Value;
-            channels.Add(id, childNode.Attributes["correction"].Value);
+            var id = childNode.Attributes["id"].Value.Trim();
+            channels.Add(id, childNode.Attributes["correction"].Value.Trim());
           }
           catch (Exception e)
           {

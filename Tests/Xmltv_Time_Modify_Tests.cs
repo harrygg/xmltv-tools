@@ -24,6 +24,7 @@ namespace Tests
     readonly static string channel1Id = "Channel1Id";
     readonly static string channel2Id = "Channel2Id";
     readonly static string channel3Id = "Channel3Id";
+    readonly static string channel4Id = "Channel 4 Id";
     static bool isDaylight = false;
     List<String> filesToCleanUp;
 
@@ -33,7 +34,7 @@ namespace Tests
     readonly static string xmlContentChannelsVaiousCorrection = $"<channels>\n\t<channel id=\"{channel1Id}\" correction=\"+1\" />" +
         $"\n\t<channel id=\"{channel2Id}\" correction=\"02:00\" />" +
         $"\n\t<channel id=\"{channel3Id}\" correction=\"-1,5\" />\n</channels>";
-    readonly static string iniContent = $"{channel1Id}=+1\n{channel2Id}=+02:00\n{channel3Id}=-1,5";
+    readonly static string iniContent = $"{channel1Id}=+1\n{channel2Id}=+02:00\n{channel3Id}=-1,5\n#{channel4Id}=-1,5";
 
     [TestInitialize]
     public void SetUp() 
@@ -129,16 +130,18 @@ namespace Tests
 
       string[] args = new string[] { $"/channels:{iniFile}" };
       var config = new Configuration(args);
-      Assert.IsTrue(config.channelsToModify.Count > 1);
+      Assert.IsTrue(config.channelsToModify.Count == 3);
       Assert.IsFalse(config.applyCorrectionToAll);
     }
 
     [TestMethod]
     public void ArgumentsProvideChannelsListFromArguments()
     {
-      string[] args = new string[] { $"/channels:\"{channel1Id},{channel2Id}\"" };
+      string[] args = new string[] { $"/channels:\"{channel1Id}, {channel2Id}, {channel4Id}\"" };
       var config = new Configuration(args);
       Assert.IsTrue(config.channelsToModify.Count > 1);
+      int count = config.channelsToModify.Where(c => c.Key == channel2Id || c.Key == channel4Id).Count();
+      Assert.IsTrue(count == 2);
       Assert.IsFalse(config.applyCorrectionToAll);
     }
 
@@ -185,6 +188,14 @@ namespace Tests
       Assert.AreEqual(config.correction, "+1");
       Assert.IsFalse(config.convertToLocal);
       Assert.IsTrue(config.applyCorrectionToAll);
+
+      args = new string[] { $"/correction:+01:45" };
+      config = new Configuration(args);
+      Assert.AreEqual(config.correction, "+01:45");
+
+      args = new string[] { $"/correction:-2:15" };
+      config = new Configuration(args);
+      Assert.AreEqual(config.correction, "-2:15");
     }
 
     [TestMethod]
@@ -252,14 +263,30 @@ namespace Tests
     [TestMethod]
     public void E2E_RunExe_ApplyCorrectionFromArgumentToAllChannels()
     {
+      //Input datetime is 20200924051000
+
       RunExe($"/correction:+1");
       //Program.Main(new String[] { $"/correction:+1" });
-
       var actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, defaultOutputXml);
       Assert.AreEqual("20200924061000 +0100", actualStartTime);
       
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, defaultOutputXml);
       Assert.AreEqual("20200924061000 +0000", actualStartTime);
+
+      RunExe($"/correction:+1:15");
+      //Program.Main(new String[] { $"/correction:+1:15" });
+      actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, defaultOutputXml);
+      Assert.AreEqual("20200924062500 +0100", actualStartTime);
+
+      RunExe($"/correction:-01:45");
+      //Program.Main(new String[] { $"/correction:-1:45" });
+      actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, defaultOutputXml);
+      Assert.AreEqual("20200924032500 +0100", actualStartTime);
+
+      RunExe($"/correction:-01:10");
+      //Program.Main(new String[] { $"/correction:-01:10" });
+      actualStartTime = GetFirstShowStartTimeForChannel(channel1Id, defaultOutputXml);
+      Assert.AreEqual("20200924040000 +0100", actualStartTime);
     }
 
     [TestMethod]
@@ -287,7 +314,7 @@ namespace Tests
       Assert.AreEqual("20200924061000 +0100", actualStartTime);
 
       actualStartTime = GetFirstShowStartTimeForChannel(channel2Id, out_E2E_RunExe_ApplyCorrectionFromIniFile);
-      Assert.AreEqual("20200924071000 +0200", actualStartTime);
+      Assert.AreEqual("20200924071000 +0000", actualStartTime);
 
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, out_E2E_RunExe_ApplyCorrectionFromIniFile);
       Assert.AreEqual("20200924034000 +0000", actualStartTime);
@@ -306,7 +333,7 @@ namespace Tests
       Assert.AreEqual("20200924061000 +0100", actualStartTime);
 
       actualStartTime = GetFirstShowStartTimeForChannel(channel2Id, E2E_RunExe_ApplyCorrectionFromXmlFile);
-      Assert.AreEqual("20200924071000 +0200", actualStartTime);
+      Assert.AreEqual("20200924071000 +0000", actualStartTime);
 
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, E2E_RunExe_ApplyCorrectionFromXmlFile);
       Assert.AreEqual("20200924034000 +0000", actualStartTime);
@@ -420,26 +447,6 @@ namespace Tests
       Assert.AreEqual("20170109103000 +0100", actual);
     }
 
-
-    [TestMethod]
-    public void Unit_ApplyOffsetTimespan()
-    {
-      String actualValue = Utils.ApplyCorrection("20170109120000 +0000", "+02:00");
-      var expectedValue = "20170109140000 +0200";
-      Assert.AreEqual(expectedValue, actualValue);
-
-      actualValue = Utils.ApplyCorrection("20170109120000 +0100", "-01:00");
-      expectedValue = "20170109100000 -0100";
-      Assert.AreEqual(expectedValue, actualValue);
-      
-      actualValue = Utils.ApplyCorrection("20170109120000 +0100", "+05:30");
-      expectedValue = "20170109163000 +0530";
-      Assert.AreEqual(expectedValue, actualValue);
-
-      actualValue = Utils.ApplyCorrection("20170109020000 +0000", "-05:00");
-      expectedValue = "20170108210000 -0500";
-      Assert.AreEqual(expectedValue, actualValue);
-    }
 
     [TestMethod]
     public void Unit_StripOffset()
