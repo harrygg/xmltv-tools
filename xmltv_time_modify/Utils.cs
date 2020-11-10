@@ -7,12 +7,17 @@ namespace xmltv_time_modify
 {
   public class Utils
   {
-    public static void ModifyProgramTimings(ref XElement programme, String correction, bool removeOffset = false)
+    public static void ModifyProgramTimings(ref XElement programme, ref int count, String correction, bool removeOffset = false)
     {
       var _time = ApplyCorrection(programme.Attribute("start").Value, correction);
       if (removeOffset)
         _time = StripOffset(_time);
-      programme.Attribute("start").Value = _time;
+
+      if (_time != programme.Attribute("start").Value)
+      {
+        count++;
+        programme.Attribute("start").Value = _time;
+      }
 
       _time = ApplyCorrection(programme.Attribute("stop").Value, correction);
       if (removeOffset)

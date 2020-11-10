@@ -43,14 +43,17 @@ namespace xmltv_time_modify
       XDocument xmlContent = XDocument.Load(config.inputXml);
       var programs = xmlContent.Elements("tv").Elements("programme");
 
+      var modifiedPrograms = 0;
       if (config.applyCorrectionToAll)
       {
         var groups = programs.GroupBy(p => p.Attribute("channel").Value);
+        
         foreach (var groupOfPrograms in groups)
         {
           groupOfPrograms.ToList().ForEach(
-              program => Utils.ModifyProgramTimings(ref program, config.correction, config.removeOffset));
-          Console.WriteLine($"{groupOfPrograms.Count()} programs modified for channel '{groupOfPrograms.Key}'. Applied correction: '{config.correction}'");
+              program => Utils.ModifyProgramTimings(ref program, ref modifiedPrograms, config.correction, config.removeOffset));
+          Console.WriteLine($"{modifiedPrograms} programs modified for channel '{groupOfPrograms.Key}'. Applied correction: '{config.correction}'");
+          modifiedPrograms = 0;
         }
       }
       else
@@ -59,9 +62,10 @@ namespace xmltv_time_modify
         {
           var _programs = programs.Where(p => p.Attribute("channel").Value == channel.Key).ToList(); 
           _programs.ForEach(
-            program => Utils.ModifyProgramTimings(ref program, channel.Value, config.removeOffset)
+            program => Utils.ModifyProgramTimings(ref program, ref modifiedPrograms, channel.Value, config.removeOffset)
             );
-          Console.WriteLine($"{_programs.Count()} programs modified for channel '{channel.Key}'. Applied correction: '{channel.Value}'");
+          Console.WriteLine($"{modifiedPrograms} programs modified for channel '{channel.Key}'. Applied correction: '{channel.Value}'");
+          modifiedPrograms = 0;
         }
       }
 
