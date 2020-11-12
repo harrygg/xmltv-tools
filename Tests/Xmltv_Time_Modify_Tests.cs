@@ -25,7 +25,7 @@ namespace Tests
     readonly static string channel2Id = "Channel2Id";
     readonly static string channel3Id = "Channel3Id";
     readonly static string channel4Id = "Channel 4 Id";
-    static bool isDaylight = false;
+    static bool isDaylight;
     List<String> filesToCleanUp;
 
     // XML Content
@@ -212,6 +212,22 @@ namespace Tests
     }
 
     [TestMethod]
+    public void Unit_ApplyCorrectionToLocal()
+    {
+      var dto = new DateTimeOffset(2020, 09, 24, 23, 30, 0, new TimeSpan(1, 0, 0));
+      dto = dto.ToLocalTime();
+      dto = dto.LocalDateTime;
+      var time = "20200924233000 +0100";
+      var expected = isDaylight ? "20200925013000 +0300" : "20200925003000 +0200";
+      var actual = Utils.ApplyCorrection(time, "local");
+
+      Assert.AreEqual(expected, dto.ToString("yyyyMMddHHmmss K"));
+
+      Assert.AreEqual(expected, actual);
+    }
+
+
+    [TestMethod]
     public void Unit_ModifyProgramsTimingsToLocal()
     {
       XElement program = new XElement("programme",
@@ -219,7 +235,9 @@ namespace Tests
         new XAttribute("start", "20200924233000 +0100"), 
         new XAttribute("stop", "20200925013000 +0100"));
 
-      Utils.ModifyProgramTimings(ref program, "local");
+      int count = 0;
+
+      Utils.ModifyProgramTimings(ref program, ref count, "local");
 
       var expectedValue = isDaylight ? "20200925013000 +0300" : "20200925003000 +0200";
       Assert.AreEqual(expectedValue, program.Attribute("start").Value);
@@ -235,7 +253,8 @@ namespace Tests
         new XAttribute("start", "20200924233000 +0100"),
         new XAttribute("stop", "20200925013000 +0100"));
 
-      Utils.ModifyProgramTimings(ref program, "local", true);
+      int count = 0;
+      Utils.ModifyProgramTimings(ref program, ref count, "local", true);
 
       var expectedValue = isDaylight ? "20200925013000" : "20200925003000";
       Assert.AreEqual(expectedValue, program.Attribute("start").Value);
@@ -300,6 +319,15 @@ namespace Tests
 
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, defaultOutputXml);
       Assert.AreEqual("20200924061000 +0000", actualStartTime);
+    }
+
+    [TestMethod]
+    public void E2E_RunExe_SaveOutputToMissingLocation()
+    {
+      File.Delete(defaultOutputXml);
+      Program.Main(new String[] { $"/out:C:\\dummy\\location\\epg.xml" });
+      Assert.AreEqual(true, File.Exists(defaultOutputXml));
+      File.Delete(defaultOutputXml);
     }
 
     [TestMethod]

@@ -8,6 +8,7 @@ namespace xmltv_time_modify
   public class Configuration
   {
     public String inputXml = "epg.xml";
+    public String defaultOutputXml = "epg_corrected.xml";
     public String outputXml = "epg_corrected.xml";
     public String channels;
     public String correction = "local";
@@ -36,6 +37,7 @@ namespace xmltv_time_modify
 
         else if (_arg.StartsWith("out:"))
           outputXml = _arg.Replace("out:", "");
+        
 
         else if (_arg.StartsWith("correction:"))
         {

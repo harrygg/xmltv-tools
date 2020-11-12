@@ -71,7 +71,17 @@ namespace xmltv_time_modify
 
       // Save new EPG
       Console.WriteLine($"Saving corrected EPG to: {config.outputXml}");
-      xmlContent.Save(config.outputXml);
+      try
+      {
+        Console.WriteLine($"Saving output xml to: {config.outputXml}");
+        xmlContent.Save(config.outputXml);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        Console.WriteLine($"Saving output xml to default location: {config.defaultOutputXml}");
+        xmlContent.Save(config.defaultOutputXml);
+      }
       Console.WriteLine($"Done! Finished at {DateTime.Now}");
 
     }
