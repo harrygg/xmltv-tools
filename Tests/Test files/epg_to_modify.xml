@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tv>
+  <channel id="Channel1Id">
+    <display-name lang="bg">Channel 1</display-name>
+  </channel>
+  <channel id="Channel2Id">
+    <display-name lang="bg">Channel 2</display-name>
+  </channel>  
+  <channel id="Channel3Id">
+    <display-name lang="bg">Channel 3</display-name>
+  </channel>  
+  <programme channel="Channel1Id" start="20200924051000 +0100" stop="20200924060000 +0100">
+    <title lang="bg">Бойният клуб на Джейми и Джими, еп. 9</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924060000 +0100" stop="20200924062500 +0100">
+    <title lang="bg">Островни пиршества с Питър Курувита, еп. 9</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924062500 +0100" stop="20200924065000 +0100">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 5</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924065000 +0100" stop="20200924071500 +0100">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 6</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924071500 +0100" stop="20200924074000 +0100">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924074000 +0100" stop="20200924081000 +0100">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924223000 +0100" stop="20200924234000 +0100">
+    <title lang="bg">Kратки новини</title>
+  </programme>
+  <programme channel="Channel1Id" start="20200924234000 +0100" stop="20200925020000 +0100">
+    <title lang="bg">Евромакс</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924051000 +0000" stop="20200924060000 +0000">
+    <title lang="bg">Бойният клуб на Джейми и Джими, еп. 9</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924060000 +0000" stop="20200924062500 +0000">
+    <title lang="bg">Островни пиршества с Питър Курувита, еп. 9</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924062500 +0000" stop="20200924065000 +0000">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 5</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924065000 +0000" stop="20200924071500 +0000">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 6</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924071500 +0000" stop="20200924074000 +0000">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924074000 +0000" stop="20200924081000 +0000">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924223000 +0000" stop="20200924234000 +0000">
+    <title lang="bg">Kратки новини</title>
+  </programme>
+  <programme channel="Channel2Id" start="20200924234000 +0000" stop="20200925020000 +0000">
+    <title lang="bg">Евромакс</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924051000 +0000" stop="20200924060000 +0000">
+    <title lang="bg">Бойният клуб на Джейми и Джими, еп. 9</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924060000 +0000" stop="20200924062500 +0000">
+    <title lang="bg">Островни пиршества с Питър Курувита, еп. 9</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924062500 +0000" stop="20200924065000 +0000">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 5</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924065000 +0000" stop="20200924071500 +0000">
+    <title lang="bg">Френска кухня с Рейчъл Ку, еп. 6</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924071500 +0000" stop="20200924074000 +0000">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924074000 +0000" stop="20200924081000 +0000">
+    <title lang="bg">Най</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924223000 +0000" stop="20200924234000 +0000">
+    <title lang="bg">Kратки новини</title>
+  </programme>
+  <programme channel="Channel3Id" start="20200924234000 +0000" stop="20200925020000 +0000">
+    <title lang="bg">Евромакс</title>
+  </programme> 
+ </tv>
