@@ -214,16 +214,43 @@ namespace Tests
     [TestMethod]
     public void Unit_ApplyCorrectionToLocal()
     {
-      var dto = new DateTimeOffset(2020, 09, 24, 23, 30, 0, new TimeSpan(1, 0, 0));
+
+
+      var inputDateTime = "20201109080000 -0200";
+      var expectedDateTime = "20201109120000 +0200";
+      var dto = DateTimeOffset.ParseExact(inputDateTime, "yyyyMMddHHmmss K", null);
       dto = dto.ToLocalTime();
-      dto = dto.LocalDateTime;
-      var time = "20200924233000 +0100";
-      var expected = isDaylight ? "20200925013000 +0300" : "20200925003000 +0200";
-      var actual = Utils.ApplyCorrection(time, "local");
+      var actualDateTime = dto.ToString("yyyyMMddHHmmss K").Replace(":", "");
 
-      Assert.AreEqual(expected, dto.ToString("yyyyMMddHHmmss K"));
+      Assert.AreEqual(expectedDateTime, actualDateTime);
 
-      Assert.AreEqual(expected, actual);
+      inputDateTime = "20201109080000 +0100";
+      expectedDateTime = "20201109090000 +0200";
+      dto = DateTimeOffset.ParseExact(inputDateTime, "yyyyMMddHHmmss K", null);
+      dto = dto.ToLocalTime();
+      actualDateTime = dto.ToString("yyyyMMddHHmmss K").Replace(":", "");
+      Assert.AreEqual(expectedDateTime, actualDateTime);
+
+      TimeZone localzone = TimeZone.CurrentTimeZone;
+      TimeSpan UtcDifference = localzone.GetUtcOffset(DateTime.Now);
+
+
+    }
+
+    [TestMethod]
+    public void Unit_ApplyOffsetLocal()
+    {
+      // no DST check, we are in +0200
+      String initialDateTime = "20170109080000 -0200";
+      String expectedDateTime = "20170109120000 +0200";
+      String actual = Utils.ApplyCorrection(initialDateTime, "local");
+      Assert.AreEqual(expectedDateTime, actual);
+
+      // DST check
+      initialDateTime = "20170709080000 +0100";
+      expectedDateTime = "20170709100000 +0300";
+      actual = Utils.ApplyCorrection(initialDateTime, "local");
+      Assert.AreEqual(expectedDateTime, actual);
     }
 
 
@@ -239,9 +266,9 @@ namespace Tests
 
       Utils.ModifyProgramTimings(ref program, ref count, "local");
 
-      var expectedValue = isDaylight ? "20200925013000 +0300" : "20200925003000 +0200";
+      var expectedValue = "20200925013000 +0300";
       Assert.AreEqual(expectedValue, program.Attribute("start").Value);
-      expectedValue = isDaylight ? "20200925033000 +0300" : "20200925023000 +0200";
+      expectedValue = "20200925033000 +0300";
       Assert.AreEqual(expectedValue, program.Attribute("stop").Value);
     }
 
@@ -256,9 +283,9 @@ namespace Tests
       int count = 0;
       Utils.ModifyProgramTimings(ref program, ref count, "local", true);
 
-      var expectedValue = isDaylight ? "20200925013000" : "20200925003000";
+      var expectedValue = "20200925013000";
       Assert.AreEqual(expectedValue, program.Attribute("start").Value);
-      expectedValue = isDaylight ? "20200925033000" : "20200925023000";
+      expectedValue = "20200925033000";
       Assert.AreEqual(expectedValue, program.Attribute("stop").Value);
     }
 
@@ -273,7 +300,7 @@ namespace Tests
 
       Assert.AreEqual(expectedStartTime, actualStartTime);
 
-      expectedStartTime = isDaylight ? "20200924081000 +0300" : "20200924071000 +0200";
+      expectedStartTime = "20200924081000 +0300";
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, defaultOutputXml);
 
       Assert.AreEqual(expectedStartTime, actualStartTime);
@@ -377,7 +404,7 @@ namespace Tests
 
       Assert.AreEqual(expectedStartTime, actualStartTime);
 
-      expectedStartTime = isDaylight ? "20200924081000 +0300" : "20200924071000 +0200";
+      expectedStartTime = "20200924081000 +0300";
       actualStartTime = GetFirstShowStartTimeForChannel(channel3Id, defaultOutputXml);
 
       Assert.AreEqual(expectedStartTime, actualStartTime);
@@ -439,18 +466,7 @@ namespace Tests
 
     }
 
-    [TestMethod]
-    public void Unit_ApplyOffsetLocal()
-    {
-      String correction = "local";
-      String initialDateTime = "20170109090000 -0100";
-      String expectedDateTime = "20170109120000 +0200";
-
-      String actual = Utils.ApplyCorrection(initialDateTime, correction);
-
-      Assert.AreEqual(expectedDateTime, actual);
-    }
-
+ 
     [TestMethod]
     public void Unit_ApplyOffsetUtc()
     {

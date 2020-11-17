@@ -15,7 +15,6 @@ TestResults/
 *xmltv_merger/bin/Debug/xmltv_merge.vshost.exe.manifest
 epg.xml*
 packages/*
-xmltv_program_copy/bin/Debug/epg.xml
 wgmulti/bin/Debug/Newtonsoft.Json.xml
 wgmulti/bin/Debug/Newtonsoft.Json.dll
 wgmulti/bin/Debug/rex/*
